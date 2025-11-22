@@ -6,6 +6,8 @@ def compute_indicators(df: pd.DataFrame) -> pd.DataFrame:
 
     # Ensuring all columns are 1D float series
     close = df['adj close'].squeeze().astype(float)
+    open = df['open'].squeeze().astype(float)
+    # close = df['close'].squeeze().astype(float)
     high  = df['high'].squeeze().astype(float)
     low   = df['low'].squeeze().astype(float)
     vol   = df['volume'].squeeze().astype(float)

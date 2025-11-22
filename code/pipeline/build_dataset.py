@@ -24,4 +24,5 @@ def make_state_frame(ticker: str, cfg: dict, news_df=None):
     # # Combine with adjusted close for RL environment
     state = features.copy()
     state["price"] = df["adj close"].reindex(state.index)
+    # state["price"] = df["close"].reindex(state.index)
     return state

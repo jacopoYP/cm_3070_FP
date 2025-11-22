@@ -9,4 +9,5 @@ def fetch_ohlcv(ticker: str, start: str, end: str, interval: str = "1d") -> pd.D
     df = df.rename(columns=str.lower)
     df.index = pd.to_datetime(df.index)
     df = df[['open', 'high', 'low', 'close', 'adj close', 'volume']].dropna()
+    # df = df[['open', 'high', 'low', 'close', 'volume']].dropna()
     return df
