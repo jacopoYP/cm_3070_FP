@@ -1,5 +1,3 @@
-# agents/ddqn.py
-
 import random
 from collections import deque
 
@@ -7,7 +5,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
 
 class QNetwork(nn.Module):
     """
@@ -55,18 +52,6 @@ class ReplayBuffer:
             torch.tensor(dones, dtype=torch.float32),
         )
 
-    # def sample(self, batch_size):
-    #     batch = random.sample(self.buffer, batch_size)
-
-    #     states, actions, rewards, next_states, dones = zip(*batch)
-
-    #     return (
-    #         np.stack(states),
-    #         np.stack(actions),
-    #         np.stack(rewards),
-    #         np.stack(next_states),
-    #         np.stack(dones),
-    #     )
     def sample(self, batch_size):
         batch = random.sample(self.buffer, batch_size)
         states, actions, rewards, next_states, dones = map(np.array, zip(*batch))
@@ -81,129 +66,9 @@ class ReplayBuffer:
     def __len__(self):
         return len(self.buffer)
 
-# class DDQNAgent:
-#     """
-#     Simple Double DQN agent.
-
-#     - epsilon-greedy exploration
-#     - target network
-#     - replay buffer
-#     """
-
-#     def __init__(
-#         self,
-#         state_dim: int,
-#         n_actions: int,
-#         gamma: float = 0.99,
-#         lr: float = 1e-3,
-#         batch_size: int = 64,
-#         buffer_size: int = 50_000,
-#         target_update_freq: int = 1_000,
-#         epsilon_start: float = 1.0,
-#         epsilon_end: float = 0.05,
-#         epsilon_decay_steps: int = 10_000,
-#         device: str | None = None,
-#     ):
-#         self.state_dim = state_dim
-#         self.n_actions = n_actions
-
-#         self.gamma = gamma
-#         self.batch_size = batch_size
-#         self.target_update_freq = target_update_freq
-
-#         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
-
-#         # Online and target networks
-#         self.q_net = QNetwork(state_dim, n_actions).to(self.device)
-#         self.target_net = QNetwork(state_dim, n_actions).to(self.device)
-#         self.target_net.load_state_dict(self.q_net.state_dict())
-#         self.target_net.eval()
-
-#         self.optimizer = optim.Adam(self.q_net.parameters(), lr=lr)
-#         self.replay_buffer = ReplayBuffer(capacity=buffer_size)
-
-#         # Epsilon-greedy schedule
-#         self.epsilon_start = epsilon_start
-#         self.epsilon_end = epsilon_end
-#         self.epsilon_decay_steps = epsilon_decay_steps
-#         self.total_steps = 0
-
-#     def epsilon(self) -> float:
-#         # Linear decay from start to end over epsilon_decay_steps
-#         frac = min(1.0, self.total_steps / self.epsilon_decay_steps)
-#         return self.epsilon_start + frac * (self.epsilon_end - self.epsilon_start)
-
-#     def select_action(self, state: np.ndarray, greedy: bool = False) -> int:
-#         """
-#         Epsilon-greedy action selection.
-#         """
-#         if (not greedy) and (random.random() < self.epsilon()):
-#             return random.randint(0, self.n_actions - 1)
-
-#         state_t = torch.as_tensor(state, dtype=torch.float32, device=self.device).unsqueeze(0)
-#         with torch.no_grad():
-#             q_values = self.q_net(state_t)
-#         return int(q_values.argmax(dim=1).item())
-
-#     def push_transition(self, state, action, reward, next_state, done):
-#         """
-#         Add a transition to the replay buffer.
-#         """
-#         self.replay_buffer.push(
-#             state,
-#             [action],     # keep single-element array for batching
-#             [reward],
-#             next_state,
-#             [done]
-#         )
-
-
-#     def update(self) -> dict:
-#         """
-#         One gradient update from replay buffer.
-#         Returns a small dict with loss and epsilon for logging.
-#         """
-#         if len(self.replay_buffer) < self.batch_size:
-#             return {}
-
-#         states, actions, rewards, next_states, dones = self.replay_buffer.sample(self.batch_size)
-
-#         states_t = torch.as_tensor(states, dtype=torch.float32, device=self.device)
-#         actions_t = torch.as_tensor(actions, dtype=torch.int64, device=self.device)
-#         rewards_t = torch.as_tensor(rewards, dtype=torch.float32, device=self.device)
-#         next_states_t = torch.as_tensor(next_states, dtype=torch.float32, device=self.device)
-#         dones_t = torch.as_tensor(dones, dtype=torch.float32, device=self.device)
-
-#         # Current Q(s, a)
-#         q_values = self.q_net(states_t)
-#         q_sa = q_values.gather(1, actions_t).squeeze(1)
-
-#         # Double DQN: select best action via online net, evaluate via target net
-#         with torch.no_grad():
-#             online_next_q = self.q_net(next_states_t)
-#             next_actions = online_next_q.argmax(dim=1, keepdim=True)
-
-#             target_next_q = self.target_net(next_states_t)
-#             target_q_next = target_next_q.gather(1, next_actions).squeeze(1)
-
-#             target = rewards_t + self.gamma * (1.0 - dones_t) * target_q_next
-
-#         loss = nn.MSELoss()(q_sa, target)
-
-#         self.optimizer.zero_grad()
-#         loss.backward()
-#         nn.utils.clip_grad_norm_(self.q_net.parameters(), 1.0)
-#         self.optimizer.step()
-
-#         # Periodically sync target net
-#         if self.total_steps % self.target_update_freq == 0:
-#             self.target_net.load_state_dict(self.q_net.state_dict())
-
-#         return {"loss": float(loss.item()), "epsilon": float(self.epsilon())}
 # ---------------------------
 # DDQN Agent
 # ---------------------------
-# agents/ddqn.py
 
 from collections import deque
 import random
@@ -213,7 +78,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
 
 class QNetwork(nn.Module):
     """
@@ -303,6 +167,7 @@ class DDQNAgent:
         self.gamma = gamma
         self.batch_size = batch_size
         self.target_update_freq = target_update_freq
+        self.loss_history = []
 
         # Device
         if device is None:
@@ -332,8 +197,7 @@ class DDQNAgent:
         # Internal training step counter
         self.learn_step = 0
 
-    # --------- Policy ---------
-
+    # Policy
     def select_action(self, state: np.ndarray, greedy: bool = False) -> int:
         """
         Epsilon-greedy action selection.
@@ -356,13 +220,12 @@ class DDQNAgent:
 
         # Exploit
         with torch.no_grad():
-            s = torch.from_numpy(state).to(self.device).unsqueeze(0)  # shape (1, state_dim)
+            s = torch.from_numpy(state).to(self.device).unsqueeze(0)
             q_values = self.q_net(s)
             action = torch.argmax(q_values, dim=1).item()
         return action
 
-    # --------- Replay Buffer Interface ---------
-
+    # Replay Buffer Interface
     def push_transition(
         self,
         state: np.ndarray,
@@ -373,8 +236,7 @@ class DDQNAgent:
     ):
         self.replay_buffer.push(state, action, reward, next_state, done)
 
-    # --------- Training Step (DDQN Update) ---------
-
+    # Training Step (DDQN Update)
     def update(self) -> float | None:
         """
         One DDQN update step.
@@ -385,15 +247,17 @@ class DDQNAgent:
 
         states, actions, rewards, next_states, dones = self.replay_buffer.sample(self.batch_size)
 
-        states = torch.from_numpy(states).to(self.device)          # (B, state_dim)
+        # Same values we encountered for the Atari breakout agent training
+        states = torch.from_numpy(states).to(self.device)          
         next_states = torch.from_numpy(next_states).to(self.device)
-        actions = torch.from_numpy(actions).to(self.device)        # (B,)
-        rewards = torch.from_numpy(rewards).to(self.device)        # (B,)
-        dones = torch.from_numpy(dones).to(self.device)            # (B,)
+        actions = torch.from_numpy(actions).to(self.device)
+        rewards = torch.from_numpy(rewards).to(self.device)
+        dones = torch.from_numpy(dones).to(self.device)
+        
 
         # Q(s,a) for taken actions
-        q_values = self.q_net(states)                              # (B, n_actions)
-        q_sa = q_values.gather(1, actions.unsqueeze(1)).squeeze(1) # (B,)
+        q_values = self.q_net(states)
+        q_sa = q_values.gather(1, actions.unsqueeze(1)).squeeze(1)
 
         # DDQN: action selection from q_net, evaluation from target_net
         with torch.no_grad():
@@ -418,5 +282,7 @@ class DDQNAgent:
         self.learn_step += 1
         if self.learn_step % self.target_update_freq == 0:
             self.target_net.load_state_dict(self.q_net.state_dict())
+
+        self.loss_history.append(loss.item())
 
         return loss.item()
