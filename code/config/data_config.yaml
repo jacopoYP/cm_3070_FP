@@ -27,3 +27,12 @@ include_sentiment: true
 scaling:
   window: 252
   method: rolling_zscore
+
+trade_manager:
+  # number of bars to wait after closing a trade
+  cooldown_steps: 5
+  # max bars SellAgent can hold a trade
+  sell_horizon: 20
+  # per-side cost (buy and sell)
+  transaction_cost: 0.001
+

@@ -4,7 +4,6 @@ from features.technicals import compute_indicators
 from features.scaling import rolling_zscore, winsorize
 from sentiment.scoring import build_sentiment_index
 
-# def make_state_frame(ticker: str, cfg: dict, news_df=None) -> pd.DataFrame:
 def make_state_frame(ticker: str, cfg: dict, news_df=None):
     df = fetch_ohlcv(ticker, cfg["start_date"], cfg["end_date"])
     # print(df)

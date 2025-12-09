@@ -233,3 +233,22 @@ Parallelism	None	Multi-process (Ray/multiprocessing)
 GA	Disabled	Enabled for hyperparams
 Sentiment	Not used	Enabled (index + deep sentiment)
 Debugging	Simple logs	TensorBoard, wandb, metrics
+
+
+First log BuyAgent
+
+[BuyTrainer] Raw dataset: (1224, 10) [BuyTrainer] 
+After dropna: (1224, 10) [BuyTrainer] 
+ state_df shape: (1194, 270) [BuyTrainer] state_dim=270, actions=2 [BuyTrainer] 
+ Dynamic warmup set to: 238 
+ [Episode 1/50] Reward=2.6845 | MeanTrades=2.6845 | Eps=0.887 | Steps=1193 | Trades=1 | Buffer=1193 | Avg10=2.6845 
+ [Episode 5/50] Reward=2.6845 | MeanTrades=2.6845 | Eps=0.433 | Steps=1193 | Trades=1 | Buffer=5965 | Avg10=-1.2854 
+ [Episode 10/50] Reward=nan | MeanTrades=nan | Eps=0.050 | Steps=1193 | Trades=115 | Buffer=11930 | Avg10=nan 
+ [Episode 15/50] Reward=-1.3378 | MeanTrades=-0.0515 | Eps=0.050 | Steps=1193 | Trades=26 | Buffer=17895 | Avg10=nan 
+ [Episode 20/50] Reward=-0.6549 | MeanTrades=-0.0252 | Eps=0.050 | Steps=1193 | Trades=26 | Buffer=23860 | Avg10=-0.8987 
+ [Episode 25/50] Reward=-0.5816 | MeanTrades=-0.0264 | Eps=0.050 | Steps=1193 | Trades=22 | Buffer=29825 | Avg10=-0.7663 
+ [Episode 30/50] Reward=-1.2247 | MeanTrades=-0.0395 | Eps=0.050 | Steps=1193 | Trades=31 | Buffer=35790 | Avg10=-0.7585 
+ [Episode 35/50] Reward=-0.4532 | MeanTrades=-0.0197 | Eps=0.050 | Steps=1193 | Trades=23 | Buffer=41755 | Avg10=-0.7397 
+ [Episode 40/50] Reward=-0.3481 | MeanTrades=-0.0174 | Eps=0.050 | Steps=1193 | Trades=20 | Buffer=47720 | Avg10=-0.7255 
+ [Episode 45/50] Reward=-1.0220 | MeanTrades=-0.0444 | Eps=0.050 | Steps=1193 | Trades=23 | Buffer=53685 | Avg10=-0.7666 
+ [Episode 50/50] Reward=-0.3397 | MeanTrades=-0.0170 | Eps=0.050 | Steps=1193 | Trades=20 | Buffer=59650 | Avg10=-0.7192 Training COMPLETE. Final 5 episode rewards: [-1.1343781697063073, -0.44265279380824596, -1.2665205086092135, -0.46967228080419754, -0.33969440119874644] episode_rewards epsilon steps buffer_size num_trades \ 0 2.684456 0.886665 1193 1193 1 1 -17.164656 0.773330 1193 2386 167 2 2.684456 0.659995 1193 3579 1 3 2.684456 0.546660 1193 4772 1 4 2.684456 0.433325 1193 5965 1 ... 1 -0.102782 2 2.684456 3 2.684456 4 2.684456
