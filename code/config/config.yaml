@@ -1,0 +1,87 @@
+# =========================
+# DATA
+# =========================
+tickers:
+  - AAPL
+  - MSFT
+  - NVDA
+  - AMZN
+  - GOOGL
+
+start_date: "2018-01-01"
+end_date: "2024-01-01"
+interval: "1d"
+
+# =========================
+# FEATURES
+# =========================
+technical_indicators:
+  - sma10
+  - sma20
+  - rsi14
+  - macd_diff
+  - bb_b
+  - atr14
+  - roc10
+  - obv
+  - mfi14
+  - willr14
+
+include_fundamentals: true
+include_sentiment: true
+
+scaling:
+  window: 252
+  method: rolling_zscore
+
+# =========================
+# REWARD (ENV-LEVEL)
+# =========================
+reward:
+  transaction_cost: 0.001
+  lambda_dd: 0.05
+  lambda_vol: 0.01
+  hold_penalty_long: 0.0
+
+# =========================
+# STATE ASSEMBLER
+# =========================
+state:
+  window_size: 30
+
+
+# =========================
+# AGENT (DDQN)
+# =========================
+agent:
+  gamma: 0.99
+  lr: 0.001
+  batch_size: 64
+  buffer_size: 200000
+  target_update_freq: 500
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  epsilon_decay_steps: 5000
+
+# =========================
+# TRAINING
+# =========================
+training:
+  episodes: 200
+  warmup_steps: 238
+  multiprocess: true
+  n_workers: 4
+  steps_per_batch: 300
+  updates_per_batch: 40
+
+# =========================
+# TRADE MANAGER (ORCHESTRATION)
+# =========================
+trade_manager:
+  cooldown_steps: 5
+  sell_horizon: 20
+
+  buy_min_confidence: 0.50
+  use_trend_filter: true
+  ma_short: 10
+  ma_long: 30

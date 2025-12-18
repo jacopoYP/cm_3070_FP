@@ -1,254 +1,150 @@
-import numpy as np
 import gym
-from gym import spaces
+import numpy as np
+from typing import Dict, Any
+
+from config.system import TradingSystemConfig
 
 
 class SellEnv(gym.Env):
     """
-    Environment for SELL decisions (closing an existing long position).
+    Sell-only trading environment.
 
-    Assumptions:
-    - At reset(), we start with a LONG position already open at some entry_idx.
-    - The agent can either:
-        0 = HOLD (keep the position open)
-        1 = SELL (close the position now)
+    The agent always starts LONG and must decide when to SELL.
 
-    Episode ends when:
-        - the agent chooses SELL (and closes the trade), or
-        - horizon steps since entry are reached, or
-        - we reach the end of the dataset.
+    Actions:
+        0 = HOLD
+        1 = SELL (close position)
 
-    Option B fixes:
-    - entry_idx is sampled with a buffer from the end (so episodes aren't 1 step long)
-    - minimum hold time before SELL is allowed
-    - horizon is respected properly
-    - numerically stable reward (same style as BuyEnv)
+    Episode:
+        - Ends on SELL
+        - Or forced close at horizon
     """
 
-    metadata = {"render.modes": ["human"]}
+    metadata = {"render.modes": []}
 
     def __init__(
         self,
-        state_window_df,
-        price_series,
-        horizon: int = 20,
-        transaction_cost: float = 0.001,
-        lambda_dd: float = 0.05,
-        lambda_vol: float = 0.01,
-        hold_penalty_long: float = 0.0,
-        max_episode_steps: int | None = None,
-        min_steps_before_sell: int = 3,
-        min_buffer_from_end: int = 30,
+        state_df: np.ndarray,
+        prices: np.ndarray,
+        entry_indices: np.ndarray,
+        config: TradingSystemConfig,
     ):
         super().__init__()
 
-        self.state_df = state_window_df
-        self.price_series = price_series
-        self.horizon = horizon
-        self.transaction_cost = transaction_cost
-        self.lambda_dd = lambda_dd
-        self.lambda_vol = lambda_vol
-        self.hold_penalty_long = hold_penalty_long
-        self.max_episode_steps = max_episode_steps
+        # Safety check
+        if entry_indices is None or len(entry_indices) == 0:
+            raise ValueError(
+                "SellEnv received empty entry_indices. "
+                "SellAgent cannot train without BUY entry points."
+            )
 
-        self.min_steps_before_sell = min_steps_before_sell
-        self.min_buffer_from_end = min_buffer_from_end
 
-        self.num_states = state_window_df.shape[0]
-        self.num_features = state_window_df.shape[1]
+        # -----------------------
+        # Data
+        # -----------------------
+        self.state_df = state_df
+        self.prices = prices
+        self.entry_indices = entry_indices
+        self.n_steps = len(prices)
 
-        # Action space: HOLD / SELL
-        self.action_space = spaces.Discrete(2)
-        self.observation_space = spaces.Box(
+        # -----------------------
+        # Config references
+        # -----------------------
+        self.reward_cfg = config.reward
+        self.trade_cfg = config.trade_manager
+
+        # -----------------------
+        # Action / Observation
+        # -----------------------
+        self.action_space = gym.spaces.Discrete(2)
+        self.observation_space = gym.spaces.Box(
             low=-np.inf,
             high=np.inf,
-            shape=(self.num_features,),
+            shape=(state_df.shape[1],),
             dtype=np.float32,
         )
 
-        # Episode state
-        self.idx: int = 0
-        self.entry_idx: int | None = None
-        self.entry_price: float | None = None
-        self.steps_since_entry: int = 0
-        self.episode_steps: int = 0
+        # -----------------------
+        # Internal state
+        # -----------------------
+        self.reset()
 
-    # ------------------------------------------------------------------ #
-    # Core API
-    # ------------------------------------------------------------------ #
+    # --------------------------------------------------
+    # Gym API
+    # --------------------------------------------------
 
-    def reset(self):
+    def reset(self) -> np.ndarray:
         """
-        For training:
-        - pick a random entry_idx such that there is enough room for horizon steps
-          AND a safety buffer from the end of the dataset.
-        - assume we are already long at that price
+        Start a new episode by sampling a valid entry index.
         """
-        # Make sure we have room: horizon + buffer
-        max_start = self.num_states - self.horizon - self.min_buffer_from_end
-        max_start = max(0, max_start)
+        self.entry_t = int(np.random.choice(self.entry_indices))
+        self.t = self.entry_t
 
-        # If dataset is short, fallback to simple range
-        if max_start <= 0:
-            self.entry_idx = 0
-        else:
-            self.entry_idx = np.random.randint(0, max_start + 1)
+        self.entry_price = self.prices[self.entry_t]
+        self.done = False
 
-        self.idx = self.entry_idx
-        self.entry_price = float(self.price_series.iloc[self.entry_idx])
-        self.steps_since_entry = 0
-        self.episode_steps = 0
-
-        return self._get_state()
-
-    def _get_state(self) -> np.ndarray:
-        return self.state_df.iloc[self.idx].values.astype(np.float32)
+        return self._get_obs()
 
     def step(self, action: int):
-        """
-        Step the environment by one time step.
-
-        - If SELL and min_steps_before_sell satisfied: close trade now.
-        - If SELL too early: treated as HOLD.
-        - If HOLD:
-            * advance time
-            * forced close at horizon/end/max_episode_steps.
-        """
-        assert self.action_space.contains(action), f"Invalid action {action}"
-
-        if self.entry_idx is None or self.entry_price is None:
-            raise RuntimeError("SellEnv used without a valid open position.")
-
-        done = False
-        info = {}
         reward = 0.0
+        info: Dict[str, Any] = {}
 
-        # Enforce minimum holding time before SELL is allowed
-        if action == 1 and self.steps_since_entry < self.min_steps_before_sell:
-            action = 0  # override to HOLD
+        price = self.prices[self.t]
+        hold_bars = self.t - self.entry_t
 
-        current_price = float(self.price_series.iloc[self.idx])
-
-        # ------------------------
-        # Action handling
-        # ------------------------
-        explicitly_sold = False
-
+        # -----------------------
+        # SELL action
+        # -----------------------
         if action == 1:
-            # SELL: close now
-            trade_reward, trade_info = self._compute_trade_reward(
-                entry_idx=self.entry_idx,
-                exit_idx=self.idx,
-                forced=False,
-            )
-            reward += trade_reward
-            done = True
-            explicitly_sold = True
-            info.update(trade_info)
-        else:
-            # HOLD: small penalty while in position (optional)
-            reward -= self.hold_penalty_long
+            reward = self._close_position(price, forced=False)
+            self.done = True
+            info["forced_exit"] = False
 
-        # ------------------------
-        # Advance time if not done
-        # ------------------------
-        self.episode_steps += 1
-        self.steps_since_entry += 1
+        # -----------------------
+        # Horizon-based forced close
+        # -----------------------
+        elif hold_bars >= self.trade_cfg.sell_horizon:
+            reward = self._close_position(price, forced=True)
+            self.done = True
+            info["forced_exit"] = True
 
-        if not done:
-            self.idx += 1
+        # -----------------------
+        # Advance time
+        # -----------------------
+        if not self.done:
+            self.t += 1
+            if self.t >= self.n_steps - 1:
+                reward = self._close_position(price, forced=True)
+                self.done = True
+                info["forced_exit"] = True
 
-            # End conditions: horizon reached or end of data or max steps
-            if self.idx >= self.num_states - 1:
-                done = True
-            if self.steps_since_entry >= self.horizon:
-                done = True
-            if self.max_episode_steps is not None and self.episode_steps >= self.max_episode_steps:
-                done = True
+        return self._get_obs(), reward, self.done, info
 
-        # ------------------------
-        # Forced close at end/horizon (only if not already sold)
-        # ------------------------
-        if done and not explicitly_sold:
-            exit_idx = min(self.idx, self.num_states - 1)
-            forced_reward, forced_info = self._compute_trade_reward(
-                entry_idx=self.entry_idx,
-                exit_idx=exit_idx,
-                forced=True,
-            )
-            reward += forced_reward
-            info.update(forced_info)
+    # --------------------------------------------------
+    # Helpers
+    # --------------------------------------------------
 
-        # ------------------------
-        # Next state
-        # ------------------------
-        if not done:
-            next_state = self._get_state()
-        else:
-            next_state = np.zeros(self.num_features, dtype=np.float32)
+    def _close_position(self, exit_price: float, forced: bool) -> float:
+        gross_return = (exit_price - self.entry_price) / self.entry_price
+        net_return = gross_return - self.reward_cfg.transaction_cost
 
-        return next_state, float(reward), done, info
+        reward = self._compute_reward(net_return)
 
-    # ------------------------------------------------------------------ #
-    # Reward computation (NaN-safe, similar to BuyEnv)
-    # ------------------------------------------------------------------ #
+        return reward
 
-    def _compute_trade_reward(
-        self,
-        entry_idx: int,
-        exit_idx: int,
-        forced: bool = False,
-    ) -> tuple[float, dict]:
-        entry_idx = max(0, min(entry_idx, self.num_states - 1))
-        exit_idx = max(0, min(exit_idx, self.num_states - 1))
+    def _compute_reward(self, net_return: float) -> float:
+        """
+        Centralised reward shaping.
+        """
+        reward = net_return
 
-        entry_price = float(self.price_series.iloc[entry_idx])
-        exit_price = float(self.price_series.iloc[exit_idx])
+        # Drawdown proxy penalty
+        reward -= self.reward_cfg.lambda_dd * max(0.0, -net_return)
 
-        # Gross return
-        if entry_price == 0 or np.isnan(entry_price) or np.isnan(exit_price):
-            gross_return = 0.0
-        else:
-            gross_return = (exit_price - entry_price) / entry_price
+        # Volatility proxy penalty
+        reward -= self.reward_cfg.lambda_vol * (net_return ** 2)
 
-        price_window = self.price_series.iloc[entry_idx : exit_idx + 1].astype(float)
+        return reward
 
-        if len(price_window) > 1:
-            peak = float(price_window.max())
-            trough = float(price_window.min())
-            if peak == 0 or np.isnan(peak) or np.isnan(trough):
-                max_drawdown = 0.0
-            else:
-                max_drawdown = (trough - peak) / peak
-
-            returns = price_window.pct_change().dropna()
-            if len(returns) > 1:
-                volatility = float(returns.std())
-            else:
-                volatility = 0.0
-        else:
-            max_drawdown = 0.0
-            volatility = 0.0
-
-        drawdown_penalty = self.lambda_dd * abs(max_drawdown)
-        volatility_penalty = self.lambda_vol * abs(volatility)
-
-        trade_reward = (
-            gross_return
-            - self.transaction_cost
-            - drawdown_penalty
-            - volatility_penalty
-        )
-
-        info = {
-            "trade_reward": trade_reward,
-            "gross_return": gross_return,
-            "max_drawdown": max_drawdown,
-            "volatility": volatility,
-            "forced_close": forced,
-        }
-
-        return float(trade_reward), info
-
-    def render(self, mode="human"):
-        pass
+    def _get_obs(self) -> np.ndarray:
+        return self.state_df[self.t].astype(np.float32)

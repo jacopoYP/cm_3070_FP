@@ -5,7 +5,10 @@ from features.scaling import rolling_zscore, winsorize
 from sentiment.scoring import build_sentiment_index
 
 def make_state_frame(ticker: str, cfg: dict, news_df=None):
-    df = fetch_ohlcv(ticker, cfg["start_date"], cfg["end_date"])
+    # print("CFG")
+    # print(cfg.data)
+    df = fetch_ohlcv(ticker, cfg.data.start_date, cfg.data.end_date)
+    # df = fetch_ohlcv(ticker, cfg.data.start_date["start_date"], cfg["end_date"])
     # print(df)
     tech = compute_indicators(df)
     features = tech.copy()
@@ -16,7 +19,7 @@ def make_state_frame(ticker: str, cfg: dict, news_df=None):
         features = features.join(sent, how="left").fillna(0)
 
     # # Normalize safely
-    features = rolling_zscore(features, window=cfg["scaling"]["window"])
+    features = rolling_zscore(features, window=cfg.scaling.window)
     features = winsorize(features)
     features = features.dropna()
 
