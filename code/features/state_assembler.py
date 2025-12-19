@@ -31,3 +31,16 @@ class StateAssembler:
         )
 
         return state_df
+    
+    def transform_window(self, window_df):
+        """
+        Transform a single rolling window into a flat state vector.
+        Used by TradeManager at inference time.
+        """
+        if len(window_df) != self.window_size:
+            raise ValueError(
+                f"Expected window of size {self.window_size}, got {len(window_df)}"
+            )
+
+        window = window_df[self.feature_cols].values
+        return window.flatten().astype("float32")

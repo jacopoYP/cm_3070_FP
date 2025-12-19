@@ -428,6 +428,34 @@ class DDQNAgent:
             s = torch.from_numpy(state).to(self.device).unsqueeze(0)
             q = self.q_net(s).squeeze(0).detach().cpu().numpy()
         return q
+    
+    def act_with_confidence(self, state: np.ndarray) -> tuple[int, float]:
+        """
+        Returns:
+            action: int
+            confidence: float in [0, 1]
+        """
+        if not isinstance(state, np.ndarray):
+            state = np.asarray(state, dtype=np.float32)
+
+        state = torch.from_numpy(state).float().unsqueeze(0).to(self.device)
+
+        with torch.no_grad():
+            q_values = self.q_net(state).cpu().numpy().squeeze()
+
+        action = int(np.argmax(q_values))
+
+        # Confidence definition (stable, bounded)
+        q_max = float(np.max(q_values))
+        q_mean = float(np.mean(q_values))
+
+        confidence = q_max - q_mean
+
+        # Optional: squash to [0, 1] for interpretability
+        confidence = 1.0 / (1.0 + np.exp(-confidence))
+
+        return action, confidence
+
 
 
     # --------------------------------------------------

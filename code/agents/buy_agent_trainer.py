@@ -378,10 +378,10 @@ class BuyAgentTrainer:
         dataset = dataset.dropna()
         print(f"[BuyTrainer] After dropna: {dataset.shape}")
 
-        feature_cols = [c for c in dataset.columns if c != "price"]
+        self.feature_cols = [c for c in dataset.columns if c != "price"]
 
         # assembler = StateAssembler(feature_cols=feature_cols, window_size=self.window_size)
-        assembler = StateAssembler(feature_cols=feature_cols, window_size=self.config.state.window_size)
+        assembler = StateAssembler(feature_cols=self.feature_cols, window_size=self.config.state.window_size)
         state_df = assembler.assemble(dataset)
         prices = dataset.loc[state_df.index, "price"]
 
@@ -410,6 +410,10 @@ class BuyAgentTrainer:
         self.agent = DDQNAgent(cfg=agent_cfg, device=self.device)
 
         print(f"[BuyTrainer] state_dim={agent_cfg.state_dim}, actions={agent_cfg.n_actions}")
+
+    # Exposing feature_cols
+    def get_feature_cols(self):
+        return self.feature_cols
 
     # ---------------------------------------------------------------------
     # Warmup helper
@@ -599,6 +603,8 @@ class BuyAgentTrainer:
         - greedy=True uses select_action(..., greedy=True)
         - buy_min_confidence/use_trend_filter override config temporarily for collection
         """
+
+        # Safety check
         if self.env is None or self.agent is None:
             self._build_dataset_and_env()
 
