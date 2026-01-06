@@ -139,175 +139,6 @@ class ReplayBuffer:
         return len(self.buffer)
 
 
-# class DDQNAgent:
-#     """
-#     Double DQN agent:
-#     - q_net: online network
-#     - target_net: target network
-#     - epsilon-greedy exploration
-#     - replay buffer + mini-batch updates
-#     """
-
-#     def __init__(
-#         self,
-#         state_dim: int,
-#         n_actions: int,
-#         gamma: float = 0.99,
-#         lr: float = 1e-3,
-#         batch_size: int = 64,
-#         buffer_size: int = 20_000,
-#         target_update_freq: int = 500,
-#         epsilon_start: float = 1.0,
-#         epsilon_end: float = 0.05,
-#         epsilon_decay_steps: int = 5_000,
-#         device: str | None = None,
-#     ):
-#         self.state_dim = state_dim
-#         self.n_actions = n_actions
-#         self.gamma = gamma
-#         self.batch_size = batch_size
-#         self.target_update_freq = target_update_freq
-#         self.loss_history = []
-
-#         # Params for GA optimization
-#         self.lr = lr
-#         self.buffer_size = buffer_size
-#         self.epsilon_start = epsilon_start
-#         self.epsilon_end = epsilon_end
-#         self.epsilon_decay_steps = epsilon_decay_steps
-
-#         # Logging info
-#         self.config = {
-#             "state_dim": state_dim,
-#             "n_actions": n_actions,
-#             "gamma": gamma,
-#             "lr": lr,
-#             "batch_size": batch_size,
-#             "buffer_size": buffer_size,
-#             "target_update_freq": target_update_freq,
-#             "epsilon_start": epsilon_start,
-#             "epsilon_end": epsilon_end,
-#             "epsilon_decay_steps": epsilon_decay_steps,
-#             "device": device,
-#         }
-
-#         # Device
-#         if device is None:
-#             self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#         else:
-#             self.device = torch.device(device)
-
-#         # Networks
-#         self.q_net = QNetwork(state_dim, n_actions).to(self.device)
-#         self.target_net = QNetwork(state_dim, n_actions).to(self.device)
-#         self.target_net.load_state_dict(self.q_net.state_dict())
-#         self.target_net.eval()
-
-#         self.optimizer = optim.Adam(self.q_net.parameters(), lr=lr)
-#         self.loss_fn = nn.MSELoss()
-
-#         # Replay buffer
-#         self.replay_buffer = ReplayBuffer(buffer_size)
-
-#         # Epsilon-greedy schedule
-#         self.epsilon_start = epsilon_start
-#         self.epsilon_end = epsilon_end
-#         self.epsilon_decay_steps = epsilon_decay_steps
-#         self.epsilon = epsilon_start
-#         self.total_steps = 0  # used to anneal epsilon
-
-#         # Internal training step counter
-#         self.learn_step = 0
-
-#     # Policy
-#     def select_action(self, state: np.ndarray, greedy: bool = False) -> int:
-#         """
-#         Epsilon-greedy action selection.
-#         - state: np.array (state_dim,)
-#         - if greedy=True -> always exploit (used for evaluation)
-#         """
-#         if not isinstance(state, np.ndarray):
-#             state = np.asarray(state, dtype=np.float32)
-#         state = state.astype(np.float32)
-
-#         # Update epsilon based on total steps (except in greedy mode)
-#         if not greedy:
-#             self.total_steps += 1
-#             frac = min(1.0, self.total_steps / float(self.epsilon_decay_steps))
-#             self.epsilon = self.epsilon_start + frac * (self.epsilon_end - self.epsilon_start)
-
-#         if (not greedy) and (random.random() < self.epsilon):
-#             # Explore
-#             return random.randrange(self.n_actions)
-
-#         # Exploit
-#         with torch.no_grad():
-#             s = torch.from_numpy(state).to(self.device).unsqueeze(0)
-#             q_values = self.q_net(s)
-#             action = torch.argmax(q_values, dim=1).item()
-#         return action
-
-#     # Replay Buffer Interface
-#     def push_transition(
-#         self,
-#         state: np.ndarray,
-#         action: int,
-#         reward: float,
-#         next_state: np.ndarray,
-#         done: bool,
-#     ):
-#         self.replay_buffer.push(state, action, reward, next_state, done)
-
-#     # Training Step (DDQN Update)
-#     def update(self) -> float | None:
-#         """
-#         One DDQN update step.
-#         Returns the loss value (float) or None if not enough data yet.
-#         """
-#         if len(self.replay_buffer) < self.batch_size:
-#             return None
-
-#         states, actions, rewards, next_states, dones = self.replay_buffer.sample(self.batch_size)
-
-#         # Same values we encountered for the Atari breakout agent training
-#         states = torch.from_numpy(states).to(self.device)          
-#         next_states = torch.from_numpy(next_states).to(self.device)
-#         actions = torch.from_numpy(actions).to(self.device)
-#         rewards = torch.from_numpy(rewards).to(self.device)
-#         dones = torch.from_numpy(dones).to(self.device)
-        
-
-#         # Q(s,a) for taken actions
-#         q_values = self.q_net(states)
-#         q_sa = q_values.gather(1, actions.unsqueeze(1)).squeeze(1)
-
-#         # DDQN: action selection from q_net, evaluation from target_net
-#         with torch.no_grad():
-#             next_q_online = self.q_net(next_states)
-#             next_actions = torch.argmax(next_q_online, dim=1)
-
-#             next_q_target = self.target_net(next_states)
-#             next_q_sa = next_q_target.gather(
-#                 1, next_actions.unsqueeze(1)
-#             ).squeeze(1)
-
-#             target = rewards + self.gamma * (1.0 - dones) * next_q_sa
-
-#         loss = self.loss_fn(q_sa, target)
-
-#         self.optimizer.zero_grad()
-#         loss.backward()
-#         torch.nn.utils.clip_grad_norm_(self.q_net.parameters(), 1.0)
-#         self.optimizer.step()
-
-#         # Increase learn_step + update target network periodically
-#         self.learn_step += 1
-#         if self.learn_step % self.target_update_freq == 0:
-#             self.target_net.load_state_dict(self.q_net.state_dict())
-
-#         self.loss_history.append(loss.item())
-
-#         return loss.item()
 from config.agents import AgentConfig
 
 class DDQNAgent:
@@ -429,32 +260,52 @@ class DDQNAgent:
             q = self.q_net(s).squeeze(0).detach().cpu().numpy()
         return q
     
-    def act_with_confidence(self, state: np.ndarray) -> tuple[int, float]:
-        """
-        Returns:
-            action: int
-            confidence: float in [0, 1]
-        """
+    # def act_with_confidence(self, state: np.ndarray) -> tuple[int, float]:
+    #     """
+    #     Returns:
+    #         action: int
+    #         confidence: float in [0, 1]
+    #     """
+    #     if not isinstance(state, np.ndarray):
+    #         state = np.asarray(state, dtype=np.float32)
+
+    #     state = torch.from_numpy(state).float().unsqueeze(0).to(self.device)
+
+    #     with torch.no_grad():
+    #         q_values = self.q_net(state).cpu().numpy().squeeze()
+
+    #     action = int(np.argmax(q_values))
+
+    #     # Confidence definition (stable, bounded)
+    #     q_max = float(np.max(q_values))
+    #     q_mean = float(np.mean(q_values))
+
+    #     confidence = q_max - q_mean
+
+    #     # Optional: squash to [0, 1] for interpretability
+    #     confidence = 1.0 / (1.0 + np.exp(-confidence))
+
+    #     return action, confidence
+    def act_with_confidence(self, state: np.ndarray, buy_index: int = 1, temp: float = 1.0) -> tuple[int, float]:
         if not isinstance(state, np.ndarray):
             state = np.asarray(state, dtype=np.float32)
 
-        state = torch.from_numpy(state).float().unsqueeze(0).to(self.device)
-
+        s = torch.from_numpy(state).float().unsqueeze(0).to(self.device)
         with torch.no_grad():
-            q_values = self.q_net(state).cpu().numpy().squeeze()
+            q = self.q_net(s).cpu().numpy().squeeze()
 
-        action = int(np.argmax(q_values))
+        action = int(np.argmax(q))
 
-        # Confidence definition (stable, bounded)
-        q_max = float(np.max(q_values))
-        q_mean = float(np.mean(q_values))
+        # BUY advantage margin vs best alternative
+        q_buy = float(q[buy_index])
+        q_other = float(np.max(np.delete(q, buy_index))) if len(q) > 1 else q_buy
+        margin = (q_buy - q_other) / max(1e-8, temp)
 
-        confidence = q_max - q_mean
 
-        # Optional: squash to [0, 1] for interpretability
-        confidence = 1.0 / (1.0 + np.exp(-confidence))
+        conf = 1.0 / (1.0 + np.exp(-margin))  # sigmoid to [0,1]
+        return action, float(conf)
 
-        return action, confidence
+
 
 
 

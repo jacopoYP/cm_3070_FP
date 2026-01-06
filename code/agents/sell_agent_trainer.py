@@ -9,6 +9,8 @@ from config.system import TradingSystemConfig
 
 from dataclasses import replace
 
+from pipeline.state_builders import build_states_and_prices
+
 class SellAgentTrainer:
     """
     Sell agent trainer.
@@ -61,10 +63,9 @@ class SellAgentTrainer:
         assembler = StateAssembler(feature_cols=feature_cols, window_size=window_size)
 
         # assembler.assemble returns a DF whose index is aligned to the last rows after rolling window
-        state_df = assembler.assemble(dataset)
-        prices = dataset.loc[state_df.index, "price"].values.astype(np.float32)
-
-        # Convert states to numpy (SellEnv expects ndarray)
+        # state_df = assembler.assemble(dataset)
+        # prices = dataset.loc[state_df.index, "price"].values.astype(np.float32)
+        state_df, prices = build_states_and_prices(self.ticker, self.config)
         self.state_df = state_df.values.astype(np.float32)
         self.prices = prices
 
@@ -119,10 +120,16 @@ class SellAgentTrainer:
         #     device=self.device,
         # )
         # Inject runtime dimensions into agent config
+        # agent_cfg = replace(
+        #     self.config.agent,
+        #     state_dim=state_dim,
+        #     n_actions=2,   # HOLD / SELL
+        # )
         agent_cfg = replace(
             self.config.agent,
             state_dim=state_dim,
             n_actions=2,   # HOLD / SELL
+            epsilon_decay_steps=1200,   # sell-specific override
         )
 
         self.agent = DDQNAgent(
@@ -184,13 +191,21 @@ class SellAgentTrainer:
                 next_state, reward, done, info = self.env.step(action)
 
                 # ✅ your DDQNAgent expects push_transition (as you re-added)
+                # self.agent.push_transition(state, action, reward, next_state, done)
+
+                # # update after warmup
+                # if self.agent.learn_step > warmup_steps:
+                #     self.agent.update()
+
+                # self.agent.learn_step += 1
                 self.agent.push_transition(state, action, reward, next_state, done)
 
-                # update after warmup
+                # always increment learn_step once per env step
+                self.agent.learn_step += 1
+
+                # only start updating after warmup AND after buffer has enough samples
                 if self.agent.learn_step > warmup_steps:
                     self.agent.update()
-
-                self.agent.learn_step += 1
 
                 state = next_state
                 ep_reward += float(reward)

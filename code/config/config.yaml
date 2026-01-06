@@ -75,13 +75,16 @@ training:
   updates_per_batch: 40
 
 # =========================
-# TRADE MANAGER (ORCHESTRATION)
+# TRADE MANAGER
 # =========================
 trade_manager:
   cooldown_steps: 5
   sell_horizon: 20
+  confidence_temp: 0.01
 
   buy_min_confidence: 0.50
+  # buy_min_confidence: 0.60
   use_trend_filter: true
   ma_short: 10
   ma_long: 30
+  min_hold_bars: 2
