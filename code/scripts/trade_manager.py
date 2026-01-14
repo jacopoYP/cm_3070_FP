@@ -422,12 +422,29 @@ class TradeManager:
             q_alt = float(np.max(np.delete(q, action))) if q.shape[0] > 1 else q_best
             margin = q_best - q_alt
             scaled = margin / max(1e-8, self.params.confidence_temp)
-            conf = 1.0 / (1.0 + np.exp(-scaled))
+            # conf = 1.0 / (1.0 + np.exp(-scaled))
+            conf = self._confidence_from_q(q_values, action)
             return action, float(conf)
 
         # Fallback: no confidence available
         action = int(self.sell_agent.select_action(state, greedy=True))
         return action, None
+    
+    def _confidence_from_q(self, q_values, action):
+        q = np.array(q_values, dtype=np.float32)
+        temp = max(1e-6, self.params.confidence_temp)
+
+        if getattr(self.params, "confidence_method", "softmax") == "margin_sigmoid":
+            q_best = q[action]
+            q_alt = np.max(np.delete(q, action))
+            margin = q_best - q_alt
+            return float(1.0 / (1.0 + np.exp(-margin / temp)))
+
+        # DEFAULT: softmax
+        exp_q = np.exp(q / temp)
+        probs = exp_q / np.sum(exp_q)
+        return float(probs[action])
+
 
 
 

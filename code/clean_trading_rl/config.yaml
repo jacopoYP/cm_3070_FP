@@ -1,0 +1,60 @@
+# Clean refactor config (single-process baseline)
+
+# DATA (kept for completeness; data pipeline is external to this skeleton)
+data:
+  tickers: [AAPL, MSFT, NVDA, AMZN, GOOGL]
+  start_date: "2018-01-01"
+  end_date: "2024-01-01"
+  interval: "1d"
+
+features:
+  technical_indicators: [sma10, sma20, rsi14, macd_diff, bb_b, atr14, roc10, obv, mfi14, willr14]
+  include_fundamentals: true
+  include_sentiment: true
+  scaling:
+    window: 252
+    method: rolling_zscore
+
+reward:
+  transaction_cost: 0.001
+  lambda_dd: 0.05
+  lambda_vol: 0.01
+  flat_hold_penalty: 0.0002
+  in_pos_hold_penalty: 0.0
+  entry_bonus: 0.0
+
+state:
+  window_size: 30
+
+agent:
+  gamma: 0.99
+  lr: 0.001
+  batch_size: 64
+  buffer_size: 200000
+  target_update_freq: 500
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  # epsilon_decay_steps: 5000
+  epsilon_decay_steps: 20000
+
+training:
+  episodes: 200
+  steps_per_episode: 500
+  warmup_steps: 238
+  log_every: 1
+  seed: 42
+
+trade_manager:
+  cooldown_steps: 5
+  sell_horizon: 20
+  # min_hold_bars: 2
+  min_hold_bars: 10
+
+  confidence_method: margin_sigmoid
+  confidence_temp: 0.02
+  # buy_min_confidence: 0.51
+  buy_min_confidence: 0.40
+  sell_min_confidence: 0.75
+  use_trend_filter: true
+  ma_short: 10
+  ma_long: 30

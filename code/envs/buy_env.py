@@ -112,6 +112,9 @@ from config.system import TradingSystemConfig
 
 
 class BuyEnv(gym.Env):
+    HOLD = 0
+    BUY = 1
+    
     """
     Buy-only trading environment (multi-trade per episode).
 
@@ -137,6 +140,8 @@ class BuyEnv(gym.Env):
         config: TradingSystemConfig,
     ):
         super().__init__()
+
+        
 
         self.features = features
         self.prices = prices

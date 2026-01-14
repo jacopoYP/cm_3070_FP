@@ -267,7 +267,7 @@ class BuyAgentTrainer:
         return total_reward, steps
 
     # ---------------------------------------------------------------------
-    # Multiprocess training (optional)
+    # Multiprocess training
     # ---------------------------------------------------------------------
 
     def train_multiprocess(
@@ -277,46 +277,41 @@ class BuyAgentTrainer:
         n_workers: int = 4,
         steps_per_batch: int = 300,
         log_every: int = 10,
+        worker_epsilon: float = 0.05,
     ) -> None:
-        """
-        Multiprocess training = parallel experience collection, single learner (this process).
-
-        Requirements (pickling safe on macOS spawn):
-          - env_fn and agent_fn must be picklable TOP-LEVEL objects
-          - do NOT pass lambdas or nested functions
-        """
-        assert self.env is not None and self.agent is not None
+        assert self.agent is not None
         assert self.state_df is not None and self.prices is not None
 
-        # Local imports reduce spawn issues
         from agents.multi_process.multi_process_trainer import MultiProcessTrainer
-        # from agents.multi_process.env_factory import EnvFactory
-        from agents.multi_process.handler import EnvHandler, AgentHandler
+        from agents.multi_process.handler import EnvHandler
 
         env_fn = EnvHandler(
             env_type="buy",
-            state_window_df=self.state_df,
-            price_series=self.prices,
+            features=self.state_df.values.astype(np.float32),
+            prices=np.asarray(self.prices, dtype=np.float32),
             config=self.config,
-            horizon=self.config.trade_manager.sell_horizon
         )
-        agent_fn = AgentHandler(self.agent)
 
         mp_trainer = MultiProcessTrainer(
             agent=self.agent,
             env_fn=env_fn,
-            agent_fn=agent_fn,
             n_workers=n_workers,
             steps_per_batch=steps_per_batch,
-            log_every=log_every,
+            worker_epsilon=worker_epsilon,
         )
 
-        mp_trainer.train(n_batches=n_batches, updates_per_batch=updates_per_batch)
+        mp_trainer.train(
+            n_batches=n_batches,
+            updates_per_batch=updates_per_batch,
+            log_every=log_every,
+        )
 
         print(
             f"[BuyTrainer-MP] Done. Replay buffer size={len(self.agent.replay_buffer)} "
             f"| Loss entries={len(self.agent.loss_history)}"
         )
+
+
 
     def collect_buy_entry_indices(self, greedy: bool = True) -> np.ndarray:
         assert self.agent is not None

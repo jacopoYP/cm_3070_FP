@@ -9,3 +9,4 @@ class TradeManagerConfig:
     use_trend_filter: bool
     ma_short: int
     ma_long: int
+    min_hold_bars: int
