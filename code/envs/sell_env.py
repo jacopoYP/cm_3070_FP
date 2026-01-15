@@ -1,171 +1,236 @@
-import gym
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Dict, Optional, Tuple
+
 import numpy as np
-from typing import Dict, Any
 
-from config.system import TradingSystemConfig
+HOLD = 0
+SELL = 1
 
 
-class SellEnv(gym.Env):
+@dataclass
+class SellEpisode:
+    entry_idx: int
+    entry_price: float
+    t: int
+    bars_held: int
+
+
+class SellEnv:
     """
-    Sell-only environment.
+    Sell environment:
+      - Each episode starts at a BUY entry index (already in position).
+      - Agent decides HOLD(0) or SELL(1).
+      - Reward is 0 while holding.
+      - Terminal reward is net return from entry -> exit minus transaction cost ONCE at exit
+        (matches TradeManager semantics you used in buy-only eval).
 
-    Episode starts LONG at a sampled BUY entry index.
-    Agent chooses when to SELL.
-
-    Actions:
-        0 = HOLD
-        1 = SELL
-
-    Done:
-        - SELL
-        - OR forced close when hold_bars >= sell_horizon
-        - OR forced close at end-of-data
+    Forced exit at:
+      - horizon end (entry_idx + sell_horizon),
+      - segment end,
+      - end of data.
     """
-
-    metadata = {"render.modes": []}
 
     def __init__(
         self,
-        state_df,
-        prices,
-        entry_indices: np.ndarray,
-        config: TradingSystemConfig,
+        features: np.ndarray,          # (n_steps, feat_dim)
+        prices: np.ndarray,            # (n_steps,)
+        entry_indices: np.ndarray,     # (n_entries,)
+        transaction_cost: float = 0.001,
+        sell_horizon: int = 20,
+        min_hold_bars: int = 10,
+        segment_len: Optional[int] = None,   # critical for stacked tickers
+        include_pos_features: bool = True,   # add: unrealized_ret + time_frac + remaining_frac
+        seed: int = 42,
     ):
-        super().__init__()
+        self.X = np.asarray(features, dtype=np.float32)
+        self.p = np.asarray(prices, dtype=np.float32)
+        self.entries = np.asarray(entry_indices, dtype=np.int32)
 
-        if entry_indices is None or len(entry_indices) == 0:
-            raise ValueError(
-                "SellEnv received empty entry_indices. "
-                "SellAgent cannot train without BUY entry points."
-            )
+        self.tc = float(transaction_cost)
+        self.horizon = int(sell_horizon)
+        self.min_hold = int(min_hold_bars)
 
-        self.state_df = state_df
-        self.prices = prices
-        self.entry_indices = np.asarray(entry_indices, dtype=np.int64)
+        self.segment_len = int(segment_len) if segment_len is not None else None
+        self.include_pos = bool(include_pos_features)
 
-        self.n_steps = len(prices)
+        self.n = len(self.p)
+        if self.X.shape[0] != self.n:
+            raise ValueError("features and prices must have same length")
+        if len(self.entries) == 0:
+            raise ValueError("entry_indices is empty")
+        if self.horizon < 0:
+            raise ValueError("sell_horizon must be >= 0")
 
-        self.reward_cfg = config.reward
-        self.trade_cfg = config.trade_manager
+        self.feat_dim = int(self.X.shape[1])
+        self.pos_dim = 3 if self.include_pos else 0
+        self.state_dim = self.feat_dim + self.pos_dim
 
-        n_features = state_df.shape[1] if hasattr(state_df, "shape") else len(self._get_row(0))
+        self.rng = np.random.default_rng(int(seed))
+        self.ep: Optional[SellEpisode] = None
 
-        self.action_space = gym.spaces.Discrete(2)
-        self.observation_space = gym.spaces.Box(
-            low=-np.inf,
-            high=np.inf,
-            shape=(n_features,),
-            dtype=np.float32,
+    # -----------------------
+    # segment helpers
+    # -----------------------
+
+    def _segment_end(self, t: int) -> int:
+        if self.segment_len is None:
+            return self.n - 1
+        seg = int(t // self.segment_len)
+        end = (seg + 1) * self.segment_len - 1
+        return int(min(end, self.n - 1))
+
+    def _last_allowed(self, entry_idx: int) -> int:
+        """
+        Last bar (inclusive) where the position may still be open / exit may occur.
+        With sell_horizon=20 and entry=33 => last_allowed=53 (matches your TM examples).
+        """
+        seg_end = self._segment_end(entry_idx)
+        return int(min(entry_idx + self.horizon, seg_end, self.n - 1))
+
+    # -----------------------
+    # env API
+    # -----------------------
+
+    def reset(self, entry_idx: Optional[int] = None) -> np.ndarray:
+        if entry_idx is None:
+            entry_idx = int(self.rng.choice(self.entries))
+
+        entry_idx = int(entry_idx)
+        if entry_idx < 0 or entry_idx >= self.n:
+            raise ValueError("entry_idx out of range")
+
+        self.ep = SellEpisode(
+            entry_idx=entry_idx,
+            entry_price=float(self.p[entry_idx]),
+            t=entry_idx,
+            bars_held=0,
         )
-
-        self.reset()
-
-    # -----------------------
-    # Gym API
-    # -----------------------
-
-    def reset(self) -> np.ndarray:
-        self.entry_t = int(np.random.choice(self.entry_indices))
-
-        # Clamp entry so we can always progress at least one step safely
-        self.entry_t = min(self.entry_t, self.n_steps - 2)
-
-        self.t = self.entry_t
-        self.entry_price = float(self._get_price(self.entry_t))
-        self.done = False
-        return self._get_obs()
+        return self._get_state()
 
     def step(self, action: int):
-        if self.done:
-            raise RuntimeError("Step called after done=True. Call reset().")
+        if self.ep is None:
+            raise RuntimeError("Call reset() before step().")
 
-        info: Dict[str, Any] = {}
+        action = int(action)
+        t = int(self.ep.t)
+        entry_idx = int(self.ep.entry_idx)
+        last_allowed = int(self._last_allowed(entry_idx))
+        bars_held = int(self.ep.bars_held)
 
-        price_t = float(self._get_price(self.t))
-        # hold_bars = int(self.t - self.entry_t)
-        hold_bars = self.t - self.entry_t
+        can_sell = bars_held >= self.min_hold
 
-        min_hold = int(getattr(self.trade_cfg, "min_hold_bars", 1))
-        if hold_bars < min_hold:
-            action = 0
+        info: Dict = {
+            "t": t,
+            "entry_idx": entry_idx,
+            "bars_held": bars_held,
+            "last_allowed": last_allowed,
+        }
 
+        # Baseline: what happens if we simply hold until the horizon/segment end
+        baseline = float(self._net_tm_at(last_allowed))
+        info["baseline_net_tm"] = baseline
 
-        # 1) SELL (signal exit)
-        if action == 1:
-            reward = self._close_position(exit_price=price_t)
-            self.done = True
-            info.update({
-                "forced_exit": False,
-                "reason": "signal",
-                "entry_t": self.entry_t,
-                "exit_t": self.t,
-                "hold_bars": hold_bars,
-            })
-            return self._get_obs(), float(reward), self.done, info
+        # 1) Forced exit at last_allowed: by definition delta = 0
+        if t >= last_allowed:
+            rets = self._returns_at(t)
+            info.update({"forced_exit": True, "reason": "limit", "exit_idx": int(t), **rets})
+            info["delta_vs_hold"] = 0.0
+            return self._terminal_state(), 0.0, True, info
 
-        # 2) Time-stop (sell_horizon)
-        if hold_bars >= int(self.trade_cfg.sell_horizon):
-            reward = self._close_position(exit_price=price_t)
-            self.done = True
-            info.update({
-                "forced_exit": True,
-                "reason": "time",
-                "entry_t": self.entry_t,
-                "exit_t": self.t,
-                "hold_bars": hold_bars,
-            })
-            return self._get_obs(), float(reward), self.done, info
+        # 2) Voluntary SELL: reward is improvement vs holding to last_allowed
+        if action == SELL and can_sell:
+            net_now = float(self._net_tm_at(t))
+            delta = net_now - baseline
+            rets = self._returns_at(t)
+            info.update({"forced_exit": False, "reason": "sell", "exit_idx": int(t), **rets})
+            info["delta_vs_hold"] = float(delta)
+            return self._terminal_state(), float(delta), True, info
 
-        # 3) Advance time
-        self.t += 1
-
-        # End-of-data forced close ON the last bar with correct price
-        if self.t >= self.n_steps - 1:
-            price_last = float(self._get_price(self.t))
-            reward = self._close_position(exit_price=price_last)
-            self.done = True
-            info.update({
-                "forced_exit": True,
-                "reason": "eod",
-                "entry_t": self.entry_t,
-                "exit_t": self.t,
-                "hold_bars": int(self.t - self.entry_t),
-            })
-            return self._get_obs(), float(reward), self.done, info
-
-        # 4) Normal HOLD step (not done)
-        reward = 0.0
-        info.update({
-            "forced_exit": False,
-            "reason": "hold",
-            "entry_t": self.entry_t,
-            "exit_t": None,
-            "hold_bars": int(self.t - self.entry_t),
-        })
-        return self._get_obs(), float(reward), self.done, info
+        # 3) HOLD (or SELL not allowed yet): reward 0, advance time
+        self.ep.t = t + 1
+        self.ep.bars_held += 1
+        return self._get_state(), 0.0, False, info
 
     # -----------------------
-    # Helpers
+    # internals
     # -----------------------
 
-    def _close_position(self, exit_price: float) -> float:
-        gross_return = (exit_price - self.entry_price) / self.entry_price
-        net_return = gross_return - float(self.reward_cfg.transaction_cost)
-        return float(self._compute_reward(float(net_return)))
+    def _get_state(self) -> np.ndarray:
+        """
+        State at current time t (in position).
+        If include_pos_features, append:
+          - unrealized_return
+          - time_frac in [0,1]
+          - remaining_frac in [0,1]
+        """
+        assert self.ep is not None
+        t = int(self.ep.t)
+        entry_idx = int(self.ep.entry_idx)
+        entry_price = float(self.ep.entry_price)
 
-    def _compute_reward(self, net_return: float) -> float:
-        reward = net_return
-        reward -= float(self.reward_cfg.lambda_dd) * max(0.0, -net_return)
-        reward -= float(self.reward_cfg.lambda_vol) * (net_return ** 2)
-        return float(reward)
+        base = self.X[t].astype(np.float32, copy=False)
 
-    def _get_row(self, t: int):
-        # pandas DataFrame or numpy array
-        return self.state_df.iloc[t].values if hasattr(self.state_df, "iloc") else self.state_df[t]
+        if not self.include_pos:
+            return base
 
-    def _get_obs(self) -> np.ndarray:
-        return np.asarray(self._get_row(self.t), dtype=np.float32)
+        last_allowed = self._last_allowed(entry_idx)
+        price_now = float(self.p[t])
 
-    def _get_price(self, t: int) -> float:
-        # pandas Series or numpy array
-        return float(self.prices.iloc[t]) if hasattr(self.prices, "iloc") else float(self.prices[t])
+        unreal = (price_now - entry_price) / (entry_price + 1e-12)
+        # time_frac = float(min(1.0, self.ep.bars_held / max(1, self.horizon)))
+        # remaining = float(max(0, last_allowed - t))
+        # remaining_frac = float(min(1.0, remaining / max(1, self.horizon)))
+        eff_h = max(1, int(last_allowed - entry_idx))
+        time_frac = float(min(1.0, self.ep.bars_held / eff_h))
+        remaining = float(max(0, last_allowed - t))
+        remaining_frac = float(min(1.0, remaining / eff_h))
+
+        extra = np.array([unreal, time_frac, remaining_frac], dtype=np.float32)
+        return np.concatenate([base, extra], axis=0)
+
+    def _terminal_state(self) -> np.ndarray:
+        return np.zeros((self.state_dim,), dtype=np.float32)
+    
+    def _trade_returns(self, exit_idx: int) -> Tuple[float, float]:
+        """(gross_return, net_return) at exit_idx with EXIT cost only."""
+        assert self.ep is not None
+        entry_price = float(self.ep.entry_price)
+        exit_price = float(self.p[exit_idx])
+        gross = (exit_price - entry_price) / (entry_price + 1e-12)
+        net = gross - float(self.tc)  # EXIT cost only
+        return gross, net
+    
+    def _returns_at(self, exit_idx: int) -> Dict[str, float]:
+        assert self.ep is not None
+        tc = float(self.tc)
+        entry_price = float(self.ep.entry_price)
+        exit_price = float(self.p[exit_idx])
+
+        gross = (exit_price - entry_price) / (entry_price + 1e-12)
+
+        # What THIS env is optimizing (Option A): gross minus EXIT cost only
+        net_env = gross - tc
+
+        # What TradeManager reports: round-trip exact net
+        net_tm = ((1.0 - tc) * (1.0 - tc) * (1.0 + gross)) - 1.0
+
+        return {
+            "exit_price": exit_price,
+            "gross_return": float(gross),
+            "net_return_env": float(net_env),
+            "net_return_tm": float(net_tm),
+        }
+    
+    def _net_tm_at(self, exit_idx: int) -> float:
+        """TradeManager-consistent round-trip net return at exit_idx (entry+exit costs)."""
+        assert self.ep is not None
+        tc = float(self.tc)
+        entry_price = float(self.ep.entry_price)
+        exit_price = float(self.p[exit_idx])
+        gross = (exit_price - entry_price) / (entry_price + 1e-12)
+        return ((1.0 - tc) * (1.0 - tc) * (1.0 + gross)) - 1.0
+
+
+
