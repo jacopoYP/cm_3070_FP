@@ -8,6 +8,7 @@ import numpy as np
 from core.types import RewardConfig, TradeManagerConfig
 from trade.confidence import softmax_confidence, margin_sigmoid_confidence
 
+from core.helper import check_sentiment
 
 @dataclass
 class Trade:
@@ -332,9 +333,22 @@ class TradeManager:
                             self.entry_debug["conf_max"] = max(self.entry_debug["conf_max"], conf)
 
                             if conf >= BUY_MIN_CONF:
-                                self._open(t, price, meta={"buy_conf": conf})
-                                self.entry_indices.append(int(t))
-                                self.entry_debug["opened"] += 1
+                                if not check_sentiment(self.state[t], self.trade_cfg):
+                                    self.entry_debug.setdefault("blocked_sentiment", 0)
+                                    self.entry_debug["blocked_sentiment"] += 1
+
+                                    # storing a few examples
+                                    self.entry_debug.setdefault("blocked_sentiment_samples", [])
+                                    if len(self.entry_debug["blocked_sentiment_samples"]) < 5:
+                                        sent = float(self.state[t, -2])
+                                        mass = float(self.state[t, -1])
+                                        self.entry_debug["blocked_sentiment_samples"].append(
+                                            {"t": int(t), "sent": sent, "mass": mass, "conf": float(conf)}
+                                        )
+                                else:
+                                    self._open(t, price, meta={"buy_conf": conf})
+                                    self.entry_indices.append(int(t))
+                                    self.entry_debug["opened"] += 1
                             else:
                                 self.entry_debug["blocked_conf"] += 1
 

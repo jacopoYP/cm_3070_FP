@@ -15,6 +15,12 @@ features:
     window: 252
     method: rolling_zscore
 
+finnhub:
+  api_key: "d5lbg61r01qgquflgn9gd5lbg61r01qgquflgna0"
+  
+alphavantage:
+  api_key: "FYFJWZUN7XRMOHJT"
+
 reward:
   transaction_cost: 0.001
   lambda_dd: 0.05
@@ -58,3 +64,10 @@ trade_manager:
   use_trend_filter: true
   ma_short: 10
   ma_long: 30
+
+  # Sentiment
+  use_sentiment_filter: true
+  sentiment_min_score: 0.05
+  sentiment_mass_min: 0.25
+
+

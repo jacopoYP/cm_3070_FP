@@ -11,6 +11,7 @@ from .types import (
     RewardConfig,
     StateConfig,
     SystemConfig,
+    AlphaVantageConfig,
     TradeManagerConfig,
     TrainingConfig,
 )
@@ -39,6 +40,7 @@ def load_config(path: str) -> SystemConfig:
     cfg.agent = _merge_dataclass(cfg.agent, raw.get("agent", raw))
     cfg.training = _merge_dataclass(cfg.training, raw.get("training", raw))
     cfg.trade_manager = _merge_dataclass(cfg.trade_manager, raw.get("trade_manager", raw))
+    cfg.alphavantage = _merge_dataclass(cfg.alphavantage, raw.get("alphavantage", raw))
 
     return cfg
 

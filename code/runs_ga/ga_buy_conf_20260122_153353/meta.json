@@ -1,0 +1,25 @@
+{
+  "run_id": "ga_buy_conf_20260122_153353",
+  "timestamp": "2026-01-22 15:33:53",
+  "seed": 42,
+  "data": {
+    "features": "data/features.npy",
+    "prices": "data/prices.npy",
+    "seg_len": 1239,
+    "n_segs": 5,
+    "train_frac": 0.7,
+    "seg_train_len": 867,
+    "seg_test_len": 372
+  },
+  "ga": {
+    "pop": 12,
+    "gens": 10,
+    "elite": 2,
+    "tourn": 3,
+    "mut_sigma": 0.03,
+    "lo": 0.35,
+    "hi": 0.85
+  },
+  "buy_model": "runs/pipeline_20260121_210147/buy_agent.pt",
+  "fitness": "test.final_equity (TM buy-only)"
+}

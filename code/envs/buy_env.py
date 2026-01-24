@@ -7,6 +7,7 @@ import numpy as np
 
 from core.types import RewardConfig, TradeManagerConfig
 
+from core.helper import check_sentiment
 
 @dataclass
 class BuyEnvState:
@@ -67,11 +68,16 @@ class BuyEnv:
 
         # entry
         if action == self.BUY and not self.s.in_pos:
-            self.s.in_pos = True
-            self.s.entry_price = price
-            self.s.entry_t = self.s.t
-            r += float(self.reward_cfg.entry_bonus)
-            info.update({"opened": True, "entry_t": self.s.entry_t, "entry_price": self.s.entry_price})
+            if action == self.BUY and not self.s.in_pos:
+                if not check_sentiment(self.features[self.s.t], self.trade_cfg):
+                    action = self.HOLD
+                    info.update({"buy_blocked": "sentiment"})
+                else:
+                    self.s.in_pos = True
+                    self.s.entry_price = price
+                    self.s.entry_t = self.s.t
+                    r += float(self.reward_cfg.entry_bonus)
+                    info.update({"opened": True, "entry_t": self.s.entry_t, "entry_price": self.s.entry_price})
 
         # in-position shaping
         if action == self.HOLD and self.s.in_pos:

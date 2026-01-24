@@ -86,6 +86,15 @@ class TradeManagerConfig:
     ma_short: int = 10
     ma_long: int = 30
 
+    # Sentiment
+    use_sentiment_filter: bool = False
+    sentiment_min_score: float = 0.0
+    sentiment_mass_min: float = 0.25
+
+
+@dataclass
+class AlphaVantageConfig:
+    api_key: str = "api_key"
 
 @dataclass
 class SystemConfig:
@@ -96,3 +105,5 @@ class SystemConfig:
     agent: AgentConfig = field(default_factory=AgentConfig)
     training: TrainingConfig = field(default_factory=TrainingConfig)
     trade_manager: TradeManagerConfig = field(default_factory=TradeManagerConfig)
+    alphavantage: AlphaVantageConfig = field(default_factory=AlphaVantageConfig)
+
