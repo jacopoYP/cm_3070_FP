@@ -1,0 +1,66 @@
+{
+  "best_genes": {
+    "buy_min_confidence": 0.48545875684378054,
+    "sell_min_margin": 0.0023837775550456276,
+    "sell_min_delta_vs_hold": 0.005440418775972615,
+    "min_hold_bars": 2,
+    "cooldown_steps": 1
+  },
+  "fitness": 4.165269952985532,
+  "metrics": {
+    "test_final_equity": 4.165269952985532,
+    "test_n_trades": 65,
+    "test_avg_net": 0.026612170345495473,
+    "test_win_rate": 0.676923076923077,
+    "exit_reasons": {
+      "time": 59,
+      "sell_agent": 6
+    },
+    "entry_debug": {
+      "checked": 582,
+      "blocked_trend": 419,
+      "blocked_latest_entry": 38,
+      "blocked_conf": 53,
+      "opened": 65,
+      "conf_min": 0.23741020554208428,
+      "conf_max": 0.7190019521451048,
+      "blocked_sentiment": 7,
+      "blocked_sentiment_samples": [
+        {
+          "t": 344,
+          "sent": -0.017996761947870255,
+          "mass": 1.6865910291671753,
+          "conf": 0.4937610213756523
+        },
+        {
+          "t": 510,
+          "sent": -0.10528286546468735,
+          "mass": 1.8700300455093384,
+          "conf": 0.5210481098766605
+        },
+        {
+          "t": 1247,
+          "sent": -0.2748927175998688,
+          "mass": 1.3700679540634155,
+          "conf": 0.5698105804741059
+        },
+        {
+          "t": 1317,
+          "sent": 0.024830954149365425,
+          "mass": 1.5768070220947266,
+          "conf": 0.5507895470506392
+        },
+        {
+          "t": 1341,
+          "sent": -0.1074419692158699,
+          "mass": 1.2505459785461426,
+          "conf": 0.519559708229877
+        }
+      ]
+    },
+    "sell_debug": {
+      "seen": 1154,
+      "sell_actions": 501
+    }
+  }
+}
