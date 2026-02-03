@@ -157,6 +157,7 @@ def build_features_for_all_tickers(cfg, raw: pd.DataFrame):
     all_features = []
     all_prices = []
     debug_rows = []
+    all_meta = []
 
     for t in cfg.data.tickers:
         # Slice one ticker from MultiIndex columns: (field, ticker)
@@ -194,7 +195,6 @@ def build_features_for_all_tickers(cfg, raw: pd.DataFrame):
         print("feats raw rows:", len(feats))
         print("feats NaNs per column:\n", feats.isna().sum().sort_values(ascending=False).head(10))
 
-       
         # Sentiment
                 # -----------------------
         # Sentiment feature (v0)
@@ -261,6 +261,13 @@ def build_features_for_all_tickers(cfg, raw: pd.DataFrame):
 
         px = close.loc[feats.index].astype(float)
 
+        # all_meta contains info to be queried later by the use via NLP 
+        meta_t = pd.DataFrame({
+            "ticker": t,
+            "date": feats.index.astype("datetime64[ns]"),
+        })
+        all_meta.append(meta_t)
+
         all_features.append(feats)
         all_prices.append(px)
 
@@ -275,11 +282,25 @@ def build_features_for_all_tickers(cfg, raw: pd.DataFrame):
 
     features_df = pd.concat(all_features, axis=0)
     prices_s = pd.concat(all_prices, axis=0)
+    meta_df = pd.concat(all_meta, axis=0).reset_index(drop=True)
 
     if len(features_df) != len(prices_s):
         raise RuntimeError(f"Alignment mismatch: features={len(features_df)} prices={len(prices_s)}")
+    
+    if len(features_df) != len(prices_s) or len(features_df) != len(meta_df):
+        raise RuntimeError(
+         f"Alignment mismatch: features={len(features_df)} prices={len(prices_s)} meta={len(meta_df)}"
+        )
 
-    return features_df.values.astype("float32"), prices_s.values.astype("float32"), pd.DataFrame(debug_rows)
+
+    # return features_df.values.astype("float32"), prices_s.values.astype("float32"), pd.DataFrame(debug_rows)
+    return (
+        features_df.values.astype("float32"),
+        prices_s.values.astype("float32"),
+        pd.DataFrame(debug_rows),
+        meta_df,
+    )
+
 
 
 
@@ -323,7 +344,6 @@ def main():
     # Step 1: download
     raw = download_ohlcv(tickers, start_date, end_date, interval)
     print("downloaded rows:", len(raw), "cols:", list(raw.columns))
-    raw = download_ohlcv(tickers, start_date, end_date, interval)
     print("RAW shape:", raw.shape)
     print("RAW head index:", raw.index[:3])
     print("RAW tail index:", raw.index[-3:])
@@ -331,42 +351,90 @@ def main():
 
 
     # Step 2: build features
-    features, prices, dbg = build_features_for_all_tickers(cfg, raw)
+    # features, prices, dbg = build_features_for_all_tickers(cfg, raw)
+    features, prices, dbg, meta_df = build_features_for_all_tickers(cfg, raw)
+
 
     # Step 3: validate
     print("\n=== VALIDATION ===")
     print(dbg.to_string(index=False))
     print("features shape:", features.shape)
     print("prices shape:", prices.shape)
+    print("meta_df shape:", meta_df.shape)
     print("features dtype:", features.dtype, "prices dtype:", prices.dtype)
 
+    # Safety check
+    if len(features) != len(prices) or len(features) != len(meta_df):
+        raise RuntimeError(
+            f"Alignment mismatch: features={len(features)} prices={len(prices)} meta={len(meta_df)}"
+        )
+
+    # Numeric checks
     if not np.isfinite(features).all():
         raise RuntimeError("features contains NaN/Inf after dropna - check scaling window / indicator math.")
     if not np.isfinite(prices).all():
         raise RuntimeError("prices contains NaN/Inf - unexpected.")
+    
+    # Safety check for required meta columns
+    for col in ("ticker", "date"):
+        if col not in meta_df.columns:
+            raise RuntimeError(f"meta_df missing required column '{col}'. Columns={list(meta_df.columns)}")
+        
+        # Ensure date is datetime64
+    meta_df = meta_df.copy()
+    meta_df["date"] = pd.to_datetime(meta_df["date"], errors="coerce")
+    if meta_df["date"].isna().any():
+        bad = meta_df[meta_df["date"].isna()].head(5)
+        raise RuntimeError(f"meta_df has invalid dates. Examples:\n{bad}")
+
+    # Ensure tickers are in the allowed universe
+    unknown = set(meta_df["ticker"].unique()) - set(tickers)
+    if unknown:
+        raise RuntimeError(f"meta_df contains unexpected tickers: {sorted(list(unknown))}")
+
+    # Quick summary (useful for debugging)
+    meta_summary = (
+        meta_df.groupby("ticker")["date"]
+        .agg(rows="size", first="min", last="max")
+        .reset_index()
+    )
+    print("\n=== META SUMMARY ===")
+    print(meta_summary.to_string(index=False))
+
 
     # Step 4: save artifacts
     f_path = os.path.join(args.out, "features.npy")
     p_path = os.path.join(args.out, "prices.npy")
     d_path = os.path.join(args.out, "build_debug.csv")
 
+    # Meta artifacts
+    m_parquet = os.path.join(args.out, "row_meta.parquet")
+    m_summary = os.path.join(args.out, "row_meta_summary.csv")
+
     np.save(f_path, features)
     np.save(p_path, prices)
     dbg.to_csv(d_path, index=False)
+
+    # meta saving
+    meta_df.to_parquet(m_parquet, index=False)
+    meta_summary.to_csv(m_summary, index=False)
 
     if args.save_csv:
         # These can be large — only use for debugging
         pd.DataFrame(features).to_csv(os.path.join(args.out, "features.csv"), index=False)
         pd.Series(prices, name="price").to_csv(os.path.join(args.out, "prices.csv"), index=False)
+        meta_df.to_csv(os.path.join(args.out, "row_meta.csv"), index=False)
 
     print("\nSaved:")
     print(" -", f_path)
     print(" -", p_path)
     print(" -", d_path)
+    print(" -", m_parquet)
+    print(" -", m_summary)
     if args.save_csv:
         print(" -", os.path.join(args.out, "features.csv"))
         print(" -", os.path.join(args.out, "prices.csv"))
-
+        print(" -", os.path.join(args.out, "row_meta.csv"))
 
 if __name__ == "__main__":
     main()

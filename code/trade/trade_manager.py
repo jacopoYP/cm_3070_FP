@@ -387,6 +387,7 @@ class TradeManager:
         if self._pos is None:
             return
 
+        # Transaction cost
         tc = float(self.reward_cfg.transaction_cost)
 
         entry_idx = int(self._pos.entry_idx)
@@ -401,7 +402,7 @@ class TradeManager:
         # charge transaction cost on exit
         self._equity *= (1.0 - tc)
 
-        # Net return reporting must match TM's equity convention:
+        # Net return
         net_exact = ((1.0 - tc) * (1.0 - tc) * (1.0 + gross)) - 1.0
 
         reason = meta.get("reason", "unknown")
