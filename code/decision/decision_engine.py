@@ -222,14 +222,19 @@ class DecisionEngine:
             row_index=row_i,
         )
 
+    # def recommend_top_k(self, tickers: List[str], k: int = 3, as_of: Optional[str] = None) -> List[Decision]:
+    #     decisions = [self.predict(t, intent="buy", as_of=as_of) for t in tickers]
+
+    #     buys = [d for d in decisions if d.action == "BUY"]
+    #     buys.sort(key=lambda d: (d.confidence, d.q_gap), reverse=True)
+
+    #     if buys:
+    #         return buys[:k]
+
+    #     decisions.sort(key=lambda d: (d.confidence, d.q_gap), reverse=True)
+    #     return decisions[:k]
     def recommend_top_k(self, tickers: List[str], k: int = 3, as_of: Optional[str] = None) -> List[Decision]:
         decisions = [self.predict(t, intent="buy", as_of=as_of) for t in tickers]
-
-        buys = [d for d in decisions if d.action == "BUY"]
-        buys.sort(key=lambda d: (d.confidence, d.q_gap), reverse=True)
-
-        if buys:
-            return buys[:k]
-
         decisions.sort(key=lambda d: (d.confidence, d.q_gap), reverse=True)
         return decisions[:k]
+

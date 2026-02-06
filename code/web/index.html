@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Financial Advisor Bot (Demo)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 24px; max-width: 900px; }
+    h1 { margin: 0 0 8px; }
+    .muted { color: #666; margin: 0 0 16px; }
+    .row { display: flex; gap: 8px; }
+    input { flex: 1; padding: 10px 12px; font-size: 16px; }
+    button { padding: 10px 12px; font-size: 16px; cursor: pointer; }
+    .examples button { font-size: 14px; padding: 6px 10px; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 12px; margin-top: 12px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid #ddd; margin-right: 8px; }
+    pre { background: #fafafa; padding: 10px; border-radius: 12px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>Financial Advisor Bot</h1>
+  <p class="muted">Academic demo. Decisions are based on the latest available dataset date.</p>
+
+  <div class="row">
+    <input id="q" placeholder='Try: "Should I buy Apple stocks?"' />
+    <button id="askBtn">Ask</button>
+  </div>
+
+    <details style="margin-top:10px;">
+    <summary><b>Examples</b></summary>
+    <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" data-q="Which company shares should I buy today?">Top picks today</button>
+        <button type="button" data-q="Should I buy Apple stocks?">Buy Apple?</button>
+        <button type="button" data-q="Should I sell nvidia?">Sell Nvidia?</button>
+    </div>
+    </details>
+
+
+  <div id="out"></div>
+
+  <script>
+    const out = document.getElementById("out");
+    const input = document.getElementById("q");
+    const askBtn = document.getElementById("askBtn");
+
+    function esc(s) {
+      return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+    }
+
+    async function ask(question) {
+      out.innerHTML = `<div class="card">Calling API…</div>`;
+      const res = await fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({question, top_k: 3})
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        out.innerHTML = `<div class="card"><b>Error:</b> ${esc(JSON.stringify(data))}</div>`;
+        return;
+      }
+
+      const decisions = (data.decisions || []).map(d => `
+        <div class="card">
+          <div>
+            <span class="pill"><b>${esc(d.ticker)}</b> ${d.company ? `(${esc(d.company)})` : ""}</span>
+            <span class="pill">Date: ${esc(d.date)}</span>
+          </div>
+          <div style="margin-top:8px;">
+            <div class="grid">
+              <div><b>Action</b><br>${esc(d.action)}</div>
+              <div><b>Confidence</b><br>${Number(d.confidence).toFixed(4)}</div>
+              <div><b>Decision margin (q_gap)</b><br>${Number(d.q_gap).toFixed(6)}</div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      out.innerHTML = `
+        <div class="card">
+          <div><b>Intent:</b> ${esc(data.intent)}</div>
+          <div><b>Used date:</b> ${esc(data.used_date || "")}</div>
+          <div style="margin-top:8px;">${esc(data.note || "")}</div>
+        </div>
+        ${decisions || `<div class="card">No decisions returned.</div>`}
+        <details class="card">
+          <summary><b>Raw JSON</b></summary>
+          <pre>${esc(JSON.stringify(data, null, 2))}</pre>
+        </details>
+      `;
+    }
+
+    askBtn.addEventListener("click", () => ask(input.value));
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") ask(input.value);
+    });
+
+    document.querySelectorAll("button[data-q]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        input.value = btn.dataset.q;
+        ask(input.value);
+      });
+    });
+  </script>
+</body>
+</html>
