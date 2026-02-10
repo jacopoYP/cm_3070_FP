@@ -2,13 +2,14 @@
 
 # DATA (kept for completeness; data pipeline is external to this skeleton)
 data:
-  tickers: [AAPL, MSFT, NVDA, AMZN, GOOGL]
+  # tickers: [AAPL, MSFT, NVDA, AMZN, GOOGL]
+  tickers: [AAPL, MSFT, NVDA, AMZN, GOOGL, META, AVGO, AMD, INTC, TSLA, JNJ, PG, KO, PEP, JPM, BAC, XOM, CVX, CAT, HON]
   start_date: "2018-01-01"
   end_date: "2024-01-01"
   interval: "1d"
 
 features:
-  technical_indicators: [sma10, sma20, rsi14, macd_diff, bb_b, atr14, roc10, obv, mfi14, willr14]
+  technical_indicators: [sma10, sma20, rsi14, macd_diff, bb_b, atr14, roc10, obv, mfi14, willr14, ret_1, ret_5, vol_20]
   include_fundamentals: true
   include_sentiment: true
   scaling:

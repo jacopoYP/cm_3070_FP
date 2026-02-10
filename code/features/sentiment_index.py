@@ -38,7 +38,10 @@ def headline_polarity(headline: str) -> float:
     pos = sum(1 for w in toks if w in POS_WORDS)
     neg = sum(1 for w in toks if w in NEG_WORDS)
     # normalized polarity in [-1, 1]
-    return float((pos - neg) / (pos + neg + 1e-9))
+    den = pos + neg
+    return float((pos - neg) / den) if den > 0 else 0.0
+
+    # return float((pos - neg) / (pos + neg + 1e-9))
 
 
 @dataclass
