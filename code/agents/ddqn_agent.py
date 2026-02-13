@@ -127,7 +127,7 @@ class DDQNAgent:
         self.loss_history.append(val)
 
         if self.learn_steps % int(self.cfg.target_update_freq) == 0:
-            print("target sync @", self.learn_steps, "loss", val)
+            # print("target sync @", self.learn_steps, "loss", val)
             self.q_tgt.load_state_dict(self.q.state_dict())
 
         return val

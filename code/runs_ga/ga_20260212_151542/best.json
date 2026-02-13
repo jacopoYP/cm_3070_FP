@@ -1,0 +1,108 @@
+{
+  "best_genes": {
+    "buy_min_confidence": 0.5768827967868075,
+    "sell_min_margin": 0.0182102094090338,
+    "sell_min_delta_vs_hold": 0.02675656490748163,
+    "min_hold_bars": 6,
+    "cooldown_steps": 9
+  },
+  "fitness": 5.8670215132789405,
+  "val_metrics": {
+    "val_final_equity": 353.1954241643957,
+    "val_log_equity": 5.8670215132789405,
+    "val_n_trades": 50,
+    "val_avg_net": 0.32458040429868307,
+    "val_win_rate": 0.62,
+    "val_exit_reasons": {
+      "time": 49,
+      "sell_agent": 1
+    },
+    "val_entry_debug": {
+      "checked": 2332,
+      "blocked_trend": 1606,
+      "blocked_latest_entry": 133,
+      "blocked_conf": 541,
+      "opened": 50,
+      "conf_min": 0.38465688257723596,
+      "conf_max": 0.6380868665802465,
+      "blocked_sentiment": 2,
+      "blocked_sentiment_samples": [
+        {
+          "t": 1031,
+          "sent": -0.21901701390743256,
+          "mass": 1.2458970546722412,
+          "conf": 0.5900366654007698
+        },
+        {
+          "t": 1062,
+          "sent": -0.26035457849502563,
+          "mass": 1.3542430400848389,
+          "conf": 0.5895512329496944
+        }
+      ]
+    },
+    "val_sell_debug": {
+      "seen": 689,
+      "sell_actions": 110
+    }
+  },
+  "test_metrics": {
+    "test_final_equity": 11.12534760460213,
+    "test_n_trades": 70,
+    "test_avg_net": 0.038917541015729126,
+    "test_win_rate": 0.6571428571428571,
+    "test_min_net": -0.10646601726953953,
+    "test_median_net": 0.02884112893611901,
+    "test_max_net": 0.41070151342071903,
+    "exit_reasons": {
+      "time": 66,
+      "sell_agent": 4
+    },
+    "entry_debug": {
+      "checked": 1788,
+      "blocked_trend": 1158,
+      "blocked_latest_entry": 160,
+      "blocked_conf": 394,
+      "opened": 70,
+      "conf_min": 0.46505438002485777,
+      "conf_max": 0.8777874430189967,
+      "blocked_sentiment": 6,
+      "blocked_sentiment_samples": [
+        {
+          "t": 151,
+          "sent": 0.021615000441670418,
+          "mass": 0.34960201382637024,
+          "conf": 0.5859338212482343
+        },
+        {
+          "t": 152,
+          "sent": -0.11976400017738342,
+          "mass": 0.6361799836158752,
+          "conf": 0.5944838679534822
+        },
+        {
+          "t": 1935,
+          "sent": 0.036295998841524124,
+          "mass": 0.5684109926223755,
+          "conf": 0.6030325522445087
+        },
+        {
+          "t": 2070,
+          "sent": -0.21618600189685822,
+          "mass": 0.8679860234260559,
+          "conf": 0.5769930175099378
+        },
+        {
+          "t": 2201,
+          "sent": -0.23215800523757935,
+          "mass": 0.8201829791069031,
+          "conf": 0.5843689118320468
+        }
+      ]
+    },
+    "sell_debug": {
+      "seen": 956,
+      "sell_actions": 180
+    }
+  }
+}

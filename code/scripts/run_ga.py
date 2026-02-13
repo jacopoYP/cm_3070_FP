@@ -8,6 +8,7 @@ import os
 import sys
 from copy import deepcopy
 from typing import Any, Dict
+from types import SimpleNamespace
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
@@ -21,6 +22,9 @@ from ga.population import GAConfig, Population
 
 from agents.ddqn_agent import DDQNAgent
 from trade.trade_manager import TradeManager
+
+from core.helper import split_by_ticker_time_ga
+from envs.buy_env import BuyEnv
 
 # ----------------------------
 # utils
@@ -37,6 +41,26 @@ def load_yaml(path: str) -> Dict[str, Any]:
     with open(path, "r") as f:
         return yaml.safe_load(f)
 
+def load_yaml_to_ns(path: str) -> SimpleNamespace:
+    """
+    Minimal YAML loader that returns a dot-accessible namespace.
+    Avoids forcing OmegaConf; works with plain PyYAML.
+
+    Example: cfg.reward.transaction_cost
+    """
+    import yaml  # local import to keep deps minimal
+
+    with open(path, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+
+    def rec(x):
+        if isinstance(x, dict):
+            return SimpleNamespace(**{k: rec(v) for k, v in x.items()})
+        if isinstance(x, list):
+            return [rec(v) for v in x]
+        return x
+
+    return rec(data)
 
 def set_by_path(d: Dict[str, Any], path: str, value: Any) -> None:
     """
@@ -81,36 +105,6 @@ def summarize_trades(trades: list[dict]) -> Dict[str, Any]:
         "median_net": float(np.median(net)),
         "max_net": float(net.max()),
     }
-
-
-def split_by_segments(features: np.ndarray, prices: np.ndarray, seg_len: int, train_frac: float):
-    n = len(prices)
-    n_segs = int(np.ceil(n / seg_len))
-
-    train_len = int(seg_len * train_frac)
-    test_len = seg_len - train_len
-
-    train_idx = []
-    test_idx = []
-    for seg in range(n_segs):
-        start = seg * seg_len
-        end = min(start + seg_len, n)
-        # if last segment is short, skip it (keeps logic clean)
-        if (end - start) < seg_len:
-            break
-
-        train_idx.extend(range(start, start + train_len))
-        test_idx.extend(range(start + train_len, start + seg_len))
-
-    train_idx = np.array(train_idx, dtype=np.int32)
-    test_idx = np.array(test_idx, dtype=np.int32)
-
-    X_train = features[train_idx]
-    p_train = prices[train_idx]
-    X_test = features[test_idx]
-    p_test = prices[test_idx]
-
-    return X_train, p_train, X_test, p_test, train_len, test_len, (n_segs if len(train_idx) > 0 else 0)
 
 
 # ----------------------------
@@ -160,12 +154,16 @@ def main():
     ap.add_argument("--pop", type=int, default=16)
     ap.add_argument("--gens", type=int, default=10)
 
+    ap.add_argument("--meta", type=str, default="data/row_meta.parquet")
+    ap.add_argument("--val_frac", type=float, default=0.15)
+
     # Fitness target (keep it simple)
-    ap.add_argument("--fitness", type=str, default="test_final_equity", choices=["test_final_equity"])
+    # ap.add_argument("--fitness", type=str, default="test_final_equity", choices=["test_final_equity"])
 
     args = ap.parse_args()
 
     cfgd = load_yaml(args.config)
+    cfg = load_yaml_to_ns(args.config)
 
     run_id = args.run_id or now_id("ga")
     out_dir = os.path.join(args.out_root, run_id)
@@ -175,23 +173,48 @@ def main():
     features = np.load(args.features).astype(np.float32, copy=False)
     prices = np.load(args.prices).astype(np.float32, copy=False)
 
-    seg_len = int(get_by_path(cfgd, "data.seg_len", 1239))
+    tickers = list(cfg.data.tickers)
     train_frac = float(get_by_path(cfgd, "data.train_frac", 0.7))
 
-    X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs = split_by_segments(
-        features, prices, seg_len=seg_len, train_frac=train_frac
+    # X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs = split_by_ticker_time(
+    #     features=features,
+    #     prices=prices,
+    #     tickers=tickers,
+    #     meta_path=args.meta,
+    #     train_frac=train_frac,
+    # )
+    
+    # The specific plist for GA in order to have a VAL dataset
+    X_train, p_train, X_val, p_val, X_test, p_test, seg_train_len, seg_val_len, seg_test_len, n_segs = split_by_ticker_time_ga(
+        features=features,
+        prices=prices,
+        tickers=tickers,
+        meta_path=args.meta,
+        train_frac=train_frac,
+        val_frac=float(args.val_frac),
     )
 
+
     print("=== DATA SPLIT ===")
+    print("tickers in cfg:", len(tickers))
+    
+    print("rows_per_ticker:", seg_train_len + seg_val_len + seg_test_len)
+    print("train/val/test per ticker:", seg_train_len, seg_val_len, seg_test_len)
+    print("train rows total:", len(p_train), "val rows total:", len(p_val), "test rows total:", len(p_test))
+
     print("features:", features.shape, "prices:", prices.shape)
-    print("SEG_LEN:", seg_len, "N_SEGS:", n_segs, "TRAIN_FRAC:", train_frac)
+    print("N_SEGS:", n_segs, "TRAIN_FRAC:", train_frac)
     print("train_len per seg:", seg_train_len, "test_len per seg:", seg_test_len)
     print("X_train:", X_train.shape, "p_train:", p_train.shape)
     print("X_test :", X_test.shape, "p_test :", p_test.shape)
 
     # ---- load agents (fixed, GA changes only TM params)
+    tmp_buy_env = BuyEnv(features=X_train, prices=p_train, reward=cfg.reward, trade=cfg.trade_manager)
+    print("BuyEnv state_dim:", tmp_buy_env.state_dim, "X_train feature_dim:", X_train.shape[1])
+
     buy_cfg = deepcopy(cfgd["agent"])
-    buy_cfg["state_dim"] = int(X_train.shape[1])
+    # buy_cfg["state_dim"] = int(X_train.shape[1])
+    buy_cfg["state_dim"] = int(tmp_buy_env.state_dim)
     buy_cfg["n_actions"] = 2
     buy_agent = DDQNAgent(_as_obj(buy_cfg))
     buy_agent.load(args.buy_model)
@@ -248,22 +271,61 @@ def main():
         for path, v in overrides.items():
             set_by_path(cfg_try, path, v)
 
-        # run TM WITH SELL
-        tm_test = run_tm_with_sell(cfg_try, X_test, p_test, buy_agent, sell_agent, seg_test_len)
+        
+        # ----------------------------
+        # Split VAL into two halves per ticker
+        # ----------------------------
+        half = seg_val_len // 2
 
-        fitness = float(tm_test.get("final_equity", 0.0))
-        trades = tm_test.get("trades", [])
-        stats = summarize_trades(trades)
+        val1_idx = []
+        val2_idx = []
+
+        for i in range(n_segs):
+            start = i * seg_val_len
+            mid   = start + half
+            end   = start + seg_val_len
+
+            val1_idx.append(np.arange(start, mid))
+            val2_idx.append(np.arange(mid, end))
+
+        val1_idx = np.concatenate(val1_idx)
+        val2_idx = np.concatenate(val2_idx)
+
+        X_val1, p_val1 = X_val[val1_idx], p_val[val1_idx]
+        X_val2, p_val2 = X_val[val2_idx], p_val[val2_idx]
+
+        seg_val1_len = half
+        seg_val2_len = seg_val_len - half
+
+        tm_v1 = run_tm_with_sell(cfg_try, X_val1, p_val1, buy_agent, sell_agent, seg_val1_len)
+        tm_v2 = run_tm_with_sell(cfg_try, X_val2, p_val2, buy_agent, sell_agent, seg_val2_len)
+
+        eq1 = float(tm_v1.get("final_equity", 0.0))
+        eq2 = float(tm_v2.get("final_equity", 0.0))
+
+        log1 = float(np.log(max(eq1, 1e-9)))
+        log2 = float(np.log(max(eq2, 1e-9)))
+
+        t1 = tm_v1.get("trades", [])
+        t2 = tm_v2.get("trades", [])
+        s1 = summarize_trades(t1)
+        s2 = summarize_trades(t2)
+
+        fitness = min(log1, log2) - 0.001 * (s1["n_trades"] + s2["n_trades"])
 
         metrics = {
-            "test_final_equity": fitness,
-            "test_n_trades": stats["n_trades"],
-            "test_avg_net": stats["avg_net_return"],
-            "test_win_rate": stats["win_rate"],
-            "exit_reasons": tm_test.get("exit_reasons", {}),
-            "entry_debug": tm_test.get("entry_debug", {}),
-            "sell_debug": tm_test.get("sell_debug", {}),
+            "val1_final_equity": eq1,
+            "val2_final_equity": eq2,
+            "val1_log_equity": log1,
+            "val2_log_equity": log2,
+            "val1_n_trades": s1["n_trades"],
+            "val2_n_trades": s2["n_trades"],
+            "val1_avg_net": s1["avg_net_return"],
+            "val2_avg_net": s2["avg_net_return"],
+            "val1_win_rate": s1["win_rate"],
+            "val2_win_rate": s2["win_rate"],
         }
+
 
         # log one line
         rec = {
@@ -292,32 +354,103 @@ def main():
     pop.init()
 
     # ---- run GA
+    # for gen in range(int(ga_cfg.generations)):
+    #     best = pop.best()
+    #     print(f"\n=== GEN {gen} ===")
+    #     print("BEST:", best.genome.values, "fitness:", best.fitness)
+    #     print("TEST:", best.fitness,
+    #           "n_trades:", best.metrics.get("test_n_trades"),
+    #           "avg_net:", best.metrics.get("test_avg_net"),
+    #           "win_rate:", best.metrics.get("test_win_rate"))
+
+    #     pop.evolve_one_generation()
     for gen in range(int(ga_cfg.generations)):
         best = pop.best()
         print(f"\n=== GEN {gen} ===")
         print("BEST:", best.genome.values, "fitness:", best.fitness)
-        print("TEST:", best.fitness,
-              "n_trades:", best.metrics.get("test_n_trades"),
-              "avg_net:", best.metrics.get("test_avg_net"),
-              "win_rate:", best.metrics.get("test_win_rate"))
+        print("VAL:",
+            best.fitness,
+            "eq1:", best.metrics.get("val1_final_equity"),
+            "eq2:", best.metrics.get("val2_final_equity"),
+            "trades:", best.metrics.get("val1_n_trades"), "/", best.metrics.get("val2_n_trades"),
+            "min_log:", min(best.metrics.get("val1_log_equity", -999), best.metrics.get("val2_log_equity", -999)))
+
 
         pop.evolve_one_generation()
 
+    # best = pop.best()
+    # out = {
+    #     "best_genes": dict(best.genome.values),
+    #     "fitness": float(best.fitness),
+    #     "metrics": dict(best.metrics),
+    # }
     best = pop.best()
+
+    # ----------------------------
+    # FINAL EVAL ON TEST (ONCE)
+    # ----------------------------
+    cfg_best = deepcopy(cfgd)
+    for path, v in best.genome.as_config_overrides().items():
+        set_by_path(cfg_best, path, v)
+
+    tm_test = run_tm_with_sell(
+        cfg_best,
+        X_test, p_test,
+        buy_agent, sell_agent,
+        seg_test_len
+    )
+
+    test_final_equity = float(tm_test.get("final_equity", 0.0))
+    test_trades = tm_test.get("trades", [])
+    test_stats = summarize_trades(test_trades)
+
+    print("Final TEST equity:", test_final_equity,
+      "n_trades:", test_stats["n_trades"],
+      "avg_net:", test_stats["avg_net_return"],
+      "win_rate:", test_stats["win_rate"])
+
+
+    test_metrics = {
+        "test_final_equity": test_final_equity,
+        "test_n_trades": test_stats["n_trades"],
+        "test_avg_net": test_stats["avg_net_return"],
+        "test_win_rate": test_stats["win_rate"],
+        "test_min_net": test_stats["min_net"],
+        "test_median_net": test_stats["median_net"],
+        "test_max_net": test_stats["max_net"],
+        "exit_reasons": tm_test.get("exit_reasons", {}),
+        "entry_debug": tm_test.get("entry_debug", {}),
+        "sell_debug": tm_test.get("sell_debug", {}),
+    }
+
     out = {
         "best_genes": dict(best.genome.values),
+
+        # GA objective value (VAL fitness)
         "fitness": float(best.fitness),
-        "metrics": dict(best.metrics),
+        "val_metrics": dict(best.metrics),
+
+        # Final untouched evaluation
+        "test_metrics": test_metrics,
     }
+
     with open(best_path, "w") as f:
         json.dump(out, f, indent=2)
 
+    # print("\n=== GA DONE ===")
+    # print("Best genes:", out["best_genes"])
+    # print("Best fitness (test final_equity):", out["fitness"])
+    # print("Saved:", best_path)
+    # print("Log:", log_path)
+    # print("Meta:", meta_path)
     print("\n=== GA DONE ===")
     print("Best genes:", out["best_genes"])
-    print("Best fitness (test final_equity):", out["fitness"])
+    print("Best VAL fitness:", out["fitness"])
+    print("Final TEST equity:", out["test_metrics"]["test_final_equity"])
     print("Saved:", best_path)
     print("Log:", log_path)
     print("Meta:", meta_path)
+
 
 
 if __name__ == "__main__":

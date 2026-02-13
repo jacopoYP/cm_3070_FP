@@ -1,0 +1,66 @@
+{
+  "run_id": "ga_20260212_152406",
+  "timestamp": "2026-02-12 15:24:06",
+  "seed": 42,
+  "config": "config.yaml",
+  "features": "data/features.npy",
+  "prices": "data/prices.npy",
+  "buy_model": "runs/pipeline_20260210_162837/buy_agent.pt",
+  "sell_model": "runs/pipeline_20260210_162837/sell_agent.pt",
+  "ga": {
+    "pop": 16,
+    "gens": 10
+  },
+  "genes": [
+    {
+      "name": "buy_min_confidence",
+      "path": "trade_manager.buy_min_confidence",
+      "kind": "float",
+      "bounds": [
+        0.4,
+        0.75
+      ],
+      "choices": null
+    },
+    {
+      "name": "sell_min_margin",
+      "path": "trade_manager.sell_min_margin",
+      "kind": "float",
+      "bounds": [
+        0.0,
+        0.08
+      ],
+      "choices": null
+    },
+    {
+      "name": "sell_min_delta_vs_hold",
+      "path": "trade_manager.sell_min_delta_vs_hold",
+      "kind": "float",
+      "bounds": [
+        0.0,
+        0.05
+      ],
+      "choices": null
+    },
+    {
+      "name": "min_hold_bars",
+      "path": "trade_manager.min_hold_bars",
+      "kind": "int",
+      "bounds": [
+        0,
+        10
+      ],
+      "choices": null
+    },
+    {
+      "name": "cooldown_steps",
+      "path": "trade_manager.cooldown_steps",
+      "kind": "int",
+      "bounds": [
+        0,
+        10
+      ],
+      "choices": null
+    }
+  ]
+}

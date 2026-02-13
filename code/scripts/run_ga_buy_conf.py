@@ -19,6 +19,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from core.helper import split_by_segments
 
 # ---- your project imports (adjust paths if needed)
 # from core.io import load_yaml_to_ns  # your existing helper
@@ -65,42 +66,42 @@ def summarize_trades(trades: List[dict]) -> Dict[str, float]:
         "max_net": float(net.max()),
     }
 
-def split_by_segments(
-    features: np.ndarray,
-    prices: np.ndarray,
-    seg_len: int,
-    train_frac: float,
-) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, int, int, int]:
-    """
-    features/prices are stacked by ticker segments of equal seg_len.
-    Returns X_train, p_train, X_test, p_test and segment lens in those subsets.
-    """
-    seg_len = int(seg_len)
-    train_frac = float(train_frac)
+# def split_by_segments(
+#     features: np.ndarray,
+#     prices: np.ndarray,
+#     seg_len: int,
+#     train_frac: float,
+# ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, int, int, int]:
+#     """
+#     features/prices are stacked by ticker segments of equal seg_len.
+#     Returns X_train, p_train, X_test, p_test and segment lens in those subsets.
+#     """
+#     seg_len = int(seg_len)
+#     train_frac = float(train_frac)
 
-    n = len(prices)
-    if n % seg_len != 0:
-        raise ValueError(f"Expected stacked segments length multiple of seg_len. n={n}, seg_len={seg_len}")
-    n_segs = n // seg_len
-    train_len = int(seg_len * train_frac)
-    test_len = seg_len - train_len
+#     n = len(prices)
+#     if n % seg_len != 0:
+#         raise ValueError(f"Expected stacked segments length multiple of seg_len. n={n}, seg_len={seg_len}")
+#     n_segs = n // seg_len
+#     train_len = int(seg_len * train_frac)
+#     test_len = seg_len - train_len
 
-    train_idx = []
-    test_idx = []
-    for seg in range(n_segs):
-        start = seg * seg_len
-        train_idx.extend(range(start, start + train_len))
-        test_idx.extend(range(start + train_len, start + seg_len))
+#     train_idx = []
+#     test_idx = []
+#     for seg in range(n_segs):
+#         start = seg * seg_len
+#         train_idx.extend(range(start, start + train_len))
+#         test_idx.extend(range(start + train_len, start + seg_len))
 
-    train_idx = np.array(train_idx, dtype=np.int32)
-    test_idx = np.array(test_idx, dtype=np.int32)
+#     train_idx = np.array(train_idx, dtype=np.int32)
+#     test_idx = np.array(test_idx, dtype=np.int32)
 
-    X_train = features[train_idx]
-    p_train = prices[train_idx]
-    X_test = features[test_idx]
-    p_test = prices[test_idx]
+#     X_train = features[train_idx]
+#     p_train = prices[train_idx]
+#     X_test = features[test_idx]
+#     p_test = prices[test_idx]
 
-    return X_train, p_train, X_test, p_test, train_len, test_len, n_segs
+#     return X_train, p_train, X_test, p_test, train_len, test_len, n_segs
 
 
 # -----------------------------
@@ -247,6 +248,7 @@ def main() -> None:
     ap.add_argument("--buy_model", type=str, required=True, help="Path to trained buy_agent.pt to reuse")
     ap.add_argument("--out_root", type=str, default="runs_ga")
     ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--meta", type=str, default="data/row_meta.parquet")
 
     # GA params
     ap.add_argument("--pop", type=int, default=12)
@@ -271,10 +273,10 @@ def main() -> None:
     features = np.load(args.features).astype(np.float32, copy=False)
     prices = np.load(args.prices).astype(np.float32, copy=False)
 
-    seg_len = int(getattr(cfg.data, "seg_len", 1239))
+    # seg_len = int(getattr(cfg.data, "seg_len", 1239))
     train_frac = float(getattr(cfg.data, "train_frac", 0.7))
     X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs = split_by_segments(
-        features, prices, seg_len=seg_len, train_frac=train_frac
+        features, prices, train_frac=train_frac, args=args, cfg=cfg
     )
 
     # load BUY agent once (GA reuses it)
@@ -294,7 +296,7 @@ def main() -> None:
         "data": {
             "features": args.features,
             "prices": args.prices,
-            "seg_len": seg_len,
+            # "seg_len": seg_len,
             "n_segs": n_segs,
             "train_frac": train_frac,
             "seg_train_len": seg_train_len,

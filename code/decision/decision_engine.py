@@ -197,7 +197,6 @@ class DecisionEngine:
         if intent == "sell" and state.shape[0] == 12:
             state = np.concatenate([state, np.zeros(3, dtype=np.float32)], axis=0)
 
-
         if intent == "buy":
             q = self.buy_model.q_values(state)
             action_idx = int(np.argmax(q))

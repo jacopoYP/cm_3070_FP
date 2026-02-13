@@ -17,6 +17,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from core.helper import split_by_segments
+
 # ----------------------------
 # Project imports (adjust paths if needed)
 # ----------------------------
@@ -113,66 +115,6 @@ def set_global_seeds(seed: int) -> None:
 
 
 # ----------------------------
-# Segmented train/test split
-# ----------------------------
-def split_by_segments(
-    features: np.ndarray,
-    prices: np.ndarray,
-    seg_len: int,
-    train_frac: float,
-) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, int, int, int]:
-    """
-    Stack segments: [seg0, seg1, ...] already concatenated in input arrays.
-
-    For each segment:
-      first floor(seg_len * train_frac) bars -> train
-      remaining -> test
-
-    Returns:
-      X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs
-    """
-    n = len(prices)
-    if n % seg_len != 0:
-        # still allow but compute number of full segments
-        n_segs = int(np.ceil(n / seg_len))
-    else:
-        n_segs = n // seg_len
-
-    seg_train_len = int(np.floor(seg_len * float(train_frac)))
-    seg_test_len = int(seg_len - seg_train_len)
-
-    X_tr_chunks, p_tr_chunks = [], []
-    X_te_chunks, p_te_chunks = [], []
-
-    for s in range(n_segs):
-        a = s * seg_len
-        b = min((s + 1) * seg_len, n)
-        segX = features[a:b]
-        segP = prices[a:b]
-
-        # If last segment is short, split proportionally
-        if len(segP) != seg_len:
-            local_train_len = int(np.floor(len(segP) * float(train_frac)))
-        else:
-            local_train_len = seg_train_len
-
-        X_tr_chunks.append(segX[:local_train_len])
-        p_tr_chunks.append(segP[:local_train_len])
-        X_te_chunks.append(segX[local_train_len:])
-        p_te_chunks.append(segP[local_train_len:])
-
-    X_train = np.concatenate(X_tr_chunks, axis=0).astype(np.float32, copy=False)
-    p_train = np.concatenate(p_tr_chunks, axis=0).astype(np.float32, copy=False)
-    X_test = np.concatenate(X_te_chunks, axis=0).astype(np.float32, copy=False)
-    p_test = np.concatenate(p_te_chunks, axis=0).astype(np.float32, copy=False)
-
-    # For the TM/SellEnv "segment_len" parameter you used:
-    # it must match the per-segment length inside that split.
-    # If all segments are full-length: seg_train_len, seg_test_len are constant.
-    return X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs
-
-
-# ----------------------------
 # Metrics
 # ----------------------------
 def summarize_trades(trades: List[Dict[str, Any]]) -> Dict[str, float]:
@@ -213,12 +155,10 @@ def train_buy_agent(
         trade=cfg.trade_manager,
     )
 
-    # buy_cfg = deepcopy(cfg.agent)
-    # buy_cfg.state_dim = int(buy_env.state_dim)
-    # buy_cfg.n_actions = 2
-
+    # buy_cfg = build_agent_cfg(cfg, state_dim=int(buy_env.state_dim), n_actions=2)
     # buy_agent = DDQNAgent(buy_cfg)
-    buy_cfg = build_agent_cfg(cfg, state_dim=int(buy_env.state_dim), n_actions=2)
+    tmp_env = BuyEnv(features=X_train, prices=p_train, reward=cfg.reward, trade=cfg.trade_manager)
+    buy_cfg = build_agent_cfg(cfg, state_dim=int(tmp_env.state_dim), n_actions=2)
     buy_agent = DDQNAgent(buy_cfg)
 
     EPISODES = int(getattr(cfg.training, "buy_episodes", 200))
@@ -461,6 +401,7 @@ def main() -> None:
     ap.add_argument("--out_root", type=str, default="runs")
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--run_id", type=str, default=None)
+    ap.add_argument("--meta", type=str, default="data/row_meta.parquet")
 
     # knobs
     ap.add_argument("--skip_buy_train", action="store_true")
@@ -478,16 +419,16 @@ def main() -> None:
     features = np.load(args.features).astype(np.float32, copy=False)
     prices = np.load(args.prices).astype(np.float32, copy=False)
 
-    seg_len = int(getattr(cfg.data, "seg_len", 1239))
+    # seg_len = int(getattr(cfg.data, "seg_len", 1239))
     train_frac = float(getattr(cfg.data, "train_frac", 0.7))
 
     X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs = split_by_segments(
-        features, prices, seg_len=seg_len, train_frac=train_frac
+        features, prices, train_frac=train_frac, args=args, cfg=cfg
     )
 
     print("\n=== DATA SPLIT ===")
     print("features:", features.shape, "prices:", prices.shape)
-    print("SEG_LEN:", seg_len, "N_SEGS:", n_segs, "TRAIN_FRAC:", train_frac)
+    # print("SEG_LEN:", seg_len, "N_SEGS:", n_segs, "TRAIN_FRAC:", train_frac)
     print("train_len per seg:", seg_train_len, "test_len per seg:", seg_test_len)
     print("X_train:", X_train.shape, "p_train:", p_train.shape)
     print("X_test :", X_test.shape, "p_test :", p_test.shape)
@@ -620,7 +561,7 @@ def main() -> None:
             "prices_path": args.prices,
             "shape_features": list(features.shape),
             "shape_prices": list(prices.shape),
-            "seg_len": int(seg_len),
+            # "seg_len": int(seg_len),
             "n_segs": int(n_segs),
             "train_frac": float(train_frac),
             "seg_train_len": int(seg_train_len),
