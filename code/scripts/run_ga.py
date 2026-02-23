@@ -275,57 +275,75 @@ def main():
         # ----------------------------
         # Split VAL into two halves per ticker
         # ----------------------------
-        half = seg_val_len // 2
+        # half = seg_val_len // 2
 
-        val1_idx = []
-        val2_idx = []
+        # val1_idx = []
+        # val2_idx = []
 
-        for i in range(n_segs):
-            start = i * seg_val_len
-            mid   = start + half
-            end   = start + seg_val_len
+        # for i in range(n_segs):
+        #     start = i * seg_val_len
+        #     mid   = start + half
+        #     end   = start + seg_val_len
 
-            val1_idx.append(np.arange(start, mid))
-            val2_idx.append(np.arange(mid, end))
+        #     val1_idx.append(np.arange(start, mid))
+        #     val2_idx.append(np.arange(mid, end))
 
-        val1_idx = np.concatenate(val1_idx)
-        val2_idx = np.concatenate(val2_idx)
+        # val1_idx = np.concatenate(val1_idx)
+        # val2_idx = np.concatenate(val2_idx)
 
-        X_val1, p_val1 = X_val[val1_idx], p_val[val1_idx]
-        X_val2, p_val2 = X_val[val2_idx], p_val[val2_idx]
+        # X_val1, p_val1 = X_val[val1_idx], p_val[val1_idx]
+        # X_val2, p_val2 = X_val[val2_idx], p_val[val2_idx]
 
-        seg_val1_len = half
-        seg_val2_len = seg_val_len - half
+        # seg_val1_len = half
+        # seg_val2_len = seg_val_len - half
 
-        tm_v1 = run_tm_with_sell(cfg_try, X_val1, p_val1, buy_agent, sell_agent, seg_val1_len)
-        tm_v2 = run_tm_with_sell(cfg_try, X_val2, p_val2, buy_agent, sell_agent, seg_val2_len)
+        # tm_v1 = run_tm_with_sell(cfg_try, X_val1, p_val1, buy_agent, sell_agent, seg_val1_len)
+        # tm_v2 = run_tm_with_sell(cfg_try, X_val2, p_val2, buy_agent, sell_agent, seg_val2_len)
 
-        eq1 = float(tm_v1.get("final_equity", 0.0))
-        eq2 = float(tm_v2.get("final_equity", 0.0))
+        # print("DBG v1 entry_debug:", tm_v1.get("entry_debug"))
+        # print("DBG v1 trade_cfg:", cfg_try["trade_manager"])
+        # print("DBG seg_val1_len:", seg_val1_len)
 
-        log1 = float(np.log(max(eq1, 1e-9)))
-        log2 = float(np.log(max(eq2, 1e-9)))
+        # eq1 = float(tm_v1.get("final_equity", 0.0))
+        # eq2 = float(tm_v2.get("final_equity", 0.0))
 
-        t1 = tm_v1.get("trades", [])
-        t2 = tm_v2.get("trades", [])
-        s1 = summarize_trades(t1)
-        s2 = summarize_trades(t2)
+        # log1 = float(np.log(max(eq1, 1e-9)))
+        # log2 = float(np.log(max(eq2, 1e-9)))
 
-        fitness = min(log1, log2) - 0.001 * (s1["n_trades"] + s2["n_trades"])
+        # t1 = tm_v1.get("trades", [])
+        # t2 = tm_v2.get("trades", [])
+        # s1 = summarize_trades(t1)
+        # s2 = summarize_trades(t2)
 
+        # fitness = min(log1, log2) - 0.001 * (s1["n_trades"] + s2["n_trades"])
+
+        # metrics = {
+        #     "val1_final_equity": eq1,
+        #     "val2_final_equity": eq2,
+        #     "val1_log_equity": log1,
+        #     "val2_log_equity": log2,
+        #     "val1_n_trades": s1["n_trades"],
+        #     "val2_n_trades": s2["n_trades"],
+        #     "val1_avg_net": s1["avg_net_return"],
+        #     "val2_avg_net": s2["avg_net_return"],
+        #     "val1_win_rate": s1["win_rate"],
+        #     "val2_win_rate": s2["win_rate"],
+        # }
+        tm_val = run_tm_with_sell(cfg_try, X_val, p_val, buy_agent, sell_agent, segment_len=seg_val_len)
+        eq = float(tm_val.get("final_equity", 1.0))
+        log_eq = float(np.log(max(eq, 1e-9)))
+        s = summarize_trades(tm_val.get("trades", []))
+
+        fitness = log_eq - 0.001 * s["n_trades"]
         metrics = {
-            "val1_final_equity": eq1,
-            "val2_final_equity": eq2,
-            "val1_log_equity": log1,
-            "val2_log_equity": log2,
-            "val1_n_trades": s1["n_trades"],
-            "val2_n_trades": s2["n_trades"],
-            "val1_avg_net": s1["avg_net_return"],
-            "val2_avg_net": s2["avg_net_return"],
-            "val1_win_rate": s1["win_rate"],
-            "val2_win_rate": s2["win_rate"],
+            "val_final_equity": eq,
+            "val_log_equity": log_eq,
+            "val_n_trades": s["n_trades"],
+            "val_avg_net": s["avg_net_return"],
+            "val_win_rate": s["win_rate"],
+            "entry_debug": tm_val.get("entry_debug", {}),
+            "exit_reasons": tm_val.get("exit_reasons", {}),
         }
-
 
         # log one line
         rec = {

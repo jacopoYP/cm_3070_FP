@@ -2,14 +2,18 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Optional, Literal, List, Dict
+
 import os
 
 import numpy as np
 import pandas as pd
 import torch
 
+import torch
+import torch.nn as nn
 
-Intent = Literal["buy", "sell"]
+# Intent = Literal["buy", "sell"]
+Intent = Literal["should_buy", "should_sell", "recommend_today", "unknown"]
 Action = Literal["BUY", "SELL", "HOLD"]
 
 
@@ -22,6 +26,8 @@ class Decision:
     q_values: List[float]
     q_gap: float
     row_index: int
+    raw_action: str
+    raw_action_idx: int
 
 
 def _softmax_maxprob(q: np.ndarray) -> float:
@@ -72,6 +78,13 @@ class ModelAdapter:
         self.model = self._load(ckpt_path, model_builder)
         self.model.eval()
 
+        w0 = None
+        for name, p in self.model.named_parameters():
+            if "net.0.weight" in name:
+                w0 = p.detach().cpu().numpy()
+                break
+        # print("MODEL net.0.weight mean/std:", float(w0.mean()), float(w0.std()))
+
     def _extract_state_dict(self, obj):
         if not isinstance(obj, dict):
             raise TypeError(f"Expected dict checkpoint, got {type(obj)}")
@@ -115,21 +128,97 @@ class ModelAdapter:
         state_dict = self._extract_state_dict(obj)
         model = model_builder().to(self.device)
 
-        missing, unexpected = model.load_state_dict(state_dict, strict=False)
-        if missing:
-            print(f"[WARN] Missing keys loading {ckpt_path}: {missing[:10]}{'...' if len(missing) > 10 else ''}")
-        if unexpected:
-            print(f"[WARN] Unexpected keys loading {ckpt_path}: {unexpected[:10]}{'...' if len(unexpected) > 10 else ''}")
+        # missing, unexpected = model.load_state_dict(state_dict, strict=False)
+        model.load_state_dict(state_dict, strict=True)
+
+        # after load_state_dict
+        k = "net.0.weight"
+        if k in state_dict:
+            a = state_dict[k].detach().cpu().view(-1)[:5].numpy()
+            b = dict(model.named_parameters())[k].detach().cpu().view(-1)[:5].numpy()
+            # print("CKPT vs MODEL first5", a, b)
+        # if missing:
+        #     print(f"[WARN] Missing keys loading {ckpt_path}: {missing[:10]}{'...' if len(missing) > 10 else ''}")
+        # if unexpected:
+        #     print(f"[WARN] Unexpected keys loading {ckpt_path}: {unexpected[:10]}{'...' if len(unexpected) > 10 else ''}")
 
         return model
 
+    # def q_values(self, state: np.ndarray) -> np.ndarray:
+    #     x = torch.tensor(state, dtype=torch.float32, device=self.device).unsqueeze(0)
+    #     q = self.model(x)
+    #     q = q.squeeze(0).detach().cpu().numpy().astype(np.float32)
+    #     if q.ndim != 1:
+    #         raise RuntimeError(f"Expected 1D Q-values, got shape={q.shape}")
+    #     return q
+
+    def _expected_in_features(self, model: nn.Module) -> int:
+        # works with your MLPQNetwork: model.net is nn.Sequential([Linear, ReLU, ...])
+        if hasattr(model, "net") and isinstance(model.net, nn.Sequential):
+            for m in model.net:
+                if isinstance(m, nn.Linear):
+                    return int(m.in_features)
+        # fallback
+        for m in model.modules():
+            if isinstance(m, nn.Linear):
+                return int(m.in_features)
+        raise RuntimeError("Could not infer model input dim (no Linear layer found).")
+
     @torch.no_grad()
-    def q_values(self, state: np.ndarray) -> np.ndarray:
-        x = torch.tensor(state, dtype=torch.float32, device=self.device).unsqueeze(0)
-        q = self.model(x)
-        q = q.squeeze(0).detach().cpu().numpy().astype(np.float32)
-        if q.ndim != 1:
-            raise RuntimeError(f"Expected 1D Q-values, got shape={q.shape}")
+    def q_values(self, state):
+        expected = self._expected_in_features(self.model)
+
+        s = np.asarray(state, dtype=np.float32).reshape(-1)
+        got = int(s.shape[0])
+
+        if got < expected:
+            # pad missing (e.g., SELL needs +3 position features)
+            padded = np.zeros((expected,), dtype=np.float32)
+            padded[:got] = s
+            s = padded
+        elif got > expected:
+            # truncate (safety)
+            s = s[:expected]
+
+        # x = torch.tensor(s, dtype=torch.float32).unsqueeze(0)  # (1, expected)
+        x = torch.tensor(s, dtype=torch.float32, device=self.device).unsqueeze(0)
+
+        # print("TORCH x sum/mean/std:",
+        #     float(x.sum()),
+        #     float(x.mean()),
+        #     float(x.std()))
+        # DEBUG: inspect activations of first layer
+        with torch.no_grad():
+            # DEBUG: walk through Sequential and print activations
+            if hasattr(self.model, "net") and isinstance(self.model.net, nn.Sequential):
+                h = x
+                for i, layer in enumerate(self.model.net):
+                    h = layer(h)
+                    # if isinstance(layer, nn.Linear):
+                        # print(f"Layer {i} Linear out min/max/mean:",
+                            # float(h.min()), float(h.max()), float(h.mean()))
+                    # elif isinstance(layer, nn.ReLU):
+                        # nz = float((h > 0).float().mean())
+                        # print(f"Layer {i} ReLU  out min/max/mean:",
+                            # float(h.min()), float(h.max()), float(h.mean()),
+                            # "nonzero_frac:", nz)
+                            
+                    q = self.model(x)
+                    q = q.squeeze(0).detach().cpu().numpy().astype(np.float32)
+
+        # in __init__ after loading:
+        last_lin = None
+        for m in self.model.modules():
+            if isinstance(m, nn.Linear):
+                last_lin = m
+        # print("LAST Linear weight mean/std:", float(last_lin.weight.mean()), float(last_lin.weight.std()))
+        # print("LAST Linear bias:", last_lin.bias.detach().cpu().numpy().tolist())
+
+        # print layer2 bias stats
+        lin2 = self.model.net[2]
+        # print("LIN2 bias min/max/mean:", float(lin2.bias.min()), float(lin2.bias.max()), float(lin2.bias.mean()))
+        # print("LIN2 weight mean/std:", float(lin2.weight.mean()), float(lin2.weight.std()))
+
         return q
 
 class DecisionEngine:
@@ -193,47 +282,212 @@ class DecisionEngine:
         row_i, ts = self._select_row(ticker, as_of)
         state = self.X[row_i]
 
-        # --- SELL model expects 15 dims, features artifact provides 12 ---
-        if intent == "sell" and state.shape[0] == 12:
-            state = np.concatenate([state, np.zeros(3, dtype=np.float32)], axis=0)
-
+        # --- choose model + action map ---
         if intent == "buy":
-            q = self.buy_model.q_values(state)
-            action_idx = int(np.argmax(q))
-            action = self.buy_action_map.get(action_idx, "HOLD")
+            model = self.buy_model
+            action_map = self.buy_action_map  # {0:"HOLD", 1:"BUY"}
+            valid = ("BUY", "HOLD")
         else:
             if self.sell_model is None:
                 raise RuntimeError("sell_ckpt_path not provided but intent='sell' requested")
-            q = self.sell_model.q_values(state)
-            action_idx = int(np.argmax(q))
-            action = self.sell_action_map.get(action_idx, "HOLD")
+            model = self.sell_model
+            action_map = self.sell_action_map  # {0:"HOLD", 1:"SELL"}
+            valid = ("SELL", "HOLD")
 
+        # --- Q values + raw argmax ---
+        q = model.q_values(state)
+        q = np.asarray(q, dtype=np.float32).reshape(-1)
+
+        raw_idx = int(np.argmax(q))
+        raw_action = action_map.get(raw_idx, "HOLD")
+
+        if raw_action not in valid:
+            raise RuntimeError(f"{intent.upper()} intent produced invalid raw_action={raw_action} idx={raw_idx}")
+
+        # --- confidence + margin ---
         conf = _softmax_maxprob(q)
-        gap = _q_gap(q)
+
+        # margin = top1 - top2 (>=0), good for "how decisive is argmax"
+        if q.size < 2:
+            margin = 0.0
+        elif q.size == 2:
+            margin = float(abs(float(q[1]) - float(q[0])))
+        else:
+            top1 = float(np.max(q))
+            top2 = float(np.partition(q, -2)[-2])
+            margin = float(top1 - top2)
+
+        # --- signed advantage for the "action" vs HOLD (useful for ranking / extra gating) ---
+        # assumes you have HOLD plus one action (BUY or SELL)
+        adv = None
+        if q.size == 2:
+            # infer HOLD idx and ACTION idx from map (robust)
+            hold_idx = None
+            act_idx = None
+            for idx, name in action_map.items():
+                if name == "HOLD":
+                    hold_idx = idx
+                elif (intent == "buy" and name == "BUY") or (intent == "sell" and name == "SELL"):
+                    act_idx = idx
+            if hold_idx is None:
+                hold_idx = 0
+            if act_idx is None:
+                act_idx = 1
+            adv = float(q[act_idx] - q[hold_idx])
+
+        # ---- FINAL ACTION (safety / demo compromise) ----
+        final_action = raw_action
+
+        # The best "demo" compromise: use margin gate + (optional) advantage gate.
+        # margin tells you "how separated are actions"; advantage tells you "is BUY/Sell actually better than HOLD"
+        if intent == "buy" and raw_action == "BUY":
+            min_margin = float(getattr(self, "min_buy_gap", 0.0005))  # your current knob
+            min_adv = float(getattr(self, "min_buy_adv", 0.0))        # new knob (optional)
+
+            if margin < min_margin:
+                final_action = "HOLD"
+            elif adv is not None and adv < min_adv:
+                final_action = "HOLD"
+
+        if intent == "sell" and raw_action == "SELL":
+            min_margin = float(getattr(self, "min_sell_gap", 0.0005))
+            min_adv = float(getattr(self, "min_sell_adv", 0.0))
+
+            if margin < min_margin:
+                final_action = "HOLD"
+            elif adv is not None and adv < min_adv:
+                final_action = "HOLD"
 
         return Decision(
             ticker=ticker,
             date=ts.date().isoformat(),
-            action=action,
-            confidence=conf,
+            action=final_action,
+            confidence=float(conf),
             q_values=[float(v) for v in q.tolist()],
-            q_gap=gap,
-            row_index=row_i,
+            q_gap=float(margin),          # <- consistent meaning: margin/top1-top2
+            row_index=int(row_i),
+            raw_action=str(raw_action),
+            raw_action_idx=int(raw_idx),
         )
 
-    # def recommend_top_k(self, tickers: List[str], k: int = 3, as_of: Optional[str] = None) -> List[Decision]:
-    #     decisions = [self.predict(t, intent="buy", as_of=as_of) for t in tickers]
-
-    #     buys = [d for d in decisions if d.action == "BUY"]
-    #     buys.sort(key=lambda d: (d.confidence, d.q_gap), reverse=True)
-
-    #     if buys:
-    #         return buys[:k]
-
-    #     decisions.sort(key=lambda d: (d.confidence, d.q_gap), reverse=True)
-    #     return decisions[:k]
     def recommend_top_k(self, tickers: List[str], k: int = 3, as_of: Optional[str] = None) -> List[Decision]:
         decisions = [self.predict(t, intent="buy", as_of=as_of) for t in tickers]
-        decisions.sort(key=lambda d: (d.confidence, d.q_gap), reverse=True)
+
+        def buy_adv(d: Decision) -> float:
+            # assumes mapping {0:HOLD, 1:BUY}
+            if len(d.q_values) >= 2:
+                return float(d.q_values[1] - d.q_values[0])
+            return 0.0
+
+        decisions.sort(
+            key=lambda d: (
+                1 if d.raw_action == "BUY" else 0,  # prioritize model BUYs
+                buy_adv(d),                          # strongest BUY advantage
+                d.confidence,                        # tie-break
+            ),
+            reverse=True,
+        )
         return decisions[:k]
 
+    # DEBUG
+
+    def debug_audit_tickers(self, tickers, as_of=None):
+        rows = []
+
+        for t in tickers:
+            d = self.predict(t, intent="buy", as_of=as_of)
+
+            q_hold = float(d.q_values[0])
+            q_buy  = float(d.q_values[1])
+            q_gap  = q_buy - q_hold
+
+            # 🔥 THIS is the raw model decision (pure argmax)
+            raw_argmax = "BUY" if q_buy > q_hold else "HOLD"
+
+            rows.append({
+                "ticker": t,
+                "final_action": d.action,     # after your gating logic
+                "raw_action": raw_argmax,     # direct from Q comparison
+                "q_gap": q_gap,
+                "q_buy": q_buy,
+                "q_hold": q_hold,
+                "confidence": float(d.confidence),
+            })
+
+        # print nicely sorted
+        rows_sorted = sorted(rows, key=lambda r: r["q_gap"], reverse=True)
+
+        print("\nTICKER  final  raw    q_gap        q_buy      q_hold     conf")
+        for r in rows_sorted:
+            print(f'{r["ticker"]:>6}  {r["final_action"]:>4}  {r["raw_action"]:>4}  '
+                f'{r["q_gap"]:+.6f}  {r["q_buy"]:+.6f}  {r["q_hold"]:+.6f}  '
+                f'{r["confidence"]:.3f}')
+            
+    from typing import Iterable, Optional, List, Dict, Any
+
+    def debug_dump_buy_universe(
+        self,
+        tickers: Iterable[str],
+        as_of: Optional[str] = None,
+        sort_by: str = "buy_adv",
+        limit: Optional[int] = None,
+        show_only_raw_buy: bool = False,
+    ) -> List[Dict[str, Any]]:
+        """
+        Print one-line diagnostics per ticker for BUY intent, at a chosen as_of date.
+
+        sort_by: "buy_adv" | "confidence" | "date" | "ticker"
+        limit:   print only top N after sorting (None = print all)
+        show_only_raw_buy: only keep rows where raw_action == "BUY"
+        """
+        rows: List[Dict[str, Any]] = []
+
+        for t in tickers:
+            d = self.predict(t, intent="buy", as_of=as_of)
+
+            # Determine the actual row/date used (important if as_of is between trading days)
+            row_i, ts = self._select_row(t, as_of)
+
+            q_hold = float(d.q_values[0]) if len(d.q_values) > 0 else 0.0
+            q_buy  = float(d.q_values[1]) if len(d.q_values) > 1 else 0.0
+            buy_adv = q_buy - q_hold
+
+            rows.append({
+                "ticker": t,
+                "used_date": ts.date().isoformat(),
+                "raw": d.raw_action,
+                "final": d.action,
+                "buy_adv": float(buy_adv),
+                "q_hold": q_hold,
+                "q_buy": q_buy,
+                "conf": float(d.confidence),
+                "gap_top2": float(d.q_gap),
+                "row_i": int(row_i),
+            })
+
+        if show_only_raw_buy:
+            rows = [r for r in rows if r["raw"] == "BUY"]
+
+        if sort_by == "buy_adv":
+            rows.sort(key=lambda r: (1 if r["raw"] == "BUY" else 0, r["buy_adv"], r["conf"]), reverse=True)
+        elif sort_by == "confidence":
+            rows.sort(key=lambda r: r["conf"], reverse=True)
+        elif sort_by == "date":
+            rows.sort(key=lambda r: r["used_date"], reverse=True)
+        else:  # ticker
+            rows.sort(key=lambda r: r["ticker"])
+
+        if limit is not None:
+            rows = rows[:limit]
+
+        print(f"\n=== DUMP (BUY intent) as_of={as_of} ===")
+        print("TICKER  used_date    raw   final   buy_adv     q_buy      q_hold     conf   gap2   row_i")
+        for r in rows:
+            print(
+                f'{r["ticker"]:>6}  {r["used_date"]}  '
+                f'{r["raw"]:>4}  {r["final"]:>5}  '
+                f'{r["buy_adv"]:+.6f}  {r["q_buy"]:+.6f}  {r["q_hold"]:+.6f}  '
+                f'{r["conf"]:.3f}  {r["gap_top2"]:.6f}  {r["row_i"]:>5}'
+            )
+
+        return rows

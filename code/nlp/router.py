@@ -78,43 +78,31 @@ def extract_ticker(text_norm: str, alias_map: Dict[str, str]) -> Optional[str]:
     return None
 
 
-def parse_question(
-    question: str,
-    ticker_to_company: Dict[str, str],
-    default_top_k: int = 3,
-) -> ParsedQuery:
-    """
-    Supports 3 core intents:
-      - Which company shares should I buy today?  -> recommend_today
-      - Should I buy Apple stocks?                -> should_buy
-      - Should I sell Nvidia?                     -> should_sell
-    """
+def parse_question(question: str, ticker_to_company: Dict[str, str], default_top_k: int = 3) -> ParsedQuery:
     t = _clean_text(question)
     alias_map = _build_alias_map(ticker_to_company)
 
-    # intent detection (simple rules)
-    # recommend_today
+    # recommend_today (portfolio ask)
+    if re.search(r"\b(which|what)\b.*\b(stocks|shares|company|companies)\b.*\b(buy|purchase)\b", t):
+        return ParsedQuery(intent="recommend_today", top_k=default_top_k, normalized_text=t)
+
     if re.search(r"\b(which|what)\b.*\b(buy|purchase)\b", t) and ("today" in t or "now" in t):
         return ParsedQuery(intent="recommend_today", top_k=default_top_k, normalized_text=t)
 
-    if re.search(r"\bwhat should i buy\b", t) or re.search(r"\bwhich (shares|stocks)\b.*\bbuy\b", t):
-        # treat as recommend; "today" implied
+    if re.search(r"\bwhat should i buy\b", t):
         return ParsedQuery(intent="recommend_today", top_k=default_top_k, normalized_text=t)
 
-    # should_buy / should_sell
-    if re.search(r"\bshould i\b.*\bbuy\b", t) or re.search(r"\bshould i buy\b", t) or re.search(r"\bbuy\b.*\b(aapl|msft|nvda|amzn|googl)\b", t):
-        ticker = extract_ticker(t, alias_map)
-        return ParsedQuery(intent="should_buy", ticker=ticker, normalized_text=t)
-
-    if re.search(r"\bshould i\b.*\bsell\b", t) or re.search(r"\bshould i sell\b", t) or re.search(r"\bsell\b.*\b(aapl|msft|nvda|amzn|googl)\b", t):
-        ticker = extract_ticker(t, alias_map)
-        return ParsedQuery(intent="should_sell", ticker=ticker, normalized_text=t)
-
-    # fallback: if it contains "sell" -> should_sell, else if contains "buy" -> should_buy
-    if "sell" in t:
-        return ParsedQuery(intent="should_sell", ticker=extract_ticker(t, alias_map), normalized_text=t)
+    # should_buy
     if "buy" in t:
-        return ParsedQuery(intent="should_buy", ticker=extract_ticker(t, alias_map), normalized_text=t)
+        ticker = extract_ticker(t, alias_map)
+        if re.search(r"\bshould i\b.*\bbuy\b", t) or ticker:
+            return ParsedQuery(intent="should_buy", ticker=ticker, normalized_text=t)
 
-    # default: recommend_today
-    return ParsedQuery(intent="recommend_today", top_k=default_top_k, normalized_text=t)
+    # should_sell
+    if "sell" in t:
+        ticker = extract_ticker(t, alias_map)
+        if re.search(r"\bshould i\b.*\bsell\b", t) or ticker:
+            return ParsedQuery(intent="should_sell", ticker=ticker, normalized_text=t)
+
+    # if none matched, return unknown instead of forcing recommend
+    return ParsedQuery(intent="unknown", top_k=default_top_k, normalized_text=t)

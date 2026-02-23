@@ -396,7 +396,7 @@ class TradeManager:
 
         gross = (exit_price - entry_price) / (entry_price + 1e-12)
 
-        # Apply the price move while in position (long-only)
+        # Apply the price move only while in position (long only term)
         self._equity *= (1.0 + gross)
 
         # charge transaction cost on exit

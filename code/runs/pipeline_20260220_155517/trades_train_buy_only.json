@@ -1,0 +1,7870 @@
+[
+  {
+    "entry_idx": 29,
+    "exit_idx": 49,
+    "entry_price": 43.82035827636719,
+    "exit_price": 47.450401306152344,
+    "gross_return": 0.08283919101918426,
+    "net_return": 0.08067459547633704,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47828051929420917,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 54,
+    "exit_idx": 74,
+    "entry_price": 48.621456146240234,
+    "exit_price": 45.250877380371094,
+    "gross_return": -0.06932286757787094,
+    "net_return": -0.07118329116558275,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4868114344631333,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 94,
+    "exit_idx": 114,
+    "entry_price": 46.42164993286133,
+    "exit_price": 48.96192169189453,
+    "gross_return": 0.05472170340147519,
+    "net_return": 0.05261331471637565,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5053534101093425,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 119,
+    "exit_idx": 139,
+    "entry_price": 50.00101852416992,
+    "exit_price": 50.55630874633789,
+    "gross_return": 0.011105578217362445,
+    "net_return": 0.00908437816650598,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47922819510756,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 145,
+    "exit_idx": 165,
+    "entry_price": 49.3954963684082,
+    "exit_price": 52.84666061401367,
+    "gross_return": 0.0698679940346273,
+    "net_return": 0.0677293279145521,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.467329624400096,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 170,
+    "exit_idx": 190,
+    "entry_price": 53.07017517089844,
+    "exit_price": 59.785064697265625,
+    "gross_return": 0.1265284974987088,
+    "net_return": 0.12427656703220902,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5031662681646355,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 195,
+    "exit_idx": 215,
+    "entry_price": 62.536582946777344,
+    "exit_price": 65.25569152832031,
+    "gross_return": 0.043480287112218165,
+    "net_return": 0.041394370018280835,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4538241712889451,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 220,
+    "exit_idx": 240,
+    "entry_price": 66.3259506225586,
+    "exit_price": 75.37271881103516,
+    "gross_return": 0.13639862080468193,
+    "net_return": 0.13412695996169344,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4862764980120384,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 245,
+    "exit_idx": 265,
+    "entry_price": 76.58280181884766,
+    "exit_price": 77.39276885986328,
+    "gross_return": 0.010576356855309972,
+    "net_return": 0.00855621471795609,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47299838230571795,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 309,
+    "exit_idx": 329,
+    "entry_price": 66.45436096191406,
+    "exit_price": 76.76641845703125,
+    "gross_return": 0.15517503059019738,
+    "net_return": 0.15286583570404755,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.403017668794254,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 334,
+    "exit_idx": 354,
+    "entry_price": 77.03048706054688,
+    "exit_price": 85.67747497558594,
+    "gross_return": 0.11225409892893856,
+    "net_return": 0.11003070298517947,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41267057256001477,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 359,
+    "exit_idx": 379,
+    "entry_price": 90.57637023925781,
+    "exit_price": 105.57352447509766,
+    "gross_return": 0.16557468792605226,
+    "net_return": 0.16324470412488812,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.40335077262820607,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 385,
+    "exit_idx": 405,
+    "entry_price": 106.18861389160156,
+    "exit_price": 113.90213775634766,
+    "gross_return": 0.07263983945227938,
+    "net_return": 0.07049563241321422,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.40820217114432245,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 428,
+    "exit_idx": 448,
+    "entry_price": 120.77588653564453,
+    "exit_price": 113.1261215209961,
+    "gross_return": -0.06333851262926316,
+    "net_return": -0.06521089894251719,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4660480646622931,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 453,
+    "exit_idx": 473,
+    "entry_price": 116.9968490600586,
+    "exit_price": 124.36871337890625,
+    "gross_return": 0.06300908424519498,
+    "net_return": 0.060884129085788885,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46542163280858245,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 478,
+    "exit_idx": 498,
+    "entry_price": 128.2589111328125,
+    "exit_price": 135.25144958496094,
+    "gross_return": 0.0545189288634112,
+    "net_return": 0.05241094552461312,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48259949324805546,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 503,
+    "exit_idx": 523,
+    "entry_price": 128.33670043945312,
+    "exit_price": 124.4668960571289,
+    "gross_return": -0.03015352871838785,
+    "net_return": -0.03209225181447972,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4794862895769453,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 549,
+    "exit_idx": 569,
+    "entry_price": 124.57402801513672,
+    "exit_price": 124.76882934570312,
+    "gross_return": 0.0015637395183427385,
+    "net_return": -0.0004383863969543711,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48486727845172756,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 597,
+    "exit_idx": 617,
+    "entry_price": 126.48326110839844,
+    "exit_price": 145.5181884765625,
+    "gross_return": 0.15049364794485048,
+    "net_return": 0.14819381114260866,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4464292354600644,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 622,
+    "exit_idx": 642,
+    "entry_price": 141.85952758789062,
+    "exit_price": 143.0100555419922,
+    "gross_return": 0.008110332620336214,
+    "net_return": 0.006095120065428228,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47128839833869074,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 647,
+    "exit_idx": 667,
+    "entry_price": 144.96429443359375,
+    "exit_price": 143.46937561035156,
+    "gross_return": -0.010312324349131227,
+    "net_return": -0.012290710012757278,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4961298732001069,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 687,
+    "exit_idx": 707,
+    "entry_price": 146.05865478515625,
+    "exit_price": 154.48175048828125,
+    "gross_return": 0.05766926797672363,
+    "net_return": 0.055554987110038256,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4601421873507166,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 712,
+    "exit_idx": 732,
+    "entry_price": 153.44451904296875,
+    "exit_price": 176.459716796875,
+    "gross_return": 0.14999035415179088,
+    "net_return": 0.1476915234338414,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5119884799845619,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 737,
+    "exit_idx": 757,
+    "entry_price": 178.1036834716797,
+    "exit_price": 170.8625030517578,
+    "gross_return": -0.04065710646053683,
+    "net_return": -0.04257483290472208,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49265313875538513,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 763,
+    "exit_idx": 783,
+    "entry_price": 172.71640014648438,
+    "exit_price": 155.31544494628906,
+    "gross_return": -0.10074871399263242,
+    "net_return": -0.10254631731336117,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.509553275531093,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 797,
+    "exit_idx": 817,
+    "entry_price": 174.1763153076172,
+    "exit_price": 160.3319549560547,
+    "gross_return": -0.07948474697671463,
+    "net_return": -0.08132485696750813,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41521095790404683,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 893,
+    "exit_idx": 913,
+    "entry_price": 106.76222229003906,
+    "exit_price": 112.0805892944336,
+    "gross_return": 0.049815064639120825,
+    "net_return": 0.04771648432490738,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48476567181076197,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 918,
+    "exit_idx": 938,
+    "entry_price": 113.48064422607422,
+    "exit_price": 118.85210418701172,
+    "gross_return": 0.04733371049812267,
+    "net_return": 0.045240090410836986,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48030266845070735,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 943,
+    "exit_idx": 963,
+    "entry_price": 120.40824127197266,
+    "exit_price": 129.16038513183594,
+    "gross_return": 0.07268724937269257,
+    "net_return": 0.07054294756119672,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44024091695739087,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 968,
+    "exit_idx": 988,
+    "entry_price": 126.5196762084961,
+    "exit_price": 133.3007354736328,
+    "gross_return": 0.05359687495533838,
+    "net_return": 0.051490734802302596,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45232391895115187,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 993,
+    "exit_idx": 1013,
+    "entry_price": 129.11326599121094,
+    "exit_price": 130.45162963867188,
+    "gross_return": 0.010365810493493619,
+    "net_return": 0.008346089238317145,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46566336818440257,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1018,
+    "exit_idx": 1038,
+    "entry_price": 130.1298828125,
+    "exit_price": 129.7513885498047,
+    "gross_return": -0.0029085883619880755,
+    "net_return": -0.004901774093852396,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46689528022992477,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1045,
+    "exit_idx": 1065,
+    "entry_price": 132.86456298828125,
+    "exit_price": 139.39373779296875,
+    "gross_return": 0.04914158190745962,
+    "net_return": 0.04704434788522671,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4809246005341786,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1070,
+    "exit_idx": 1090,
+    "entry_price": 142.0614013671875,
+    "exit_price": 147.84371948242188,
+    "gross_return": 0.04070294998912984,
+    "net_return": 0.038622584792101566,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5000610947605907,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1095,
+    "exit_idx": 1115,
+    "entry_price": 150.92955017089844,
+    "exit_price": 157.10116577148438,
+    "gross_return": 0.04089070426300045,
+    "net_return": 0.038809963745178644,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49814723535020117,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1120,
+    "exit_idx": 1140,
+    "entry_price": 171.0205535888672,
+    "exit_price": 162.37637329101562,
+    "gross_return": -0.050544686685040745,
+    "net_return": -0.05244264785635733,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.42524773324692744,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1164,
+    "exit_idx": 1184,
+    "entry_price": 155.65472412109375,
+    "exit_price": 173.79176330566406,
+    "gross_return": 0.11652096836110311,
+    "net_return": 0.11428904294534914,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4232542239254069,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1189,
+    "exit_idx": 1209,
+    "entry_price": 171.13540649414062,
+    "exit_price": 177.8368682861328,
+    "gross_return": 0.03915882709064997,
+    "net_return": 0.03708154859529578,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46344128535962426,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1214,
+    "exit_idx": 1234,
+    "entry_price": 187.43185424804688,
+    "exit_price": 193.6949005126953,
+    "gross_return": 0.03341505791411477,
+    "net_return": 0.03134926121334458,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45593953076499416,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1239,
+    "exit_idx": 1259,
+    "entry_price": 192.1864013671875,
+    "exit_price": 203.86741638183594,
+    "gross_return": 0.06077961256130117,
+    "net_return": 0.058659114115791056,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44910648595497255,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1264,
+    "exit_idx": 1284,
+    "entry_price": 219.07467651367188,
+    "exit_price": 200.4412384033203,
+    "gross_return": -0.08505518943075382,
+    "net_return": -0.08688416410708177,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4863760749996408,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1294,
+    "exit_idx": 1314,
+    "entry_price": 211.88734436035156,
+    "exit_price": 209.00668334960938,
+    "gross_return": -0.013595248075992236,
+    "net_return": -0.015567071175088265,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.478894436660929,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1319,
+    "exit_idx": 1339,
+    "entry_price": 207.89654541015625,
+    "exit_price": 205.4662628173828,
+    "gross_return": -0.011689865206652446,
+    "net_return": -0.013665497166104323,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46786047424455574,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1344,
+    "exit_idx": 1364,
+    "entry_price": 214.87936401367188,
+    "exit_price": 216.8080291748047,
+    "gross_return": 0.008975571805071476,
+    "net_return": 0.006958629637033198,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4656422342319873,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1369,
+    "exit_idx": 1389,
+    "entry_price": 222.57484436035156,
+    "exit_price": 227.87698364257812,
+    "gross_return": 0.023821826305053174,
+    "net_return": 0.021775206474269337,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5275336783573448,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1409,
+    "exit_idx": 1429,
+    "entry_price": 226.2420196533203,
+    "exit_price": 251.94956970214844,
+    "gross_return": 0.11362853853683201,
+    "net_return": 0.11140239508829697,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5024575542195052,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1434,
+    "exit_idx": 1454,
+    "entry_price": 238.3119659423828,
+    "exit_price": 238.389892578125,
+    "gross_return": 0.00032699422135197217,
+    "net_return": -0.0016726594400965356,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5044199418037572,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1459,
+    "exit_idx": 1479,
+    "entry_price": 244.4532928466797,
+    "exit_price": 267.4247741699219,
+    "gross_return": 0.09397084021956592,
+    "net_return": 0.09178399250996705,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5000892207017011,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1484,
+    "exit_idx": 1504,
+    "entry_price": 270.9046325683594,
+    "exit_price": 279.3682861328125,
+    "gross_return": 0.031242188382723194,
+    "net_return": 0.029180735248146128,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4999960884451867,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1509,
+    "exit_idx": 1529,
+    "entry_price": 286.6252136230469,
+    "exit_price": 289.6192321777344,
+    "gross_return": 0.01044576126727306,
+    "net_return": 0.008425880190499724,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49244587238478343,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1550,
+    "exit_idx": 1570,
+    "entry_price": 296.7856140136719,
+    "exit_price": 324.5818176269531,
+    "gross_return": 0.09365751674203683,
+    "net_return": 0.09147129536606946,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45338560198343014,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1575,
+    "exit_idx": 1595,
+    "entry_price": 328.81365966796875,
+    "exit_price": 316.6802673339844,
+    "gross_return": -0.03690051181643871,
+    "net_return": -0.03882574769331759,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49069809216124116,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1602,
+    "exit_idx": 1622,
+    "entry_price": 325.41754150390625,
+    "exit_price": 300.8989562988281,
+    "gross_return": -0.07534500166083927,
+    "net_return": -0.07719338700251921,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5071140792944351,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1660,
+    "exit_idx": 1680,
+    "entry_price": 294.4430847167969,
+    "exit_price": 272.1815185546875,
+    "gross_return": -0.07560566818378858,
+    "net_return": -0.07745353245308917,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4112225203290272,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1710,
+    "exit_idx": 1730,
+    "entry_price": 264.82684326171875,
+    "exit_price": 260.8423156738281,
+    "gross_return": -0.015045784403180178,
+    "net_return": -0.01701470788015813,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5466642518546202,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1761,
+    "exit_idx": 1781,
+    "entry_price": 4.108794212341309,
+    "exit_price": 4.75355339050293,
+    "gross_return": 0.15692174999294062,
+    "net_return": 0.15460906341470482,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4993413690561799,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1786,
+    "exit_idx": 1806,
+    "entry_price": 4.623509407043457,
+    "exit_price": 3.884690999984741,
+    "gross_return": -0.15979602116371594,
+    "net_return": -0.16147558891740965,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5042750389680342,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1833,
+    "exit_idx": 1853,
+    "entry_price": 3.9569544792175293,
+    "exit_price": 4.307778358459473,
+    "gross_return": 0.08866007458120383,
+    "net_return": 0.08648384309211599,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.400412604569164,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1858,
+    "exit_idx": 1878,
+    "entry_price": 4.097582817077637,
+    "exit_price": 4.153369426727295,
+    "gross_return": 0.01361451668948357,
+    "net_return": 0.011588301270621493,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49545638849604073,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1884,
+    "exit_idx": 1904,
+    "entry_price": 4.489120960235596,
+    "exit_price": 4.58437442779541,
+    "gross_return": 0.021218734893433167,
+    "net_return": 0.019177318642381147,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4083744290415415,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1909,
+    "exit_idx": 1929,
+    "entry_price": 4.639087677001953,
+    "exit_price": 5.177534580230713,
+    "gross_return": 0.11606741254276513,
+    "net_return": 0.11383639378509214,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4931060421568126,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1934,
+    "exit_idx": 1954,
+    "entry_price": 5.279503345489502,
+    "exit_price": 5.681870460510254,
+    "gross_return": 0.07621306185257645,
+    "net_return": 0.07406171194193312,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4782409199523415,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1959,
+    "exit_idx": 1979,
+    "entry_price": 5.938971519470215,
+    "exit_price": 6.234152793884277,
+    "gross_return": 0.049702422960995175,
+    "net_return": 0.047604067817496265,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4922022958234373,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 1984,
+    "exit_idx": 2004,
+    "entry_price": 5.884463310241699,
+    "exit_price": 6.884133338928223,
+    "gross_return": 0.1698829572012903,
+    "net_return": 0.16754436116984506,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49395340357553336,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2009,
+    "exit_idx": 2029,
+    "entry_price": 6.112367630004883,
+    "exit_price": 6.684155464172363,
+    "gross_return": 0.09354604774761072,
+    "net_return": 0.0913600491981632,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5496293894356806,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2034,
+    "exit_idx": 2054,
+    "entry_price": 7.071408271789551,
+    "exit_price": 7.7724480628967285,
+    "gross_return": 0.0991372247454279,
+    "net_return": 0.09694004943316181,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5077211678981638,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2059,
+    "exit_idx": 2079,
+    "entry_price": 8.771583557128906,
+    "exit_price": 9.204625129699707,
+    "gross_return": 0.04936868807671639,
+    "net_return": 0.04727100006925111,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.40941781556480045,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2084,
+    "exit_idx": 2104,
+    "entry_price": 9.204127311706543,
+    "exit_price": 10.0953369140625,
+    "gross_return": 0.09682717026549044,
+    "net_return": 0.09463461275212959,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45146857408135294,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2109,
+    "exit_idx": 2129,
+    "entry_price": 10.577943801879883,
+    "exit_price": 12.58535099029541,
+    "gross_return": 0.1897729110697853,
+    "net_return": 0.18739455502055669,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4653007712042301,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2134,
+    "exit_idx": 2154,
+    "entry_price": 12.975168228149414,
+    "exit_price": 13.021772384643555,
+    "gross_return": 0.0035917959347170608,
+    "net_return": 0.0015856159346436804,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4644142693072538,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2159,
+    "exit_idx": 2179,
+    "entry_price": 13.72010326385498,
+    "exit_price": 14.516875267028809,
+    "gross_return": 0.05807332407423139,
+    "net_return": 0.05595823549940704,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.492412352459098,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2185,
+    "exit_idx": 2205,
+    "entry_price": 13.473370552062988,
+    "exit_price": 13.32303524017334,
+    "gross_return": -0.011157958679212496,
+    "net_return": -0.013134653919812722,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4755347100262863,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2225,
+    "exit_idx": 2245,
+    "entry_price": 13.163229942321777,
+    "exit_price": 14.919293403625488,
+    "gross_return": 0.13340672988303331,
+    "net_return": 0.1311410498299972,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4806301796241673,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2250,
+    "exit_idx": 2270,
+    "entry_price": 14.315491676330566,
+    "exit_price": 13.153807640075684,
+    "gross_return": -0.08114873470783726,
+    "net_return": -0.08298551838715629,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48567626756525445,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2280,
+    "exit_idx": 2300,
+    "entry_price": 13.827399253845215,
+    "exit_price": 14.315942764282227,
+    "gross_return": 0.035331554507701,
+    "net_return": 0.03326192673024031,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5173923210344437,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2318,
+    "exit_idx": 2338,
+    "entry_price": 16.204538345336914,
+    "exit_price": 19.94040870666504,
+    "gross_return": 0.23054469567181127,
+    "net_return": 0.22808483682516334,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49495985295028344,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2343,
+    "exit_idx": 2363,
+    "entry_price": 20.652307510375977,
+    "exit_price": 19.770784378051758,
+    "gross_return": -0.042684001866681864,
+    "net_return": -0.04459767654695035,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46765476586621596,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2368,
+    "exit_idx": 2388,
+    "entry_price": 19.89151382446289,
+    "exit_price": 22.293081283569336,
+    "gross_return": 0.12073326747775426,
+    "net_return": 0.11849292167606618,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4771348534737848,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2393,
+    "exit_idx": 2413,
+    "entry_price": 22.295074462890625,
+    "exit_price": 20.89595603942871,
+    "gross_return": -0.06275459746907934,
+    "net_return": -0.06462815102873853,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4808719646110486,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2420,
+    "exit_idx": 2440,
+    "entry_price": 22.679285049438477,
+    "exit_price": 32.917205810546875,
+    "gross_return": 0.45142167130887717,
+    "net_return": 0.4485202793879308,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4609125885830121,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2445,
+    "exit_idx": 2465,
+    "entry_price": 33.30739974975586,
+    "exit_price": 30.26338005065918,
+    "gross_return": -0.09139169439724579,
+    "net_return": -0.0932080024001457,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.536976284589725,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2501,
+    "exit_idx": 2521,
+    "entry_price": 24.459619522094727,
+    "exit_price": 26.406352996826172,
+    "gross_return": 0.07958968752448718,
+    "net_return": 0.07743158773912584,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4379878768435117,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2526,
+    "exit_idx": 2546,
+    "entry_price": 27.643169403076172,
+    "exit_price": 19.866907119750977,
+    "gross_return": -0.28130863613850154,
+    "net_return": -0.28274530017486066,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46354466687257456,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2576,
+    "exit_idx": 2596,
+    "entry_price": 18.892629623413086,
+    "exit_price": 15.833382606506348,
+    "gross_return": -0.16192806813485303,
+    "net_return": -0.16360337392665147,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5492712019210086,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2614,
+    "exit_idx": 2634,
+    "entry_price": 81.6500015258789,
+    "exit_price": 88.71299743652344,
+    "gross_return": 0.0865033163337521,
+    "net_return": 0.084331396204401,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4318863494062865,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2639,
+    "exit_idx": 2659,
+    "entry_price": 90.70950317382812,
+    "exit_price": 96.32599639892578,
+    "gross_return": 0.061917362884620984,
+    "net_return": 0.05979459007621468,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4814889286336824,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2664,
+    "exit_idx": 2684,
+    "entry_price": 96.05000305175781,
+    "exit_price": 86.92500305175781,
+    "gross_return": -0.09500259979255575,
+    "net_return": -0.0968116895955704,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48836745904490175,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2694,
+    "exit_idx": 2714,
+    "entry_price": 95.43949890136719,
+    "exit_price": 98.8949966430664,
+    "gross_return": 0.03620615972921545,
+    "net_return": 0.03413478361591671,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5009782599841232,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2719,
+    "exit_idx": 2739,
+    "entry_price": 98.69100189208984,
+    "exit_price": 90.23300170898438,
+    "gross_return": -0.08570183725922129,
+    "net_return": -0.08752951928654007,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.496500146925743,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2752,
+    "exit_idx": 2772,
+    "entry_price": 91.14949798583984,
+    "exit_price": 86.09950256347656,
+    "gross_return": -0.05540343648571435,
+    "net_return": -0.05729168501617932,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47912853046280873,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2783,
+    "exit_idx": 2803,
+    "entry_price": 89.03900146484375,
+    "exit_price": 86.7354965209961,
+    "gross_return": -0.025870740978122364,
+    "net_return": -0.02781802536690703,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47814517619568947,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2813,
+    "exit_idx": 2833,
+    "entry_price": 87.58000183105469,
+    "exit_price": 95.34300231933594,
+    "gross_return": 0.08863896238842629,
+    "net_return": 0.08646277310261175,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4736863448379704,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2838,
+    "exit_idx": 2858,
+    "entry_price": 93.47200012207031,
+    "exit_price": 108.0,
+    "gross_return": 0.15542622238698867,
+    "net_return": 0.153116525368437,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47989111825311376,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2863,
+    "exit_idx": 2883,
+    "entry_price": 107.65499877929688,
+    "exit_price": 94.04650115966797,
+    "gross_return": -0.12640841367271308,
+    "net_return": -0.1281547232537813,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.43770967949474204,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2899,
+    "exit_idx": 2919,
+    "entry_price": 108.44349670410156,
+    "exit_price": 120.44999694824219,
+    "gross_return": 0.110716646078846,
+    "net_return": 0.10849632350333449,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4625806366822814,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2924,
+    "exit_idx": 2944,
+    "entry_price": 121.31300354003906,
+    "exit_price": 130.7635040283203,
+    "gross_return": 0.07790179298596014,
+    "net_return": 0.07574706730178127,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4442910606395068,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2949,
+    "exit_idx": 2969,
+    "entry_price": 138.2205047607422,
+    "exit_price": 154.99549865722656,
+    "gross_return": 0.12136400402763353,
+    "net_return": 0.11912239738358243,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4343085159876268,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2974,
+    "exit_idx": 2994,
+    "entry_price": 151.67649841308594,
+    "exit_price": 172.09249877929688,
+    "gross_return": 0.13460226587383697,
+    "net_return": 0.13233419594435536,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4818494240623425,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 2999,
+    "exit_idx": 3019,
+    "entry_price": 176.57249450683594,
+    "exit_price": 161.06300354003906,
+    "gross_return": -0.08783639269589831,
+    "net_return": -0.08965980774689919,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46798141881036914,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3026,
+    "exit_idx": 3046,
+    "entry_price": 172.14649963378906,
+    "exit_price": 157.18699645996094,
+    "gross_return": -0.08689983941382316,
+    "net_return": -0.0887251266348349,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45972485800659935,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3063,
+    "exit_idx": 3083,
+    "entry_price": 159.3365020751953,
+    "exit_price": 159.3314971923828,
+    "gross_return": -3.14107737230106e-05,
+    "net_return": -0.002030347983586367,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4808619210555429,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3088,
+    "exit_idx": 3108,
+    "entry_price": 155.7104949951172,
+    "exit_price": 165.25,
+    "gross_return": 0.06126436760208035,
+    "net_return": 0.05914290013124379,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4792155509937205,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3113,
+    "exit_idx": 3133,
+    "entry_price": 165.4320068359375,
+    "exit_price": 156.7864990234375,
+    "gross_return": -0.05226018820574355,
+    "net_return": -0.05415472008952016,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4816970761438885,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3144,
+    "exit_idx": 3164,
+    "entry_price": 158.0500030517578,
+    "exit_price": 173.37100219726562,
+    "gross_return": 0.09693767067179641,
+    "net_return": 0.09474489226812355,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47631873818087656,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3169,
+    "exit_idx": 3189,
+    "entry_price": 164.58050537109375,
+    "exit_price": 159.90049743652344,
+    "gross_return": -0.028435979850820543,
+    "net_return": -0.030378136327098737,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49050314213503693,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3194,
+    "exit_idx": 3214,
+    "entry_price": 169.19349670410156,
+    "exit_price": 183.8679962158203,
+    "gross_return": 0.08673205411306406,
+    "net_return": 0.08455967673689213,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4567349147868172,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3219,
+    "exit_idx": 3239,
+    "entry_price": 178.6595001220703,
+    "exit_price": 162.09800720214844,
+    "gross_return": -0.09269864131829558,
+    "net_return": -0.09451233673430026,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.501880517675705,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3252,
+    "exit_idx": 3272,
+    "entry_price": 173.90249633789062,
+    "exit_price": 159.48899841308594,
+    "gross_return": -0.08288263957292101,
+    "net_return": -0.08471595717641467,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48080035811839456,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3286,
+    "exit_idx": 3306,
+    "entry_price": 166.77749633789062,
+    "exit_price": 183.82850646972656,
+    "gross_return": 0.10223807471776977,
+    "net_return": 0.10003470080640908,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4505672200229496,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3311,
+    "exit_idx": 3331,
+    "entry_price": 178.07850646972656,
+    "exit_price": 170.66099548339844,
+    "gross_return": -0.041653039063358634,
+    "net_return": -0.04356877463827091,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48373925626217135,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3366,
+    "exit_idx": 3386,
+    "entry_price": 158.10049438476562,
+    "exit_price": 157.23899841308594,
+    "gross_return": -0.0054490403400199285,
+    "net_return": -0.007437147708380221,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4570776839469559,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3391,
+    "exit_idx": 3411,
+    "entry_price": 163.64950561523438,
+    "exit_price": 144.35000610351562,
+    "gross_return": -0.11793191454604685,
+    "net_return": -0.11969516864886931,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4250936828919891,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3493,
+    "exit_idx": 3513,
+    "entry_price": 59.17935562133789,
+    "exit_price": 60.02595901489258,
+    "gross_return": 0.0143057217278895,
+    "net_return": 0.012278124590155537,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4893621764251523,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3518,
+    "exit_idx": 3538,
+    "entry_price": 61.60800552368164,
+    "exit_price": 58.00075912475586,
+    "gross_return": -0.05855158543542081,
+    "net_return": -0.06043354081613539,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49636120067961614,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3570,
+    "exit_idx": 3590,
+    "entry_price": 55.728431701660156,
+    "exit_price": 60.13463592529297,
+    "gross_return": 0.0790656418831444,
+    "net_return": 0.0769085896650199,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49329413451956916,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3595,
+    "exit_idx": 3615,
+    "entry_price": 59.85723876953125,
+    "exit_price": 59.86368942260742,
+    "gross_return": 0.00010776730114479156,
+    "net_return": -0.0018914481256903093,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4473412082506149,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3620,
+    "exit_idx": 3640,
+    "entry_price": 61.53655242919922,
+    "exit_price": 60.32966995239258,
+    "gross_return": -0.01961244868560353,
+    "net_return": -0.02157224340068098,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46008148141302657,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3645,
+    "exit_idx": 3665,
+    "entry_price": 61.75390625,
+    "exit_price": 66.17698669433594,
+    "gross_return": 0.07162430221709037,
+    "net_return": 0.0694821252369584,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4956709483215679,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3670,
+    "exit_idx": 3690,
+    "entry_price": 64.19844055175781,
+    "exit_price": 67.02508544921875,
+    "gross_return": 0.04402980622530865,
+    "net_return": 0.04194279064266415,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5020386538185629,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3696,
+    "exit_idx": 3716,
+    "entry_price": 67.9207992553711,
+    "exit_price": 71.1017837524414,
+    "gross_return": 0.046833731816233265,
+    "net_return": 0.04474111118633273,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4668793317367013,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3721,
+    "exit_idx": 3741,
+    "entry_price": 73.4009017944336,
+    "exit_price": 60.333641052246094,
+    "gross_return": -0.1780258882756436,
+    "net_return": -0.17966901452498052,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4830210697435595,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3767,
+    "exit_idx": 3787,
+    "entry_price": 62.393577575683594,
+    "exit_price": 66.91092681884766,
+    "gross_return": 0.07240086910683126,
+    "net_return": 0.07025713976948667,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4953932501125294,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3792,
+    "exit_idx": 3812,
+    "entry_price": 69.92963409423828,
+    "exit_price": 71.16827392578125,
+    "gross_return": 0.0177126599843743,
+    "net_return": 0.01567825237706555,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5070816758001009,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3817,
+    "exit_idx": 3837,
+    "entry_price": 71.51465606689453,
+    "exit_price": 74.8449935913086,
+    "gross_return": 0.046568601564675516,
+    "net_return": 0.044476510930147706,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47745270891887714,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3842,
+    "exit_idx": 3862,
+    "entry_price": 73.83958435058594,
+    "exit_price": 81.35679626464844,
+    "gross_return": 0.1018046347386129,
+    "net_return": 0.09960212727377038,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44891625999481577,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3867,
+    "exit_idx": 3887,
+    "entry_price": 78.4676284790039,
+    "exit_price": 73.58551788330078,
+    "gross_return": -0.06221814894035444,
+    "net_return": -0.0640927748606227,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41426005988221937,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3895,
+    "exit_idx": 3915,
+    "entry_price": 77.19026947021484,
+    "exit_price": 86.48751831054688,
+    "gross_return": 0.12044586583441597,
+    "net_return": 0.11820609454861297,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48516503402334477,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3920,
+    "exit_idx": 3940,
+    "entry_price": 87.26911163330078,
+    "exit_price": 85.66374969482422,
+    "gross_return": -0.01839553432401343,
+    "net_return": -0.020357761650899642,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4450382160455163,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3960,
+    "exit_idx": 3980,
+    "entry_price": 93.2985610961914,
+    "exit_price": 104.50091552734375,
+    "gross_return": 0.1200699592741042,
+    "net_return": 0.11783093942551526,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4384629379684612,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 3985,
+    "exit_idx": 4005,
+    "entry_price": 100.04161834716797,
+    "exit_price": 100.86092376708984,
+    "gross_return": 0.008189645803996134,
+    "net_return": 0.006174274702033911,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46801592209160037,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4011,
+    "exit_idx": 4031,
+    "entry_price": 110.11598205566406,
+    "exit_price": 116.27545928955078,
+    "gross_return": 0.05593626936708446,
+    "net_return": 0.053825452764619586,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45738036775559965,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4036,
+    "exit_idx": 4056,
+    "entry_price": 113.72819519042969,
+    "exit_price": 119.02269744873047,
+    "gross_return": 0.04655399876376717,
+    "net_return": 0.0444619373202384,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.498949097154293,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4062,
+    "exit_idx": 4082,
+    "entry_price": 119.8668212890625,
+    "exit_price": 126.0525894165039,
+    "gross_return": 0.05160534050139017,
+    "net_return": 0.04950318142572785,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4953137220334921,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4087,
+    "exit_idx": 4107,
+    "entry_price": 127.45846557617188,
+    "exit_price": 134.66253662109375,
+    "gross_return": 0.05652093026819402,
+    "net_return": 0.05440894492858783,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49605891075008524,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4112,
+    "exit_idx": 4132,
+    "entry_price": 140.3798370361328,
+    "exit_price": 141.14852905273438,
+    "gross_return": 0.005475800747679319,
+    "net_return": 0.0034658546219847874,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49679592167330144,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4149,
+    "exit_idx": 4169,
+    "entry_price": 142.16287231445312,
+    "exit_price": 146.76705932617188,
+    "gross_return": 0.03238670502896577,
+    "net_return": 0.03032296400561285,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4746710993905286,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4174,
+    "exit_idx": 4194,
+    "entry_price": 144.68878173828125,
+    "exit_price": 145.31703186035156,
+    "gross_return": 0.004342079009323001,
+    "net_return": 0.0023343991933832964,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4342038147134298,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4201,
+    "exit_idx": 4221,
+    "entry_price": 143.90420532226562,
+    "exit_price": 136.61178588867188,
+    "gross_return": -0.05067551304190676,
+    "net_return": -0.05257321269133597,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47370139050092336,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4227,
+    "exit_idx": 4247,
+    "entry_price": 140.53018188476562,
+    "exit_price": 131.43641662597656,
+    "gross_return": -0.06471040695190917,
+    "net_return": -0.06658005084841234,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4657493883496019,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4256,
+    "exit_idx": 4276,
+    "entry_price": 137.23855590820312,
+    "exit_price": 123.87850189208984,
+    "gross_return": -0.09734912997080448,
+    "net_return": -0.09915352905999286,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.464000472074979,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4330,
+    "exit_idx": 4350,
+    "entry_price": 165.53367614746094,
+    "exit_price": 161.15426635742188,
+    "gross_return": -0.026456307211698508,
+    "net_return": -0.028402421053582372,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4711669847292489,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4355,
+    "exit_idx": 4375,
+    "entry_price": 168.42349243164062,
+    "exit_price": 174.50106811523438,
+    "gross_return": 0.03608508288153725,
+    "net_return": 0.03401394880085706,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47895951344016224,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4380,
+    "exit_idx": 4400,
+    "entry_price": 177.8576202392578,
+    "exit_price": 180.2806854248047,
+    "gross_return": 0.013623623110931671,
+    "net_return": 0.011597389488332999,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48961705986477505,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4405,
+    "exit_idx": 4425,
+    "entry_price": 181.4524688720703,
+    "exit_price": 187.16259765625,
+    "gross_return": 0.03146900573838693,
+    "net_return": 0.029407099195915887,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46349334626690936,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4430,
+    "exit_idx": 4450,
+    "entry_price": 187.53005981445312,
+    "exit_price": 203.2402801513672,
+    "gross_return": 0.08377441116617816,
+    "net_return": 0.08160794611825706,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48594241126387183,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4455,
+    "exit_idx": 4475,
+    "entry_price": 192.8826446533203,
+    "exit_price": 180.49916076660156,
+    "gross_return": -0.06420216763916875,
+    "net_return": -0.06607282750605803,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49819584973842757,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4484,
+    "exit_idx": 4504,
+    "entry_price": 187.18247985839844,
+    "exit_price": 178.6024169921875,
+    "gross_return": -0.04583795915462611,
+    "net_return": -0.04774532907427598,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4826318640945053,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4511,
+    "exit_idx": 4531,
+    "entry_price": 184.56077575683594,
+    "exit_price": 193.7466278076172,
+    "gross_return": 0.04977142089434985,
+    "net_return": 0.047672927823982025,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49294700320429585,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4536,
+    "exit_idx": 4556,
+    "entry_price": 197.44082641601562,
+    "exit_price": 204.74974060058594,
+    "gross_return": 0.037018251580704514,
+    "net_return": 0.03494525209579469,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4756175857770905,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4561,
+    "exit_idx": 4581,
+    "entry_price": 203.82620239257812,
+    "exit_price": 208.07650756835938,
+    "gross_return": 0.020852594641364887,
+    "net_return": 0.018811910304676882,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47713764159930905,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4631,
+    "exit_idx": 4651,
+    "entry_price": 173.57749938964844,
+    "exit_price": 211.70118713378906,
+    "gross_return": 0.21963496350733794,
+    "net_return": 0.2171969132152869,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4994825573622686,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4656,
+    "exit_idx": 4676,
+    "entry_price": 211.71115112304688,
+    "exit_price": 234.0153350830078,
+    "gross_return": 0.10535195638796373,
+    "net_return": 0.1031423578271442,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4557486201354506,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4681,
+    "exit_idx": 4701,
+    "entry_price": 240.55960083007812,
+    "exit_price": 238.2060546875,
+    "gross_return": -0.009783630062807462,
+    "net_return": -0.011763072586311929,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4804335965127527,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4708,
+    "exit_idx": 4728,
+    "entry_price": 251.9103240966797,
+    "exit_price": 291.6229248046875,
+    "gross_return": 0.15764578466727117,
+    "net_return": 0.15533165074372124,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4650314424605033,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4734,
+    "exit_idx": 4754,
+    "entry_price": 269.2790222167969,
+    "exit_price": 256.86566162109375,
+    "gross_return": -0.046098505904812244,
+    "net_return": -0.048005354991508487,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47459344123816205,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4760,
+    "exit_idx": 4780,
+    "entry_price": 269.9344177246094,
+    "exit_price": 274.5621032714844,
+    "gross_return": 0.017143740268038766,
+    "net_return": 0.015110469931242987,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4828726035649009,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4785,
+    "exit_idx": 4805,
+    "entry_price": 270.0833740234375,
+    "exit_price": 272.57598876953125,
+    "gross_return": 0.009229056601897438,
+    "net_return": 0.007211607717750423,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4847184046812053,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4833,
+    "exit_idx": 4853,
+    "entry_price": 256.5379943847656,
+    "exit_price": 263.0723571777344,
+    "gross_return": 0.0254713256359533,
+    "net_return": 0.023421408456007153,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46235763776380623,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4865,
+    "exit_idx": 4885,
+    "entry_price": 282.0398864746094,
+    "exit_price": 305.6846923828125,
+    "gross_return": 0.08383497172599969,
+    "net_return": 0.08166838561751932,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5026691451438994,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4890,
+    "exit_idx": 4910,
+    "entry_price": 294.46307373046875,
+    "exit_price": 316.39984130859375,
+    "gross_return": 0.07449751610690694,
+    "net_return": 0.07234959557220932,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5069127669730062,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4915,
+    "exit_idx": 4935,
+    "entry_price": 330.4417419433594,
+    "exit_price": 339.001953125,
+    "gross_return": 0.025905356663771292,
+    "net_return": 0.02385457185580031,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.476554025321984,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4940,
+    "exit_idx": 4960,
+    "entry_price": 352.239501953125,
+    "exit_price": 349.5085754394531,
+    "gross_return": -0.007753038766320113,
+    "net_return": -0.009736540441826258,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47168923580964767,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4965,
+    "exit_idx": 4985,
+    "entry_price": 359.1015319824219,
+    "exit_price": 379.52886962890625,
+    "gross_return": 0.05688457393571977,
+    "net_return": 0.054771861672422206,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5005979088079038,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 4990,
+    "exit_idx": 5010,
+    "entry_price": 373.91802978515625,
+    "exit_price": 321.5240173339844,
+    "gross_return": -0.14012165308336694,
+    "net_return": -0.1418405498988532,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4992746864876537,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5031,
+    "exit_idx": 5051,
+    "entry_price": 325.36724853515625,
+    "exit_price": 327.5321044921875,
+    "gross_return": 0.0066535767406759394,
+    "net_return": 0.004641276240771264,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4069403573276669,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5063,
+    "exit_idx": 5083,
+    "entry_price": 343.8183288574219,
+    "exit_price": 292.5862121582031,
+    "gross_return": -0.14900926564756836,
+    "net_return": -0.15071039612553883,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48412330913642276,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5124,
+    "exit_idx": 5144,
+    "entry_price": 220.28126525878906,
+    "exit_price": 185.69287109375,
+    "gross_return": -0.1570192277786495,
+    "net_return": -0.15870434634232,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5595738184918398,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5229,
+    "exit_idx": 5249,
+    "entry_price": 24.327306747436523,
+    "exit_price": 26.793228149414062,
+    "gross_return": 0.10136434039239806,
+    "net_return": 0.09916271307595359,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4656188757965116,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5254,
+    "exit_idx": 5274,
+    "entry_price": 26.065149307250977,
+    "exit_price": 21.74102210998535,
+    "gross_return": -0.16589688960893637,
+    "net_return": -0.1675642617266081,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5031463386557441,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5293,
+    "exit_idx": 5313,
+    "entry_price": 23.32590103149414,
+    "exit_price": 24.473628997802734,
+    "gross_return": 0.049204014231171884,
+    "net_return": 0.04710665540672365,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4824015505694665,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5318,
+    "exit_idx": 5338,
+    "entry_price": 25.395187377929688,
+    "exit_price": 22.965545654296875,
+    "gross_return": -0.09567331350916737,
+    "net_return": -0.09748106255546252,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48332582547272174,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5348,
+    "exit_idx": 5368,
+    "entry_price": 24.693883895874023,
+    "exit_price": 23.513282775878906,
+    "gross_return": -0.047809454558597406,
+    "net_return": -0.049712883458934765,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4772203566372197,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5378,
+    "exit_idx": 5398,
+    "entry_price": 24.662202835083008,
+    "exit_price": 26.493322372436523,
+    "gross_return": 0.07424801221521858,
+    "net_return": 0.07210059043880035,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4535322146100377,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5403,
+    "exit_idx": 5423,
+    "entry_price": 27.22150993347168,
+    "exit_price": 27.572954177856445,
+    "gross_return": 0.012910534545793708,
+    "net_return": 0.010885726387236616,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48760328485344123,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5428,
+    "exit_idx": 5448,
+    "entry_price": 27.735553741455078,
+    "exit_price": 26.253238677978516,
+    "gross_return": -0.05344458153943254,
+    "net_return": -0.055336745820935174,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48887532544216156,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5453,
+    "exit_idx": 5473,
+    "entry_price": 27.119569778442383,
+    "exit_price": 21.31161880493164,
+    "gross_return": -0.2141608816422791,
+    "net_return": -0.2157317740398762,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4343273701618971,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5505,
+    "exit_idx": 5525,
+    "entry_price": 22.654666900634766,
+    "exit_price": 24.043188095092773,
+    "gross_return": 0.06129073539452665,
+    "net_return": 0.05916921521447294,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4030881187235201,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5530,
+    "exit_idx": 5550,
+    "entry_price": 25.48420524597168,
+    "exit_price": 27.173444747924805,
+    "gross_return": 0.06628574388130386,
+    "net_return": 0.06415423867928505,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4395916129376221,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5555,
+    "exit_idx": 5575,
+    "entry_price": 28.17937660217285,
+    "exit_price": 28.395063400268555,
+    "gross_return": 0.0076540656360391006,
+    "net_return": 0.005639765158832688,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4716259236985643,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5580,
+    "exit_idx": 5600,
+    "entry_price": 28.936925888061523,
+    "exit_price": 30.985912322998047,
+    "gross_return": 0.07080871143198389,
+    "net_return": 0.06866816481783156,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45829101170546543,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5605,
+    "exit_idx": 5625,
+    "entry_price": 32.43293762207031,
+    "exit_price": 34.0291748046875,
+    "gross_return": 0.049216546500274884,
+    "net_return": 0.04711916262382099,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4533146990280577,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5630,
+    "exit_idx": 5650,
+    "entry_price": 33.627769470214844,
+    "exit_price": 33.94978713989258,
+    "gross_return": 0.009575944963074217,
+    "net_return": 0.007557802649093004,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4818319382928943,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5655,
+    "exit_idx": 5675,
+    "entry_price": 34.9871826171875,
+    "exit_price": 38.27470016479492,
+    "gross_return": 0.09396348324407038,
+    "net_return": 0.09177665024106552,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4843689342073198,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5680,
+    "exit_idx": 5700,
+    "entry_price": 39.389312744140625,
+    "exit_price": 41.98828887939453,
+    "gross_return": 0.06598175886276289,
+    "net_return": 0.0638508613267963,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49144700907106786,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5705,
+    "exit_idx": 5725,
+    "entry_price": 42.52444076538086,
+    "exit_price": 39.906593322753906,
+    "gross_return": -0.061561008105204304,
+    "net_return": -0.06343694765000196,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47681088303600994,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5736,
+    "exit_idx": 5756,
+    "entry_price": 41.4578971862793,
+    "exit_price": 41.26206588745117,
+    "gross_return": -0.004723618710042333,
+    "net_return": -0.0067131761962409,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5027348945973926,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5782,
+    "exit_idx": 5802,
+    "entry_price": 42.82330322265625,
+    "exit_price": 43.20146179199219,
+    "gross_return": 0.008830672574923148,
+    "net_return": 0.006814020060446069,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5258278977435027,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5807,
+    "exit_idx": 5827,
+    "entry_price": 43.24531173706055,
+    "exit_price": 44.47977828979492,
+    "gross_return": 0.028545673580528917,
+    "net_return": 0.02648961077904155,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4879456204931024,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5832,
+    "exit_idx": 5852,
+    "entry_price": 44.065853118896484,
+    "exit_price": 45.17329406738281,
+    "gross_return": 0.025131499111074873,
+    "net_return": 0.023082261244351976,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49279951168028546,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5857,
+    "exit_idx": 5877,
+    "entry_price": 46.57680130004883,
+    "exit_price": 44.64191818237305,
+    "gross_return": -0.04154177753021677,
+    "net_return": -0.04345773551693388,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4883298540440872,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5882,
+    "exit_idx": 5902,
+    "entry_price": 46.88593292236328,
+    "exit_price": 52.431549072265625,
+    "gross_return": 0.11827889100735205,
+    "net_return": 0.11604345150422835,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4613476648081586,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5907,
+    "exit_idx": 5927,
+    "entry_price": 51.42734909057617,
+    "exit_price": 61.581809997558594,
+    "gross_return": 0.19745254395861875,
+    "net_return": 0.1950588363232455,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4727376369856131,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5932,
+    "exit_idx": 5952,
+    "entry_price": 61.6383171081543,
+    "exit_price": 54.271297454833984,
+    "gross_return": -0.11952012966858873,
+    "net_return": -0.12128020892938118,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.43401730724124454,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5963,
+    "exit_idx": 5983,
+    "entry_price": 55.835845947265625,
+    "exit_price": 56.238800048828125,
+    "gross_return": 0.007216763617104759,
+    "net_return": 0.005203337306634248,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4538869618279965,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 5988,
+    "exit_idx": 6008,
+    "entry_price": 55.89726638793945,
+    "exit_price": 55.27709197998047,
+    "gross_return": -0.011094896907029854,
+    "net_return": -0.013071718208112593,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4852085816634807,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6095,
+    "exit_idx": 6115,
+    "entry_price": 25.700000762939453,
+    "exit_price": 27.489999771118164,
+    "gross_return": 0.06964976478755205,
+    "net_return": 0.06751153490774175,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4815417554570369,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6120,
+    "exit_idx": 6140,
+    "entry_price": 27.65999984741211,
+    "exit_price": 26.360000610351562,
+    "gross_return": -0.04699924961070196,
+    "net_return": -0.04890429811073016,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4985225541677019,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6147,
+    "exit_idx": 6167,
+    "entry_price": 29.56999969482422,
+    "exit_price": 31.239999771118164,
+    "gross_return": 0.056476161431486156,
+    "net_return": 0.05436426558478469,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.479803344226418,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6172,
+    "exit_idx": 6192,
+    "entry_price": 33.790000915527344,
+    "exit_price": 29.190000534057617,
+    "gross_return": -0.13613495876988202,
+    "net_return": -0.13786182498730104,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49355783947186915,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6216,
+    "exit_idx": 6236,
+    "entry_price": 29.760000228881836,
+    "exit_price": 28.459999084472656,
+    "gross_return": -0.043682833817571536,
+    "net_return": -0.04559451183277019,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4845334328025613,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6243,
+    "exit_idx": 6263,
+    "entry_price": 30.969999313354492,
+    "exit_price": 38.560001373291016,
+    "gross_return": 0.24507595183133937,
+    "net_return": 0.2425870450036287,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4814919047817552,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6268,
+    "exit_idx": 6288,
+    "entry_price": 39.150001525878906,
+    "exit_price": 45.459999084472656,
+    "gross_return": 0.16117489942937954,
+    "net_return": 0.1588537108054202,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49418825009567935,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6293,
+    "exit_idx": 6313,
+    "entry_price": 45.86000061035156,
+    "exit_price": 48.779998779296875,
+    "gross_return": 0.06367200458096252,
+    "net_return": 0.06154572424380511,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4998623505269493,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6318,
+    "exit_idx": 6338,
+    "entry_price": 49.31999969482422,
+    "exit_price": 48.59000015258789,
+    "gross_return": -0.01480128845809627,
+    "net_return": -0.016770700682468442,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5250557868751067,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6361,
+    "exit_idx": 6381,
+    "entry_price": 48.790000915527344,
+    "exit_price": 51.95000076293945,
+    "gross_return": 0.06476736601999897,
+    "net_return": 0.06263889605532502,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41089442610819055,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6386,
+    "exit_idx": 6406,
+    "entry_price": 54.5099983215332,
+    "exit_price": 53.5,
+    "gross_return": -0.018528680107007135,
+    "net_return": -0.020490641275473176,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46293553954882277,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6411,
+    "exit_idx": 6431,
+    "entry_price": 54.22999954223633,
+    "exit_price": 57.459999084472656,
+    "gross_return": 0.05956112058825716,
+    "net_return": 0.057443057908201256,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4753436921352065,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6451,
+    "exit_idx": 6471,
+    "entry_price": 82.41999816894531,
+    "exit_price": 78.93000030517578,
+    "gross_return": -0.04234406626187564,
+    "net_return": -0.0442584204734181,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44203329369052974,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6487,
+    "exit_idx": 6507,
+    "entry_price": 86.69000244140625,
+    "exit_price": 81.3499984741211,
+    "gross_return": -0.06159884435225852,
+    "net_return": -0.06347470826239832,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4883106792677632,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6516,
+    "exit_idx": 6536,
+    "entry_price": 83.36000061035156,
+    "exit_price": 96.8499984741211,
+    "gross_return": 0.16182818815975628,
+    "net_return": 0.15950569361162503,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4835889151880781,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6541,
+    "exit_idx": 6561,
+    "entry_price": 91.55000305175781,
+    "exit_price": 94.12999725341797,
+    "gross_return": 0.02818125740751235,
+    "net_return": 0.026125923073954782,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4938053454768207,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6580,
+    "exit_idx": 6600,
+    "entry_price": 85.37000274658203,
+    "exit_price": 80.30000305175781,
+    "gross_return": -0.05938853849957441,
+    "net_return": -0.06126882081111373,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4918442003401882,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6613,
+    "exit_idx": 6633,
+    "entry_price": 82.76000213623047,
+    "exit_price": 78.80999755859375,
+    "gross_return": -0.047728425274018306,
+    "net_return": -0.0496320161518955,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4720206644616905,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6651,
+    "exit_idx": 6671,
+    "entry_price": 80.27999877929688,
+    "exit_price": 93.30999755859375,
+    "gross_return": 0.16230691302223804,
+    "net_return": 0.1599834615031066,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4557109200561356,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6676,
+    "exit_idx": 6696,
+    "entry_price": 90.9000015258789,
+    "exit_price": 110.11000061035156,
+    "gross_return": 0.21133111949402364,
+    "net_return": 0.20890966858615512,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48132003438932,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6702,
+    "exit_idx": 6722,
+    "entry_price": 107.4800033569336,
+    "exit_price": 105.7300033569336,
+    "gross_return": -0.01628209848662133,
+    "net_return": -0.01824855057174657,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4251013304390348,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6745,
+    "exit_idx": 6765,
+    "entry_price": 112.12000274658203,
+    "exit_price": 147.88999938964844,
+    "gross_return": 0.31903314098122904,
+    "net_return": 0.3163963937324077,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5583985007631808,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6770,
+    "exit_idx": 6790,
+    "entry_price": 155.41000366210938,
+    "exit_price": 135.8000030517578,
+    "gross_return": -0.12618235730170416,
+    "net_return": -0.127929118769458,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4366091960393128,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6800,
+    "exit_idx": 6820,
+    "entry_price": 144.4199981689453,
+    "exit_price": 122.76000213623047,
+    "gross_return": -0.14997920168491077,
+    "net_return": -0.15167839326074262,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49254922591521183,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6856,
+    "exit_idx": 6876,
+    "entry_price": 119.66999816894531,
+    "exit_price": 90.69000244140625,
+    "gross_return": -0.24216592438336987,
+    "net_return": -0.24368083470052748,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4400290490684832,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6895,
+    "exit_idx": 6915,
+    "entry_price": 93.5,
+    "exit_price": 83.79000091552734,
+    "gross_return": -0.10385025758794174,
+    "net_return": -0.1056416609230234,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5000581145283943,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6956,
+    "exit_idx": 6976,
+    "entry_price": 47.08857345581055,
+    "exit_price": 48.283756256103516,
+    "gross_return": 0.02538158862286499,
+    "net_return": 0.02333185082720801,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5019170249941219,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 6981,
+    "exit_idx": 7001,
+    "entry_price": 50.71743392944336,
+    "exit_price": 39.673954010009766,
+    "gross_return": -0.21774524189841207,
+    "net_return": -0.2193089691598571,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47850157414271854,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7022,
+    "exit_idx": 7042,
+    "entry_price": 40.19677734375,
+    "exit_price": 42.84577560424805,
+    "gross_return": 0.06590076208957235,
+    "net_return": 0.06377002646615537,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.43345625045101743,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7047,
+    "exit_idx": 7067,
+    "entry_price": 45.093936920166016,
+    "exit_price": 40.880496978759766,
+    "gross_return": -0.09343695026818351,
+    "net_return": -0.09524916980459741,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49476317839925216,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7081,
+    "exit_idx": 7101,
+    "entry_price": 45.459800720214844,
+    "exit_price": 43.62632369995117,
+    "gross_return": -0.04033183144703777,
+    "net_return": -0.04225020811597513,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41808590566048304,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7108,
+    "exit_idx": 7128,
+    "entry_price": 45.49490737915039,
+    "exit_price": 50.99373245239258,
+    "gross_return": 0.12086682642115,
+    "net_return": 0.11862621363513415,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4907053539650914,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7133,
+    "exit_idx": 7153,
+    "entry_price": 51.35539245605469,
+    "exit_price": 51.99930953979492,
+    "gross_return": 0.012538451230632264,
+    "net_return": 0.010514386866622427,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49743217997287303,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7158,
+    "exit_idx": 7178,
+    "entry_price": 52.59031677246094,
+    "exit_price": 58.509159088134766,
+    "gross_return": 0.11254623814650862,
+    "net_return": 0.1103222582164538,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49939817964291305,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7183,
+    "exit_idx": 7203,
+    "entry_price": 59.40007019042969,
+    "exit_price": 50.49138259887695,
+    "gross_return": -0.14997772835945097,
+    "net_return": -0.15167692288046042,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46804189250505,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7230,
+    "exit_idx": 7250,
+    "entry_price": 53.771183013916016,
+    "exit_price": 52.05135726928711,
+    "gross_return": -0.031984153002246246,
+    "net_return": -0.03391921668039466,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4058434292839258,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7255,
+    "exit_idx": 7275,
+    "entry_price": 53.7451057434082,
+    "exit_price": 53.923404693603516,
+    "gross_return": 0.003317491848402911,
+    "net_return": 0.001311860182197977,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4640338260460593,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7299,
+    "exit_idx": 7319,
+    "entry_price": 54.422603607177734,
+    "exit_price": 43.37604904174805,
+    "gross_return": -0.20297732620738798,
+    "net_return": -0.20457057453229932,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5175136175266594,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7329,
+    "exit_idx": 7349,
+    "entry_price": 46.89423751831055,
+    "exit_price": 46.88526153564453,
+    "gross_return": -0.00019140907584883171,
+    "net_return": -0.0021900264491061527,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48446085947765605,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7355,
+    "exit_idx": 7375,
+    "entry_price": 47.40581130981445,
+    "exit_price": 41.033714294433594,
+    "gross_return": -0.1344159468917581,
+    "net_return": -0.1361462494139214,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5770698463709771,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7391,
+    "exit_idx": 7411,
+    "entry_price": 44.803497314453125,
+    "exit_price": 44.071231842041016,
+    "gross_return": -0.016343935547546463,
+    "net_return": -0.018310264020386824,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49755734658388034,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7417,
+    "exit_idx": 7437,
+    "entry_price": 46.692909240722656,
+    "exit_price": 53.806766510009766,
+    "gross_return": 0.15235412367672074,
+    "net_return": 0.1500505677834909,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5152112527985869,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7442,
+    "exit_idx": 7462,
+    "entry_price": 56.817256927490234,
+    "exit_price": 58.91822814941406,
+    "gross_return": 0.03697769543160162,
+    "net_return": 0.034904777018433863,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5000510364769117,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7467,
+    "exit_idx": 7487,
+    "entry_price": 57.73585510253906,
+    "exit_price": 57.93595886230469,
+    "gross_return": 0.00346584907091506,
+    "net_return": 0.0014599208386221196,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4621574331241542,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7517,
+    "exit_idx": 7537,
+    "entry_price": 51.466033935546875,
+    "exit_price": 51.255558013916016,
+    "gross_return": -0.004089608340414249,
+    "net_return": -0.006080433213341729,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4854419561609482,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7581,
+    "exit_idx": 7601,
+    "entry_price": 49.488616943359375,
+    "exit_price": 49.60834884643555,
+    "gross_return": 0.0024193826878048503,
+    "net_return": 0.0004155463418120675,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48151013371734935,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7648,
+    "exit_idx": 7668,
+    "entry_price": 47.99639129638672,
+    "exit_price": 50.09246063232422,
+    "gross_return": 0.04367139443867425,
+    "net_return": 0.04158509532119137,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.6263761413630985,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7673,
+    "exit_idx": 7693,
+    "entry_price": 50.95500183105469,
+    "exit_price": 44.51173782348633,
+    "gross_return": -0.1264500790115047,
+    "net_return": -0.12819630530356074,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5119905277161177,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7722,
+    "exit_idx": 7742,
+    "entry_price": 48.43677520751953,
+    "exit_price": 43.97904968261719,
+    "gross_return": -0.09203183956412968,
+    "net_return": -0.09384686791684094,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5239230427870382,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7889,
+    "exit_idx": 7909,
+    "entry_price": 14.982666969299316,
+    "exit_price": 16.99066734313965,
+    "gross_return": 0.13402155824158352,
+    "net_return": 0.13175464914665858,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.7228078071207579,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7919,
+    "exit_idx": 7939,
+    "entry_price": 16.107332229614258,
+    "exit_price": 14.37266731262207,
+    "gross_return": -0.1076941167080914,
+    "net_return": -0.10947783616879192,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4134070017216983,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7948,
+    "exit_idx": 7968,
+    "entry_price": 16.47333335876465,
+    "exit_price": 16.302000045776367,
+    "gross_return": -0.010400646260042619,
+    "net_return": -0.01237885536816885,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4300376576836383,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 7985,
+    "exit_idx": 8005,
+    "entry_price": 20.887332916259766,
+    "exit_price": 22.32466697692871,
+    "gross_return": 0.06881367125383359,
+    "net_return": 0.06667711272499721,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45941157421346274,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8012,
+    "exit_idx": 8032,
+    "entry_price": 23.51333236694336,
+    "exit_price": 31.876667022705078,
+    "gross_return": 0.355684788750705,
+    "net_return": 0.35297477485799256,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.6404944620429974,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8047,
+    "exit_idx": 8067,
+    "entry_price": 52.0,
+    "exit_price": 49.70066833496094,
+    "gross_return": -0.044217916635365735,
+    "net_return": -0.046128525020011635,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4140832609154319,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8098,
+    "exit_idx": 8118,
+    "entry_price": 49.680667877197266,
+    "exit_price": 53.55533218383789,
+    "gross_return": 0.07799138925060554,
+    "net_return": 0.07583648446349356,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46466594428570357,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8123,
+    "exit_idx": 8143,
+    "entry_price": 55.17333221435547,
+    "exit_price": 66.72666931152344,
+    "gross_return": 0.20940074912063608,
+    "net_return": 0.20698315702314396,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4605449492879173,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8148,
+    "exit_idx": 8168,
+    "entry_price": 63.982666015625,
+    "exit_price": 102.63999938964844,
+    "gross_return": 0.604184473410071,
+    "net_return": 0.6009777086477244,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41506189734645915,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8173,
+    "exit_idx": 8193,
+    "entry_price": 99.0,
+    "exit_price": 166.10667419433594,
+    "gross_return": 0.6778451938821743,
+    "net_return": 0.674491181339604,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4649206028213912,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8198,
+    "exit_idx": 8218,
+    "entry_price": 110.06999969482422,
+    "exit_price": 137.9933319091797,
+    "gross_return": 0.25368703817365634,
+    "net_return": 0.25118091778434737,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45874514360351015,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8223,
+    "exit_idx": 8243,
+    "entry_price": 148.88333129882812,
+    "exit_price": 136.7866668701172,
+    "gross_return": -0.0812492864256999,
+    "net_return": -0.083085869102135,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4757407869635565,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8249,
+    "exit_idx": 8269,
+    "entry_price": 162.2133331298828,
+    "exit_price": 218.63333129882812,
+    "gross_return": 0.3478135679745262,
+    "net_return": 0.34511928865214525,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4133322031064902,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8274,
+    "exit_idx": 8294,
+    "entry_price": 220.58999633789062,
+    "exit_price": 294.36334228515625,
+    "gross_return": 0.33443649835445094,
+    "net_return": 0.3317689597942406,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44086379479368415,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8299,
+    "exit_idx": 8319,
+    "entry_price": 290.92999267578125,
+    "exit_price": 217.73333740234375,
+    "gross_return": -0.25159542541565727,
+    "net_return": -0.25309148616025134,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48914583703672515,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8346,
+    "exit_idx": 8366,
+    "entry_price": 233.9933319091797,
+    "exit_price": 209.67999267578125,
+    "gross_return": -0.10390612003779287,
+    "net_return": -0.10569741170383729,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48884088361809624,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8393,
+    "exit_idx": 8413,
+    "entry_price": 205.53334045410156,
+    "exit_price": 214.74000549316406,
+    "gross_return": 0.04479402231638634,
+    "net_return": 0.04270547906577593,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47705213973217725,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8418,
+    "exit_idx": 8438,
+    "entry_price": 214.4600067138672,
+    "exit_price": 226.75332641601562,
+    "gross_return": 0.057322201423550934,
+    "net_return": 0.05520861434290514,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49538244768989625,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8443,
+    "exit_idx": 8463,
+    "entry_price": 237.30667114257812,
+    "exit_price": 263.78668212890625,
+    "gross_return": 0.11158561560377857,
+    "net_return": 0.1093635559581867,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4842128125415799,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8469,
+    "exit_idx": 8489,
+    "entry_price": 260.1966552734375,
+    "exit_price": 390.6666564941406,
+    "gross_return": 0.5014284333654991,
+    "net_return": 0.49842707792720176,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4919628197239823,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8495,
+    "exit_idx": 8515,
+    "entry_price": 355.98333740234375,
+    "exit_price": 334.6000061035156,
+    "gross_return": -0.06006834885830608,
+    "net_return": -0.061947272228938255,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5308768443324763,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8531,
+    "exit_idx": 8551,
+    "entry_price": 399.9266662597656,
+    "exit_price": 310.4166564941406,
+    "gross_return": -0.22381605758563008,
+    "net_return": -0.22536764928651631,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5019431016376424,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8586,
+    "exit_idx": 8606,
+    "entry_price": 333.03668212890625,
+    "exit_price": 336.260009765625,
+    "gross_return": 0.009678596412004574,
+    "net_return": 0.0076602488977770555,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.481562588683995,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8689,
+    "exit_idx": 8709,
+    "entry_price": 114.13130950927734,
+    "exit_price": 111.80765533447266,
+    "gross_return": -0.020359480538649083,
+    "net_return": -0.02231778193705236,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4934289662557588,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8718,
+    "exit_idx": 8738,
+    "entry_price": 115.4791488647461,
+    "exit_price": 115.59493255615234,
+    "gross_return": 0.0010026372080544133,
+    "net_return": -0.0009983670637243591,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4802665893174186,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8753,
+    "exit_idx": 8773,
+    "entry_price": 116.63566589355469,
+    "exit_price": 112.15640258789062,
+    "gross_return": -0.038403890193861784,
+    "net_return": -0.04032612081736431,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4163612698816265,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8801,
+    "exit_idx": 8821,
+    "entry_price": 109.29235076904297,
+    "exit_price": 110.43003845214844,
+    "gross_return": 0.010409581961592395,
+    "net_return": 0.008389773207251094,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4595492449032168,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8826,
+    "exit_idx": 8846,
+    "entry_price": 107.87165832519531,
+    "exit_price": 107.66194152832031,
+    "gross_return": -0.0019441325008907834,
+    "net_return": -0.003939246180021505,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4771839246910094,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8856,
+    "exit_idx": 8876,
+    "entry_price": 111.56244659423828,
+    "exit_price": 118.67007446289062,
+    "gross_return": 0.0637098601333413,
+    "net_return": 0.061583504122934674,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41112817837708077,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8881,
+    "exit_idx": 8901,
+    "entry_price": 119.7596206665039,
+    "exit_price": 124.16858673095703,
+    "gross_return": 0.0368151305082269,
+    "net_return": 0.034742537062341095,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4687563317801034,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8906,
+    "exit_idx": 8926,
+    "entry_price": 125.4524154663086,
+    "exit_price": 126.63489532470703,
+    "gross_return": 0.009425724120202325,
+    "net_return": 0.007407882097685947,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4918326550172776,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8959,
+    "exit_idx": 8979,
+    "entry_price": 121.77279663085938,
+    "exit_price": 125.4533920288086,
+    "gross_return": 0.03022510363383131,
+    "net_return": 0.028165683651667273,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4249492966531327,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 8984,
+    "exit_idx": 9004,
+    "entry_price": 125.49592590332031,
+    "exit_price": 121.66692352294922,
+    "gross_return": -0.030510969601681367,
+    "net_return": -0.032448978173447496,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4084959410978357,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9026,
+    "exit_idx": 9046,
+    "entry_price": 126.89649200439453,
+    "exit_price": 128.09478759765625,
+    "gross_return": 0.009443094717072331,
+    "net_return": 0.007425217970732811,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4623987543748243,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9051,
+    "exit_idx": 9071,
+    "entry_price": 128.71957397460938,
+    "exit_price": 126.80191802978516,
+    "gross_return": -0.01489793576540637,
+    "net_return": -0.016867154791811223,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4833682466726472,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9089,
+    "exit_idx": 9109,
+    "entry_price": 127.82728576660156,
+    "exit_price": 127.75831604003906,
+    "gross_return": -0.0005395540251744884,
+    "net_return": -0.002537475456678151,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4926117970112522,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9114,
+    "exit_idx": 9134,
+    "entry_price": 128.68023681640625,
+    "exit_price": 129.8520050048828,
+    "gross_return": 0.009106046254393879,
+    "net_return": 0.007088843267931466,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49895785154814215,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9139,
+    "exit_idx": 9159,
+    "entry_price": 131.82144165039062,
+    "exit_price": 144.00241088867188,
+    "gross_return": 0.09240506768683987,
+    "net_return": 0.09022134995653408,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4761944082189144,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9164,
+    "exit_idx": 9184,
+    "entry_price": 141.16537475585938,
+    "exit_price": 138.8242950439453,
+    "gross_return": -0.01658395138299928,
+    "net_return": -0.018549800064184607,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4400582392753208,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9201,
+    "exit_idx": 9221,
+    "entry_price": 141.39962768554688,
+    "exit_price": 144.4987335205078,
+    "gross_return": 0.02191735498662625,
+    "net_return": 0.019874542194008082,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4583169073916309,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9228,
+    "exit_idx": 9248,
+    "entry_price": 146.46304321289062,
+    "exit_price": 145.99761962890625,
+    "gross_return": -0.0031777544271550996,
+    "net_return": -0.005170402096055127,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45736483525902083,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9273,
+    "exit_idx": 9293,
+    "entry_price": 148.52755737304688,
+    "exit_price": 152.5771942138672,
+    "gross_return": 0.02726522210722876,
+    "net_return": 0.02521171892823637,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4744763989775538,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9298,
+    "exit_idx": 9318,
+    "entry_price": 153.90362548828125,
+    "exit_price": 147.5456085205078,
+    "gross_return": -0.041311677665822874,
+    "net_return": -0.043228095622168894,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.495961128107236,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9351,
+    "exit_idx": 9371,
+    "entry_price": 144.69139099121094,
+    "exit_price": 142.52606201171875,
+    "gross_return": -0.014965154213105203,
+    "net_return": -0.01693423886983314,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4606517564995743,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9383,
+    "exit_idx": 9403,
+    "entry_price": 149.82846069335938,
+    "exit_price": 152.3189239501953,
+    "gross_return": 0.016622097332581767,
+    "net_return": 0.014589869760013974,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.494909007957018,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9408,
+    "exit_idx": 9428,
+    "entry_price": 148.16517639160156,
+    "exit_price": 148.7255401611328,
+    "gross_return": 0.003782020736439452,
+    "net_return": 0.0017754604769872895,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.466251831137407,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9443,
+    "exit_idx": 9463,
+    "entry_price": 151.8733673095703,
+    "exit_price": 162.70486450195312,
+    "gross_return": 0.07131926673031759,
+    "net_return": 0.06917769951612374,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4787832499939653,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9468,
+    "exit_idx": 9488,
+    "entry_price": 161.0398406982422,
+    "exit_price": 158.3096160888672,
+    "gross_return": -0.016953721498588047,
+    "net_return": -0.018918831009312354,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4488875062066047,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9501,
+    "exit_idx": 9521,
+    "entry_price": 159.59718322753906,
+    "exit_price": 161.73231506347656,
+    "gross_return": 0.013378255134324089,
+    "net_return": 0.011352512002310577,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4350289532702203,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9555,
+    "exit_idx": 9575,
+    "entry_price": 84.93215942382812,
+    "exit_price": 87.80740356445312,
+    "gross_return": 0.033853420896517356,
+    "net_return": 0.031786747908145285,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4820188895076709,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9580,
+    "exit_idx": 9600,
+    "entry_price": 89.52468872070312,
+    "exit_price": 90.70653533935547,
+    "gross_return": 0.013201348539054138,
+    "net_return": 0.011175959043324468,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4944942434856652,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9605,
+    "exit_idx": 9625,
+    "entry_price": 90.06497192382812,
+    "exit_price": 94.82609558105469,
+    "gross_return": 0.05286321147419221,
+    "net_return": 0.05075853791445528,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4826951178930952,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9630,
+    "exit_idx": 9650,
+    "entry_price": 93.27281188964844,
+    "exit_price": 102.30531311035156,
+    "gross_return": 0.09683959385066496,
+    "net_return": 0.0946470115025575,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49389455268080834,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9655,
+    "exit_idx": 9675,
+    "entry_price": 97.09698486328125,
+    "exit_price": 104.68428802490234,
+    "gross_return": 0.07814149092584516,
+    "net_return": 0.0759862860854843,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.483136793581974,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9680,
+    "exit_idx": 9700,
+    "entry_price": 103.03599548339844,
+    "exit_price": 103.63924407958984,
+    "gross_return": 0.005854736428383401,
+    "net_return": 0.0038440328102631316,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5179539509903478,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9715,
+    "exit_idx": 9735,
+    "entry_price": 106.832275390625,
+    "exit_price": 104.1131362915039,
+    "gross_return": -0.02545241210279122,
+    "net_return": -0.02740053273099774,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4839865439480681,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9740,
+    "exit_idx": 9760,
+    "entry_price": 106.55864715576172,
+    "exit_price": 104.95968627929688,
+    "gross_return": -0.015005453983734924,
+    "net_return": -0.016974458081221333,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4846218242713524,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9770,
+    "exit_idx": 9790,
+    "entry_price": 107.81559753417969,
+    "exit_price": 107.89706420898438,
+    "gross_return": 0.0007556112164463049,
+    "net_return": -0.0012448992503752976,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48531317135644286,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9826,
+    "exit_idx": 9846,
+    "entry_price": 98.62464904785156,
+    "exit_price": 100.39938354492188,
+    "gross_return": 0.017994837134570826,
+    "net_return": 0.015959865455138944,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45688115057440987,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9865,
+    "exit_idx": 9885,
+    "entry_price": 102.46017456054688,
+    "exit_price": 105.31758880615234,
+    "gross_return": 0.02788804779867818,
+    "net_return": 0.02583329959112879,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4122695571306777,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9890,
+    "exit_idx": 9910,
+    "entry_price": 107.41301727294922,
+    "exit_price": 116.847900390625,
+    "gross_return": 0.08783742750378697,
+    "net_return": 0.08566284048620698,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.440703466677349,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9915,
+    "exit_idx": 9935,
+    "entry_price": 118.06779479980469,
+    "exit_price": 120.79515075683594,
+    "gross_return": 0.023099914431837416,
+    "net_return": 0.021054737702888238,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4802355316716324,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9940,
+    "exit_idx": 9960,
+    "entry_price": 120.21131134033203,
+    "exit_price": 124.1497802734375,
+    "gross_return": 0.03276288137274518,
+    "net_return": 0.03069838837288108,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46308188310618303,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 9965,
+    "exit_idx": 9985,
+    "entry_price": 124.73399353027344,
+    "exit_price": 121.18547058105469,
+    "gross_return": -0.028448723950760712,
+    "net_return": -0.030390854951583113,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4921968954671916,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10010,
+    "exit_idx": 10030,
+    "entry_price": 121.91268920898438,
+    "exit_price": 113.68348693847656,
+    "gross_return": -0.06750078538913316,
+    "net_return": -0.06936485131914027,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.475284790211068,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10062,
+    "exit_idx": 10082,
+    "entry_price": 113.44548034667969,
+    "exit_price": 120.98208618164062,
+    "gross_return": 0.06643372492169497,
+    "net_return": 0.06430192390557665,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4783589751340395,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10087,
+    "exit_idx": 10107,
+    "entry_price": 118.81978607177734,
+    "exit_price": 122.4214096069336,
+    "gross_return": 0.03031164803630037,
+    "net_return": 0.02825205505187589,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48314237516341113,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10112,
+    "exit_idx": 10132,
+    "entry_price": 119.6270523071289,
+    "exit_price": 120.04400634765625,
+    "gross_return": 0.0034854494237378515,
+    "net_return": 0.00147948201033965,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48895966181342604,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10138,
+    "exit_idx": 10158,
+    "entry_price": 121.5343246459961,
+    "exit_price": 127.14601135253906,
+    "gross_return": 0.046173677460162675,
+    "net_return": 0.044082376278919755,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44138857435809203,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10163,
+    "exit_idx": 10183,
+    "entry_price": 127.31562805175781,
+    "exit_price": 128.53860473632812,
+    "gross_return": 0.009605864600323257,
+    "net_return": 0.007587662476987278,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4506848979885125,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10188,
+    "exit_idx": 10208,
+    "entry_price": 128.64573669433594,
+    "exit_price": 128.59217834472656,
+    "gross_return": -0.00041632432590152574,
+    "net_return": -0.0024144920935740277,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49706152484349314,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10217,
+    "exit_idx": 10237,
+    "entry_price": 127.39531707763672,
+    "exit_price": 133.53016662597656,
+    "gross_return": 0.04815600517404515,
+    "net_return": 0.04606074131970228,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.442942001158451,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10242,
+    "exit_idx": 10262,
+    "entry_price": 132.2726287841797,
+    "exit_price": 146.93167114257812,
+    "gross_return": 0.11082445773657751,
+    "net_return": 0.10860391964556215,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5098290296381763,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10267,
+    "exit_idx": 10287,
+    "entry_price": 146.1772003173828,
+    "exit_price": 144.781005859375,
+    "gross_return": -0.009551383218288202,
+    "net_return": -0.011531290003234829,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48314814280198176,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10324,
+    "exit_idx": 10344,
+    "entry_price": 137.98988342285156,
+    "exit_price": 145.8021240234375,
+    "gross_return": 0.05661458946701414,
+    "net_return": 0.05450241690266955,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5099990222794878,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10349,
+    "exit_idx": 10369,
+    "entry_price": 141.6701202392578,
+    "exit_price": 131.97119140625,
+    "gross_return": -0.0684613580946203,
+    "net_return": -0.07032350383978914,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47121636661220306,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10428,
+    "exit_idx": 10448,
+    "entry_price": 37.43941116333008,
+    "exit_price": 39.212562561035156,
+    "gross_return": 0.0473605578348876,
+    "net_return": 0.04526688407977586,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.40970825088572993,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10453,
+    "exit_idx": 10473,
+    "entry_price": 39.903934478759766,
+    "exit_price": 39.53791809082031,
+    "gross_return": -0.009172438575806822,
+    "net_return": -0.011153102871093834,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4506773354453904,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10478,
+    "exit_idx": 10498,
+    "entry_price": 41.30292892456055,
+    "exit_price": 42.70737838745117,
+    "gross_return": 0.03400362878515967,
+    "net_return": 0.03193665553121816,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.444022506673106,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10503,
+    "exit_idx": 10523,
+    "entry_price": 42.658203125,
+    "exit_price": 44.0107307434082,
+    "gross_return": 0.03170615542443037,
+    "net_return": 0.029643774819737123,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4750464023978841,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10528,
+    "exit_idx": 10548,
+    "entry_price": 44.15827941894531,
+    "exit_price": 44.80316162109375,
+    "gross_return": 0.01460387973974701,
+    "net_return": 0.012575686584147316,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5576774468395341,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10553,
+    "exit_idx": 10573,
+    "entry_price": 44.51416015625,
+    "exit_price": 45.232540130615234,
+    "gross_return": 0.016138234931168397,
+    "net_return": 0.014106974599541022,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47071254950865443,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10579,
+    "exit_idx": 10599,
+    "entry_price": 44.23342514038086,
+    "exit_price": 43.944419860839844,
+    "gross_return": -0.006533640083801131,
+    "net_return": -0.008519579337273542,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47884851147916163,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10604,
+    "exit_idx": 10624,
+    "entry_price": 44.755157470703125,
+    "exit_price": 45.745113372802734,
+    "gross_return": 0.022119370326148795,
+    "net_return": 0.020076153704866817,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5152890389363495,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10629,
+    "exit_idx": 10649,
+    "entry_price": 46.0362548828125,
+    "exit_price": 49.23899841308594,
+    "gross_return": 0.06957002776238218,
+    "net_return": 0.06743195727688511,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4877065986401625,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10654,
+    "exit_idx": 10674,
+    "entry_price": 49.8712272644043,
+    "exit_price": 37.981101989746094,
+    "gross_return": -0.23841653648544897,
+    "net_return": -0.23993894182901443,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.467985128825923,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10696,
+    "exit_idx": 10716,
+    "entry_price": 39.52519607543945,
+    "exit_price": 36.672000885009766,
+    "gross_return": -0.07218674348847977,
+    "net_return": -0.07404144218824626,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.43153027499572255,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10727,
+    "exit_idx": 10747,
+    "entry_price": 39.43288803100586,
+    "exit_price": 37.56404113769531,
+    "gross_return": -0.047393102220690396,
+    "net_return": -0.0492973634093512,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5055504545333416,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10762,
+    "exit_idx": 10782,
+    "entry_price": 39.968955993652344,
+    "exit_price": 41.002052307128906,
+    "gross_return": 0.025847468060977312,
+    "net_return": 0.02379679897232334,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45957274575940066,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10790,
+    "exit_idx": 10810,
+    "entry_price": 42.196044921875,
+    "exit_price": 42.068092346191406,
+    "gross_return": -0.003032335753753508,
+    "net_return": -0.005025274114581757,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4523877812987414,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10821,
+    "exit_idx": 10841,
+    "entry_price": 42.87053680419922,
+    "exit_price": 46.08026885986328,
+    "gross_return": 0.07487034907735493,
+    "net_return": 0.07272168324954942,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47793937904097816,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10846,
+    "exit_idx": 10866,
+    "entry_price": 45.82417678833008,
+    "exit_price": 45.65006637573242,
+    "gross_return": -0.0037995317057608917,
+    "net_return": -0.0057909364418810005,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49516062649627113,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10871,
+    "exit_idx": 10891,
+    "entry_price": 45.66726303100586,
+    "exit_price": 41.967777252197266,
+    "gross_return": -0.08100957958213395,
+    "net_return": -0.08284664143254927,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.489463272708386,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10906,
+    "exit_idx": 10926,
+    "entry_price": 43.249691009521484,
+    "exit_price": 44.43381881713867,
+    "gross_return": 0.027378873235336467,
+    "net_return": 0.025325142867739014,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46234430275664595,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10931,
+    "exit_idx": 10951,
+    "entry_price": 44.58129119873047,
+    "exit_price": 47.37466812133789,
+    "gross_return": 0.06265805335595362,
+    "net_return": 0.060533799907295016,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44411520928548087,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10956,
+    "exit_idx": 10976,
+    "entry_price": 46.489803314208984,
+    "exit_price": 47.73902130126953,
+    "gross_return": 0.026870795271330246,
+    "net_return": 0.024818080551582966,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5011628472701006,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 10981,
+    "exit_idx": 11001,
+    "entry_price": 48.268192291259766,
+    "exit_price": 47.163509368896484,
+    "gross_return": -0.02288635372332538,
+    "net_return": -0.024839603902232388,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49876637262084567,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11011,
+    "exit_idx": 11031,
+    "entry_price": 49.296173095703125,
+    "exit_price": 50.02164077758789,
+    "gross_return": 0.014716511167638405,
+    "net_return": 0.01268809286181427,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44758178380925806,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11036,
+    "exit_idx": 11056,
+    "entry_price": 49.505943298339844,
+    "exit_price": 47.60751724243164,
+    "gross_return": -0.03834743728581427,
+    "net_return": -0.04026978075867993,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4921983852204569,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11078,
+    "exit_idx": 11098,
+    "entry_price": 48.10948944091797,
+    "exit_price": 49.23671340942383,
+    "gross_return": 0.023430387260503997,
+    "net_return": 0.021384549916370288,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44677210410807966,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11103,
+    "exit_idx": 11123,
+    "entry_price": 48.81399917602539,
+    "exit_price": 51.66859436035156,
+    "gross_return": 0.058479027174813514,
+    "net_return": 0.056363127599491136,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4873661325420951,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11128,
+    "exit_idx": 11148,
+    "entry_price": 52.547183990478516,
+    "exit_price": 54.144622802734375,
+    "gross_return": 0.030400084094806733,
+    "net_return": 0.028340314326701144,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4426429160034851,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11153,
+    "exit_idx": 11173,
+    "entry_price": 54.66823959350586,
+    "exit_price": 52.05907440185547,
+    "gross_return": -0.04772725829569772,
+    "net_return": -0.04963085150636459,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4538886239504392,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11187,
+    "exit_idx": 11207,
+    "entry_price": 55.37287902832031,
+    "exit_price": 58.17192840576172,
+    "gross_return": 0.05054910321729504,
+    "net_return": 0.048449055559963705,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4375684868513973,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11212,
+    "exit_idx": 11232,
+    "entry_price": 56.41023254394531,
+    "exit_price": 56.401283264160156,
+    "gross_return": -0.00015864639058497633,
+    "net_return": -0.00215732925645018,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4828461850873506,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11258,
+    "exit_idx": 11278,
+    "entry_price": 91.13038635253906,
+    "exit_price": 94.7313461303711,
+    "gross_return": 0.03951436970651735,
+    "net_return": 0.03743638048147413,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44105003331032855,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11283,
+    "exit_idx": 11303,
+    "entry_price": 93.95674896240234,
+    "exit_price": 99.16703796386719,
+    "gross_return": 0.05545412180608477,
+    "net_return": 0.05334426901659439,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4878303904157772,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11308,
+    "exit_idx": 11328,
+    "entry_price": 99.6644287109375,
+    "exit_price": 103.68424224853516,
+    "gross_return": 0.04033348296468456,
+    "net_return": 0.03825385633223832,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49354741039341277,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11333,
+    "exit_idx": 11353,
+    "entry_price": 105.9918212890625,
+    "exit_price": 108.46804809570312,
+    "gross_return": 0.02336243284175105,
+    "net_return": 0.021316731338500317,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4765623888011404,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11358,
+    "exit_idx": 11378,
+    "entry_price": 109.90541076660156,
+    "exit_price": 106.12718963623047,
+    "gross_return": -0.03437702569889488,
+    "net_return": -0.03630730602452281,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4975977650348344,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11398,
+    "exit_idx": 11418,
+    "entry_price": 108.697998046875,
+    "exit_price": 112.04605865478516,
+    "gross_return": 0.030801492833992267,
+    "net_return": 0.02874092064981726,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49364536945758825,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11423,
+    "exit_idx": 11443,
+    "entry_price": 112.24456787109375,
+    "exit_price": 114.0392074584961,
+    "gross_return": 0.015988654252412155,
+    "net_return": 0.01395769293256155,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49039030704612596,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11448,
+    "exit_idx": 11468,
+    "entry_price": 113.44373321533203,
+    "exit_price": 112.33551025390625,
+    "gross_return": -0.009768921825961155,
+    "net_return": -0.011748393751231045,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.481983731132098,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11473,
+    "exit_idx": 11493,
+    "entry_price": 114.39656066894531,
+    "exit_price": 111.6065902709961,
+    "gross_return": -0.02438858634940215,
+    "net_return": -0.026338833565289654,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4744760274192806,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11502,
+    "exit_idx": 11522,
+    "entry_price": 118.14427185058594,
+    "exit_price": 121.20073699951172,
+    "gross_return": 0.02587061650175634,
+    "net_return": 0.02381990113936938,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48894476792719216,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11527,
+    "exit_idx": 11547,
+    "entry_price": 118.24420166015625,
+    "exit_price": 94.32522583007812,
+    "gross_return": -0.20228455598036904,
+    "net_return": -0.2038791891529642,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5092212829765503,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11558,
+    "exit_idx": 11578,
+    "entry_price": 112.04161071777344,
+    "exit_price": 112.54464721679688,
+    "gross_return": 0.004489729269338638,
+    "net_return": 0.0024817543005293263,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4275811856163765,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11584,
+    "exit_idx": 11604,
+    "entry_price": 113.62625885009766,
+    "exit_price": 111.25516510009766,
+    "gross_return": -0.02086748058059417,
+    "net_return": -0.02282476648691356,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.42641559884223795,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11613,
+    "exit_idx": 11633,
+    "entry_price": 110.7566146850586,
+    "exit_price": 116.0798110961914,
+    "gross_return": 0.04806210831081749,
+    "net_return": 0.045967032156304155,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4533050977317305,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11638,
+    "exit_idx": 11658,
+    "entry_price": 116.15589141845703,
+    "exit_price": 117.60919952392578,
+    "gross_return": 0.01251170377775439,
+    "net_return": 0.010487692881902655,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45061333142020155,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11663,
+    "exit_idx": 11683,
+    "entry_price": 116.68477630615234,
+    "exit_price": 116.59965515136719,
+    "gross_return": -0.0007294966616880544,
+    "net_return": -0.00272703839786137,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4715065429360074,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11688,
+    "exit_idx": 11708,
+    "entry_price": 121.28884887695312,
+    "exit_price": 122.4632568359375,
+    "gross_return": 0.009682736458120695,
+    "net_return": 0.00766438066794084,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48206353532050084,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11713,
+    "exit_idx": 11733,
+    "entry_price": 122.02071380615234,
+    "exit_price": 124.88704681396484,
+    "gross_return": 0.02349054450186272,
+    "net_return": 0.02144458690340345,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4719976400460653,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11738,
+    "exit_idx": 11758,
+    "entry_price": 124.32989501953125,
+    "exit_price": 121.53581237792969,
+    "gross_return": -0.022473136015779726,
+    "net_return": -0.024427212216884153,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4762217271061424,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11800,
+    "exit_idx": 11820,
+    "entry_price": 123.28377532958984,
+    "exit_price": 123.85397338867188,
+    "gross_return": 0.004625085965753769,
+    "net_return": 0.002616840418908195,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.40598860216833516,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11825,
+    "exit_idx": 11845,
+    "entry_price": 125.95336151123047,
+    "exit_price": 127.54299926757812,
+    "gross_return": 0.012620844233727781,
+    "net_return": 0.010596615166104772,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4916909462027527,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11850,
+    "exit_idx": 11870,
+    "entry_price": 127.37828826904297,
+    "exit_price": 130.35455322265625,
+    "gross_return": 0.02336555934341745,
+    "net_return": 0.02131985159028993,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.502867324510304,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11875,
+    "exit_idx": 11895,
+    "entry_price": 134.4882049560547,
+    "exit_price": 134.92337036132812,
+    "gross_return": 0.003235714280041352,
+    "net_return": 0.0012302460871955745,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4421360185771542,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11900,
+    "exit_idx": 11920,
+    "entry_price": 136.00247192382812,
+    "exit_price": 136.30377197265625,
+    "gross_return": 0.002215401268565722,
+    "net_return": 0.00021197268143002823,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49128295897808943,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11940,
+    "exit_idx": 11960,
+    "entry_price": 139.54576110839844,
+    "exit_price": 142.55117797851562,
+    "gross_return": 0.02153714198299849,
+    "net_return": 0.01949508923617449,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4650807468218394,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11965,
+    "exit_idx": 11985,
+    "entry_price": 143.19082641601562,
+    "exit_price": 148.46324157714844,
+    "gross_return": 0.036820900424268145,
+    "net_return": 0.03474829544432012,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4898134857820208,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 11990,
+    "exit_idx": 12010,
+    "entry_price": 151.25958251953125,
+    "exit_price": 151.1448974609375,
+    "gross_return": -0.0007582002851220395,
+    "net_return": -0.0027556846427521098,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.42927283994014837,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12053,
+    "exit_idx": 12073,
+    "entry_price": 147.15768432617188,
+    "exit_price": 153.87936401367188,
+    "gross_return": 0.04567671554685173,
+    "net_return": 0.04358640779247369,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5137579348988085,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12078,
+    "exit_idx": 12098,
+    "entry_price": 149.16444396972656,
+    "exit_price": 147.83253479003906,
+    "gross_return": -0.008929133138174715,
+    "net_return": -0.010910283801031428,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5374171406616377,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12155,
+    "exit_idx": 12175,
+    "entry_price": 88.40941619873047,
+    "exit_price": 91.37142944335938,
+    "gross_return": 0.033503368441781506,
+    "net_return": 0.031437395208266494,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46903260623945736,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12180,
+    "exit_idx": 12200,
+    "entry_price": 94.52961730957031,
+    "exit_price": 92.85908508300781,
+    "gross_return": -0.017672051089466914,
+    "net_return": -0.01963572465933905,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5007234508711066,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12220,
+    "exit_idx": 12240,
+    "entry_price": 91.34650421142578,
+    "exit_price": 95.97724914550781,
+    "gross_return": 0.05069427641548169,
+    "net_return": 0.048593938556927174,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5167908315861139,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12245,
+    "exit_idx": 12265,
+    "entry_price": 96.84770202636719,
+    "exit_price": 90.99716186523438,
+    "gross_return": -0.060409695209287656,
+    "net_return": -0.06228793622856421,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49684453474548146,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12276,
+    "exit_idx": 12296,
+    "entry_price": 96.5882568359375,
+    "exit_price": 96.49300384521484,
+    "gross_return": -0.0009861756888774763,
+    "net_return": -0.0029832043236753814,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45270360914934255,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12305,
+    "exit_idx": 12325,
+    "entry_price": 101.71543884277344,
+    "exit_price": 109.2833480834961,
+    "gross_return": 0.07440275858634078,
+    "net_return": 0.07225502747192669,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4688311039782258,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12330,
+    "exit_idx": 12350,
+    "entry_price": 110.34638214111328,
+    "exit_price": 115.75446319580078,
+    "gross_return": 0.04901004409706412,
+    "net_return": 0.04691307301891423,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49518986730215386,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12355,
+    "exit_idx": 12375,
+    "entry_price": 117.61058044433594,
+    "exit_price": 115.38526916503906,
+    "gross_return": -0.01892101264095093,
+    "net_return": -0.02088218953668164,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48584637526776175,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12386,
+    "exit_idx": 12406,
+    "entry_price": 116.71836853027344,
+    "exit_price": 75.02716827392578,
+    "gross_return": -0.3571948510018265,
+    "net_return": -0.3584798184946739,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.462423943181985,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12428,
+    "exit_idx": 12448,
+    "entry_price": 74.92313385009766,
+    "exit_price": 75.08614349365234,
+    "gross_return": 0.00217569174136291,
+    "net_return": 0.0001723425335720119,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4410753806642713,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12457,
+    "exit_idx": 12477,
+    "entry_price": 85.67301940917969,
+    "exit_price": 84.04295349121094,
+    "gross_return": -0.019026595878259344,
+    "net_return": -0.02098756171309868,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49186189077119846,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12494,
+    "exit_idx": 12514,
+    "entry_price": 86.1180191040039,
+    "exit_price": 85.17375946044922,
+    "gross_return": -0.01096471625078026,
+    "net_return": -0.012941797782994868,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4553904899175548,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12519,
+    "exit_idx": 12539,
+    "entry_price": 87.06227111816406,
+    "exit_price": 80.3398666381836,
+    "gross_return": -0.07721375049884124,
+    "net_return": -0.07905840021159405,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4830988389398589,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12552,
+    "exit_idx": 12572,
+    "entry_price": 89.56636810302734,
+    "exit_price": 102.20918273925781,
+    "gross_return": 0.14115582560730183,
+    "net_return": 0.13887465511191288,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48041220893213377,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12577,
+    "exit_idx": 12597,
+    "entry_price": 102.55888366699219,
+    "exit_price": 105.19937133789062,
+    "gross_return": 0.025746064860378674,
+    "net_return": 0.023695598476722868,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4855182602097134,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12602,
+    "exit_idx": 12622,
+    "entry_price": 106.37972259521484,
+    "exit_price": 117.81904602050781,
+    "gross_return": 0.10753293152324335,
+    "net_return": 0.10531897319312855,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4780791790066915,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12627,
+    "exit_idx": 12647,
+    "entry_price": 113.31024169921875,
+    "exit_price": 132.53433227539062,
+    "gross_return": 0.16965889656472466,
+    "net_return": 0.16732074843049194,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4640001014771088,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12652,
+    "exit_idx": 12672,
+    "entry_price": 134.65664672851562,
+    "exit_price": 135.1219482421875,
+    "gross_return": 0.003455466365577755,
+    "net_return": 0.0014495588883129962,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4909584023274728,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12677,
+    "exit_idx": 12697,
+    "entry_price": 136.49496459960938,
+    "exit_price": 140.43685913085938,
+    "gross_return": 0.028879413557950782,
+    "net_return": 0.026822683610248532,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4874934569445708,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12702,
+    "exit_idx": 12722,
+    "entry_price": 143.81179809570312,
+    "exit_price": 138.42605590820312,
+    "gross_return": -0.03744993289017837,
+    "net_return": -0.03937407047433095,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4849063582625843,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12760,
+    "exit_idx": 12780,
+    "entry_price": 141.8875732421875,
+    "exit_price": 141.21047973632812,
+    "gross_return": -0.004772042331738532,
+    "net_return": -0.006761503019117376,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.43898820437544095,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12785,
+    "exit_idx": 12805,
+    "entry_price": 140.90757751464844,
+    "exit_price": 144.30209350585938,
+    "gross_return": 0.02409037222187733,
+    "net_return": 0.022043215567805863,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48369534445481804,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12811,
+    "exit_idx": 12831,
+    "entry_price": 151.92051696777344,
+    "exit_price": 146.13949584960938,
+    "gross_return": -0.03805293210916561,
+    "net_return": -0.03997586429787936,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4098434004670732,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12863,
+    "exit_idx": 12883,
+    "entry_price": 147.6737060546875,
+    "exit_price": 134.07666015625,
+    "gross_return": -0.0920749283112192,
+    "net_return": -0.09388987052952502,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.42764191161124665,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12894,
+    "exit_idx": 12914,
+    "entry_price": 137.17840576171875,
+    "exit_price": 125.91667175292969,
+    "gross_return": -0.08209553060669626,
+    "net_return": -0.0839304216410135,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4773463832977181,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12921,
+    "exit_idx": 12941,
+    "entry_price": 126.71913146972656,
+    "exit_price": 112.03494262695312,
+    "gross_return": -0.11587980972140266,
+    "net_return": -0.1176471659817695,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.40727593032908865,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 12963,
+    "exit_idx": 12983,
+    "entry_price": 120.11009216308594,
+    "exit_price": 104.73186492919922,
+    "gross_return": -0.12803443038746468,
+    "net_return": -0.12977748956112012,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48038561404072755,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13019,
+    "exit_idx": 13039,
+    "entry_price": 24.9879207611084,
+    "exit_price": 24.657123565673828,
+    "gross_return": -0.013238284153254367,
+    "net_return": -0.015210820823231996,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47446729580799535,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13044,
+    "exit_idx": 13064,
+    "entry_price": 25.471389770507812,
+    "exit_price": 24.088829040527344,
+    "gross_return": -0.05427896720347863,
+    "net_return": -0.056169463548038756,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4503305897100555,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13087,
+    "exit_idx": 13107,
+    "entry_price": 24.108135223388672,
+    "exit_price": 25.071775436401367,
+    "gross_return": 0.03997157822799058,
+    "net_return": 0.03789267504311278,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47874364722340995,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13113,
+    "exit_idx": 13133,
+    "entry_price": 26.026891708374023,
+    "exit_price": 22.837486267089844,
+    "gross_return": -0.12254269457224053,
+    "net_return": -0.12429673172579059,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5116245359131602,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13144,
+    "exit_idx": 13164,
+    "entry_price": 25.28852081298828,
+    "exit_price": 23.940832138061523,
+    "gross_return": -0.05329250709810305,
+    "net_return": -0.05518497537641398,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4882414269644424,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13172,
+    "exit_idx": 13192,
+    "entry_price": 26.62763214111328,
+    "exit_price": 28.292930603027344,
+    "gross_return": 0.06254023839178571,
+    "net_return": 0.06041622045524053,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48747149150736874,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13197,
+    "exit_idx": 13217,
+    "entry_price": 28.73072052001953,
+    "exit_price": 30.397977828979492,
+    "gross_return": 0.058030473262867185,
+    "net_return": 0.055915470346814766,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.500283494561334,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13222,
+    "exit_idx": 13242,
+    "entry_price": 30.76046371459961,
+    "exit_price": 28.3351993560791,
+    "gross_return": -0.0788435564893433,
+    "net_return": -0.080684948219921,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5017404485979242,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13252,
+    "exit_idx": 13272,
+    "entry_price": 30.078636169433594,
+    "exit_price": 17.75409698486328,
+    "gross_return": -0.4097439496639912,
+    "net_return": -0.41092387150861287,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4947989372897669,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13294,
+    "exit_idx": 13314,
+    "entry_price": 18.605318069458008,
+    "exit_price": 18.857208251953125,
+    "gross_return": 0.013538612000866562,
+    "net_return": 0.011512548315476767,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41600083912299773,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13323,
+    "exit_idx": 13343,
+    "entry_price": 21.59328842163086,
+    "exit_price": 21.62142562866211,
+    "gross_return": 0.0013030533599996995,
+    "net_return": -0.0006985514436668172,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4797416056152758,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13364,
+    "exit_idx": 13384,
+    "entry_price": 21.114126205444336,
+    "exit_price": 22.4698429107666,
+    "gross_return": 0.06420898938136621,
+    "net_return": 0.06208163561159297,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45293012049959325,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13389,
+    "exit_idx": 13409,
+    "entry_price": 22.51357650756836,
+    "exit_price": 20.935335159301758,
+    "gross_return": -0.07010176049709278,
+    "net_return": -0.07196062707785911,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4551358722216085,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13424,
+    "exit_idx": 13444,
+    "entry_price": 21.261213302612305,
+    "exit_price": 24.26455307006836,
+    "gross_return": 0.1412590958337689,
+    "net_return": 0.13897771890119737,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4769058603114762,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13449,
+    "exit_idx": 13469,
+    "entry_price": 25.52402114868164,
+    "exit_price": 26.631372451782227,
+    "gross_return": 0.04338467268343175,
+    "net_return": 0.041298946722737595,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4335078473995733,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13474,
+    "exit_idx": 13494,
+    "entry_price": 26.861799240112305,
+    "exit_price": 26.55161476135254,
+    "gross_return": -0.011547420036427064,
+    "net_return": -0.013523336743774261,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4858242275794985,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13502,
+    "exit_idx": 13522,
+    "entry_price": 29.139423370361328,
+    "exit_price": 33.790771484375,
+    "gross_return": 0.15962389011254605,
+    "net_return": 0.15730580195621102,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48755749205380733,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13528,
+    "exit_idx": 13548,
+    "entry_price": 33.54139709472656,
+    "exit_price": 33.91547393798828,
+    "gross_return": 0.01115269117160658,
+    "net_return": 0.00913139694195464,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47849729798056195,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13553,
+    "exit_idx": 13573,
+    "entry_price": 35.518619537353516,
+    "exit_price": 37.41567611694336,
+    "gross_return": 0.053410200179506734,
+    "net_return": 0.051304433189347964,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48510008518391634,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13578,
+    "exit_idx": 13598,
+    "entry_price": 38.24396896362305,
+    "exit_price": 36.87555694580078,
+    "gross_return": -0.035781119347833325,
+    "net_return": -0.037708592890256964,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48783560273392396,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13627,
+    "exit_idx": 13647,
+    "entry_price": 37.51951599121094,
+    "exit_price": 36.794830322265625,
+    "gross_return": -0.019314899187800105,
+    "net_return": -0.021275288704323603,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47910789116354735,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13661,
+    "exit_idx": 13681,
+    "entry_price": 38.718624114990234,
+    "exit_price": 42.287532806396484,
+    "gross_return": 0.09217550398502991,
+    "net_return": 0.08999224515256388,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47536060101626,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13686,
+    "exit_idx": 13706,
+    "entry_price": 43.48316955566406,
+    "exit_price": 40.54898452758789,
+    "gross_return": -0.06747863732242354,
+    "net_return": -0.069342747526416,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4909854018766987,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13728,
+    "exit_idx": 13748,
+    "entry_price": 43.349205017089844,
+    "exit_price": 42.355587005615234,
+    "gross_return": -0.022921251060610357,
+    "net_return": -0.024874431479740222,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49107831796770857,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13753,
+    "exit_idx": 13773,
+    "entry_price": 44.51446533203125,
+    "exit_price": 36.91669464111328,
+    "gross_return": -0.17068093785349084,
+    "net_return": -0.17233874665872162,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49423350630510743,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13786,
+    "exit_idx": 13806,
+    "entry_price": 39.431060791015625,
+    "exit_price": 32.90460205078125,
+    "gross_return": -0.16551567747123008,
+    "net_return": -0.16718381163196505,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5485757078574931,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13833,
+    "exit_idx": 13853,
+    "entry_price": 33.00284194946289,
+    "exit_price": 28.28292465209961,
+    "gross_return": -0.14301548044228213,
+    "net_return": -0.14472859249687797,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4944953609372709,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13858,
+    "exit_idx": 13878,
+    "entry_price": 53.68254470825195,
+    "exit_price": 58.174251556396484,
+    "gross_return": 0.08367164545860273,
+    "net_return": 0.08150538583933109,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41462602070979165,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13885,
+    "exit_idx": 13905,
+    "entry_price": 58.35561752319336,
+    "exit_price": 59.4510383605957,
+    "gross_return": 0.018771471948985055,
+    "net_return": 0.01673494777655904,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5031631017947347,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13910,
+    "exit_idx": 13930,
+    "entry_price": 58.85615158081055,
+    "exit_price": 55.700523376464844,
+    "gross_return": -0.053615945310541,
+    "net_return": -0.05550776703586524,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4874018725604394,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 13952,
+    "exit_idx": 13972,
+    "entry_price": 55.267601013183594,
+    "exit_price": 54.91538619995117,
+    "gross_return": -0.006372898529617701,
+    "net_return": -0.008359159105457037,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44228634763699143,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14010,
+    "exit_idx": 14030,
+    "entry_price": 53.43638610839844,
+    "exit_price": 50.100799560546875,
+    "gross_return": -0.06242163422288873,
+    "net_return": -0.06429585337607713,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4296388662076188,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14050,
+    "exit_idx": 14070,
+    "entry_price": 53.1095085144043,
+    "exit_price": 51.43428421020508,
+    "gross_return": -0.031542831991089405,
+    "net_return": -0.03347877786993925,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46259026820270505,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14078,
+    "exit_idx": 14098,
+    "entry_price": 52.3891487121582,
+    "exit_price": 51.742549896240234,
+    "gross_return": -0.012342227957750668,
+    "net_return": -0.014316555844063106,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4137900909982173,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14158,
+    "exit_idx": 14178,
+    "entry_price": 32.359130859375,
+    "exit_price": 34.3004150390625,
+    "gross_return": 0.05999185170095557,
+    "net_return": 0.057872927989405465,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.521753688604039,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14183,
+    "exit_idx": 14203,
+    "entry_price": 34.16047668457031,
+    "exit_price": 36.25177001953125,
+    "gross_return": 0.06121967659501299,
+    "net_return": 0.05909829846149961,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.42625688385658766,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14243,
+    "exit_idx": 14263,
+    "entry_price": 34.097110748291016,
+    "exit_price": 29.253278732299805,
+    "gross_return": -0.14205989626947635,
+    "net_return": -0.14377491853683366,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4813337987389739,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14307,
+    "exit_idx": 14327,
+    "entry_price": 28.603181838989258,
+    "exit_price": 35.561153411865234,
+    "gross_return": 0.24325865604893157,
+    "net_return": 0.2407733819954898,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5234301769841305,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14334,
+    "exit_idx": 14354,
+    "entry_price": 33.48270034790039,
+    "exit_price": 38.50834655761719,
+    "gross_return": 0.1500968009598363,
+    "net_return": 0.14779775745471757,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45850539776874194,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14360,
+    "exit_idx": 14380,
+    "entry_price": 36.470481872558594,
+    "exit_price": 46.29623031616211,
+    "gross_return": 0.26941646885659637,
+    "net_return": 0.26687890533535197,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49774584211243983,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14385,
+    "exit_idx": 14405,
+    "entry_price": 49.48339080810547,
+    "exit_price": 46.725589752197266,
+    "gross_return": -0.05573185286761744,
+    "net_return": -0.05761944489373505,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.41332461506455614,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14421,
+    "exit_idx": 14441,
+    "entry_price": 48.66594696044922,
+    "exit_price": 49.05658721923828,
+    "gross_return": 0.008026973339417962,
+    "net_return": 0.0060119274197125705,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45330288205289593,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14446,
+    "exit_idx": 14466,
+    "entry_price": 51.47758102416992,
+    "exit_price": 52.91845703125,
+    "gross_return": 0.02799035965585728,
+    "net_return": 0.025935406926905324,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4837199052652326,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14524,
+    "exit_idx": 14544,
+    "entry_price": 48.974205017089844,
+    "exit_price": 53.676883697509766,
+    "gross_return": 0.096023583818845,
+    "net_return": 0.09383263267479114,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47273447990377265,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14549,
+    "exit_idx": 14569,
+    "entry_price": 54.82493209838867,
+    "exit_price": 53.079689025878906,
+    "gross_return": -0.03183301840443186,
+    "net_return": -0.03376838420064143,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4895217339363691,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14594,
+    "exit_idx": 14614,
+    "entry_price": 56.81999206542969,
+    "exit_price": 69.48016357421875,
+    "gross_return": 0.22281191968859,
+    "net_return": 0.2203675186611327,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45199005153188027,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14619,
+    "exit_idx": 14639,
+    "entry_price": 68.83879852294922,
+    "exit_price": 74.38075256347656,
+    "gross_return": 0.08050625750941466,
+    "net_return": 0.07834632550065335,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4266034888676846,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14644,
+    "exit_idx": 14664,
+    "entry_price": 68.82136535644531,
+    "exit_price": 76.53306579589844,
+    "gross_return": 0.1120538716358203,
+    "net_return": 0.10983087594642038,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4051625226705093,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14669,
+    "exit_idx": 14689,
+    "entry_price": 74.18035125732422,
+    "exit_price": 80.8646240234375,
+    "gross_return": 0.09010840003879353,
+    "net_return": 0.08792927334711598,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49728633892693214,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14694,
+    "exit_idx": 14714,
+    "entry_price": 85.90876007080078,
+    "exit_price": 80.54771423339844,
+    "gross_return": -0.06240394847957337,
+    "net_return": -0.06427820298656262,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48669584538470223,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14728,
+    "exit_idx": 14748,
+    "entry_price": 86.4591064453125,
+    "exit_price": 91.81421661376953,
+    "gross_return": 0.06193806978382558,
+    "net_return": 0.05981525558232792,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.42757516784380334,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14753,
+    "exit_idx": 14773,
+    "entry_price": 93.49273681640625,
+    "exit_price": 89.22956848144531,
+    "gross_return": -0.04559892543666327,
+    "net_return": -0.04750677318471541,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4981284228951421,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14797,
+    "exit_idx": 14817,
+    "entry_price": 90.63249206542969,
+    "exit_price": 92.20004272460938,
+    "gross_return": 0.017295680869593866,
+    "net_return": 0.01526210680353568,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4674922844205262,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14822,
+    "exit_idx": 14842,
+    "entry_price": 92.73255157470703,
+    "exit_price": 94.90763092041016,
+    "gross_return": 0.0234554027552107,
+    "net_return": 0.021409515405103052,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49306320951341326,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14847,
+    "exit_idx": 14867,
+    "entry_price": 92.33504486083984,
+    "exit_price": 88.52571868896484,
+    "gross_return": -0.04125547540065722,
+    "net_return": -0.04317200570533131,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4917699007534956,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14876,
+    "exit_idx": 14896,
+    "entry_price": 91.8975830078125,
+    "exit_price": 85.72966003417969,
+    "gross_return": -0.06711735795171447,
+    "net_return": -0.06898219035316899,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4241633179356474,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14913,
+    "exit_idx": 14933,
+    "entry_price": 88.05587768554688,
+    "exit_price": 89.37503051757812,
+    "gross_return": 0.0149808606387641,
+    "net_return": 0.012951913898347156,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.43911334917011996,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 14948,
+    "exit_idx": 14968,
+    "entry_price": 92.07617950439453,
+    "exit_price": 86.54377746582031,
+    "gross_return": -0.06008505205529421,
+    "net_return": -0.061963942036235675,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44379849146139655,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15023,
+    "exit_idx": 15043,
+    "entry_price": 65.73229217529297,
+    "exit_price": 72.2815170288086,
+    "gross_return": 0.09963481626428367,
+    "net_return": 0.09743664626657145,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4078132788986775,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15048,
+    "exit_idx": 15068,
+    "entry_price": 72.69853973388672,
+    "exit_price": 73.86109161376953,
+    "gross_return": 0.01599140621171102,
+    "net_return": 0.013960439390693802,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4710299808089256,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15098,
+    "exit_idx": 15118,
+    "entry_price": 70.75049591064453,
+    "exit_price": 67.55525207519531,
+    "gross_return": -0.04516214048145554,
+    "net_return": -0.047070861362633054,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4710275674997948,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15171,
+    "exit_idx": 15191,
+    "entry_price": 66.19265747070312,
+    "exit_price": 73.12568664550781,
+    "gross_return": 0.10474015456885294,
+    "net_return": 0.10253177899986987,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5002387910899765,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15196,
+    "exit_idx": 15216,
+    "entry_price": 71.71072387695312,
+    "exit_price": 74.45979309082031,
+    "gross_return": 0.03833553846959093,
+    "net_return": 0.03625990572819027,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4117614586369771,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15221,
+    "exit_idx": 15241,
+    "entry_price": 73.49764251708984,
+    "exit_price": 81.69501495361328,
+    "gross_return": 0.11153245404595466,
+    "net_return": 0.10931050067031678,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4738362463498614,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15246,
+    "exit_idx": 15266,
+    "entry_price": 83.99917602539062,
+    "exit_price": 86.86090850830078,
+    "gross_return": 0.03406857803039758,
+    "net_return": 0.03200147494291472,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.45678242673555464,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15291,
+    "exit_idx": 15311,
+    "entry_price": 89.34546661376953,
+    "exit_price": 89.30198669433594,
+    "gross_return": -0.00048664941917592864,
+    "net_return": -0.002484676606987035,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4763358361036211,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15316,
+    "exit_idx": 15336,
+    "entry_price": 89.98261260986328,
+    "exit_price": 86.38030242919922,
+    "gross_return": -0.04003340285619982,
+    "net_return": -0.04195237608389024,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49008997686782185,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15359,
+    "exit_idx": 15379,
+    "entry_price": 85.36769104003906,
+    "exit_price": 80.75634002685547,
+    "gross_return": -0.05401752064514348,
+    "net_return": -0.055908539621373765,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4710639529195881,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15390,
+    "exit_idx": 15410,
+    "entry_price": 84.62590026855469,
+    "exit_price": 94.88870239257812,
+    "gross_return": 0.12127259020530351,
+    "net_return": 0.11903116629748323,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.431167875627847,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15415,
+    "exit_idx": 15435,
+    "entry_price": 96.31034851074219,
+    "exit_price": 97.72979736328125,
+    "gross_return": 0.014738279681136513,
+    "net_return": 0.012709817860053985,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49783226715723683,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15440,
+    "exit_idx": 15460,
+    "entry_price": 98.87854766845703,
+    "exit_price": 103.32896423339844,
+    "gross_return": 0.045008919223447255,
+    "net_return": 0.042919946393919606,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48454162060329964,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15465,
+    "exit_idx": 15485,
+    "entry_price": 108.8940658569336,
+    "exit_price": 117.25027465820312,
+    "gross_return": 0.0767370447187448,
+    "net_return": 0.07458464736635206,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4589660374613398,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15490,
+    "exit_idx": 15510,
+    "entry_price": 115.48031616210938,
+    "exit_price": 137.95730590820312,
+    "gross_return": 0.19463914278292005,
+    "net_return": 0.1922510591364972,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4325632307706645,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15515,
+    "exit_idx": 15535,
+    "entry_price": 142.99609375,
+    "exit_price": 138.39581298828125,
+    "gross_return": -0.0321706743245825,
+    "net_return": -0.03410536514660767,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4284817213387473,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15551,
+    "exit_idx": 15571,
+    "entry_price": 148.7658233642578,
+    "exit_price": 145.2561798095703,
+    "gross_return": -0.023591732800711918,
+    "net_return": -0.025543572926843283,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4398588729193669,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15608,
+    "exit_idx": 15628,
+    "entry_price": 118.48388671875,
+    "exit_price": 116.77732849121094,
+    "gross_return": -0.014403293770991617,
+    "net_return": -0.016373501586743333,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5281839515651685,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15633,
+    "exit_idx": 15653,
+    "entry_price": 120.97472381591797,
+    "exit_price": 118.58641815185547,
+    "gross_return": -0.01974218736549184,
+    "net_return": -0.021701722732948237,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.567394707217111,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15683,
+    "exit_idx": 15703,
+    "entry_price": 113.01087951660156,
+    "exit_price": 117.69325256347656,
+    "gross_return": 0.041432940500096785,
+    "net_return": 0.03935111605203723,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5003810971237345,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15708,
+    "exit_idx": 15728,
+    "entry_price": 115.26102447509766,
+    "exit_price": 102.82706451416016,
+    "gross_return": -0.10787653517363774,
+    "net_return": -0.10965988997982556,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4972893190714821,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15741,
+    "exit_idx": 15761,
+    "entry_price": 113.84550476074219,
+    "exit_price": 103.08045959472656,
+    "gross_return": -0.09455836827847845,
+    "net_return": -0.09636834610028966,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.427912560848284,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15770,
+    "exit_idx": 15790,
+    "entry_price": 116.44881439208984,
+    "exit_price": 126.45301818847656,
+    "gross_return": 0.08591073982687282,
+    "net_return": 0.08374000425795902,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.44782625287150424,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15796,
+    "exit_idx": 15816,
+    "entry_price": 128.6547088623047,
+    "exit_price": 130.5304412841797,
+    "gross_return": 0.014579586230944148,
+    "net_return": 0.012551441638068539,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5042780189822546,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15821,
+    "exit_idx": 15841,
+    "entry_price": 130.72418212890625,
+    "exit_price": 115.08403778076172,
+    "gross_return": -0.11964231937379244,
+    "net_return": -0.12140215437736424,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4912468346910015,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15887,
+    "exit_idx": 15907,
+    "entry_price": 112.98223114013672,
+    "exit_price": 96.02161407470703,
+    "gross_return": -0.15011756179954133,
+    "net_return": -0.15181647679350407,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.40132449675347076,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15920,
+    "exit_idx": 15940,
+    "entry_price": 109.56256103515625,
+    "exit_price": 109.2403564453125,
+    "gross_return": -0.0029408274760970455,
+    "net_return": -0.004933948761972284,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4209217543947294,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15945,
+    "exit_idx": 15965,
+    "entry_price": 112.82025909423828,
+    "exit_price": 123.28604888916016,
+    "gross_return": 0.09276516362349206,
+    "net_return": 0.09058072606140866,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4245304124254787,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15970,
+    "exit_idx": 15990,
+    "entry_price": 121.1761474609375,
+    "exit_price": 132.32984924316406,
+    "gross_return": 0.0920453572417954,
+    "net_return": 0.089862358572669,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4744869884002223,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 15995,
+    "exit_idx": 16015,
+    "entry_price": 138.70472717285156,
+    "exit_price": 143.31228637695312,
+    "gross_return": 0.033218472780380905,
+    "net_return": 0.031153069053292848,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4954964320888332,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16020,
+    "exit_idx": 16040,
+    "entry_price": 152.15771484375,
+    "exit_price": 155.77236938476562,
+    "gross_return": 0.023755972838626502,
+    "net_return": 0.021709484648922084,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4869711395662191,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16045,
+    "exit_idx": 16065,
+    "entry_price": 156.2440948486328,
+    "exit_price": 163.4380645751953,
+    "gross_return": 0.04604314635719114,
+    "net_return": 0.04395210610762312,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4249281769143304,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16070,
+    "exit_idx": 16090,
+    "entry_price": 160.25384521484375,
+    "exit_price": 168.11981201171875,
+    "gross_return": 0.049084418450798924,
+    "net_return": 0.04698729869831597,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4869648108749339,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16095,
+    "exit_idx": 16115,
+    "entry_price": 174.78660583496094,
+    "exit_price": 200.7880096435547,
+    "gross_return": 0.14876084860383954,
+    "net_return": 0.14646447566748044,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4774093977106143,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16120,
+    "exit_idx": 16140,
+    "entry_price": 208.85020446777344,
+    "exit_price": 210.61036682128906,
+    "gross_return": 0.00842786990800968,
+    "net_return": 0.006412022596063549,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47125925133609364,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16145,
+    "exit_idx": 16165,
+    "entry_price": 211.9418487548828,
+    "exit_price": 224.2599639892578,
+    "gross_return": 0.05812025943314865,
+    "net_return": 0.05600507703454194,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4918497867898818,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16170,
+    "exit_idx": 16190,
+    "entry_price": 219.0013427734375,
+    "exit_price": 195.25523376464844,
+    "gross_return": -0.10842905668096708,
+    "net_return": -0.11021130699666182,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5048185138239243,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16227,
+    "exit_idx": 16247,
+    "entry_price": 201.31353759765625,
+    "exit_price": 189.92018127441406,
+    "gross_return": -0.05659508277090043,
+    "net_return": -0.058480949200441334,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48577137113685115,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16276,
+    "exit_idx": 16296,
+    "entry_price": 185.82879638671875,
+    "exit_price": 185.63430786132812,
+    "gross_return": -0.0010466005762954191,
+    "net_return": -0.0030435084217433905,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4331525530112712,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16320,
+    "exit_idx": 16340,
+    "entry_price": 191.13555908203125,
+    "exit_price": 199.44288635253906,
+    "gross_return": 0.043463012902494214,
+    "net_return": 0.04137713033970214,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49117980017393653,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16372,
+    "exit_idx": 16392,
+    "entry_price": 199.92678833007812,
+    "exit_price": 201.97418212890625,
+    "gross_return": 0.010240717694358586,
+    "net_return": 0.008221246499687584,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5378897919107,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16397,
+    "exit_idx": 16417,
+    "entry_price": 213.96998596191406,
+    "exit_price": 193.7415008544922,
+    "gross_return": -0.09453889066021803,
+    "net_return": -0.09634890741778823,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4888431176791501,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16430,
+    "exit_idx": 16450,
+    "entry_price": 208.43177795410156,
+    "exit_price": 162.48138427734375,
+    "gross_return": -0.22045771584252502,
+    "net_return": -0.22201602086855587,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4935976935018255,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16482,
+    "exit_idx": 16502,
+    "entry_price": 127.05253601074219,
+    "exit_price": 131.0926513671875,
+    "gross_return": 0.031798777759962954,
+    "net_return": 0.02973621200322074,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49156841850042354,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16507,
+    "exit_idx": 16527,
+    "entry_price": 133.48550415039062,
+    "exit_price": 139.95941162109375,
+    "gross_return": 0.04849895508810671,
+    "net_return": 0.0464030056768856,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49018884485774195,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16532,
+    "exit_idx": 16552,
+    "entry_price": 137.05848693847656,
+    "exit_price": 143.53921508789062,
+    "gross_return": 0.04728439875688336,
+    "net_return": 0.04519087724376836,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4771348534737848,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16557,
+    "exit_idx": 16577,
+    "entry_price": 143.76974487304688,
+    "exit_price": 143.7203369140625,
+    "gross_return": -0.00034366033707581114,
+    "net_return": -0.002341973360061922,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49452143482366157,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16607,
+    "exit_idx": 16627,
+    "entry_price": 140.37057495117188,
+    "exit_price": 131.27511596679688,
+    "gross_return": -0.06479605136289286,
+    "net_return": -0.0666655240562185,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4646268389629003,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16638,
+    "exit_idx": 16658,
+    "entry_price": 140.5691375732422,
+    "exit_price": 147.397705078125,
+    "gross_return": 0.0485779995720953,
+    "net_return": 0.046481892150950666,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4804693046332095,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16663,
+    "exit_idx": 16683,
+    "entry_price": 149.22750854492188,
+    "exit_price": 146.78225708007812,
+    "gross_return": -0.016386063727034893,
+    "net_return": -0.018352307985644467,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48546949998338984,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16688,
+    "exit_idx": 16708,
+    "entry_price": 147.63893127441406,
+    "exit_price": 145.72598266601562,
+    "gross_return": -0.012956938877069344,
+    "net_return": -0.014930037956254139,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48086545489738364,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16718,
+    "exit_idx": 16738,
+    "entry_price": 150.42520141601562,
+    "exit_price": 100.02069854736328,
+    "gross_return": -0.3350801753574085,
+    "net_return": -0.336409350086869,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.46135210844473207,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16759,
+    "exit_idx": 16779,
+    "entry_price": 115.66644287109375,
+    "exit_price": 105.64398193359375,
+    "gross_return": -0.08664968584423055,
+    "net_return": -0.08847547312222781,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4174751677493801,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16787,
+    "exit_idx": 16807,
+    "entry_price": 124.30290985107422,
+    "exit_price": 120.00674438476562,
+    "gross_return": -0.0345620667404789,
+    "net_return": -0.036491977169064604,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4608011445686601,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16825,
+    "exit_idx": 16845,
+    "entry_price": 130.24176025390625,
+    "exit_price": 132.8757781982422,
+    "gross_return": 0.02022406591557808,
+    "net_return": 0.018184638007813003,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4652401565647869,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16851,
+    "exit_idx": 16871,
+    "entry_price": 140.61878967285156,
+    "exit_price": 136.8065643310547,
+    "gross_return": -0.027110355242467656,
+    "net_return": -0.0290551616423379,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48641534771687506,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16880,
+    "exit_idx": 16900,
+    "entry_price": 147.21804809570312,
+    "exit_price": 155.26600646972656,
+    "gross_return": 0.05466692758208278,
+    "net_return": 0.052558648393846275,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4760845765810095,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16905,
+    "exit_idx": 16925,
+    "entry_price": 167.87564086914062,
+    "exit_price": 182.6767120361328,
+    "gross_return": 0.08816687811503017,
+    "net_return": 0.08599163252567821,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5875406927313426,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16930,
+    "exit_idx": 16950,
+    "entry_price": 178.77003479003906,
+    "exit_price": 177.10186767578125,
+    "gross_return": -0.009331357552271128,
+    "net_return": -0.011311704168524117,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4992812057320804,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16974,
+    "exit_idx": 16994,
+    "entry_price": 179.6126708984375,
+    "exit_price": 181.42503356933594,
+    "gross_return": 0.01009039430143118,
+    "net_return": 0.008071223603222766,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48964703555724387,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 16999,
+    "exit_idx": 17019,
+    "entry_price": 185.57122802734375,
+    "exit_price": 191.41017150878906,
+    "gross_return": 0.031464702494639514,
+    "net_return": 0.029402804554352846,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47699526314776175,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17024,
+    "exit_idx": 17044,
+    "entry_price": 195.4794464111328,
+    "exit_price": 197.50253295898438,
+    "gross_return": 0.010349356850523262,
+    "net_return": 0.00832966848617911,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4853773774107593,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17049,
+    "exit_idx": 17069,
+    "entry_price": 193.32150268554688,
+    "exit_price": 193.18414306640625,
+    "gross_return": -0.0007105242677740347,
+    "net_return": -0.0027081039297627285,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4969341245092065,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17074,
+    "exit_idx": 17094,
+    "entry_price": 189.44097900390625,
+    "exit_price": 201.47055053710938,
+    "gross_return": 0.06350036616393866,
+    "net_return": 0.061374428931976865,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4720061813476447,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17099,
+    "exit_idx": 17119,
+    "entry_price": 197.47970581054688,
+    "exit_price": 185.2314910888672,
+    "gross_return": -0.062022650233386566,
+    "net_return": -0.06389766695557009,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4852353803229347,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17140,
+    "exit_idx": 17160,
+    "entry_price": 192.764892578125,
+    "exit_price": 190.87110900878906,
+    "gross_return": -0.009824317820572036,
+    "net_return": -0.011803679009248724,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4337907413654167,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17193,
+    "exit_idx": 17213,
+    "entry_price": 182.7078399658203,
+    "exit_price": 165.98316955566406,
+    "gross_return": -0.09153778192159073,
+    "net_return": -0.09335379789552956,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4566463634897607,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17244,
+    "exit_idx": 17264,
+    "entry_price": 168.01123046875,
+    "exit_price": 171.64967346191406,
+    "gross_return": 0.0216559511112014,
+    "net_return": 0.019613660864929994,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4411440772107506,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17278,
+    "exit_idx": 17298,
+    "entry_price": 168.82943725585938,
+    "exit_price": 172.89764404296875,
+    "gross_return": 0.02409654887935226,
+    "net_return": 0.022049379878142483,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4314615541905343,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17333,
+    "exit_idx": 17353,
+    "entry_price": 250.38352966308594,
+    "exit_price": 254.3227081298828,
+    "gross_return": 0.01573257822548227,
+    "net_return": 0.013702128801609481,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4080617895348441,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17358,
+    "exit_idx": 17378,
+    "entry_price": 252.6064453125,
+    "exit_price": 263.8073425292969,
+    "gross_return": 0.04434129621253399,
+    "net_return": 0.04225365796140523,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4652677759521811,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17383,
+    "exit_idx": 17403,
+    "entry_price": 263.0215148925781,
+    "exit_price": 248.6500244140625,
+    "gross_return": -0.05463998062814404,
+    "net_return": -0.05652975530686832,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5020790725329412,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17413,
+    "exit_idx": 17433,
+    "entry_price": 261.2872009277344,
+    "exit_price": 272.9872131347656,
+    "gross_return": 0.04477835946609241,
+    "net_return": 0.04268984752551974,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4597994364621636,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17438,
+    "exit_idx": 17458,
+    "entry_price": 270.400390625,
+    "exit_price": 265.3445129394531,
+    "gross_return": -0.018697745494600675,
+    "net_return": -0.020659368701356984,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49922942431184103,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17472,
+    "exit_idx": 17492,
+    "entry_price": 270.6727294921875,
+    "exit_price": 267.25384521484375,
+    "gross_return": -0.012631062921476977,
+    "net_return": -0.01460481342669695,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4668618997401442,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17503,
+    "exit_idx": 17523,
+    "entry_price": 272.6612548828125,
+    "exit_price": 284.44281005859375,
+    "gross_return": 0.043209495169545885,
+    "net_return": 0.041124119388701974,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4837474432370976,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17528,
+    "exit_idx": 17548,
+    "entry_price": 286.4033508300781,
+    "exit_price": 295.930419921875,
+    "gross_return": 0.03326451685772772,
+    "net_return": 0.031199021088529122,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.500468827646664,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17553,
+    "exit_idx": 17573,
+    "entry_price": 295.4447021484375,
+    "exit_price": 297.01171875,
+    "gross_return": 0.005303925202135434,
+    "net_return": 0.003294322655656323,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4938964150483108,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17578,
+    "exit_idx": 17598,
+    "entry_price": 306.6884460449219,
+    "exit_price": 264.29754638671875,
+    "gross_return": -0.13822137809519508,
+    "net_return": -0.13994407356038274,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4836458509399148,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17622,
+    "exit_idx": 17642,
+    "entry_price": 261.5839538574219,
+    "exit_price": 264.23858642578125,
+    "gross_return": 0.010148300494786046,
+    "net_return": 0.008129014042096872,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5288417405824062,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17647,
+    "exit_idx": 17667,
+    "entry_price": 269.12384033203125,
+    "exit_price": 287.2732238769531,
+    "gross_return": 0.06743878031217905,
+    "net_return": 0.06530497019033499,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4302922451743929,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17672,
+    "exit_idx": 17692,
+    "entry_price": 281.5290222167969,
+    "exit_price": 298.9989929199219,
+    "gross_return": 0.062053889029145444,
+    "net_return": 0.05993084330497633,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4648003142241983,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17697,
+    "exit_idx": 17717,
+    "entry_price": 299.9248352050781,
+    "exit_price": 322.4867858886719,
+    "gross_return": 0.07522534993864913,
+    "net_return": 0.07307597446412162,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4789600712442171,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17722,
+    "exit_idx": 17742,
+    "entry_price": 319.7649230957031,
+    "exit_price": 310.30902099609375,
+    "gross_return": -0.02957141767791481,
+    "net_return": -0.03151130441397665,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.457927571092072,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17747,
+    "exit_idx": 17767,
+    "entry_price": 322.4020080566406,
+    "exit_price": 325.4786071777344,
+    "gross_return": 0.009542741807468003,
+    "net_return": 0.007524665866595059,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.481063725080263,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17772,
+    "exit_idx": 17792,
+    "entry_price": 332.8590087890625,
+    "exit_price": 338.95660400390625,
+    "gross_return": 0.01831885288917586,
+    "net_return": 0.01628323350225025,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.47248916276138564,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17797,
+    "exit_idx": 17817,
+    "entry_price": 343.388671875,
+    "exit_price": 358.6789855957031,
+    "gross_return": 0.0445277173449363,
+    "net_return": 0.0424397064379638,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49090347237306614,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17822,
+    "exit_idx": 17842,
+    "entry_price": 352.5086364746094,
+    "exit_price": 355.05706787109375,
+    "gross_return": 0.0072294154888540635,
+    "net_return": 0.005215963887291952,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.49069697496099707,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17855,
+    "exit_idx": 17875,
+    "entry_price": 370.83282470703125,
+    "exit_price": 389.4762268066406,
+    "gross_return": 0.050274411695723414,
+    "net_return": 0.048174913146743714,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4725216604865118,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17880,
+    "exit_idx": 17900,
+    "entry_price": 386.104736328125,
+    "exit_price": 388.92364501953125,
+    "gross_return": 0.007300891250944504,
+    "net_return": 0.005287296769333816,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4908159573067721,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17905,
+    "exit_idx": 17925,
+    "entry_price": 392.67919921875,
+    "exit_price": 400.8417053222656,
+    "gross_return": 0.02078670354771838,
+    "net_return": 0.018746150927326344,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4706848914083712,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17930,
+    "exit_idx": 17950,
+    "entry_price": 407.5222473144531,
+    "exit_price": 411.15850830078125,
+    "gross_return": 0.00892285270384833,
+    "net_return": 0.0069060159212932515,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4862435540892316,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17955,
+    "exit_idx": 17975,
+    "entry_price": 415.42425537109375,
+    "exit_price": 424.1907653808594,
+    "gross_return": 0.021102547327032168,
+    "net_return": 0.019061363334925474,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4825213573243841,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 17980,
+    "exit_idx": 18000,
+    "entry_price": 417.341064453125,
+    "exit_price": 408.7335205078125,
+    "gross_return": -0.02062472322629364,
+    "net_return": -0.02258249440456417,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48993041190124653,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 18005,
+    "exit_idx": 18025,
+    "entry_price": 424.7768249511719,
+    "exit_price": 442.3470458984375,
+    "gross_return": 0.04136341701147486,
+    "net_return": 0.039281731540869114,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.48471319414820485,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 18030,
+    "exit_idx": 18050,
+    "entry_price": 441.31951904296875,
+    "exit_price": 442.39703369140625,
+    "gross_return": 0.002441574872496374,
+    "net_return": 0.0004376941643262633,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.5005945560514026,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 18055,
+    "exit_idx": 18075,
+    "entry_price": 450.40899658203125,
+    "exit_price": 418.049072265625,
+    "gross_return": -0.07184564376371774,
+    "net_return": -0.07370102432183401,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4629270184748732,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 18112,
+    "exit_idx": 18132,
+    "entry_price": 421.1032409667969,
+    "exit_price": 415.6567687988281,
+    "gross_return": -0.012933816789118894,
+    "net_return": -0.014906962089357378,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4225110701949409,
+      "reason": "time"
+    }
+  },
+  {
+    "entry_idx": 18164,
+    "exit_idx": 18184,
+    "entry_price": 394.4781799316406,
+    "exit_price": 370.690673828125,
+    "gross_return": -0.06030119614635648,
+    "net_return": -0.062179654055259825,
+    "hold_bars": 20,
+    "forced_exit": true,
+    "meta": {
+      "buy_conf": 0.4525647952419801,
+      "reason": "time"
+    }
+  }
+]

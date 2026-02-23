@@ -7,6 +7,7 @@ import os
 import sys
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
+import yaml
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -328,6 +329,61 @@ def plot_ga_progress(out_dir: str,
     plt.legend()
     save_fig(os.path.join(out_dir, "ga_fitness_progress.png"))
 
+def plot_buyhold_benchmark(out_dir: str,
+                           prices: np.ndarray,
+                           tickers: List[str],
+                           symbols: List[str],
+                           rows_per_ticker: int,
+                           train_len: int,
+                           val_len: int,
+                           test_len: int,
+                           title: str = "Buy & Hold benchmark (normalized equity)") -> None:
+    """
+    Plots buy&hold equity curves (normalized to 1.0 at test start) for selected symbols
+    using the segment layout: [ticker0 rows][ticker1 rows]...[tickerN rows].
+
+    prices: flat array (N,), N = len(tickers) * rows_per_ticker
+    """
+    if prices.ndim != 1:
+        raise ValueError(f"Expected prices as 1D array, got shape={prices.shape}")
+
+    needed = len(tickers) * rows_per_ticker
+    if len(prices) < needed:
+        raise ValueError(f"prices too short: len(prices)={len(prices)} < {needed} (=tickers*rows_per_ticker)")
+
+    start_off = train_len + val_len
+    if start_off + test_len > rows_per_ticker:
+        raise ValueError("train_len+val_len+test_len exceeds rows_per_ticker")
+
+    plt.figure()
+    for sym in symbols:
+        if sym not in tickers:
+            print(f"[WARN] symbol not in tickers list: {sym}")
+            continue
+
+        idx = tickers.index(sym)
+        seg_start = idx * rows_per_ticker
+        seg_end = seg_start + rows_per_ticker
+        seg = prices[seg_start:seg_end]
+
+        p = seg[start_off : start_off + test_len].astype(float, copy=False)
+        if len(p) < 2:
+            print(f"[WARN] not enough prices for {sym} in selected window")
+            continue
+
+        # normalized equity curve
+        p0 = max(float(p[0]), 1e-12)
+        eq = p / p0
+        t = np.arange(len(eq), dtype=int)
+
+        plt.plot(t, eq, label=f"{sym} (B&H)")
+
+    plt.title(title)
+    plt.xlabel("t (bars) [test window]")
+    plt.ylabel("Equity (normalized to 1.0)")
+    plt.legend()
+    save_fig(os.path.join(out_dir, "buyhold_benchmark.png"))
+
 
 # -----------------------------
 # Text summary for report
@@ -391,6 +447,15 @@ def main() -> None:
     ap.add_argument("--ga_log", type=str, default=None, help="Explicit ga_log.jsonl path (optional).")
     ap.add_argument("--ga_meta", type=str, default=None, help="Explicit meta.json path (optional).")
     ap.add_argument("--ga_pop", type=int, default=None, help="Override population size for chunking.")
+
+    # SPY Comparison
+    ap.add_argument("--config", type=str, default=None, help="config.yaml (to read tickers list for benchmark plot)")
+    ap.add_argument("--bench_symbols", type=str, default="AAPL,SPY", help="Comma-separated symbols to compare (e.g. AAPL,SPY)")
+    ap.add_argument("--rows_per_ticker", type=int, default=1238, help="Rows per ticker segment (must match your dataset layout)")
+    ap.add_argument("--train_len", type=int, default=866)
+    ap.add_argument("--val_len", type=int, default=185)
+    ap.add_argument("--test_len", type=int, default=187)
+
 
     ap.add_argument("--out_dir", type=str, default=None, help="Where to write plots (default: <run_dir>/plots).")
     args = ap.parse_args()
@@ -459,6 +524,30 @@ def main() -> None:
             plot_sentiment_and_price(args.out_dir, X, p, seg_len=int(args.seg_len))
         else:
             print(f"[WARN] features/prices length mismatch: {X.shape} vs {p.shape}")
+
+        # Benchmark plot: AAPL vs SPY (buy&hold), using test window
+    if args.config and args.prices and os.path.exists(args.config) and os.path.exists(args.prices):
+        with open(args.config, "r", encoding="utf-8") as f:
+            cfg = yaml.safe_load(f)
+
+        # adjust this path if your config stores tickers elsewhere
+        tickers = cfg["data"]["tickers"]
+
+        p_all = np.load(args.prices).astype(np.float32, copy=False)
+        symbols = [s.strip() for s in args.bench_symbols.split(",") if s.strip()]
+
+        plot_buyhold_benchmark(
+            out_dir=args.out_dir,
+            prices=p_all,
+            tickers=tickers,
+            symbols=symbols,
+            rows_per_ticker=int(args.rows_per_ticker),
+            train_len=int(args.train_len),
+            val_len=int(args.val_len),
+            test_len=int(args.test_len),
+            title="Buy & Hold benchmark (TEST): "+str(symbols)
+        )
+
 
     # GA plots (optional)
     ga_log = args.ga_log

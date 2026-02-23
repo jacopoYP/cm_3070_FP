@@ -1,0 +1,314 @@
+{
+  "run_id": "pipeline_20260220_155517",
+  "timestamp": "2026-02-20 17:52:28",
+  "seed": 42,
+  "data": {
+    "features_path": "data/features.npy",
+    "prices_path": "data/prices.npy",
+    "shape_features": [
+      25998,
+      15
+    ],
+    "shape_prices": [
+      25998
+    ],
+    "n_segs": 21,
+    "train_frac": 0.7,
+    "seg_train_len": 866,
+    "seg_test_len": 372
+  },
+  "train": {
+    "buy": {
+      "episodes": 200,
+      "steps_per_episode": null,
+      "state_dim": 15,
+      "reward_mean": 0.0,
+      "reward_last": 0.0,
+      "loss_last": 0.0,
+      "total_steps": 0,
+      "learn_steps": 3636763,
+      "model_path": "runs/pipeline_20260220_155517/buy_agent.pt"
+    },
+    "sell": {
+      "episodes": 4000,
+      "max_steps": 200,
+      "updates_per_step": 1,
+      "avg_steps_per_ep": 15,
+      "sell_state_dim": 18,
+      "sell_decay_steps": 40000,
+      "reward_mean": 0.0,
+      "reward_last": 0.0,
+      "loss_last": 0.0,
+      "model_path": "runs/pipeline_20260220_155517/sell_agent.pt",
+      "n_entries_train": 999
+    },
+    "tm_buy_only": {
+      "final_equity": 132.57538114281428,
+      "exit_reasons": {
+        "time": 562
+      },
+      "entry_debug": {
+        "checked": 4701,
+        "blocked_trend": 3931,
+        "blocked_latest_entry": 36,
+        "blocked_conf": 133,
+        "opened": 562,
+        "conf_min": 0.0010155758526992807,
+        "conf_max": 0.7228078071207579,
+        "blocked_sentiment": 39,
+        "blocked_sentiment_samples": [
+          {
+            "t": 384,
+            "sent": -0.3596475124359131,
+            "mass": 2.0,
+            "conf": 0.4037526596090561
+          },
+          {
+            "t": 1534,
+            "sent": -0.08276594430208206,
+            "mass": 0.9664360284805298,
+            "conf": 0.4874424525290819
+          },
+          {
+            "t": 2224,
+            "sent": -0.12670600414276123,
+            "mass": 0.5854560136795044,
+            "conf": 0.47346512339912145
+          },
+          {
+            "t": 3365,
+            "sent": 0.04114900156855583,
+            "mass": 0.7033069729804993,
+            "conf": 0.4725480302403357
+          },
+          {
+            "t": 3443,
+            "sent": -0.11711200326681137,
+            "mass": 0.7399730086326599,
+            "conf": 0.45715349060934224
+          }
+        ]
+      },
+      "sell_debug": {
+        "seen": 0,
+        "sell_actions": 0
+      },
+      "n_trades": 562,
+      "avg_net_return": 0.01354417071495619,
+      "win_rate": 0.594306049822064,
+      "min_net": -0.41092387150861287,
+      "median_net": 0.011264235522817523,
+      "max_net": 0.674491181339604
+    },
+    "tm_with_sell": {
+      "final_equity": 2390.3714762850163,
+      "exit_reasons": {
+        "time": 479,
+        "sell_agent": 115
+      },
+      "entry_debug": {
+        "checked": 4583,
+        "blocked_trend": 3754,
+        "blocked_latest_entry": 36,
+        "blocked_conf": 149,
+        "opened": 594,
+        "conf_min": 0.0010155758526992807,
+        "conf_max": 0.7228078071207579,
+        "blocked_sentiment": 50,
+        "blocked_sentiment_samples": [
+          {
+            "t": 384,
+            "sent": -0.3596475124359131,
+            "mass": 2.0,
+            "conf": 0.4037526596090561
+          },
+          {
+            "t": 479,
+            "sent": -0.10032100230455399,
+            "mass": 0.9770979881286621,
+            "conf": 0.48119969054211786
+          },
+          {
+            "t": 2224,
+            "sent": -0.12670600414276123,
+            "mass": 0.5854560136795044,
+            "conf": 0.47346512339912145
+          },
+          {
+            "t": 3292,
+            "sent": -0.03400375694036484,
+            "mass": 2.0728681087493896,
+            "conf": 0.46684075891672194
+          },
+          {
+            "t": 3365,
+            "sent": 0.04114900156855583,
+            "mass": 0.7033069729804993,
+            "conf": 0.4725480302403357
+          }
+        ]
+      },
+      "sell_debug": {
+        "seen": 5405,
+        "sell_actions": 1116
+      },
+      "n_trades": 594,
+      "avg_net_return": 0.017325093287647232,
+      "win_rate": 0.622895622895623,
+      "min_net": -0.3089726892002418,
+      "median_net": 0.014637373097331485,
+      "max_net": 0.674491181339604
+    }
+  },
+  "test": {
+    "tm_buy_only": {
+      "final_equity": 64.35582675482833,
+      "exit_reasons": {
+        "time": 224
+      },
+      "entry_debug": {
+        "checked": 2436,
+        "blocked_trend": 1977,
+        "blocked_latest_entry": 133,
+        "blocked_conf": 79,
+        "opened": 224,
+        "conf_min": 0.076277991463935,
+        "conf_max": 0.6621005269718051,
+        "blocked_sentiment": 23,
+        "blocked_sentiment_samples": [
+          {
+            "t": 344,
+            "sent": -0.017996761947870255,
+            "mass": 1.6865910291671753,
+            "conf": 0.5071153828820388
+          },
+          {
+            "t": 847,
+            "sent": -0.11386299878358841,
+            "mass": 0.6134979724884033,
+            "conf": 0.4419496840719325
+          },
+          {
+            "t": 1302,
+            "sent": 0.01765500009059906,
+            "mass": 0.34769299626350403,
+            "conf": 0.510816927555618
+          },
+          {
+            "t": 1687,
+            "sent": -0.3070429861545563,
+            "mass": 0.6459760069847107,
+            "conf": 0.4982103781829504
+          },
+          {
+            "t": 1713,
+            "sent": 0.03299099951982498,
+            "mass": 0.5878499746322632,
+            "conf": 0.46648249576449125
+          }
+        ]
+      },
+      "sell_debug": {
+        "seen": 0,
+        "sell_actions": 0
+      },
+      "n_trades": 224,
+      "avg_net_return": 0.02407361181234067,
+      "win_rate": 0.59375,
+      "min_net": -0.30247908329780404,
+      "median_net": 0.02454927453964495,
+      "max_net": 0.5204917706265317
+    },
+    "tm_with_sell": {
+      "final_equity": 103.06719541968468,
+      "exit_reasons": {
+        "time": 204,
+        "sell_agent": 27
+      },
+      "entry_debug": {
+        "checked": 2411,
+        "blocked_trend": 1948,
+        "blocked_latest_entry": 136,
+        "blocked_conf": 75,
+        "opened": 231,
+        "conf_min": 0.05138043190263754,
+        "conf_max": 0.6621005269718051,
+        "blocked_sentiment": 21,
+        "blocked_sentiment_samples": [
+          {
+            "t": 344,
+            "sent": -0.017996761947870255,
+            "mass": 1.6865910291671753,
+            "conf": 0.5071153828820388
+          },
+          {
+            "t": 847,
+            "sent": -0.11386299878358841,
+            "mass": 0.6134979724884033,
+            "conf": 0.4419496840719325
+          },
+          {
+            "t": 1302,
+            "sent": 0.01765500009059906,
+            "mass": 0.34769299626350403,
+            "conf": 0.510816927555618
+          },
+          {
+            "t": 1687,
+            "sent": -0.3070429861545563,
+            "mass": 0.6459760069847107,
+            "conf": 0.4982103781829504
+          },
+          {
+            "t": 1982,
+            "sent": -0.3122459948062897,
+            "mass": 0.6170579791069031,
+            "conf": 0.40844157432038286
+          }
+        ]
+      },
+      "sell_debug": {
+        "seen": 2194,
+        "sell_actions": 384
+      },
+      "n_trades": 231,
+      "avg_net_return": 0.026130440623821975,
+      "win_rate": 0.6103896103896104,
+      "min_net": -0.32559674845573505,
+      "median_net": 0.023035127118458343,
+      "max_net": 0.5204917706265317
+    }
+  },
+  "sell_uplift": {
+    "train": {
+      "final_equity_delta": 2257.796095142202,
+      "avg_net_return_delta": 0.003780922572691043,
+      "win_rate_delta": 0.028589573073558916,
+      "n_trades_delta": 32,
+      "sell_exits": 115
+    },
+    "test": {
+      "final_equity_delta": 38.71136866485635,
+      "avg_net_return_delta": 0.002056828811481306,
+      "win_rate_delta": 0.01663961038961037,
+      "n_trades_delta": 7,
+      "sell_exits": 27
+    }
+  },
+  "entry_indices": {
+    "n_train": 999,
+    "n_test": 386,
+    "train_path": "runs/pipeline_20260220_155517/entry_indices_train_sell.npy",
+    "test_path": "runs/pipeline_20260220_155517/entry_indices_test_sell.npy"
+  },
+  "artifacts": {
+    "buy_agent": "runs/pipeline_20260220_155517/buy_agent.pt",
+    "sell_agent": "runs/pipeline_20260220_155517/sell_agent.pt",
+    "entry_indices_train_sell": "runs/pipeline_20260220_155517/entry_indices_train_sell.npy",
+    "entry_indices_test_sell": "runs/pipeline_20260220_155517/entry_indices_test_sell.npy",
+    "trades_train_buy_only": "runs/pipeline_20260220_155517/trades_train_buy_only.json",
+    "trades_test_buy_only": "runs/pipeline_20260220_155517/trades_test_buy_only.json",
+    "trades_train_with_sell": "runs/pipeline_20260220_155517/trades_train_with_sell.json",
+    "trades_test_with_sell": "runs/pipeline_20260220_155517/trades_test_with_sell.json"
+  }
+}
