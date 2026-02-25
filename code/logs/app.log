@@ -1,0 +1,11 @@
+2026-02-24 18:55:29,319 | INFO | __main__ | Starting feature build...
+2026-02-24 18:55:33,806 | INFO | __main__ | 
+Saved:
+2026-02-24 18:56:40,966 | INFO | __main__ | Starting feature build...
+2026-02-24 18:56:43,158 | INFO | __main__ | 
+Saved:
+2026-02-24 18:56:43,158 | INFO | __main__ |  -data/features.npy
+2026-02-24 18:56:43,158 | INFO | __main__ |  -data/prices.npy
+2026-02-24 18:56:43,158 | INFO | __main__ |  -data/build_debug.csv
+2026-02-24 18:56:43,158 | INFO | __main__ |  -data/row_meta.parquet
+2026-02-24 18:56:43,158 | INFO | __main__ |  -data/row_meta_summary.csv

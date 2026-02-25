@@ -2,18 +2,29 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Optional, Literal, Dict, List
+from typing import Optional, Literal, Dict
 
-Intent = Literal["should_buy", "should_sell", "recommend_today"]
+# -----------------------------
+# Supported intents
+# -----------------------------
+Intent = Literal[
+    "should_buy",
+    "should_sell",
+    "recommend_today",
+    "unknown",
+]
 
 @dataclass
 class ParsedQuery:
     intent: Intent
-    ticker: Optional[str] = None      # for should_buy/should_sell
-    top_k: int = 3                    # for recommend_today
+    ticker: Optional[str] = None
+    top_k: int = 3
     normalized_text: str = ""
 
 
+# -----------------------------
+# Text utilities
+# -----------------------------
 def _clean_text(text: str) -> str:
     t = text.strip().lower()
     t = re.sub(r"\s+", " ", t)
@@ -22,87 +33,150 @@ def _clean_text(text: str) -> str:
 
 def _build_alias_map(ticker_to_company: Dict[str, str]) -> Dict[str, str]:
     """
-    Builds alias -> ticker mapping (e.g. "apple" -> "AAPL", "aapl" -> "AAPL")
+    Build alias → ticker map.
+    Example:
+        "apple" → "AAPL"
+        "aapl"  → "AAPL"
     """
     alias = {}
-    for tkr, name in ticker_to_company.items():
-        tkr_u = tkr.upper()
-        alias[tkr.lower()] = tkr_u
+
+    for ticker, company in ticker_to_company.items():
+        tkr_u = ticker.upper()
+
+        # ticker aliases
+        alias[ticker.lower()] = tkr_u
         alias[tkr_u.lower()] = tkr_u
 
-        if name:
-            n = name.strip().lower()
-            alias[n] = tkr_u
+        # company name alias
+        if company:
+            name = company.strip().lower()
+            alias[name] = tkr_u
 
-            # add simple variants (remove punctuation, "inc", "corp", "ltd", etc.)
-            n2 = re.sub(r"[^\w\s]", "", n)
-            n2 = re.sub(r"\b(inc|incorporated|corp|corporation|ltd|limited|plc|co|company|class)\b", "", n2)
-            n2 = re.sub(r"\s+", " ", n2).strip()
-            if n2 and n2 != n:
-                alias[n2] = tkr_u
+            # Remove punctuation
+            name2 = re.sub(r"[^\w\s]", "", name)
 
-    # Add a couple of common nicknames manually if in universe
-    # (optional; keep minimal)
-    if "GOOGL" in ticker_to_company:
-        alias["google"] = "GOOGL"
-        alias["alphabet"] = "GOOGL"
+            # Remove common suffixes
+            name2 = re.sub(
+                r"\b(inc|incorporated|corp|corporation|ltd|limited|plc|co|company|class)\b",
+                "",
+                name2,
+            )
+
+            name2 = re.sub(r"\s+", " ", name2).strip()
+
+            if name2 and name2 != name:
+                alias[name2] = tkr_u
 
     return alias
 
 
 def extract_ticker(text_norm: str, alias_map: Dict[str, str]) -> Optional[str]:
     """
-    Try to find a supported ticker/company mention in the normalized text.
+    Extract ticker from normalized text.
     Strategy:
-      1) check for $TICKER like $AAPL
-      2) token-based scan for exact alias matches
-      3) substring scan for company names (safe because universe is small)
+        1) $TICKER pattern
+        2) token match
+        3) substring match (for multi-word names)
     """
+
+    # $AAPL pattern
     m = re.search(r"\$([a-z]{1,6})\b", text_norm)
     if m:
-        cand = m.group(1).upper()
-        # validate cand exists in alias_map values
-        if cand in set(alias_map.values()):
-            return cand
+        candidate = m.group(1).upper()
+        if candidate in set(alias_map.values()):
+            return candidate
 
+    # token scan
     tokens = re.findall(r"[a-z0-9]+", text_norm)
     for tok in tokens:
         if tok in alias_map:
             return alias_map[tok]
 
-    # substring pass (for multi-word names like "microsoft corporation")
-    for a, tkr in alias_map.items():
-        if len(a) >= 4 and a in text_norm:
-            return tkr
+    # substring scan
+    for alias, ticker in alias_map.items():
+        if len(alias) >= 4 and alias in text_norm:
+            return ticker
 
     return None
 
 
-def parse_question(question: str, ticker_to_company: Dict[str, str], default_top_k: int = 3) -> ParsedQuery:
+# -----------------------------
+# Main parser
+# -----------------------------
+def parse_question(
+    question: str,
+    ticker_to_company: Dict[str, str],
+    default_top_k: int = 3,
+) -> ParsedQuery:
+    """
+    Supported queries:
+
+      - "Should I buy Apple?"
+      - "Should I sell NVDA?"
+      - "Which company shares should I buy today?"
+      - "What should I buy?"
+    """
+
     t = _clean_text(question)
     alias_map = _build_alias_map(ticker_to_company)
 
-    # recommend_today (portfolio ask)
+    # -----------------------------
+    # RECOMMEND TODAY
+    # -----------------------------
     if re.search(r"\b(which|what)\b.*\b(stocks|shares|company|companies)\b.*\b(buy|purchase)\b", t):
-        return ParsedQuery(intent="recommend_today", top_k=default_top_k, normalized_text=t)
-
-    if re.search(r"\b(which|what)\b.*\b(buy|purchase)\b", t) and ("today" in t or "now" in t):
-        return ParsedQuery(intent="recommend_today", top_k=default_top_k, normalized_text=t)
+        return ParsedQuery(
+            intent="recommend_today",
+            top_k=default_top_k,
+            normalized_text=t,
+        )
 
     if re.search(r"\bwhat should i buy\b", t):
-        return ParsedQuery(intent="recommend_today", top_k=default_top_k, normalized_text=t)
+        return ParsedQuery(
+            intent="recommend_today",
+            top_k=default_top_k,
+            normalized_text=t,
+        )
 
-    # should_buy
+    if re.search(r"\b(which|what)\b.*\b(buy|purchase)\b", t) and (
+        "today" in t or "now" in t
+    ):
+        return ParsedQuery(
+            intent="recommend_today",
+            top_k=default_top_k,
+            normalized_text=t,
+        )
+
+    # -----------------------------
+    # SHOULD BUY
+    # -----------------------------
     if "buy" in t:
         ticker = extract_ticker(t, alias_map)
-        if re.search(r"\bshould i\b.*\bbuy\b", t) or ticker:
-            return ParsedQuery(intent="should_buy", ticker=ticker, normalized_text=t)
 
-    # should_sell
+        if re.search(r"\bshould i\b.*\bbuy\b", t) or ticker:
+            return ParsedQuery(
+                intent="should_buy",
+                ticker=ticker,
+                normalized_text=t,
+            )
+
+    # -----------------------------
+    # SHOULD SELL
+    # -----------------------------
     if "sell" in t:
         ticker = extract_ticker(t, alias_map)
-        if re.search(r"\bshould i\b.*\bsell\b", t) or ticker:
-            return ParsedQuery(intent="should_sell", ticker=ticker, normalized_text=t)
 
-    # if none matched, return unknown instead of forcing recommend
-    return ParsedQuery(intent="unknown", top_k=default_top_k, normalized_text=t)
+        if re.search(r"\bshould i\b.*\bsell\b", t) or ticker:
+            return ParsedQuery(
+                intent="should_sell",
+                ticker=ticker,
+                normalized_text=t,
+            )
+
+    # -----------------------------
+    # UNKNOWN (fallback)
+    # -----------------------------
+    return ParsedQuery(
+        intent="unknown",
+        top_k=default_top_k,
+        normalized_text=t,
+    )
