@@ -24,7 +24,6 @@ def _merge_dataclass(dc, overrides: Dict[str, Any]):
             setattr(dc, k, v)
     return dc
 
-
 def load_config(path: str) -> SystemConfig:
     with open(path, "r") as f:
         raw = yaml.safe_load(f) or {}
@@ -43,7 +42,6 @@ def load_config(path: str) -> SystemConfig:
     cfg.alphavantage = _merge_dataclass(cfg.alphavantage, raw.get("alphavantage", raw))
 
     return cfg
-
 
 def save_config(cfg: SystemConfig, path: str) -> None:
     with open(path, "w") as f:

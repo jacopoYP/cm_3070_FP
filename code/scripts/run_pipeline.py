@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 from __future__ import annotations
 
 import argparse
@@ -9,7 +8,9 @@ import sys
 from copy import deepcopy
 from dataclasses import asdict, is_dataclass
 from types import SimpleNamespace
-from typing import Any, Dict, List, Optional, Tuple
+# from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
+import logging
 
 import numpy as np
 
@@ -17,32 +18,29 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from core.helper import split_by_segments
+from core.helper import split_by_segments, load_yaml_to_ns, now_run_id, check_dir
+from core.logging_config import setup_logging
+from core.metrics import summarize_trades
 
-# ----------------------------
-# Project imports (adjust paths if needed)
-# ----------------------------
 from agents.ddqn_agent import DDQNAgent
 from core.types import AgentConfig
 from envs.buy_env import BuyEnv
 from envs.sell_env import SellEnv
-
-# If your TradeManager lives elsewhere, update this import.
 from trade.trade_manager import TradeManager
 
 
-# ----------------------------
-# Small utilities
-# ----------------------------
-def _now_run_id(prefix: str = "pipeline") -> str:
-    return f"{prefix}_{dt.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+# ---------------------------------------------------------------------
+# Helper methods
+# ---------------------------------------------------------------------
+# TODO: Clean
+# def now_run_id(prefix: str = "pipeline") -> str:
+#     return f"{prefix}_{dt.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+
+# def check_dir(path: str) -> None:
+#     os.makedirs(path, exist_ok=True)
 
 
-def _ensure_dir(path: str) -> None:
-    os.makedirs(path, exist_ok=True)
-
-
-def _json_default(o: Any):
+def json_default(o: Any):
     if is_dataclass(o):
         return asdict(o)
     if isinstance(o, (np.integer, np.floating)):
@@ -54,45 +52,23 @@ def _json_default(o: Any):
 
 def save_json(path: str, obj: Any) -> None:
     with open(path, "w", encoding="utf-8") as f:
-        json.dump(obj, f, indent=2, default=_json_default)
+        json.dump(obj, f, indent=2, default=json_default)
 
-def ns_to_dict(ns):
+def namespace_to_dict(ns):
     if isinstance(ns, dict):
-        return {k: ns_to_dict(v) for k, v in ns.items()}
+        return {k: namespace_to_dict(v) for k, v in ns.items()}
     if hasattr(ns, "__dict__"):
-        return {k: ns_to_dict(v) for k, v in ns.__dict__.items()}
+        return {k: namespace_to_dict(v) for k, v in ns.__dict__.items()}
     if isinstance(ns, list):
-        return [ns_to_dict(x) for x in ns]
+        return [namespace_to_dict(x) for x in ns]
     return ns
 
 
 def build_agent_cfg(cfg: SimpleNamespace, state_dim: int, n_actions: int) -> "AgentConfig":
-    d = ns_to_dict(cfg.agent)
+    d = namespace_to_dict(cfg.agent)
     d["state_dim"] = int(state_dim)
     d["n_actions"] = int(n_actions)
     return AgentConfig(**d)
-
-def load_yaml_to_ns(path: str) -> SimpleNamespace:
-    """
-    Minimal YAML loader that returns a dot-accessible namespace.
-    Avoids forcing OmegaConf; works with plain PyYAML.
-
-    Example: cfg.reward.transaction_cost
-    """
-    import yaml  # local import to keep deps minimal
-
-    with open(path, "r", encoding="utf-8") as f:
-        data = yaml.safe_load(f)
-
-    def rec(x):
-        if isinstance(x, dict):
-            return SimpleNamespace(**{k: rec(v) for k, v in x.items()})
-        if isinstance(x, list):
-            return [rec(v) for v in x]
-        return x
-
-    return rec(data)
-
 
 def set_global_seeds(seed: int) -> None:
     np.random.seed(seed)
@@ -113,35 +89,35 @@ def set_global_seeds(seed: int) -> None:
     except Exception:
         pass
 
-
-# ----------------------------
+# TODO: Clean
+# ---------------------------------------------------------------------
 # Metrics
-# ----------------------------
-def summarize_trades(trades: List[Dict[str, Any]]) -> Dict[str, float]:
-    if not trades:
-        return {
-            "n_trades": 0,
-            "avg_net_return": 0.0,
-            "win_rate": 0.0,
-            "min_net": 0.0,
-            "median_net": 0.0,
-            "max_net": 0.0,
-        }
+# ---------------------------------------------------------------------
+# def summarize_trades(trades: List[Dict[str, Any]]) -> Dict[str, float]:
+#     if not trades:
+#         return {
+#             "n_trades": 0,
+#             "avg_net_return": 0.0,
+#             "win_rate": 0.0,
+#             "min_net": 0.0,
+#             "median_net": 0.0,
+#             "max_net": 0.0,
+#         }
 
-    net = np.array([t.get("net_return", 0.0) for t in trades], dtype=float)
-    return {
-        "n_trades": int(len(trades)),
-        "avg_net_return": float(np.mean(net)),
-        "win_rate": float(np.mean(net > 0)),
-        "min_net": float(np.min(net)),
-        "median_net": float(np.median(net)),
-        "max_net": float(np.max(net)),
-    }
+#     net = np.array([t.get("net_return", 0.0) for t in trades], dtype=float)
+#     return {
+#         "n_trades": int(len(trades)),
+#         "avg_net_return": float(np.mean(net)),
+#         "win_rate": float(np.mean(net > 0)),
+#         "min_net": float(np.min(net)),
+#         "median_net": float(np.median(net)),
+#         "max_net": float(np.max(net)),
+#     }
 
 
-# ----------------------------
+# ---------------------------------------------------------------------
 # Training loops
-# ----------------------------
+# ---------------------------------------------------------------------
 def train_buy_agent(
     cfg: SimpleNamespace,
     X_train: np.ndarray,
@@ -155,28 +131,28 @@ def train_buy_agent(
         trade=cfg.trade_manager,
     )
 
-    # buy_cfg = build_agent_cfg(cfg, state_dim=int(buy_env.state_dim), n_actions=2)
-    # buy_agent = DDQNAgent(buy_cfg)
     tmp_env = BuyEnv(features=X_train, prices=p_train, reward=cfg.reward, trade=cfg.trade_manager)
     buy_cfg = build_agent_cfg(cfg, state_dim=int(tmp_env.state_dim), n_actions=2)
     buy_agent = DDQNAgent(buy_cfg)
 
     EPISODES = int(getattr(cfg.training, "buy_episodes", 200))
-    MAX_STEPS = int(getattr(cfg.training, "buy_max_steps", 10_000_000))  # safety cap
+    MAX_STEPS = int(getattr(cfg.training, "buy_max_steps", 10_000_000))
     UPDATES_PER_STEP = int(getattr(cfg.training, "buy_updates_per_step", 1))
     WARMUP = int(getattr(cfg.training, "warmup_steps", 200))
 
+    # Looping episodes
     for ep in range(EPISODES):
+        # Starting with reset, the same way was done in the Atari games (e.g. Lunar)
         s = buy_env.reset()
         done = False
         ep_reward = 0.0
         steps = 0
 
         while (not done) and (steps < MAX_STEPS):
-            a = buy_agent.select_action(s, greedy=False)  # increments total_steps internally
-            ns, r, done, info = buy_env.step(a)
+            action = buy_agent.select_action(s, greedy=False)
+            ns, r, done, info = buy_env.step(action)
 
-            buy_agent.push(s, a, r, ns, done)
+            buy_agent.push(s, action, r, ns, done)
 
             if buy_agent.total_steps >= WARMUP:
                 for _ in range(UPDATES_PER_STEP):
@@ -194,26 +170,9 @@ def train_buy_agent(
     buy_agent.save(path)
     return path
 
-
-# def run_tm_with_sell(
-#     cfg: SimpleNamespace,
-#     state: np.ndarray,
-#     prices: np.ndarray,
-#     buy_agent: DDQNAgent,
-#     sell_agent: Optional[DDQNAgent],
-#     segment_len: Optional[int],
-# ) -> Dict[str, Any]:
-#     tm = TradeManager(
-#         buy_agent=buy_agent,
-#         sell_agent=sell_agent,
-#         state=state,
-#         prices=prices,
-#         reward=cfg.reward,
-#         trade=cfg.trade_manager,
-#         segment_len=segment_len,
-#     )
-#     return tm.run()
-
+# ---------------------------------------------------------------------
+# Trade Manager
+# ---------------------------------------------------------------------
 def run_tm(
     cfg,
     state: np.ndarray,
@@ -256,19 +215,18 @@ def run_tm(
         **stats,
     }
 
+# TODO: Remove
+# def uplift(a: dict, b: dict) -> dict:
+#     return {
+#         "final_equity_delta": float(a.get("final_equity", 0.0) - b.get("final_equity", 0.0)),
+#         "avg_net_return_delta": float(a.get("avg_net_return", 0.0) - b.get("avg_net_return", 0.0)),
+#         "win_rate_delta": float(a.get("win_rate", 0.0) - b.get("win_rate", 0.0)),
+#         "n_trades_delta": int(a.get("n_trades", 0) - b.get("n_trades", 0)),
+#         "sell_exits": int(a.get("exit_reasons", {}).get("sell_agent", 0)),
+#     }
 
-def uplift(a: dict, b: dict) -> dict:
-    # a = with_sell, b = buy_only
-    return {
-        "final_equity_delta": float(a.get("final_equity", 0.0) - b.get("final_equity", 0.0)),
-        "avg_net_return_delta": float(a.get("avg_net_return", 0.0) - b.get("avg_net_return", 0.0)),
-        "win_rate_delta": float(a.get("win_rate", 0.0) - b.get("win_rate", 0.0)),
-        "n_trades_delta": int(a.get("n_trades", 0) - b.get("n_trades", 0)),
-        "sell_exits": int(a.get("exit_reasons", {}).get("sell_agent", 0)),
-    }
 
-
-def harvest_entries_for_sell_training(
+def collect_entries_for_sell_training(
     cfg: SimpleNamespace,
     state: np.ndarray,
     prices: np.ndarray,
@@ -276,10 +234,6 @@ def harvest_entries_for_sell_training(
     segment_len: int,
     out_path: str,
 ) -> np.ndarray:
-    """
-    Uses TM's safe harvesting method (top-K per segment) if available.
-    Falls back to using TM.run() entry_indices if collect method not found.
-    """
     tm = TradeManager(
         buy_agent=buy_agent,
         sell_agent=None,
@@ -289,22 +243,21 @@ def harvest_entries_for_sell_training(
         trade=cfg.trade_manager,
         segment_len=segment_len,
     )
-
-    # Prefer the harvesting method you added.
-    if hasattr(tm, "collect_entry_indices_topk"):
-        topk = int(getattr(cfg.training, "sell_topk_entries_per_segment", 50))
-        min_gap = getattr(cfg.training, "sell_min_gap", None)
-        use_conf = bool(getattr(cfg.training, "sell_use_confidence_score", False))
-        entries = tm.collect_entry_indices_topk(
-            topk_per_segment=topk,
-            min_gap=min_gap,
-            use_confidence_score=use_conf,
-        )
-        entries = np.asarray(entries, dtype=np.int64)
-    else:
-        # fallback (less ideal): run buy-only TM and grab entries
-        out = tm.run()
-        entries = np.asarray(out.get("entry_indices", []), dtype=np.int64)
+    # TODO: Clean
+    # if hasattr(tm, "collect_entry_indices_topk"):
+    topk = int(getattr(cfg.training, "sell_topk_entries_per_segment", 50))
+    min_gap = getattr(cfg.training, "sell_min_gap", None)
+    use_conf = bool(getattr(cfg.training, "sell_use_confidence_score", False))
+    entries = tm.collect_entry_indices_topk(
+        topk_per_segment=topk,
+        min_gap=min_gap,
+        use_confidence_score=use_conf,
+    )
+    entries = np.asarray(entries, dtype=np.int64)
+    # else:
+    #     # fallback (less ideal): run buy-only TM and grab entries
+    #     out = tm.run()
+    #     entries = np.asarray(out.get("entry_indices", []), dtype=np.int64)
 
     np.save(out_path, entries)
     return entries
@@ -329,29 +282,22 @@ def train_sell_agent(
         include_pos_features=True,
     )
 
-    # sell_cfg = deepcopy(cfg.agent)
-    # sell_cfg.state_dim = int(sell_env_train.state_dim)
-    # sell_cfg.n_actions = 2
-
-    # # You can override these in config if you want.
-    # sell_cfg.lr = float(getattr(getattr(cfg.training, "sell_overrides", SimpleNamespace()), "lr", getattr(sell_cfg, "lr", 5e-4)))
     sell_cfg = build_agent_cfg(cfg, state_dim=int(sell_env_train.state_dim), n_actions=2)
-    # then override a couple optional knobs if you want:
     sell_cfg.lr = float(getattr(getattr(cfg.training, "sell_overrides", SimpleNamespace()), "lr", sell_cfg.lr))
 
+    # DEfault params in case
     EPISODES = int(getattr(cfg.training, "sell_episodes", 4000))
     MAX_STEPS = int(getattr(cfg.training, "sell_max_steps", 200))
     UPDATES_PER_STEP = int(getattr(cfg.training, "sell_updates_per_step", 1))
     WARMUP = int(getattr(cfg.training, "warmup_steps", 200))
 
-    # Epsilon decay heuristic: finish by ~80% of training
+    # Epsilon decay heuristic
     avg_steps_per_ep = int(getattr(cfg.training, "sell_avg_steps_per_ep", 15))
     total_estimated_steps = EPISODES * avg_steps_per_ep
     sell_cfg.epsilon_start = float(getattr(sell_cfg, "epsilon_start", 1.0))
     sell_cfg.epsilon_end = float(getattr(sell_cfg, "epsilon_end", 0.05))
     sell_cfg.epsilon_decay_steps = int(getattr(cfg.training, "sell_decay_steps", int(total_estimated_steps * 0.8)))
 
-    # sell_agent = DDQNAgent(sell_cfg)
     sell_agent = DDQNAgent(sell_cfg)
     print(f"SELL state_dim={sell_cfg.state_dim} decay_steps={sell_cfg.epsilon_decay_steps} est_total={total_estimated_steps}")
 
@@ -362,10 +308,10 @@ def train_sell_agent(
         steps = 0
 
         while (not done) and (steps < MAX_STEPS):
-            a = sell_agent.select_action(s, greedy=False)  # increments total_steps internally
-            ns, r, done, info = sell_env_train.step(a)
+            action = sell_agent.select_action(s, greedy=False)
+            ns, r, done, info = sell_env_train.step(action)
 
-            sell_agent.push(s, a, r, ns, done)
+            sell_agent.push(s, action, r, ns, done)
 
             if sell_agent.total_steps >= WARMUP:
                 for _ in range(UPDATES_PER_STEP):
@@ -383,16 +329,14 @@ def train_sell_agent(
     sell_agent.save(path)
     return path
 
+# def load_agent_for_eval(agent_cls, cfg_agent: SimpleNamespace, model_path: str):
+#     agent = agent_cls(cfg_agent)
+#     agent.load(model_path)
+#     return agent
 
-def load_agent_for_eval(agent_cls, cfg_agent: SimpleNamespace, model_path: str):
-    a = agent_cls(cfg_agent)
-    a.load(model_path)
-    return a
-
-
-# ----------------------------
+# ---------------------------------------------------------------------
 # Main pipeline
-# ----------------------------
+# ---------------------------------------------------------------------
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", type=str, default="config.yaml")
@@ -411,15 +355,14 @@ def main() -> None:
     cfg = load_yaml_to_ns(args.config)
     set_global_seeds(int(args.seed))
 
-    run_id = args.run_id or _now_run_id("pipeline")
+    run_id = args.run_id or now_run_id("pipeline")
     out_dir = os.path.join(args.out_root, run_id)
-    _ensure_dir(out_dir)
+    check_dir(out_dir)
 
-    # ---- load data
+    # Loading data
     features = np.load(args.features).astype(np.float32, copy=False)
     prices = np.load(args.prices).astype(np.float32, copy=False)
 
-    # seg_len = int(getattr(cfg.data, "seg_len", 1239))
     train_frac = float(getattr(cfg.data, "train_frac", 0.7))
 
     X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs = split_by_segments(
@@ -428,12 +371,11 @@ def main() -> None:
 
     print("\n=== DATA SPLIT ===")
     print("features:", features.shape, "prices:", prices.shape)
-    # print("SEG_LEN:", seg_len, "N_SEGS:", n_segs, "TRAIN_FRAC:", train_frac)
     print("train_len per seg:", seg_train_len, "test_len per seg:", seg_test_len)
     print("X_train:", X_train.shape, "p_train:", p_train.shape)
     print("X_test :", X_test.shape, "p_test :", p_test.shape)
 
-    # ---- train buy agent
+    # Training the buy agent
     buy_path = os.path.join(out_dir, "buy_agent.pt")
     if not args.skip_buy_train:
         buy_path = train_buy_agent(cfg, X_train, p_train, out_dir)
@@ -448,11 +390,11 @@ def main() -> None:
     buy_agent = DDQNAgent(buy_cfg)
     buy_agent.load(buy_path)
 
-    # ---- harvest entry indices (for sell training)
+    # Collect entry indices (for sell training)
     entries_train_path = os.path.join(out_dir, "entry_indices_train_sell.npy")
     entries_test_path = os.path.join(out_dir, "entry_indices_test_sell.npy")
 
-    entries_train = harvest_entries_for_sell_training(
+    entries_train = collect_entries_for_sell_training(
         cfg=cfg,
         state=X_train,
         prices=p_train,
@@ -460,7 +402,7 @@ def main() -> None:
         segment_len=seg_train_len,
         out_path=entries_train_path,
     )
-    entries_test = harvest_entries_for_sell_training(
+    entries_test = collect_entries_for_sell_training(
         cfg=cfg,
         state=X_test,
         prices=p_test,
@@ -471,7 +413,7 @@ def main() -> None:
 
     print("entries_train:", entries_train.shape, "entries_test:", entries_test.shape)
 
-    # ---- train sell agent
+    # Training now the sell agent
     sell_path = os.path.join(out_dir, "sell_agent.pt")
     if not args.skip_sell_train:
         sell_path = train_sell_agent(cfg, X_train, p_train, entries_train, seg_train_len, out_dir)
@@ -496,11 +438,11 @@ def main() -> None:
     sell_agent = DDQNAgent(sell_cfg)
     sell_agent.load(sell_path)
 
-    # =========================================================
+    # ---------------------------------------------------------------------
     # TRADE MANAGER BACKTESTS: BUY-ONLY (baseline) vs WITH-SELL
-    # =========================================================
+    # ---------------------------------------------------------------------
 
-    # ---- BUY ONLY baseline
+    # BUY ONLY (sell_agent=None)
     tm_train_buy_only = run_tm(
         cfg=cfg,
         state=X_train,
@@ -510,6 +452,7 @@ def main() -> None:
         segment_len=seg_train_len,
         name="TRAIN",
     )
+
     tm_test_buy_only = run_tm(
         cfg=cfg,
         state=X_test,
@@ -520,7 +463,7 @@ def main() -> None:
         name="TEST",
     )
 
-    # ---- WITH SELL
+    # WITH SELL
     tm_train_with_sell = run_tm(
         cfg=cfg,
         state=X_train,
@@ -540,7 +483,7 @@ def main() -> None:
         name="TEST",
     )
 
-    # ---- save trades (4 files)
+    # Save trades
     train_trades_buy_only_path = os.path.join(out_dir, "trades_train_buy_only.json")
     test_trades_buy_only_path  = os.path.join(out_dir, "trades_test_buy_only.json")
     train_trades_with_sell_path = os.path.join(out_dir, "trades_train_with_sell.json")
@@ -551,7 +494,7 @@ def main() -> None:
     save_json(train_trades_with_sell_path, tm_train_with_sell.get("trades", []))
     save_json(test_trades_with_sell_path,  tm_test_with_sell.get("trades", []))
 
-    # ---- summary.json
+    # Summary.json for debug purposes
     summary = {
         "run_id": run_id,
         "timestamp": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -599,10 +542,10 @@ def main() -> None:
             "tm_buy_only": {k: v for k, v in tm_test_buy_only.items() if k != "trades"},
             "tm_with_sell": {k: v for k, v in tm_test_with_sell.items() if k != "trades"},
         },
-        "sell_uplift": {
-            "train": uplift(tm_train_with_sell, tm_train_buy_only),
-            "test": uplift(tm_test_with_sell, tm_test_buy_only),
-        },
+        # "sell_uplift": {
+        #     "train": uplift(tm_train_with_sell, tm_train_buy_only),
+        #     "test": uplift(tm_test_with_sell, tm_test_buy_only),
+        # },
         "entry_indices": {
             "n_train": int(len(entries_train)),
             "n_test": int(len(entries_test)),

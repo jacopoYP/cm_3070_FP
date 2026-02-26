@@ -6,7 +6,7 @@ from typing import Deque, Tuple
 
 import numpy as np
 
-
+# STandard Replay buffer
 class ReplayBuffer:
     def __init__(self, capacity: int):
         self._buf: Deque[Tuple[np.ndarray, int, float, np.ndarray, bool]] = deque(maxlen=capacity)

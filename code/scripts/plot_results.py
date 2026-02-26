@@ -16,6 +16,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from core.helper import check_dir
 
 # -----------------------------
 # IO helpers
@@ -35,14 +36,10 @@ def load_jsonl(path: str) -> List[Dict[str, Any]]:
             rows.append(json.loads(line))
     return rows
 
-def ensure_dir(path: str) -> None:
-    os.makedirs(path, exist_ok=True)
-
 def save_fig(path: str) -> None:
     plt.tight_layout()
     plt.savefig(path, dpi=150)
     plt.close()
-
 
 # -----------------------------
 # Trade parsing + derived series
@@ -96,13 +93,8 @@ def trades_to_arrays(trades: List[Dict[str, Any]]) -> Dict[str, np.ndarray]:
     }
 
 def equity_from_trade_net_returns(trades: List[Dict[str, Any]], start_equity: float = 1.0) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Builds a simple trade-by-trade equity curve using each trade's net_return:
-      equity_{k+1} = equity_k * (1 + net_return_k)
+    #  Builds a simple trade-by-trade equity curve using each trade's net_return
 
-    Note: This is a trade-level curve (not bar-by-bar). It matches your JSON logs easily and
-    is perfect for report plots.
-    """
     if not trades:
         return np.array([0], dtype=int), np.array([start_equity], dtype=float)
 
@@ -125,9 +117,9 @@ def reason_counts(reason: np.ndarray) -> Dict[str, int]:
     return out
 
 
-# -----------------------------
+# ---------------------------------------------------------------------
 # Feature/sentiment helpers
-# -----------------------------
+# ---------------------------------------------------------------------
 
 @dataclass
 class SentimentColumns:
@@ -135,10 +127,8 @@ class SentimentColumns:
     mass_idx: int
 
 def infer_sentiment_columns(n_features: int) -> SentimentColumns:
-    """
-    Your pipeline appends sentiment_score and sentiment_mass as the last 2 features (most common).
-    If you ever change that, just modify here or pass explicit indices via args later.
-    """
+    # The pipeline appends sentiment_score and sentiment_mass as the last 2 features (most common).
+
     if n_features < 2:
         raise ValueError("Need at least 2 features to infer sentiment columns.")
     return SentimentColumns(score_idx=n_features - 2, mass_idx=n_features - 1)
@@ -147,18 +137,13 @@ def slice_first_segment(x: np.ndarray, seg_len: int) -> np.ndarray:
     return x[: min(seg_len, len(x))]
 
 
-# -----------------------------
+# ---------------------------------------------------------------------
 # GA log helpers
-# -----------------------------
+# ---------------------------------------------------------------------
 
 def ga_best_mean_by_generation(ga_rows: List[Dict[str, Any]], pop_size: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """
-    We assume the GA evaluator logs one JSON line per evaluated individual.
-    If gens=G and pop=P, the log is typically ~G*P lines (maybe + elites, depending on implementation).
-    We keep it simple: chunk sequentially in groups of pop_size.
-
-    Each row should contain "fitness" OR some "test_final_equity" field.
-    """
+    #The GA fitenss function logs one JSON line per evaluated individual.
+    
     if not ga_rows or pop_size <= 0:
         return np.array([], dtype=int), np.array([], dtype=float), np.array([], dtype=float)
 
@@ -178,10 +163,14 @@ def ga_best_mean_by_generation(ga_rows: List[Dict[str, Any]], pop_size: int) -> 
 
     fits = np.array([get_fit(r) for r in ga_rows], dtype=float)
     fits = fits[np.isfinite(fits)]
+
+    # If it is empty
     if len(fits) == 0:
         return np.array([], dtype=int), np.array([], dtype=float), np.array([], dtype=float)
 
     n_chunks = int(np.ceil(len(fits) / pop_size))
+    
+    # Arrays
     best = []
     mean = []
     gen = []
@@ -196,9 +185,9 @@ def ga_best_mean_by_generation(ga_rows: List[Dict[str, Any]], pop_size: int) -> 
     return np.array(gen, dtype=int), np.array(best, dtype=float), np.array(mean, dtype=float)
 
 
-# -----------------------------
+# ---------------------------------------------------------------------
 # Plotters
-# -----------------------------
+# ---------------------------------------------------------------------
 
 def plot_equity_curves(out_dir: str,
                        train_buy_only: Optional[List[Dict[str, Any]]],
@@ -266,7 +255,8 @@ def plot_sentiment_and_price(out_dir: str,
                              features: np.ndarray,
                              prices: np.ndarray,
                              seg_len: int) -> None:
-    # first segment only (keeps plots interpretable)
+    
+    # First segment only
     X0 = slice_first_segment(features, seg_len)
     p0 = slice_first_segment(prices, seg_len)
 
@@ -275,7 +265,7 @@ def plot_sentiment_and_price(out_dir: str,
     mass = X0[:, cols.mass_idx]
     t = np.arange(len(p0))
 
-    # price
+    # Price
     plt.figure()
     plt.plot(t, p0)
     plt.title("Price (first segment)")
@@ -283,7 +273,7 @@ def plot_sentiment_and_price(out_dir: str,
     plt.ylabel("Price")
     save_fig(os.path.join(out_dir, "price_first_segment.png"))
 
-    # sentiment score
+    # Sentiment score
     plt.figure()
     plt.plot(t, sent)
     plt.title("Sentiment score (first segment)")
@@ -291,7 +281,7 @@ def plot_sentiment_and_price(out_dir: str,
     plt.ylabel("Sentiment score")
     save_fig(os.path.join(out_dir, "sentiment_score_first_segment.png"))
 
-    # sentiment mass
+    # Sentiment mass
     plt.figure()
     plt.plot(t, mass)
     plt.title("Sentiment mass (first segment)")
@@ -313,7 +303,7 @@ def plot_ga_progress(out_dir: str,
         meta = load_json(meta_path)
         pop_size = int(meta.get("pop", meta.get("population", 0)) or 0)
     if not pop_size:
-        # fallback: assume 16 if unknown
+        # Assume 16 if unknown, fallback
         pop_size = 16
 
     gen, best, mean = ga_best_mean_by_generation(ga_rows, pop_size=pop_size)
@@ -341,8 +331,6 @@ def plot_buyhold_benchmark(out_dir: str,
     """
     Plots buy&hold equity curves (normalized to 1.0 at test start) for selected symbols
     using the segment layout: [ticker0 rows][ticker1 rows]...[tickerN rows].
-
-    prices: flat array (N,), N = len(tickers) * rows_per_ticker
     """
     if prices.ndim != 1:
         raise ValueError(f"Expected prices as 1D array, got shape={prices.shape}")
@@ -385,9 +373,9 @@ def plot_buyhold_benchmark(out_dir: str,
     save_fig(os.path.join(out_dir, "buyhold_benchmark.png"))
 
 
-# -----------------------------
+# ---------------------------------------------------------------------
 # Text summary for report
-# -----------------------------
+# ---------------------------------------------------------------------
 
 def write_quick_summary(out_dir: str, summary: Optional[Dict[str, Any]]) -> None:
     if not summary:
@@ -406,7 +394,6 @@ def write_quick_summary(out_dir: str, summary: Optional[Dict[str, Any]]) -> None
             pick = {kk: ed.get(kk) for kk in ["checked","opened","blocked_sentiment","blocked_conf","blocked_trend","blocked_latest_entry"] if isinstance(ed, dict)}
             lines.append(f"  - entry_debug: {pick}")
 
-    # try to match your run_pipeline summary structure
     train = summary.get("train", {}) if isinstance(summary, dict) else {}
     test = summary.get("test", {}) if isinstance(summary, dict) else {}
 
@@ -424,9 +411,9 @@ def write_quick_summary(out_dir: str, summary: Optional[Dict[str, Any]]) -> None
         f.write("\n".join(lines).strip() + "\n")
 
 
-# -----------------------------
-# main
-# -----------------------------
+# ---------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------
 
 def main() -> None:
     ap = argparse.ArgumentParser()
@@ -456,7 +443,6 @@ def main() -> None:
     ap.add_argument("--val_len", type=int, default=185)
     ap.add_argument("--test_len", type=int, default=187)
 
-
     ap.add_argument("--out_dir", type=str, default=None, help="Where to write plots (default: <run_dir>/plots).")
     args = ap.parse_args()
 
@@ -470,7 +456,6 @@ def main() -> None:
 
         for name in ["train_buy_only", "test_buy_only", "train_with_sell", "test_with_sell"]:
             if getattr(args, name) is None:
-                # common filenames you used
                 mapping = {
                     "train_buy_only": "trades_train_buy_only.json",
                     "test_buy_only": "trades_test_buy_only.json",
@@ -487,7 +472,7 @@ def main() -> None:
     if args.out_dir is None:
         args.out_dir = "plots"
 
-    ensure_dir(args.out_dir)
+    check_dir(args.out_dir)
 
     summary = load_json(args.summary) if args.summary and os.path.exists(args.summary) else None
 
@@ -516,7 +501,7 @@ def main() -> None:
     plot_exit_reasons(args.out_dir, train_with_sell, "TRAIN exit reasons (with_sell)", "exit_reasons_train_with_sell.png")
     plot_exit_reasons(args.out_dir, test_with_sell,  "TEST exit reasons (with_sell)",  "exit_reasons_test_with_sell.png")
 
-    # Sentiment + price (optional)
+    # Sentiment + price
     if args.features and args.prices and os.path.exists(args.features) and os.path.exists(args.prices):
         X = np.load(args.features).astype(np.float32, copy=False)
         p = np.load(args.prices).astype(np.float32, copy=False)
@@ -525,12 +510,11 @@ def main() -> None:
         else:
             print(f"[WARN] features/prices length mismatch: {X.shape} vs {p.shape}")
 
-        # Benchmark plot: AAPL vs SPY (buy&hold), using test window
+    # Benchmark plot: AAPL vs SPY (buy&hold), using test window
     if args.config and args.prices and os.path.exists(args.config) and os.path.exists(args.prices):
         with open(args.config, "r", encoding="utf-8") as f:
             cfg = yaml.safe_load(f)
 
-        # adjust this path if your config stores tickers elsewhere
         tickers = cfg["data"]["tickers"]
 
         p_all = np.load(args.prices).astype(np.float32, copy=False)
@@ -548,8 +532,7 @@ def main() -> None:
             title="Buy & Hold benchmark (TEST): "+str(symbols)
         )
 
-
-    # GA plots (optional)
+    # GA plots
     ga_log = args.ga_log
     ga_meta = args.ga_meta
     if args.ga_dir:
@@ -565,14 +548,13 @@ def main() -> None:
     if ga_log and os.path.exists(ga_log):
         plot_ga_progress(args.out_dir, ga_log_path=ga_log, meta_path=ga_meta, pop_override=args.ga_pop)
 
-    # Write a compact text summary (handy to paste into Evaluation)
+    # Compact text summary
     write_quick_summary(args.out_dir, summary)
 
     print("\nSaved plots to:", args.out_dir)
     for fn in sorted(os.listdir(args.out_dir)):
         if fn.lower().endswith(".png") or fn.lower().endswith(".txt"):
             print(" -", fn)
-
 
 if __name__ == "__main__":
     main()

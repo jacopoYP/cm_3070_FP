@@ -20,7 +20,7 @@ class BuyEnvState:
 
 
 class BuyEnv:
-    """Simple buy-only environment.
+    """Buy-only environment.
 
     Actions:
         0 = HOLD
@@ -44,6 +44,10 @@ class BuyEnv:
         self.state_dim = int(features.shape[1])
         self.reset()
 
+    # ---------------------------------------------------------------------
+    # Env API
+    # ---------------------------------------------------------------------
+    
     def reset(self) -> np.ndarray:
         self.s = BuyEnvState()
         return self._obs()
@@ -57,16 +61,16 @@ class BuyEnv:
 
         price = float(self.prices[self.s.t])
 
-        # cooldown overrides action
+        # Cooldown overrides action
         if self.s.cooldown > 0:
             action = self.HOLD
             self.s.cooldown -= 1
 
-        # shaping: discourage HOLD forever while flat
+        # Siscourage HOLD forever while flat
         if action == self.HOLD and not self.s.in_pos:
             r -= float(self.reward_cfg.flat_hold_penalty)
 
-        # entry
+        # Entry
         if action == self.BUY and not self.s.in_pos:
             if action == self.BUY and not self.s.in_pos:
                 if not check_sentiment(self.features[self.s.t], self.trade_cfg):
@@ -79,11 +83,11 @@ class BuyEnv:
                     r += float(self.reward_cfg.entry_bonus)
                     info.update({"opened": True, "entry_t": self.s.entry_t, "entry_price": self.s.entry_price})
 
-        # in-position shaping
+        # In-position shaping
         if action == self.HOLD and self.s.in_pos:
             r -= float(self.reward_cfg.in_pos_hold_penalty)
 
-        # time stop
+        # Time stop
         if self.s.in_pos:
             hold_bars = int(self.s.t - self.s.entry_t)
             if hold_bars >= int(self.trade_cfg.sell_horizon):
@@ -91,7 +95,7 @@ class BuyEnv:
                 r += r_close
                 info.update(tinfo)
 
-        # advance time
+        # Advance time
         self.s.t += 1
         if self.s.t >= len(self.prices) - 1:
             self.s.done = True
@@ -103,7 +107,9 @@ class BuyEnv:
 
         return self._obs(), float(r), bool(self.s.done), info
 
-    # ---------- internals ----------
+    # ---------------------------------------------------------------------
+    # Utils methods
+    # ---------------------------------------------------------------------
 
     def _obs(self) -> np.ndarray:
         t = min(self.s.t, len(self.features) - 1)
@@ -111,11 +117,11 @@ class BuyEnv:
 
     def _close(self, exit_price: float, forced: bool, reason: str):
         gross = (exit_price - float(self.s.entry_price)) / float(self.s.entry_price)
-        # net = gross - float(self.reward_cfg.transaction_cost)
+        
+        # Considering transaction cost
         net = gross - 2.0 * float(self.reward_cfg.transaction_cost)
 
-
-        # same reward shape you used: return - dd penalty - vol penalty
+        # reward : return - dd penalty - vol penalty
         rew = net
         rew -= float(self.reward_cfg.lambda_dd) * max(0.0, -net)
         rew -= float(self.reward_cfg.lambda_vol) * (net ** 2)

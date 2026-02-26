@@ -4,6 +4,11 @@ from typing import Any
 import numpy as np
 import pandas as pd
 from typing import Any, Dict, List, Optional, Tuple
+from types import SimpleNamespace
+from typing import Tuple
+import datetime as dt
+import os
+import yaml
 
 def check_sentiment(
     x: np.ndarray,
@@ -14,7 +19,7 @@ def check_sentiment(
     """
     x: 1D feature vector at time t (shape: [D])
     cfg: config object (expects fields on cfg.trade_manager or cfg directly)
-    Assumes sentiment is stored at indices sentiment_col and mass_col.
+    Sentiment is stored at indices sentiment_col and mass_col.
 
     Logic:
       - if filter disabled: True
@@ -34,7 +39,7 @@ def check_sentiment(
         sent = float(x[sentiment_col])
         mass = float(x[mass_col])
     except Exception:
-        # fail open (don't block buys if feature indexing is wrong)
+        # fail open
         return True
 
     if mass < mass_min:
@@ -76,7 +81,8 @@ def split_by_segments(
 
     for t in tickers:
         idx_t = meta.index[meta["ticker"] == t].to_numpy()
-        # ensure time order
+        
+        # Ensuring time order
         idx_t = idx_t[np.argsort(meta.loc[idx_t, "date"].to_numpy())]
 
         cut = int(np.floor(len(idx_t) * train_frac))
@@ -91,18 +97,13 @@ def split_by_segments(
     X_test  = features[test_idx]
     p_test  = prices[test_idx]
 
-    # segment lengths per ticker (constant if all tickers have same rows)
+    # segment lengths per ticker
     rows_per_ticker = int(meta.groupby("ticker").size().iloc[0])
     seg_train_len = int(np.floor(rows_per_ticker * train_frac))
     seg_test_len = rows_per_ticker - seg_train_len
     n_segs = len(tickers)
 
     return X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs
-
-
-from typing import Tuple
-import numpy as np
-import pandas as pd
 
 def split_by_ticker_time(
     features: np.ndarray,
@@ -146,10 +147,6 @@ def split_by_ticker_time(
     n_segs = len(tickers)
 
     return X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs
-
-from typing import Tuple, List
-import numpy as np
-import pandas as pd
 
 def split_by_ticker_time_ga(
     features: np.ndarray,
@@ -215,3 +212,28 @@ def split_by_ticker_time_ga(
         n_segs
     )
 
+def load_yaml(path: str) -> Dict[str, Any]:
+    with open(path, "r") as f:
+        return yaml.safe_load(f)
+
+def load_yaml_to_ns(path: str) -> SimpleNamespace:
+    # Minimal YAML loader that returns a dot-accessible namespace.
+    import yaml
+
+    with open(path, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+
+    def rec(x):
+        if isinstance(x, dict):
+            return SimpleNamespace(**{k: rec(v) for k, v in x.items()})
+        if isinstance(x, list):
+            return [rec(v) for v in x]
+        return x
+
+    return rec(data)
+
+def now_run_id(prefix: str = "pipeline") -> str:
+    return f"{prefix}_{dt.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+
+def check_dir(path: str) -> None:
+    os.makedirs(path, exist_ok=True)

@@ -14,11 +14,7 @@ from agents.replay_buffer import ReplayBuffer
 
 
 class DDQNAgent:
-    """Double DQN with replay buffer.
-
-    Clean, minimal, single-process friendly.
-    Actions are integers in [0, n_actions).
-    """
+    # Double DQN with replay buffer.
 
     def __init__(self, cfg: AgentConfig, device: Optional[str] = None, hidden_sizes=(128, 128)):
         self.cfg = cfg
@@ -33,12 +29,11 @@ class DDQNAgent:
         )
 
         self.q = MLPQNetwork(self.state_dim, self.n_actions, hidden_sizes=hidden_sizes).to(self.device)
-        self.q_tgt = MLPQNetwork(self.state_dim, self.n_actions, hidden_sizes=hidden_sizes).to(self.device)
-        self.q_tgt.load_state_dict(self.q.state_dict())
-        self.q_tgt.eval()
+        self.q_target = MLPQNetwork(self.state_dim, self.n_actions, hidden_sizes=hidden_sizes).to(self.device)
+        self.q_target.load_state_dict(self.q.state_dict())
+        self.q_target.eval()
 
         self.opt = optim.Adam(self.q.parameters(), lr=float(cfg.lr))
-        # self.loss_fn = nn.MSELoss()
         self.loss_fn = nn.SmoothL1Loss()
 
         self.buf = ReplayBuffer(int(cfg.buffer_size))
@@ -75,8 +70,8 @@ class DDQNAgent:
         self.buf.push(s, a, r, ns, done)
 
     def update(self):
-        import torch
-        import numpy as np
+        # import torch
+        # import numpy as np
 
         if len(self.buf) < int(self.cfg.batch_size):
             return None
@@ -89,17 +84,15 @@ class DDQNAgent:
         r  = torch.tensor(np.asarray(r),  dtype=torch.float32, device=self.device)
         d  = torch.tensor(np.asarray(d),  dtype=torch.float32, device=self.device).clamp(0.0, 1.0)
 
-        # ---- Q(s,a) (needs grad) ----
-        # If inference_mode leaked from elsewhere, this output may be an inference tensor.
         q_out = self.q(s)
 
-        # 🔥 CRITICAL: convert inference tensor -> normal tensor for autograd
+        # convert inference tensor -> normal tensor for autograd
         if q_out.is_inference():
             q_out = q_out.clone()
 
         q_sa = q_out.gather(1, a.unsqueeze(1)).squeeze(1)
 
-        # ---- DDQN target (no grad) ----
+        # DDQN target (no grad)
         with torch.no_grad():
             # online selects action
             q_next_online = self.q(ns)
@@ -108,10 +101,10 @@ class DDQNAgent:
             next_a = torch.argmax(q_next_online, dim=1)
 
             # target evaluates that action
-            q_next_tgt = self.q_tgt(ns)
-            if q_next_tgt.is_inference():
-                q_next_tgt = q_next_tgt.clone()
-            next_q = q_next_tgt.gather(1, next_a.unsqueeze(1)).squeeze(1)
+            q_next_target = self.q_target(ns)
+            if q_next_target.is_inference():
+                q_next_target = q_next_target.clone()
+            next_q = q_next_target.gather(1, next_a.unsqueeze(1)).squeeze(1)
 
             target = r + float(self.cfg.gamma) * (1.0 - d) * next_q
 
@@ -128,19 +121,15 @@ class DDQNAgent:
 
         if self.learn_steps % int(self.cfg.target_update_freq) == 0:
             # print("target sync @", self.learn_steps, "loss", val)
-            self.q_tgt.load_state_dict(self.q.state_dict())
+            self.q_target.load_state_dict(self.q.state_dict())
 
         return val
-
-
-
-
 
     def save(self, path: str) -> None:
         payload = {
             "cfg": asdict(self.cfg),
             "state_dict": self.q.state_dict(),
-            "target_state_dict": self.q_tgt.state_dict(),
+            "target_state_dict": self.q_target.state_dict(),
             "eps": self.eps,
             "steps": self._steps,
             "learn_steps": self.learn_steps,
@@ -150,22 +139,12 @@ class DDQNAgent:
     def load(self, path: str) -> None:
         payload = torch.load(path, map_location=self.device)
         self.q.load_state_dict(payload["state_dict"])
-        self.q_tgt.load_state_dict(payload.get("target_state_dict", payload["state_dict"]))
+        self.q_target.load_state_dict(payload.get("target_state_dict", payload["state_dict"]))
         self.eps = float(payload.get("eps", self.eps))
         self._steps = int(payload.get("steps", self._steps))
         self.learn_steps = int(payload.get("learn_steps", self.learn_steps))
 
-    # ---------- internals ----------
-
-    # def _anneal_epsilon(self) -> None:
-    #     self._steps += 1
-    #     frac = min(1.0, self._steps / float(self.cfg.epsilon_decay_steps))
-    #     self.eps = float(self.cfg.epsilon_start + frac * (self.cfg.epsilon_end - self.cfg.epsilon_start))
-
-    # def _update_eps(self):
-    #     frac = min(1.0, self.total_steps / float(self.cfg.epsilon_decay_steps))
-    #     self.eps = self.cfg.epsilon_start + frac * (self.cfg.epsilon_end - self.cfg.epsilon_start)
-
+    # internal methods
     def _update_epsilon(self) -> None:
         decay_steps = float(self.cfg.epsilon_decay_steps)
         if decay_steps <= 0:

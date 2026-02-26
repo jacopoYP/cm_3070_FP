@@ -7,12 +7,10 @@ from typing import Dict, List, Optional
 import numpy as np
 
 from data.finnhub_api import FinnhubClient
-from sentiment.finbert import add_finbert_sentiment
+# from sentiment.finbert import add_finbert_sentiment
 
 
-
-# Very simple finance-ish lexicon (Phase 1 baseline).
-# You can expand later or replace with FinBERT without changing the interface.
+# Basic finance-ish lexicon.
 POS_WORDS = {
     "beat", "beats", "growth", "surge", "record", "profit", "profits", "upgrade",
     "strong", "bull", "bullish", "outperform", "rally", "upside", "win", "wins"
@@ -22,11 +20,11 @@ NEG_WORDS = {
     "weak", "bear", "bearish", "underperform", "crash", "downside", "lawsuit"
 }
 
-
 def _tokenize(text: str) -> List[str]:
     if not text:
         return []
-    # cheap tokenizer, good enough for baseline
+    
+    # simple tokenizer, to be imprved later in case
     t = "".join(ch.lower() if ch.isalnum() else " " for ch in text)
     return [w for w in t.split() if len(w) >= 2]
 
@@ -37,24 +35,23 @@ def headline_polarity(headline: str) -> float:
         return 0.0
     pos = sum(1 for w in toks if w in POS_WORDS)
     neg = sum(1 for w in toks if w in NEG_WORDS)
-    # normalized polarity in [-1, 1]
+
+    # Normalizing polarity in [-1, 1]
     den = pos + neg
     return float((pos - neg) / den) if den > 0 else 0.0
-
-    # return float((pos - neg) / (pos + neg + 1e-9))
 
 
 @dataclass
 class SentimentIndexConfig:
-    ewma_alpha: float = 0.2      # smoothing
-    clip: float = 3.0            # clip after z-score (optional)
-    z_window: int = 60           # rolling window for z-score
+    ewma_alpha: float = 0.2
+    clip: float = 3.0
+    z_window: int = 60
     use_zscore: bool = True
 
 
 class SentimentIndex:
     """
-    Build a daily sentiment series aligned to your price index.
+    Build a daily sentiment series aligned to the price index.
     - Pull Finnhub company news per day
     - Aggregate to a single score per day
     - EWMA smooth
@@ -66,10 +63,6 @@ class SentimentIndex:
         self.cfg = cfg or SentimentIndexConfig()
 
     def build_daily_scores(self, symbol: str, dates: List[str]) -> np.ndarray:
-        """
-        dates: list of YYYY-MM-DD in the same order as your daily bars.
-        returns: sentiment array (len(dates),)
-        """
         scores = np.zeros((len(dates),), dtype=np.float32)
 
         for i, d in enumerate(dates):

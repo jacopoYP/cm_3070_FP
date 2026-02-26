@@ -10,7 +10,7 @@ from ga.genome import Genome
 class Creature:
     genome: Genome
     fitness: Optional[float] = None
-    metrics: Dict[str, Any] = None  # store evaluation outputs (n_trades, avg_net, etc.)
+    metrics: Dict[str, Any] = None
 
     def __post_init__(self):
         if self.metrics is None:

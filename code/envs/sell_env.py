@@ -24,7 +24,6 @@ class SellEnv:
       - Agent decides HOLD(0) or SELL(1).
       - Reward is 0 while holding.
       - Terminal reward is net return from entry -> exit minus transaction cost ONCE at exit
-        (matches TradeManager semantics you used in buy-only eval).
 
     Forced exit at:
       - horizon end (entry_idx + sell_horizon),
@@ -34,14 +33,14 @@ class SellEnv:
 
     def __init__(
         self,
-        features: np.ndarray,          # (n_steps, feat_dim)
-        prices: np.ndarray,            # (n_steps,)
-        entry_indices: np.ndarray,     # (n_entries,)
+        features: np.ndarray,
+        prices: np.ndarray,
+        entry_indices: np.ndarray,
         transaction_cost: float = 0.001,
         sell_horizon: int = 20,
         min_hold_bars: int = 10,
-        segment_len: Optional[int] = None,   # critical for stacked tickers
-        include_pos_features: bool = True,   # add: unrealized_ret + time_frac + remaining_frac
+        segment_len: Optional[int] = None,
+        include_pos_features: bool = True,
         seed: int = 42,
     ):
         self.X = np.asarray(features, dtype=np.float32)
@@ -55,6 +54,7 @@ class SellEnv:
         self.segment_len = int(segment_len) if segment_len is not None else None
         self.include_pos = bool(include_pos_features)
 
+        # Safety checks
         self.n = len(self.p)
         if self.X.shape[0] != self.n:
             raise ValueError("features and prices must have same length")
@@ -70,9 +70,9 @@ class SellEnv:
         self.rng = np.random.default_rng(int(seed))
         self.ep: Optional[SellEpisode] = None
 
-    # -----------------------
-    # segment helpers
-    # -----------------------
+    # ---------------------------------------------------------------------
+    # Segment helpers
+    # ---------------------------------------------------------------------
 
     def _segment_end(self, t: int) -> int:
         if self.segment_len is None:
@@ -82,16 +82,14 @@ class SellEnv:
         return int(min(end, self.n - 1))
 
     def _last_allowed(self, entry_idx: int) -> int:
-        """
-        Last bar (inclusive) where the position may still be open / exit may occur.
-        With sell_horizon=20 and entry=33 => last_allowed=53 (matches your TM examples).
-        """
+        # Last bar (inclusive) where the position may still be open / exit may occur.
+
         seg_end = self._segment_end(entry_idx)
         return int(min(entry_idx + self.horizon, seg_end, self.n - 1))
 
-    # -----------------------
-    # env API
-    # -----------------------
+    # ---------------------------------------------------------------------
+    # Env API
+    # ---------------------------------------------------------------------
 
     def reset(self, entry_idx: Optional[int] = None) -> np.ndarray:
         if entry_idx is None:
@@ -121,6 +119,7 @@ class SellEnv:
 
         can_sell = bars_held >= self.min_hold
 
+        # Info dictionary 
         info: Dict = {
             "t": t,
             "entry_idx": entry_idx,
@@ -132,14 +131,14 @@ class SellEnv:
         baseline = float(self._net_tm_at(last_allowed))
         info["baseline_net_tm"] = baseline
 
-        # 1) Forced exit at last_allowed: by definition delta = 0
+        # Forced exit at last_allowed: by definition delta = 0
         if t >= last_allowed:
             rets = self._returns_at(t)
             info.update({"forced_exit": True, "reason": "limit", "exit_idx": int(t), **rets})
             info["delta_vs_hold"] = 0.0
             return self._terminal_state(), 0.0, True, info
 
-        # 2) Voluntary SELL: reward is improvement vs holding to last_allowed
+        # Voluntary SELL: reward is improvement vs holding to last_allowed
         if action == SELL and can_sell:
             net_now = float(self._net_tm_at(t))
             delta = net_now - baseline
@@ -148,19 +147,19 @@ class SellEnv:
             info["delta_vs_hold"] = float(delta)
             return self._terminal_state(), float(delta), True, info
 
-        # 3) HOLD (or SELL not allowed yet): reward 0, advance time
+        # HOLD (or SELL not allowed yet): reward 0, advance time
         self.ep.t = t + 1
         self.ep.bars_held += 1
         return self._get_state(), 0.0, False, info
 
-    # -----------------------
-    # internals
-    # -----------------------
+    # ---------------------------------------------------------------------
+    # Utils methods
+    # ---------------------------------------------------------------------
 
     def _get_state(self) -> np.ndarray:
         """
         State at current time t (in position).
-        If include_pos_features, append:
+        If include_pos_features, it appends:
           - unrealized_return
           - time_frac in [0,1]
           - remaining_frac in [0,1]
@@ -179,9 +178,7 @@ class SellEnv:
         price_now = float(self.p[t])
 
         unreal = (price_now - entry_price) / (entry_price + 1e-12)
-        # time_frac = float(min(1.0, self.ep.bars_held / max(1, self.horizon)))
-        # remaining = float(max(0, last_allowed - t))
-        # remaining_frac = float(min(1.0, remaining / max(1, self.horizon)))
+
         eff_h = max(1, int(last_allowed - entry_idx))
         time_frac = float(min(1.0, self.ep.bars_held / eff_h))
         remaining = float(max(0, last_allowed - t))
@@ -193,14 +190,6 @@ class SellEnv:
     def _terminal_state(self) -> np.ndarray:
         return np.zeros((self.state_dim,), dtype=np.float32)
     
-    def _trade_returns(self, exit_idx: int) -> Tuple[float, float]:
-        """(gross_return, net_return) at exit_idx with EXIT cost only."""
-        assert self.ep is not None
-        entry_price = float(self.ep.entry_price)
-        exit_price = float(self.p[exit_idx])
-        gross = (exit_price - entry_price) / (entry_price + 1e-12)
-        net = gross - float(self.tc)  # EXIT cost only
-        return gross, net
     
     def _returns_at(self, exit_idx: int) -> Dict[str, float]:
         assert self.ep is not None
@@ -210,7 +199,7 @@ class SellEnv:
 
         gross = (exit_price - entry_price) / (entry_price + 1e-12)
 
-        # What THIS env is optimizing (Option A): gross minus EXIT cost only
+        # Gross minus 'exit' cost only
         net_env = gross - tc
 
         # What TradeManager reports: round-trip exact net
@@ -231,6 +220,3 @@ class SellEnv:
         exit_price = float(self.p[exit_idx])
         gross = (exit_price - entry_price) / (entry_price + 1e-12)
         return ((1.0 - tc) * (1.0 - tc) * (1.0 + gross)) - 1.0
-
-
-

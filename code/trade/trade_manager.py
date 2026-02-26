@@ -32,15 +32,13 @@ class Position:
 
 class TradeManager:
     """
-    Minimal long-only single-position backtest orchestrator.
+    Trade orchestrator.
 
-    Phase A:
-      - Buy agent opens trades
-      - Exit uses forced last_allowed (min(entry+horizon, seg_end(entry), eod))
-      - Produces entry_indices for SellAgent training
+    - Buy agent opens trades
+    - Exit uses forced last_allowed (min(entry+horizon, seg_end(entry), eod))
+    - Produces entry_indices for SellAgent training
 
-    Phase B:
-      - If sell_agent is provided, it can close positions early (aligned with SellEnv)
+    - If sell_agent is provided, it can close positions early (aligned with SellEnv)
     """
 
     def __init__(
@@ -67,7 +65,7 @@ class TradeManager:
         self.reward_cfg = reward
         self.trade_cfg = trade
 
-        # Precompute MAs (optional trend filter)
+        # Precompute MAs
         self._ma_short = None
         self._ma_long = None
         if self.trade_cfg.use_trend_filter:
@@ -99,9 +97,9 @@ class TradeManager:
             "conf_max": -float("inf"),
         }
 
-    # -----------------------
-    # helpers
-    # -----------------------
+    # ---------------------------------------------------------------------
+    # Utils
+    # ---------------------------------------------------------------------
 
     def _trend_ok(self, t: int) -> bool:
         if not self.trade_cfg.use_trend_filter:
@@ -123,13 +121,14 @@ class TradeManager:
         return softmax_confidence(q, action=1, temp=temp)
 
     def _sell_confidence(self, q: np.ndarray) -> float:
-        # Confidence that action=1 (SELL) is correct (NOTE: with delta-reward, margin gating is more important)
+        # Confidence that action=1 (SELL) is correct
         method = str(self.trade_cfg.confidence_method)
         temp = float(self.trade_cfg.confidence_temp)
 
         if method == "margin_sigmoid":
             return margin_sigmoid_confidence(q, action=1, temp=temp)
-
+        
+        # default softmax
         return softmax_confidence(q, action=1, temp=temp)
 
     @staticmethod
@@ -167,18 +166,11 @@ class TradeManager:
         seg_end = self._segment_end(entry_idx)
         return int(min(entry_idx + int(self.trade_cfg.sell_horizon), seg_end, len(self.prices) - 1))
 
-    # -----------------------
-    # SellAgent observation (MUST MATCH SellEnv._get_state)
-    # -----------------------
+    # ---------------------------------------------------------------------
+    # SellAgent observation
+    # ---------------------------------------------------------------------
 
     def _sell_state(self, t: int) -> np.ndarray:
-        """
-        Build SellAgent observation consistent with SellEnv(include_pos_features=True):
-        [base_features..., unrealized_ret, time_frac, remaining_frac]
-
-        IMPORTANT: This must be mathematically identical to SellEnv._get_state()
-        given your current SellEnv code (which normalizes by self.horizon, not eff_horizon).
-        """
         if self._pos is None:
             raise RuntimeError("_sell_state called while flat")
         if self.sell_agent is None:
@@ -195,16 +187,13 @@ class TradeManager:
         price_now = float(self.prices[t])
 
         last_allowed = int(self._last_allowed_exit(entry_idx))
-        horizon = max(1, int(self.trade_cfg.sell_horizon))
+        # horizon = max(1, int(self.trade_cfg.sell_horizon))
 
-        # SellEnv uses "bars_held" which at time t equals (t - entry_idx) in this backtester
         hold = int(t - entry_idx)
 
+        # TODO: Clean 1e-12
         unreal = (price_now - entry_price) / (entry_price + 1e-12)
-        # time_frac = float(min(1.0, hold / horizon))
 
-        # remaining = float(max(0, last_allowed - t))
-        # remaining_frac = float(min(1.0, remaining / horizon))
         eff_h = max(1, int(last_allowed - entry_idx))
         time_frac = float(min(1.0, hold / eff_h))
         remaining = float(max(0, last_allowed - t))
@@ -218,19 +207,19 @@ class TradeManager:
 
         return out
 
-    # -----------------------
-    # core
-    # -----------------------
+    # ---------------------------------------------------------------------
+    # Main methods
+    # ---------------------------------------------------------------------
 
     def run(self) -> Dict[str, Any]:
         self.reset()
 
         n = len(self.prices)
 
+        # Constants
         BUY_MIN_CONF = float(self.trade_cfg.buy_min_confidence)
         MIN_HOLD = int(self.trade_cfg.min_hold_bars)
 
-        # For delta-trained SellEnv: gate sells using margin (q_sell - q_hold).
         SELL_MIN_CONF = float(getattr(self.trade_cfg, "sell_min_confidence", 0.0))
         SELL_MIN_MARGIN = float(getattr(self.trade_cfg, "sell_min_margin", 0.01))
 
@@ -238,16 +227,16 @@ class TradeManager:
             price = float(self.prices[t])
             s = self.state[t]
 
-            # 1) cooldown tick
+            # Cooldown tick
             if self._cooldown > 0:
                 self._cooldown -= 1
 
-            # 2) exits (forced limit OR sell agent)
+            # Exits (forced limit OR sell agent)
             if self._pos is not None:
                 entry_idx = int(self._pos.entry_idx)
                 hold = int(t - entry_idx)
 
-                # last_allowed MUST be computed from entry_idx (entry segment), not current t
+                # last_allowed computed from entry_idx (entry segment), not current t
                 last_allowed = int(self._last_allowed_exit(entry_idx))
 
                 # Forced exit: matches SellEnv "if t >= last_allowed: done"
@@ -256,13 +245,15 @@ class TradeManager:
                     reason = "segment_end" if last_allowed == seg_end_entry else "time"
                     self._close(t, price, forced=True, meta={"reason": reason})
                 else:
-                    # Optional SellAgent decision window
+                    # SellAgent decision window
                     if self.sell_agent is not None and hold >= MIN_HOLD:
                         sell_state = self._sell_state(t)
                         q_sell = np.asarray(self.sell_agent.q_values(sell_state), dtype=np.float32).reshape(-1)
 
                         if q_sell.shape[0] >= 2 and np.all(np.isfinite(q_sell[:2])):
                             q0, q1 = float(q_sell[0]), float(q_sell[1])
+                            
+                            # Computing margin
                             margin = q1 - q0
                             action = int(np.argmax(q_sell[:2]))
                             sell_conf = float(self._sell_confidence(q_sell[:2]))
@@ -271,13 +262,8 @@ class TradeManager:
                             if action == 1:
                                 self._sell_debug["sell_actions"] += 1
 
-                            # Aligned gating:
-                            # - require agent chooses SELL
-                            # - require margin >= threshold (primary gate for delta objective)
-                            # - optionally also require sell_conf >= threshold (secondary; can set to 0.0)
+                            # If agent chooses SELL and margin >= threshold and sell_conf >= threshold
                             if action == 1 and margin >= SELL_MIN_MARGIN and sell_conf >= SELL_MIN_CONF:
-                            # if action == 1 and sell_conf >= SELL_MIN_CONF:
-                                # SellEnv-consistent delta gate
                                 baseline = self._net_tm_at(last_allowed, entry_price=self._pos.entry_price)
                                 net_now  = self._net_tm_at(t, entry_price=self._pos.entry_price)
                                 delta = net_now - baseline
@@ -298,20 +284,7 @@ class TradeManager:
                                         },
                                     )
 
-                                # self._close(
-                                #     t,
-                                #     price,
-                                #     forced=False,
-                                #     meta={
-                                #         "reason": "sell_agent",
-                                #         "sell_conf": sell_conf,
-                                #         "sell_q0": q0,
-                                #         "sell_q1": q1,
-                                #         "sell_margin": margin,
-                                #     },
-                                # )
-
-            # 3) entries (only if flat)
+            # Entries (only if flat)
             if self._pos is None and self._cooldown == 0:
                 self.entry_debug["checked"] += 1
 
@@ -332,12 +305,13 @@ class TradeManager:
                             self.entry_debug["conf_min"] = min(self.entry_debug["conf_min"], conf)
                             self.entry_debug["conf_max"] = max(self.entry_debug["conf_max"], conf)
 
+                            # Checking min_conf for Buy
                             if conf >= BUY_MIN_CONF:
                                 if not check_sentiment(self.state[t], self.trade_cfg):
                                     self.entry_debug.setdefault("blocked_sentiment", 0)
                                     self.entry_debug["blocked_sentiment"] += 1
 
-                                    # storing a few examples
+                                    # Storing a few examples
                                     self.entry_debug.setdefault("blocked_sentiment_samples", [])
                                     if len(self.entry_debug["blocked_sentiment_samples"]) < 5:
                                         sent = float(self.state[t, -2])
@@ -352,10 +326,10 @@ class TradeManager:
                             else:
                                 self.entry_debug["blocked_conf"] += 1
 
-            # 4) record equity
+            # Record equity
             self.equity_curve.append(float(self._equity))
 
-        # force close at end
+        # Forcing close at end
         if self._pos is not None:
             self._close(n - 1, float(self.prices[n - 1]), forced=True, meta={"reason": "eod"})
             if self.equity_curve:
@@ -372,9 +346,9 @@ class TradeManager:
             "sell_debug": dict(getattr(self, "_sell_debug", {})),
         }
 
-    # -----------------------
-    # accounting
-    # -----------------------
+    # ---------------------------------------------------------------------
+    # Open and close methods
+    # ---------------------------------------------------------------------
 
     def _open(self, t: int, price: float, meta: Dict[str, Any]) -> None:
         # charge transaction cost on entry
@@ -396,7 +370,7 @@ class TradeManager:
 
         gross = (exit_price - entry_price) / (entry_price + 1e-12)
 
-        # Apply the price move only while in position (long only term)
+        # Apply the price move only while in position (long term only)
         self._equity *= (1.0 + gross)
 
         # charge transaction cost on exit
@@ -425,10 +399,9 @@ class TradeManager:
         self._pos = None
         self._cooldown = int(self.trade_cfg.cooldown_steps)
 
-    # -----------------------
-    # Entry harvesting (FOR SELL TRAINING ONLY)
-    # Does NOT open trades; does NOT affect run()
-    # -----------------------
+    # ---------------------------------------------------------------------
+    # Entry harvesting
+    # ---------------------------------------------------------------------
 
     def collect_entry_indices_topk(
         self,
@@ -439,12 +412,10 @@ class TradeManager:
         """
         Harvest entry indices for SellAgent training without executing trades.
 
-        Strategy:
+        My approach:
           - For each segment, score every eligible bar using BuyAgent.
           - Pick top-K bars by score.
           - Enforce spacing (min_gap) to avoid clustered entries.
-
-        This method is SAFE: it does not modify run() or equity/trades logic.
         """
 
         n = len(self.prices)

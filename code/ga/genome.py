@@ -24,10 +24,10 @@ class GeneSpec:
 
     def sample(self, rng: random.Random) -> Any:
         if self.kind == "float":
-            lo, hi = self.bounds  # type: ignore[misc]
+            lo, hi = self.bounds
             return float(rng.uniform(float(lo), float(hi)))
         if self.kind == "int":
-            lo, hi = self.bounds  # type: ignore[misc]
+            lo, hi = self.bounds
             return int(rng.randint(int(lo), int(hi)))
         if self.kind == "categorical":
             if not self.choices:
@@ -37,21 +37,19 @@ class GeneSpec:
 
     def clamp(self, v: Any) -> Any:
         if self.kind == "float":
-            lo, hi = self.bounds  # type: ignore[misc]
+            lo, hi = self.bounds
             return float(min(max(float(v), float(lo)), float(hi)))
         if self.kind == "int":
-            lo, hi = self.bounds  # type: ignore[misc]
+            lo, hi = self.bounds
             return int(min(max(int(v), int(lo)), int(hi)))
         if self.kind == "categorical":
-            # assume valid if in choices
             return v
         return v
 
 
 class Genome:
-    """
-    A genome is a mapping {gene_name: value}, with the gene specs stored separately.
-    """
+    # A genome is a mapping {gene_name: value}, with the gene specs stored separately.
+    
     def __init__(self, genes: List[GeneSpec], values: Dict[str, Any]):
         self.genes = genes
         self.values = dict(values)
@@ -62,9 +60,6 @@ class Genome:
         return cls(genes, vals)
 
     def as_config_overrides(self) -> Dict[str, Any]:
-        """
-        Returns {path: value} so caller can apply overrides to config.
-        """
         out = {}
         for g in self.genes:
             out[g.path] = self.values[g.name]
@@ -74,11 +69,8 @@ class Genome:
         return Genome(self.genes, dict(self.values))
 
     def mutate(self, rng: random.Random, p_mut: float, sigma: float = 0.05) -> "Genome":
-        """
-        For float genes: gaussian mutation within bounds
-        For int genes: +/- 1 step sometimes
-        For categorical: random re-sample
-        """
+        #  gaussian mutation within bounds
+
         child = self.copy()
         for g in self.genes:
             if rng.random() > p_mut:
@@ -89,6 +81,7 @@ class Genome:
             if g.kind == "float":
                 lo, hi = g.bounds  # type: ignore[misc]
                 span = float(hi) - float(lo)
+                
                 # sigma is relative to span
                 step = rng.gauss(0.0, sigma * span)
                 child.values[g.name] = g.clamp(float(cur) + step)
@@ -104,9 +97,8 @@ class Genome:
 
     @staticmethod
     def crossover(a: "Genome", b: "Genome", rng: random.Random) -> "Genome":
-        """
-        Uniform crossover: for each gene pick from parent A or B.
-        """
+        # Uniform crossover: for each gene I pick from parent A or B
+        
         if a.genes != b.genes:
             raise ValueError("Cannot crossover genomes with different gene specs")
 
