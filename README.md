@@ -77,16 +77,27 @@ Copy the best trained models (buy\_agent.pt and sell\_agent.pt) into the <strong
 
 Run it using <strong>uvicorn api.app:app --reload</strong>
 
-#### Project structure
+## Project structure
 
 * scripts/  <br>
     build\_features.py <br>
     run\_pipeline.py <br>
     run\_ga.py <br>
+* api/
 * agents/
-* features/
 * core/
 * data/
+* features/
+* ga/
+* logs/
 * models/
-* api/
+* nlp/
+* runs/
+* runs_ga/
+* sentiment/
+* static/
+* trade/
+* web/
+
 * config.yaml
+* requirements.txt

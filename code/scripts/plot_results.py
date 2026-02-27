@@ -17,6 +17,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from core.helper import check_dir
+from core.math_utils import clamp_prob
 
 # -----------------------------
 # IO helpers
@@ -360,7 +361,8 @@ def plot_buyhold_benchmark(out_dir: str,
             continue
 
         # normalized equity curve
-        p0 = max(float(p[0]), 1e-12)
+        # p0 = max(float(p[0]), 1e-12)
+        p0 = clamp_prob(p[0])
         eq = p / p0
         t = np.arange(len(eq), dtype=int)
 

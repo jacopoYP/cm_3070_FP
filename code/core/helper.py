@@ -10,6 +10,8 @@ import datetime as dt
 import os
 import yaml
 
+from core.math_utils import safe_divide
+
 def check_sentiment(
     x: np.ndarray,
     cfg: Any,
@@ -237,3 +239,10 @@ def now_run_id(prefix: str = "pipeline") -> str:
 
 def check_dir(path: str) -> None:
     os.makedirs(path, exist_ok=True)
+
+def net_return(exit_price: float, entry_price: float, tc: float) -> float:
+    # Computing net return, used by sell_env and TradeManager
+    gross = safe_divide(exit_price - entry_price, entry_price, fill_value=0.0)
+    one_minus_tc = 1.0 - float(tc)
+    return (one_minus_tc * one_minus_tc * (1.0 + gross)) - 1.0
+

@@ -32,13 +32,6 @@ from trade.trade_manager import TradeManager
 # ---------------------------------------------------------------------
 # Helper methods
 # ---------------------------------------------------------------------
-# TODO: Clean
-# def now_run_id(prefix: str = "pipeline") -> str:
-#     return f"{prefix}_{dt.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-
-# def check_dir(path: str) -> None:
-#     os.makedirs(path, exist_ok=True)
-
 
 def json_default(o: Any):
     if is_dataclass(o):
@@ -88,32 +81,6 @@ def set_global_seeds(seed: int) -> None:
         torch.backends.cudnn.benchmark = False
     except Exception:
         pass
-
-# TODO: Clean
-# ---------------------------------------------------------------------
-# Metrics
-# ---------------------------------------------------------------------
-# def summarize_trades(trades: List[Dict[str, Any]]) -> Dict[str, float]:
-#     if not trades:
-#         return {
-#             "n_trades": 0,
-#             "avg_net_return": 0.0,
-#             "win_rate": 0.0,
-#             "min_net": 0.0,
-#             "median_net": 0.0,
-#             "max_net": 0.0,
-#         }
-
-#     net = np.array([t.get("net_return", 0.0) for t in trades], dtype=float)
-#     return {
-#         "n_trades": int(len(trades)),
-#         "avg_net_return": float(np.mean(net)),
-#         "win_rate": float(np.mean(net > 0)),
-#         "min_net": float(np.min(net)),
-#         "median_net": float(np.median(net)),
-#         "max_net": float(np.max(net)),
-#     }
-
 
 # ---------------------------------------------------------------------
 # Training loops
@@ -215,17 +182,6 @@ def run_tm(
         **stats,
     }
 
-# TODO: Remove
-# def uplift(a: dict, b: dict) -> dict:
-#     return {
-#         "final_equity_delta": float(a.get("final_equity", 0.0) - b.get("final_equity", 0.0)),
-#         "avg_net_return_delta": float(a.get("avg_net_return", 0.0) - b.get("avg_net_return", 0.0)),
-#         "win_rate_delta": float(a.get("win_rate", 0.0) - b.get("win_rate", 0.0)),
-#         "n_trades_delta": int(a.get("n_trades", 0) - b.get("n_trades", 0)),
-#         "sell_exits": int(a.get("exit_reasons", {}).get("sell_agent", 0)),
-#     }
-
-
 def collect_entries_for_sell_training(
     cfg: SimpleNamespace,
     state: np.ndarray,
@@ -243,8 +199,7 @@ def collect_entries_for_sell_training(
         trade=cfg.trade_manager,
         segment_len=segment_len,
     )
-    # TODO: Clean
-    # if hasattr(tm, "collect_entry_indices_topk"):
+
     topk = int(getattr(cfg.training, "sell_topk_entries_per_segment", 50))
     min_gap = getattr(cfg.training, "sell_min_gap", None)
     use_conf = bool(getattr(cfg.training, "sell_use_confidence_score", False))
@@ -254,10 +209,6 @@ def collect_entries_for_sell_training(
         use_confidence_score=use_conf,
     )
     entries = np.asarray(entries, dtype=np.int64)
-    # else:
-    #     # fallback (less ideal): run buy-only TM and grab entries
-    #     out = tm.run()
-    #     entries = np.asarray(out.get("entry_indices", []), dtype=np.int64)
 
     np.save(out_path, entries)
     return entries

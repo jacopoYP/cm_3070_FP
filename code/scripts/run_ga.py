@@ -24,6 +24,7 @@ from trade.trade_manager import TradeManager
 
 from core.helper import split_by_ticker_time_ga, load_yaml, load_yaml_to_ns, now_run_id, check_dir
 from core.metrics import summarize_trades
+from core.math_utils import EPS
 from envs.buy_env import BuyEnv
 
 def set_by_path(d: Dict[str, Any], path: str, value: Any) -> None:
@@ -190,7 +191,9 @@ def main():
 
         tm_val = run_tm_with_sell(cfg_try, X_val, p_val, buy_agent, sell_agent, segment_len=seg_val_len)
         eq = float(tm_val.get("final_equity", 1.0))
-        log_eq = float(np.log(max(eq, 1e-9)))
+        # log_eq = float(np.log(max(eq, 1e-9)))
+        log_eq = float(np.log(np.clip(eq, EPS, None)))
+
         s = summarize_trades(tm_val.get("trades", []))
 
         fitness = log_eq - 0.001 * s["n_trades"]

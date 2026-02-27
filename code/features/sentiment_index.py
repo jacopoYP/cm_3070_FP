@@ -7,7 +7,8 @@ from typing import Dict, List, Optional
 import numpy as np
 
 from data.finnhub_api import FinnhubClient
-# from sentiment.finbert import add_finbert_sentiment
+# from sentiment.finbert import add_finbert_sentimen
+from core.math_utils import MIN_TEMP
 
 
 # Basic finance-ish lexicon.
@@ -99,7 +100,7 @@ class SentimentIndex:
             lo = max(0, i - w + 1)
             win = x[lo : i + 1]
             mu = float(np.mean(win))
-            sd = float(np.std(win)) + 1e-6
+            sd = float(np.std(win)) + MIN_TEMP
             z = (float(x[i]) - mu) / sd
             if self.cfg.clip is not None:
                 z = float(np.clip(z, -self.cfg.clip, self.cfg.clip))

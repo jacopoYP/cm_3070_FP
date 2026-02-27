@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+from core.math_utils import safe_divide
 
 # =========================
 # Helper indicator functions
@@ -14,7 +15,8 @@ def rsi(close: pd.Series, window: int = 14) -> pd.Series:
     avg_gain = gain.rolling(window).mean()
     avg_loss = loss.rolling(window).mean()
 
-    rs = avg_gain / (avg_loss + 1e-10)
+    # rs = avg_gain / (avg_loss + 1e-10)
+    rs = safe_divide(avg_gain, avg_loss, fill_value=np.inf)
     return 100.0 - (100.0 / (1.0 + rs))
 
 
@@ -33,9 +35,10 @@ def bb_b(close: pd.Series, window: int = 20, n_std: float = 2.0) -> pd.Series:
     upper = sma + n_std * std
     lower = sma - n_std * std
 
-    # TODO: Remove all the 1e-10
-    return (close - lower) / (upper - lower + 1e-10)
+    band_width = upper - lower
+    normalized = safe_divide(close - lower, band_width)
 
+    return normalized
 
 def atr(high: pd.Series, low: pd.Series, close: pd.Series, window: int = 14) -> pd.Series:
     prev_close = close.shift(1)
@@ -68,7 +71,8 @@ def mfi(high: pd.Series, low: pd.Series, close: pd.Series, volume: pd.Series, wi
     pos_sum = positive_flow.rolling(window).sum()
     neg_sum = negative_flow.rolling(window).sum()
 
-    mfr = pos_sum / (neg_sum + 1e-10)
+    # mfr = pos_sum / (neg_sum + 1e-10)
+    mfr = safe_divide(pos_sum, neg_sum, fill_value=np.inf)
     return 100.0 - (100.0 / (1.0 + mfr))
 
 
@@ -80,8 +84,6 @@ def williams_r(high: pd.Series, low: pd.Series, close: pd.Series, window: int = 
     out = -100.0 * (highest_high - close) / den.replace(0.0, np.nan)
 
     return out
-    # return -100.0 * (highest_high - close) / (highest_high - lowest_low + 1e-10)
-
 
 # ---------------------------------------------------------------------
 # Return / vol primitives

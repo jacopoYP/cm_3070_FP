@@ -28,12 +28,24 @@ class Decision:
     raw_action: str
     raw_action_idx: int
 
-def _softmax_maxprob(q: np.ndarray) -> float:
-    q = q.astype(np.float64)
+# def _softmax_maxprob(q: np.ndarray) -> float:
+#     q = q.astype(np.float64)
+#     q = q - np.max(q)
+#     exp = np.exp(q)
+#     p = exp / (np.sum(exp) + 1e-12)
+#     return float(np.max(p))
+def softmax_maxprob(q: np.ndarray) -> float:
+    q = np.asarray(q, dtype=np.float64)
     q = q - np.max(q)
     exp = np.exp(q)
-    p = exp / (np.sum(exp) + 1e-12)
-    return float(np.max(p))
+
+    s = exp.sum()
+    if not np.isfinite(s) or s == 0.0:
+        # degenerate case
+        return float(1.0 / q.size)
+
+    p = exp / s
+    return float(p.max())
 
 def load_row_meta(meta_parquet: str, meta_csv_fallback: Optional[str] = None) -> pd.DataFrame:
     try:
