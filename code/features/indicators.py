@@ -3,9 +3,9 @@ import pandas as pd
 
 from core.math_utils import safe_divide
 
-# =========================
+# ---------------------------------------------------------------------
 # Helper indicator functions
-# =========================
+# ---------------------------------------------------------------------
 
 def rsi(close: pd.Series, window: int = 14) -> pd.Series:
     delta = close.diff()
@@ -15,7 +15,6 @@ def rsi(close: pd.Series, window: int = 14) -> pd.Series:
     avg_gain = gain.rolling(window).mean()
     avg_loss = loss.rolling(window).mean()
 
-    # rs = avg_gain / (avg_loss + 1e-10)
     rs = safe_divide(avg_gain, avg_loss, fill_value=np.inf)
     return 100.0 - (100.0 / (1.0 + rs))
 
@@ -71,7 +70,6 @@ def mfi(high: pd.Series, low: pd.Series, close: pd.Series, volume: pd.Series, wi
     pos_sum = positive_flow.rolling(window).sum()
     neg_sum = negative_flow.rolling(window).sum()
 
-    # mfr = pos_sum / (neg_sum + 1e-10)
     mfr = safe_divide(pos_sum, neg_sum, fill_value=np.inf)
     return 100.0 - (100.0 / (1.0 + mfr))
 
@@ -133,8 +131,6 @@ def build_indicators(
         "obv":        lambda: obv(close, volume),
         "mfi14":      lambda: mfi(high, low, close, volume, 14),
         "willr14":    lambda: williams_r(high, low, close, 14),
-
-        # “prod-ish” primitives (recommended)
         "ret_1":      lambda: ret(close, 1),
         "ret_5":      lambda: ret(close, 5),
         "vol_20":     lambda: vol(close, 20),

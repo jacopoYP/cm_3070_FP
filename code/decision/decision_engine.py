@@ -28,12 +28,6 @@ class Decision:
     raw_action: str
     raw_action_idx: int
 
-# def _softmax_maxprob(q: np.ndarray) -> float:
-#     q = q.astype(np.float64)
-#     q = q - np.max(q)
-#     exp = np.exp(q)
-#     p = exp / (np.sum(exp) + 1e-12)
-#     return float(np.max(p))
 def softmax_maxprob(q: np.ndarray) -> float:
     q = np.asarray(q, dtype=np.float64)
     q = q - np.max(q)
@@ -139,12 +133,12 @@ class ModelAdapter:
         return model
 
     def _expected_in_features(self, model: nn.Module) -> int:
-        # works with your MLPQNetwork: model.net is nn.Sequential([Linear, ReLU, ...])
+        # Works with your MLPQNetwork: model.net is nn.Sequential([Linear, ReLU, ...])
         if hasattr(model, "net") and isinstance(model.net, nn.Sequential):
             for m in model.net:
                 if isinstance(m, nn.Linear):
                     return int(m.in_features)
-        # fallback
+        # Fallback
         for m in model.modules():
             if isinstance(m, nn.Linear):
                 return int(m.in_features)
@@ -158,7 +152,7 @@ class ModelAdapter:
         got = int(s.shape[0])
 
         if got < expected:
-            # pad missing (e.g., SELL needs +3 position features)
+            # Pad missing (e.g., SELL needs +3 position features)
             padded = np.zeros((expected,), dtype=np.float32)
             padded[:got] = s
             s = padded
@@ -177,20 +171,6 @@ class ModelAdapter:
                             
                     q = self.model(x)
                     q = q.squeeze(0).detach().cpu().numpy().astype(np.float32)
-
-        # in __init__ after loading:
-        # last_lin = None
-        # for m in self.model.modules():
-        #     if isinstance(m, nn.Linear):
-        #         last_lin = m
-        # print("LAST Linear weight mean/std:", float(last_lin.weight.mean()), float(last_lin.weight.std()))
-        # print("LAST Linear bias:", last_lin.bias.detach().cpu().numpy().tolist())
-
-        # print layer2 bias stats
-        # lin2 = self.model.net[2]
-        # print("LIN2 bias min/max/mean:", float(lin2.bias.min()), float(lin2.bias.max()), float(lin2.bias.mean()))
-        # print("LIN2 weight mean/std:", float(lin2.weight.mean()), float(lin2.weight.std()))
-
         return q
 
 class DecisionEngine:
@@ -267,7 +247,7 @@ class DecisionEngine:
             action_map = self.sell_action_map
             valid = ("SELL", "HOLD")
 
-        # --- Q values + raw argmax ---
+        # Q values + raw argmax
         q = model.q_values(state)
         q = np.asarray(q, dtype=np.float32).reshape(-1)
 
@@ -278,7 +258,7 @@ class DecisionEngine:
             raise RuntimeError(f"{intent.upper()} intent produced invalid raw_action={raw_action} idx={raw_idx}")
 
         # Confidence + margin
-        conf = _softmax_maxprob(q)
+        conf = softmax_maxprob(q)
 
         # If size is minor than 2
         if q.size < 2:
@@ -310,7 +290,7 @@ class DecisionEngine:
         # The final action
         final_action = raw_action
 
-        # margin advises "how separated are actions" whilst advantage tells us "is BUY/Sell actually better than HOLD"
+        # Margin advises "how separated are actions" whilst advantage tells us "is BUY/Sell actually better than HOLD"
 
         # Using default margin, might be subjected to GA later
         if intent == "buy" and raw_action == "BUY":
@@ -366,7 +346,7 @@ class DecisionEngine:
         return decisions[:k]
 
     # ---------------------------------------------------------------------
-    # DEBUG
+    # Only for debug purposes
     # ---------------------------------------------------------------------
     def debug_audit_tickers(self, tickers, as_of=None):
         rows = []

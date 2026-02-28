@@ -192,7 +192,6 @@ class TradeManager:
 
         hold = int(t - entry_idx)
 
-        # unreal = (price_now - entry_price) / (entry_price + 1e-12)
         unreal = safe_divide(price_now - entry_price, entry_price)
 
         eff_h = max(1, int(last_allowed - entry_idx))
@@ -369,7 +368,6 @@ class TradeManager:
         entry_price = float(self._pos.entry_price)
         exit_price = float(price)
 
-        # gross = (exit_price - entry_price) / (entry_price + 1e-12)
         gross = safe_divide(exit_price - entry_price, entry_price)
 
         # Apply the price move only while in position (long term only)
@@ -479,13 +477,6 @@ class TradeManager:
             collected.extend(picked)
 
         return collected
-
-    # def _net_tm_at(self, exit_idx: int, entry_price: float) -> float:
-    #     tc = float(self.reward_cfg.transaction_cost)
-    #     exit_price = float(self.prices[exit_idx])
-    #     # gross = (exit_price - entry_price) / (entry_price + 1e-12)
-    #     gross = safe_divide(exit_price - entry_price, entry_price)
-    #     return ((1.0 - tc) * (1.0 - tc) * (1.0 + gross)) - 1.0
 
     def _net_tm_at(self, exit_idx: int, entry_price: float) -> float:
         return net_return(

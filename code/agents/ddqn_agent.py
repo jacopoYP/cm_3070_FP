@@ -70,9 +70,6 @@ class DDQNAgent:
         self.buf.push(s, a, r, ns, done)
 
     def update(self):
-        # import torch
-        # import numpy as np
-
         if len(self.buf) < int(self.cfg.batch_size):
             return None
 
@@ -86,7 +83,7 @@ class DDQNAgent:
 
         q_out = self.q(s)
 
-        # convert inference tensor -> normal tensor for autograd
+        # convert inference tensor -> normal tensor
         if q_out.is_inference():
             q_out = q_out.clone()
 
@@ -144,7 +141,7 @@ class DDQNAgent:
         self._steps = int(payload.get("steps", self._steps))
         self.learn_steps = int(payload.get("learn_steps", self.learn_steps))
 
-    # internal methods
+    # ---------------------------------------------------------------------
     def _update_epsilon(self) -> None:
         decay_steps = float(self.cfg.epsilon_decay_steps)
         if decay_steps <= 0:

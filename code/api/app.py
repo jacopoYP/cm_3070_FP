@@ -114,6 +114,10 @@ def confidence_label(conf: float) -> str:
         return "MEDIUM"
     return "HIGH"
 
+# ---------------------------------------------------------------------
+# Endpoints exposed
+# ---------------------------------------------------------------------
+
 @app.get("/", response_class=HTMLResponse)
 def home():
     root = Path(__file__).resolve().parents[1]
@@ -133,7 +137,7 @@ def tickers() -> Dict[str, Any]:
     return {"supported": supported, "companies": {t: TICKER_TO_COMPANY.get(t) for t in supported}}
 
 # Date used for the demo
-DEMO_AS_OF = os.getenv("DEMO_AS_OF", "2023-07-14")  # configurable for video/demo
+DEMO_AS_OF = os.getenv("DEMO_AS_OF", "2023-07-14")
 
 def _help_note(supported: List[str]) -> str:
     examples = [
@@ -182,7 +186,6 @@ def ask(req: AskRequest) -> AskResponse:
             decisions=out,
             note=(
                 f"Decisions are based on dataset date {used_date} (demo as_of={DEMO_AS_OF}) "
-                "and are for academic demonstration only."
             ),
         )
 
@@ -240,7 +243,6 @@ def ask(req: AskRequest) -> AskResponse:
             )
         ],
         note=(
-            f"Decision is based on dataset date {d.date} (demo as_of={DEMO_AS_OF}) "
-            "and is for academic demonstration only."
+            f"Decision is based on dataset date {d.date} (demo as_of={DEMO_AS_OF})"
         ),
     )

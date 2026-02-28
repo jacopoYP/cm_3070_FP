@@ -4,10 +4,9 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
 
-# =========================
+# ---------------------------------------------------------------------
 # Config dataclasses
-# =========================
-
+# ---------------------------------------------------------------------
 
 @dataclass
 class DataConfig:
@@ -31,7 +30,6 @@ class RewardConfig:
     lambda_dd: float = 0.0
     lambda_vol: float = 0.0
 
-    # Minimal shaping knobs (safe defaults)
     flat_hold_penalty: float = 0.0       # penalty when flat and HOLD
     in_pos_hold_penalty: float = 0.0     # penalty when in position and HOLD
     entry_bonus: float = 0.0             # bonus on opening a position
@@ -53,7 +51,6 @@ class AgentConfig:
     epsilon_end: float = 0.05
     epsilon_decay_steps: int = 40_000
 
-    # filled at runtime
     state_dim: int = 0
     n_actions: int = 2
 
@@ -62,7 +59,7 @@ class AgentConfig:
 class TrainingConfig:
     episodes: int = 200
     warmup_steps: int = 200
-    steps_per_episode: Optional[int] = None  # None means run until env done
+    steps_per_episode: Optional[int] = None 
     log_every: int = 1
     seed: int = 42
 
@@ -71,11 +68,10 @@ class TrainingConfig:
 class TradeManagerConfig:
     cooldown_steps: int = 5
     sell_horizon: int = 20
-    # min_hold_bars: int = 2
     min_hold_bars: int = 10
 
     # Confidence gating
-    confidence_method: str = "margin_sigmoid"  # softmax | margin_sigmoid
+    confidence_method: str = "margin_sigmoid"  # it can be softmax or margin_sigmoid
     confidence_temp: float = 0.02
     # buy_min_confidence: float = 0.51
     buy_min_confidence: float = 0.40

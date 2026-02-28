@@ -2,7 +2,6 @@ from __future__ import annotations
 import numpy as np
 
 from dataclasses import dataclass
-# from typing import Dict, Optional, Tuple
 from typing import Dict, Optional
 
 from core.math_utils import safe_divide
@@ -180,7 +179,6 @@ class SellEnv:
         last_allowed = self._last_allowed(entry_idx)
         price_now = float(self.p[t])
 
-        # unreal = (price_now - entry_price) / (entry_price + 1e-12)
         unreal = safe_divide(price_now - entry_price, entry_price)
 
         eff_h = max(1, int(last_allowed - entry_idx))
@@ -201,7 +199,6 @@ class SellEnv:
         entry_price = float(self.ep.entry_price)
         exit_price = float(self.p[exit_idx])
 
-        # gross = (exit_price - entry_price) / (entry_price + 1e-12)
         gross = safe_divide(exit_price - entry_price, entry_price)
 
         # Gross minus 'exit' cost only
@@ -216,17 +213,6 @@ class SellEnv:
             "net_return_env": float(net_env),
             "net_return_tm": float(net_tm),
         }
-    
-    # def _net_tm_at(self, exit_idx: int) -> float:
-    #     """TradeManager-consistent round-trip net return at exit_idx (entry+exit costs)."""
-    #     assert self.ep is not None
-    #     tc = float(self.tc)
-    #     entry_price = float(self.ep.entry_price)
-    #     exit_price = float(self.p[exit_idx])
-    #     # gross = (exit_price - entry_price) / (entry_price + 1e-12)
-    #     gross = safe_divide(exit_price - entry_price, entry_price)
-
-    #     return ((1.0 - tc) * (1.0 - tc) * (1.0 + gross)) - 1.0
 
     def _net_tm_at(self, exit_idx: int) -> float:
         assert self.ep is not None

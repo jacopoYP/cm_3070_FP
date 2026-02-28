@@ -191,7 +191,6 @@ def main():
 
         tm_val = run_tm_with_sell(cfg_try, X_val, p_val, buy_agent, sell_agent, segment_len=seg_val_len)
         eq = float(tm_val.get("final_equity", 1.0))
-        # log_eq = float(np.log(max(eq, 1e-9)))
         log_eq = float(np.log(np.clip(eq, EPS, None)))
 
         s = summarize_trades(tm_val.get("trades", []))

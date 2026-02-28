@@ -30,8 +30,6 @@ def load_config(path: str) -> SystemConfig:
 
     cfg = SystemConfig()
 
-    # Allow top-level (legacy) keys OR nested keys.
-    # If you later want strictness, we can enforce nesting only.
     cfg.data = _merge_dataclass(cfg.data, raw.get("data", raw))
     cfg.features = _merge_dataclass(cfg.features, raw.get("features", raw))
     cfg.reward = _merge_dataclass(cfg.reward, raw.get("reward", raw))

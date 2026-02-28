@@ -361,7 +361,6 @@ def plot_buyhold_benchmark(out_dir: str,
             continue
 
         # normalized equity curve
-        # p0 = max(float(p[0]), 1e-12)
         p0 = clamp_prob(p[0])
         eq = p / p0
         t = np.arange(len(eq), dtype=int)

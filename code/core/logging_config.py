@@ -1,7 +1,6 @@
 import logging
 import os
 
-
 def setup_logging(
     log_file: str = "app.log",
     level: int = logging.INFO,

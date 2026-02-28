@@ -29,7 +29,7 @@ class MLPQNetwork(nn.Module):
         self._init_weights()
 
     def _init_weights(self):
-        # Kaiming init appropriate for LeakyReLU
+        # Kaiming init for LeakyReLU, changed over time
         for m in self.modules():
             if isinstance(m, nn.Linear):
                 nn.init.kaiming_uniform_(m.weight, a=0.01, nonlinearity="leaky_relu")

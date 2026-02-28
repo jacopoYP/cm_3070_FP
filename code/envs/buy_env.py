@@ -47,7 +47,7 @@ class BuyEnv:
     # ---------------------------------------------------------------------
     # Env API
     # ---------------------------------------------------------------------
-    
+
     def reset(self) -> np.ndarray:
         self.s = BuyEnvState()
         return self._obs()
@@ -66,7 +66,7 @@ class BuyEnv:
             action = self.HOLD
             self.s.cooldown -= 1
 
-        # Siscourage HOLD forever while flat
+        # Discourage HOLD forever while flat
         if action == self.HOLD and not self.s.in_pos:
             r -= float(self.reward_cfg.flat_hold_penalty)
 
@@ -121,7 +121,7 @@ class BuyEnv:
         # Considering transaction cost
         net = gross - 2.0 * float(self.reward_cfg.transaction_cost)
 
-        # reward : return - dd penalty - vol penalty
+        # reward
         rew = net
         rew -= float(self.reward_cfg.lambda_dd) * max(0.0, -net)
         rew -= float(self.reward_cfg.lambda_vol) * (net ** 2)

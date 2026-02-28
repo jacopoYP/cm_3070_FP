@@ -20,7 +20,7 @@ def check_sentiment(
 ) -> bool:
     """
     x: 1D feature vector at time t (shape: [D])
-    cfg: config object (expects fields on cfg.trade_manager or cfg directly)
+    cfg: config object
     Sentiment is stored at indices sentiment_col and mass_col.
 
     Logic:
@@ -28,7 +28,6 @@ def check_sentiment(
       - if mass < mass_min: True  (no-news => ignore sentiment)
       - else require sentiment >= sentiment_min_score
     """
-    # allow cfg to be either cfg.trade_manager or trade_cfg itself
     trade_cfg = getattr(cfg, "trade_manager", cfg)
 
     if not bool(getattr(trade_cfg, "use_sentiment_filter", False)):
@@ -41,7 +40,7 @@ def check_sentiment(
         sent = float(x[sentiment_col])
         mass = float(x[mass_col])
     except Exception:
-        # fail open
+        # Handling exceptions
         return True
 
     if mass < mass_min:
@@ -57,8 +56,6 @@ def split_by_segments(
     cfg
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, int, int, int]:
     """
-    Stack segments: [seg0, seg1, ...] already concatenated in input arrays.
-
     For each segment:
       first floor(seg_len * train_frac) bars -> train
       remaining -> test
@@ -71,7 +68,7 @@ def split_by_segments(
     meta["date"] = pd.to_datetime(meta["date"])
     meta["ticker"] = meta["ticker"].astype(str)
 
-    # sanity: must align 1:1 with rows
+    # Sanity check: must align 1:1 with rows
     if len(meta) != len(prices):
         raise RuntimeError(f"meta mismatch: meta={len(meta)} prices={len(prices)}")
 
@@ -107,48 +104,48 @@ def split_by_segments(
 
     return X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs
 
-def split_by_ticker_time(
-    features: np.ndarray,
-    prices: np.ndarray,
-    tickers: list[str],
-    meta_path: str,
-    train_frac: float,
-) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, int, int, int]:
-    meta = pd.read_parquet(meta_path)
-    meta["date"] = pd.to_datetime(meta["date"])
-    meta["ticker"] = meta["ticker"].astype(str)
+# def split_by_ticker_time(
+#     features: np.ndarray,
+#     prices: np.ndarray,
+#     tickers: list[str],
+#     meta_path: str,
+#     train_frac: float,
+# ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, int, int, int]:
+#     meta = pd.read_parquet(meta_path)
+#     meta["date"] = pd.to_datetime(meta["date"])
+#     meta["ticker"] = meta["ticker"].astype(str)
 
-    if len(meta) != len(prices):
-        raise RuntimeError(f"meta mismatch: meta={len(meta)} prices={len(prices)}")
+#     if len(meta) != len(prices):
+#         raise RuntimeError(f"meta mismatch: meta={len(meta)} prices={len(prices)}")
 
-    sizes = meta.groupby("ticker").size()
-    if sizes.nunique() != 1:
-        raise RuntimeError(f"Unequal rows per ticker: {sizes.to_dict()}")
-    rows_per_ticker = int(sizes.iloc[0])
+#     sizes = meta.groupby("ticker").size()
+#     if sizes.nunique() != 1:
+#         raise RuntimeError(f"Unequal rows per ticker: {sizes.to_dict()}")
+#     rows_per_ticker = int(sizes.iloc[0])
 
-    train_idx, test_idx = [], []
+#     train_idx, test_idx = [], []
 
-    for t in tickers:
-        idx_t = meta.index[meta["ticker"] == t].to_numpy()
-        idx_t = idx_t[np.argsort(meta.loc[idx_t, "date"].to_numpy())]
+#     for t in tickers:
+#         idx_t = meta.index[meta["ticker"] == t].to_numpy()
+#         idx_t = idx_t[np.argsort(meta.loc[idx_t, "date"].to_numpy())]
 
-        cut = int(np.floor(len(idx_t) * train_frac))
-        train_idx.append(idx_t[:cut])
-        test_idx.append(idx_t[cut:])
+#         cut = int(np.floor(len(idx_t) * train_frac))
+#         train_idx.append(idx_t[:cut])
+#         test_idx.append(idx_t[cut:])
 
-    train_idx = np.concatenate(train_idx).astype(np.int64)
-    test_idx  = np.concatenate(test_idx).astype(np.int64)
+#     train_idx = np.concatenate(train_idx).astype(np.int64)
+#     test_idx  = np.concatenate(test_idx).astype(np.int64)
 
-    X_train = features[train_idx]
-    p_train = prices[train_idx]
-    X_test  = features[test_idx]
-    p_test  = prices[test_idx]
+#     X_train = features[train_idx]
+#     p_train = prices[train_idx]
+#     X_test  = features[test_idx]
+#     p_test  = prices[test_idx]
 
-    seg_train_len = int(np.floor(rows_per_ticker * train_frac))
-    seg_test_len = rows_per_ticker - seg_train_len
-    n_segs = len(tickers)
+#     seg_train_len = int(np.floor(rows_per_ticker * train_frac))
+#     seg_test_len = rows_per_ticker - seg_train_len
+#     n_segs = len(tickers)
 
-    return X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs
+#     return X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs
 
 def split_by_ticker_time_ga(
     features: np.ndarray,
@@ -219,9 +216,6 @@ def load_yaml(path: str) -> Dict[str, Any]:
         return yaml.safe_load(f)
 
 def load_yaml_to_ns(path: str) -> SimpleNamespace:
-    # Minimal YAML loader that returns a dot-accessible namespace.
-    import yaml
-
     with open(path, "r", encoding="utf-8") as f:
         data = yaml.safe_load(f)
 
