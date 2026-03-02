@@ -13,7 +13,7 @@ from ga.creature import Creature
 class GAConfig:
     population_size: int = 16
     generations: int = 10
-    elite_frac: float = 0.25     # keep top X%
+    elite_frac: float = 0.25
     tournament_k: int = 3
     crossover_rate: float = 0.6
     mutation_rate: float = 0.3

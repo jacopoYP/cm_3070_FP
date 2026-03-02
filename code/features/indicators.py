@@ -7,6 +7,7 @@ from core.math_utils import safe_divide
 # Helper indicator functions
 # ---------------------------------------------------------------------
 
+# Default values
 def rsi(close: pd.Series, window: int = 14) -> pd.Series:
     delta = close.diff()
     gain = delta.clip(lower=0.0)
@@ -18,7 +19,7 @@ def rsi(close: pd.Series, window: int = 14) -> pd.Series:
     rs = safe_divide(avg_gain, avg_loss, fill_value=np.inf)
     return 100.0 - (100.0 / (1.0 + rs))
 
-
+# Default values
 def macd_diff(close: pd.Series, fast: int = 12, slow: int = 26, signal: int = 9) -> pd.Series:
     ema_fast = close.ewm(span=fast, adjust=False).mean()
     ema_slow = close.ewm(span=slow, adjust=False).mean()
@@ -26,7 +27,7 @@ def macd_diff(close: pd.Series, fast: int = 12, slow: int = 26, signal: int = 9)
     macd_signal = macd.ewm(span=signal, adjust=False).mean()
     return macd - macd_signal
 
-
+# Default values
 def bb_b(close: pd.Series, window: int = 20, n_std: float = 2.0) -> pd.Series:
     sma = close.rolling(window).mean()
     std = close.rolling(window).std()
@@ -88,12 +89,12 @@ def williams_r(high: pd.Series, low: pd.Series, close: pd.Series, window: int = 
 # ---------------------------------------------------------------------
 
 def ret(close: pd.Series, k: int = 1) -> pd.Series:
-    # Simple pct return over k bars.
+    # Simple pct return over k bars
     return close.pct_change(k)
 
 
 def vol(close: pd.Series, window: int = 20) -> pd.Series:
-    # Rolling volatility of daily returns (std of pct returns).
+    # Rolling volatility of daily returns
     
     r = close.pct_change(1)
     return r.rolling(window).std()

@@ -39,7 +39,7 @@ def rolling_zscore(x: pd.DataFrame, window: int) -> pd.DataFrame:
 # ---------------------------------------------------------------------
 # Market data download
 # ---------------------------------------------------------------------
-def download_ohlcv(
+def _download_ohlcv(
     tickers: List[str],
     start_date: str,
     end_date: str,
@@ -72,9 +72,9 @@ def download_ohlcv(
 
 
 # ---------------------------------------------------------------------
-# AlphaVantage news → daily sentiment
+# AlphaVantage news for daily sentiment
 # ---------------------------------------------------------------------
-def news_feed_to_daily_sentiment(feed_items: list, ticker: str) -> pd.DataFrame:
+def _news_feed_to_daily_sentiment(feed_items: list, ticker: str) -> pd.DataFrame:
     """
     Convert AlphaVantage 'news feed' to a daily sentiment series for one ticker.
 
@@ -130,7 +130,7 @@ def news_feed_to_daily_sentiment(feed_items: list, ticker: str) -> pd.DataFrame:
     return daily
 
 
-def align_daily_sentiment(feature_index: pd.DatetimeIndex, daily: pd.DataFrame) -> pd.DataFrame:
+def _align_daily_sentiment(feature_index: pd.DatetimeIndex, daily: pd.DataFrame) -> pd.DataFrame:
     # Align daily sentiment to the feature index.
     index = pd.to_datetime(feature_index, utc=True).normalize()
 
@@ -155,7 +155,7 @@ def align_daily_sentiment(feature_index: pd.DatetimeIndex, daily: pd.DataFrame) 
 # ---------------------------------------------------------------------
 # Feature builder
 # ---------------------------------------------------------------------
-def build_features_for_all_tickers(cfg, raw: pd.DataFrame, logger) -> Tuple[np.ndarray, np.ndarray, pd.DataFrame, pd.DataFrame]:
+def _build_features_for_all_tickers(cfg, raw: pd.DataFrame, logger) -> Tuple[np.ndarray, np.ndarray, pd.DataFrame, pd.DataFrame]:
     """
     Build a single stacked dataset across tickers.
 
@@ -193,7 +193,7 @@ def build_features_for_all_tickers(cfg, raw: pd.DataFrame, logger) -> Tuple[np.n
         df_t.columns = [str(c).strip().lower() for c in df_t.columns]
         df_t = df_t.sort_index()
 
-        # Prefer Adj Close for price alignment (dividends/splits) because I noticed that sometimes close is not available
+        # Prefer Adj Close for price alignment (dividends/splits) because I noticed that sometimes 'close' is not available
         if "adj close" in df_t.columns:
             close = df_t["adj close"].astype(float)
         elif "close" in df_t.columns:
@@ -226,7 +226,6 @@ def build_features_for_all_tickers(cfg, raw: pd.DataFrame, logger) -> Tuple[np.n
         # Sentiment feature
         if use_sentiment:
             # Currently using hardcode dates because AlphaVantage free plan has date limitations
-            ######################################
             date_from = "2018-01-01"
             date_to = "2024-01-01"
 
@@ -242,8 +241,8 @@ def build_features_for_all_tickers(cfg, raw: pd.DataFrame, logger) -> Tuple[np.n
                     use_cache=True,
                 )
 
-                daily = news_feed_to_daily_sentiment(feed, ticker=ticker)
-                sent_df = align_daily_sentiment(feats.index, daily)
+                daily = _news_feed_to_daily_sentiment(feed, ticker=ticker)
+                sent_df = _align_daily_sentiment(feats.index, daily)
 
                 feats["sentiment"] = sent_df["sentiment"]
                 feats["sentiment_mass"] = sent_df["sentiment_mass"]
@@ -357,13 +356,13 @@ def main():
     logger.debug("scaling:", cfg.features.scaling)
     logger.debug("include_sentiment:", getattr(cfg.features, "include_sentiment", True))
 
-    raw = download_ohlcv(tickers, start_date, end_date, interval)
+    raw = _download_ohlcv(tickers, start_date, end_date, interval)
     logger.debug(f"\nDownloaded raw: shape={raw.shape}")
     logger.debug("raw index head:", raw.index[:3])
     logger.debug("raw index tail:", raw.index[-3:])
     logger.debug("raw columns sample:", list(raw.columns)[:10])
 
-    features, prices, dbg, meta_df = build_features_for_all_tickers(cfg, raw, logger)
+    features, prices, dbg, meta_df = _build_features_for_all_tickers(cfg, raw, logger)
 
     # -----------------------
     # Validation checks

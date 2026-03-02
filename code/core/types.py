@@ -30,9 +30,12 @@ class RewardConfig:
     lambda_dd: float = 0.0
     lambda_vol: float = 0.0
 
-    flat_hold_penalty: float = 0.0       # penalty when flat and HOLD
-    in_pos_hold_penalty: float = 0.0     # penalty when in position and HOLD
-    entry_bonus: float = 0.0             # bonus on opening a position
+    # penalty when flat and HOLD
+    flat_hold_penalty: float = 0.0
+    # penalty when in position and HOLD
+    in_pos_hold_penalty: float = 0.0
+    # bonus on opening a position
+    entry_bonus: float = 0.0
 
 
 @dataclass
@@ -70,8 +73,8 @@ class TradeManagerConfig:
     sell_horizon: int = 20
     min_hold_bars: int = 10
 
-    # Confidence gating
-    confidence_method: str = "margin_sigmoid"  # it can be softmax or margin_sigmoid
+    # Softmax or margin_sigmoid
+    confidence_method: str = "margin_sigmoid"
     confidence_temp: float = 0.02
     # buy_min_confidence: float = 0.51
     buy_min_confidence: float = 0.40

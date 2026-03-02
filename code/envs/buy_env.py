@@ -6,7 +6,6 @@ from typing import Any, Dict, Optional, Tuple
 import numpy as np
 
 from core.types import RewardConfig, TradeManagerConfig
-
 from core.helper import check_sentiment
 
 @dataclass

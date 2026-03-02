@@ -2096,3 +2096,431 @@ Saved:
 2026-02-28 10:17:44,177 | INFO | __main__ |  -data/build_debug.csv
 2026-02-28 10:17:44,177 | INFO | __main__ |  -data/row_meta.parquet
 2026-02-28 10:17:44,177 | INFO | __main__ |  -data/row_meta_summary.csv
+2026-03-01 13:39:08,602 | INFO | __main__ | Starting feature build...
+2026-03-01 13:39:10,177 | INFO | __main__ | 
+=== AAPL ===
+2026-03-01 13:39:10,177 | INFO | __main__ | [AAPL] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,188 | INFO | __main__ | [AAPL] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,189 | INFO | __main__ | [AAPL] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,189 | INFO | __main__ | [AAPL] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,252 | INFO | __main__ | [AAPL] sentiment min/max=-0.631/0.887 mass_sum=671.16
+2026-03-01 13:39:10,259 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,260 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,261 | INFO | __main__ | 
+=== MSFT ===
+2026-03-01 13:39:10,261 | INFO | __main__ | [MSFT] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,267 | INFO | __main__ | [MSFT] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,267 | INFO | __main__ | [MSFT] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,267 | INFO | __main__ | [MSFT] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,321 | INFO | __main__ | [MSFT] sentiment min/max=-0.445/0.914 mass_sum=660.65
+2026-03-01 13:39:10,327 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,328 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,328 | INFO | __main__ | 
+=== NVDA ===
+2026-03-01 13:39:10,329 | INFO | __main__ | [NVDA] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,334 | INFO | __main__ | [NVDA] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,335 | INFO | __main__ | [NVDA] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,335 | INFO | __main__ | [NVDA] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,377 | INFO | __main__ | [NVDA] sentiment min/max=-0.699/0.937 mass_sum=535.20
+2026-03-01 13:39:10,383 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,384 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,385 | INFO | __main__ | 
+=== AMZN ===
+2026-03-01 13:39:10,385 | INFO | __main__ | [AMZN] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,390 | INFO | __main__ | [AMZN] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,391 | INFO | __main__ | [AMZN] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,391 | INFO | __main__ | [AMZN] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,443 | INFO | __main__ | [AMZN] sentiment min/max=-0.790/0.632 mass_sum=629.78
+2026-03-01 13:39:10,450 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,450 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,451 | INFO | __main__ | 
+=== GOOGL ===
+2026-03-01 13:39:10,451 | INFO | __main__ | [GOOGL] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,457 | INFO | __main__ | [GOOGL] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,457 | INFO | __main__ | [GOOGL] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,457 | INFO | __main__ | [GOOGL] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,525 | INFO | __main__ | [GOOGL] sentiment min/max=-0.672/0.724 mass_sum=632.53
+2026-03-01 13:39:10,531 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,531 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,532 | INFO | __main__ | 
+=== META ===
+2026-03-01 13:39:10,532 | INFO | __main__ | [META] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,538 | INFO | __main__ | [META] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,538 | INFO | __main__ | [META] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,538 | INFO | __main__ | [META] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,566 | INFO | __main__ | [META] sentiment min/max=-0.700/0.709 mass_sum=284.22
+2026-03-01 13:39:10,572 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,572 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,573 | INFO | __main__ | 
+=== AVGO ===
+2026-03-01 13:39:10,573 | INFO | __main__ | [AVGO] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,579 | INFO | __main__ | [AVGO] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,579 | INFO | __main__ | [AVGO] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,579 | INFO | __main__ | [AVGO] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,599 | INFO | __main__ | [AVGO] sentiment min/max=-0.604/0.806 mass_sum=196.63
+2026-03-01 13:39:10,605 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,606 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,607 | INFO | __main__ | 
+=== AMD ===
+2026-03-01 13:39:10,607 | INFO | __main__ | [AMD] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,612 | INFO | __main__ | [AMD] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,612 | INFO | __main__ | [AMD] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,612 | INFO | __main__ | [AMD] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,646 | INFO | __main__ | [AMD] sentiment min/max=-0.605/0.815 mass_sum=416.91
+2026-03-01 13:39:10,652 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,652 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,653 | INFO | __main__ | 
+=== INTC ===
+2026-03-01 13:39:10,653 | INFO | __main__ | [INTC] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,659 | INFO | __main__ | [INTC] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,659 | INFO | __main__ | [INTC] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,659 | INFO | __main__ | [INTC] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,709 | INFO | __main__ | [INTC] sentiment min/max=-0.634/0.590 mass_sum=696.62
+2026-03-01 13:39:10,714 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,715 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,716 | INFO | __main__ | 
+=== TSLA ===
+2026-03-01 13:39:10,722 | INFO | __main__ | [TSLA] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,727 | INFO | __main__ | [TSLA] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,728 | INFO | __main__ | [TSLA] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,728 | INFO | __main__ | [TSLA] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,780 | INFO | __main__ | [TSLA] sentiment min/max=-0.705/0.843 mass_sum=698.64
+2026-03-01 13:39:10,786 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,787 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,787 | INFO | __main__ | 
+=== JNJ ===
+2026-03-01 13:39:10,787 | INFO | __main__ | [JNJ] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,793 | INFO | __main__ | [JNJ] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,794 | INFO | __main__ | [JNJ] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,794 | INFO | __main__ | [JNJ] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,845 | INFO | __main__ | [JNJ] sentiment min/max=-0.822/0.881 mass_sum=727.60
+2026-03-01 13:39:10,851 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,851 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,852 | INFO | __main__ | 
+=== PG ===
+2026-03-01 13:39:10,852 | INFO | __main__ | [PG] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,858 | INFO | __main__ | [PG] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,858 | INFO | __main__ | [PG] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,858 | INFO | __main__ | [PG] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,888 | INFO | __main__ | [PG] sentiment min/max=-0.737/0.837 mass_sum=382.46
+2026-03-01 13:39:10,894 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,894 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,895 | INFO | __main__ | 
+=== KO ===
+2026-03-01 13:39:10,895 | INFO | __main__ | [KO] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,901 | INFO | __main__ | [KO] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,901 | INFO | __main__ | [KO] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,901 | INFO | __main__ | [KO] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:10,948 | INFO | __main__ | [KO] sentiment min/max=-0.695/0.708 mass_sum=674.56
+2026-03-01 13:39:10,954 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:10,955 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:10,956 | INFO | __main__ | 
+=== PEP ===
+2026-03-01 13:39:10,956 | INFO | __main__ | [PEP] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:10,961 | INFO | __main__ | [PEP] feats_raw rows=1509 dim=13
+2026-03-01 13:39:10,962 | INFO | __main__ | [PEP] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:10,962 | INFO | __main__ | [PEP] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:11,005 | INFO | __main__ | [PEP] sentiment min/max=-0.430/0.832 mass_sum=630.27
+2026-03-01 13:39:11,010 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:11,010 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:11,011 | INFO | __main__ | 
+=== JPM ===
+2026-03-01 13:39:11,011 | INFO | __main__ | [JPM] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:11,017 | INFO | __main__ | [JPM] feats_raw rows=1509 dim=13
+2026-03-01 13:39:11,018 | INFO | __main__ | [JPM] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:11,018 | INFO | __main__ | [JPM] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:11,086 | INFO | __main__ | [JPM] sentiment min/max=-0.441/0.605 mass_sum=638.96
+2026-03-01 13:39:11,091 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:11,092 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:11,093 | INFO | __main__ | 
+=== BAC ===
+2026-03-01 13:39:11,093 | INFO | __main__ | [BAC] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:11,098 | INFO | __main__ | [BAC] feats_raw rows=1509 dim=13
+2026-03-01 13:39:11,099 | INFO | __main__ | [BAC] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:11,099 | INFO | __main__ | [BAC] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:11,151 | INFO | __main__ | [BAC] sentiment min/max=-0.623/0.727 mass_sum=635.12
+2026-03-01 13:39:11,157 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:11,158 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:11,159 | INFO | __main__ | 
+=== XOM ===
+2026-03-01 13:39:11,159 | INFO | __main__ | [XOM] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:11,164 | INFO | __main__ | [XOM] feats_raw rows=1509 dim=13
+2026-03-01 13:39:11,164 | INFO | __main__ | [XOM] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:11,164 | INFO | __main__ | [XOM] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:11,218 | INFO | __main__ | [XOM] sentiment min/max=-0.647/0.729 mass_sum=673.69
+2026-03-01 13:39:11,224 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:11,224 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:11,225 | INFO | __main__ | 
+=== CVX ===
+2026-03-01 13:39:11,225 | INFO | __main__ | [CVX] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:11,230 | INFO | __main__ | [CVX] feats_raw rows=1509 dim=13
+2026-03-01 13:39:11,231 | INFO | __main__ | [CVX] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:11,231 | INFO | __main__ | [CVX] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:11,280 | INFO | __main__ | [CVX] sentiment min/max=-0.633/0.641 mass_sum=631.46
+2026-03-01 13:39:11,286 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:11,287 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:11,288 | INFO | __main__ | 
+=== CAT ===
+2026-03-01 13:39:11,288 | INFO | __main__ | [CAT] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:11,293 | INFO | __main__ | [CAT] feats_raw rows=1509 dim=13
+2026-03-01 13:39:11,293 | INFO | __main__ | [CAT] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:11,294 | INFO | __main__ | [CAT] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:11,322 | INFO | __main__ | [CAT] sentiment min/max=-0.638/0.725 mass_sum=387.29
+2026-03-01 13:39:11,328 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:11,328 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:11,329 | INFO | __main__ | 
+=== HON ===
+2026-03-01 13:39:11,329 | INFO | __main__ | [HON] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:11,335 | INFO | __main__ | [HON] feats_raw rows=1509 dim=13
+2026-03-01 13:39:11,336 | INFO | __main__ | [HON] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:11,336 | INFO | __main__ | [HON] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:11,358 | INFO | __main__ | [HON] sentiment min/max=-0.639/0.829 mass_sum=261.67
+2026-03-01 13:39:11,363 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:11,364 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:11,365 | INFO | __main__ | 
+=== SPY ===
+2026-03-01 13:39:11,365 | INFO | __main__ | [SPY] ohlcv rows=1509 close_non_null=1509
+2026-03-01 13:39:11,370 | INFO | __main__ | [SPY] feats_raw rows=1509 dim=13
+2026-03-01 13:39:11,371 | INFO | __main__ | [SPY] top NaNs:
+vol_20     20
+sma20      19
+bb_b       19
+rsi14      14
+atr14      13
+mfi14      13
+willr14    13
+roc10      10
+sma10       9
+ret_5       5
+dtype: int64
+2026-03-01 13:39:11,371 | INFO | __main__ | [SPY] fetching AlphaVantage news 2018-01-01 → 2024-01-01
+2026-03-01 13:39:11,377 | INFO | __main__ | [SPY] sentiment min/max=-0.312/0.437 mass_sum=9.94
+2026-03-01 13:39:11,383 | INFO | __main__ | [{ticker}] rows before dropna={len(feats)}
+2026-03-01 13:39:11,383 | INFO | __main__ | [{ticker}] rows after dropna={len(feats)}
+2026-03-01 13:39:11,474 | INFO | __main__ | 
+Saved:
+2026-03-01 13:39:11,474 | INFO | __main__ |  -data/features.npy
+2026-03-01 13:39:11,474 | INFO | __main__ |  -data/prices.npy
+2026-03-01 13:39:11,474 | INFO | __main__ |  -data/build_debug.csv
+2026-03-01 13:39:11,474 | INFO | __main__ |  -data/row_meta.parquet
+2026-03-01 13:39:11,474 | INFO | __main__ |  -data/row_meta_summary.csv

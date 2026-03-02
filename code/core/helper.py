@@ -75,26 +75,26 @@ def split_by_segments(
     tickers = list(cfg.data.tickers)
     train_frac = float(getattr(cfg.data, "train_frac", 0.7))
 
-    train_idx = []
-    test_idx = []
+    train_index = []
+    test_index = []
 
     for t in tickers:
-        idx_t = meta.index[meta["ticker"] == t].to_numpy()
+        index_t = meta.index[meta["ticker"] == t].to_numpy()
         
         # Ensuring time order
-        idx_t = idx_t[np.argsort(meta.loc[idx_t, "date"].to_numpy())]
+        index_t = index_t[np.argsort(meta.loc[index_t, "date"].to_numpy())]
 
-        cut = int(np.floor(len(idx_t) * train_frac))
-        train_idx.append(idx_t[:cut])
-        test_idx.append(idx_t[cut:])
+        cut = int(np.floor(len(index_t) * train_frac))
+        train_index.append(index_t[:cut])
+        test_index.append(index_t[cut:])
 
-    train_idx = np.concatenate(train_idx).astype(np.int64)
-    test_idx  = np.concatenate(test_idx).astype(np.int64)
+    train_index = np.concatenate(train_index).astype(np.int64)
+    test_index  = np.concatenate(test_index).astype(np.int64)
 
-    X_train = features[train_idx]
-    p_train = prices[train_idx]
-    X_test  = features[test_idx]
-    p_test  = prices[test_idx]
+    X_train = features[train_index]
+    p_train = prices[train_index]
+    X_test  = features[test_index]
+    p_test  = prices[test_index]
 
     # segment lengths per ticker
     rows_per_ticker = int(meta.groupby("ticker").size().iloc[0])
@@ -104,6 +104,7 @@ def split_by_segments(
 
     return X_train, p_train, X_test, p_test, seg_train_len, seg_test_len, n_segs
 
+# TODO: Remove
 # def split_by_ticker_time(
 #     features: np.ndarray,
 #     prices: np.ndarray,
@@ -176,27 +177,27 @@ def split_by_ticker_time_ga(
         raise RuntimeError(f"Unequal rows per ticker: {sizes.to_dict()}")
     rows_per_ticker = int(sizes.iloc[0])
 
-    train_idx, val_idx, test_idx = [], [], []
+    train_index, val_index, test_index = [], [], []
 
     for t in tickers:
-        idx_t = meta.index[meta["ticker"] == t].to_numpy()
-        idx_t = idx_t[np.argsort(meta.loc[idx_t, "date"].to_numpy())]
+        index_t = meta.index[meta["ticker"] == t].to_numpy()
+        index_t = index_t[np.argsort(meta.loc[index_t, "date"].to_numpy())]
 
-        n = len(idx_t)
+        n = len(index_t)
         cut_train = int(np.floor(n * train_frac))
         cut_val   = int(np.floor(n * (train_frac + val_frac)))
 
-        train_idx.append(idx_t[:cut_train])
-        val_idx.append(idx_t[cut_train:cut_val])
-        test_idx.append(idx_t[cut_val:])
+        train_index.append(index_t[:cut_train])
+        val_index.append(index_t[cut_train:cut_val])
+        test_index.append(index_t[cut_val:])
 
-    train_idx = np.concatenate(train_idx).astype(np.int64)
-    val_idx   = np.concatenate(val_idx).astype(np.int64)
-    test_idx  = np.concatenate(test_idx).astype(np.int64)
+    train_index = np.concatenate(train_index).astype(np.int64)
+    val_index   = np.concatenate(val_index).astype(np.int64)
+    test_index  = np.concatenate(test_index).astype(np.int64)
 
-    X_train, p_train = features[train_idx], prices[train_idx]
-    X_val,   p_val   = features[val_idx],   prices[val_idx]
-    X_test,  p_test  = features[test_idx],  prices[test_idx]
+    X_train, p_train = features[train_index], prices[train_index]
+    X_val,   p_val   = features[val_index],   prices[val_index]
+    X_test,  p_test  = features[test_index],  prices[test_index]
 
     seg_train_len = int(np.floor(rows_per_ticker * train_frac))
     seg_val_len   = int(np.floor(rows_per_ticker * val_frac))

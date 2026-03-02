@@ -1,43 +1,43 @@
 TRAIN tm_buy_only
-  - n_trades: 562
-  - final_equity: 132.57538114281428
-  - avg_net_return: 0.01354417071495619
-  - win_rate: 0.594306049822064
-  - min_net: -0.41092387150861287
-  - median_net: 0.011264235522817523
-  - max_net: 0.674491181339604
-  - exit_reasons: {'time': 562}
-  - entry_debug: {'checked': 4701, 'opened': 562, 'blocked_sentiment': 39, 'blocked_conf': 133, 'blocked_trend': 3931, 'blocked_latest_entry': 36}
+  - n_trades: 565
+  - final_equity: 345.8912572053513
+  - avg_net_return: 0.015272713359901872
+  - win_rate: 0.5893805309734513
+  - min_net: -0.410924210782624
+  - median_net: 0.011175701645500302
+  - max_net: 0.6744911813396108
+  - exit_reasons: {'time': 565}
+  - entry_debug: {'checked': 4629, 'opened': 565, 'blocked_sentiment': 41, 'blocked_conf': 21, 'blocked_trend': 3961, 'blocked_latest_entry': 41}
 
 TRAIN tm_with_sell
-  - n_trades: 594
-  - final_equity: 2390.3714762850163
-  - avg_net_return: 0.017325093287647232
-  - win_rate: 0.622895622895623
-  - min_net: -0.3089726892002418
-  - median_net: 0.014637373097331485
-  - max_net: 0.674491181339604
-  - exit_reasons: {'time': 479, 'sell_agent': 115}
-  - entry_debug: {'checked': 4583, 'opened': 594, 'blocked_sentiment': 50, 'blocked_conf': 149, 'blocked_trend': 3754, 'blocked_latest_entry': 36}
+  - n_trades: 577
+  - final_equity: 2930.9477826937114
+  - avg_net_return: 0.018347786760402444
+  - win_rate: 0.6065857885615251
+  - min_net: -0.319565432499452
+  - median_net: 0.013957761852456674
+  - max_net: 0.6744911813396108
+  - exit_reasons: {'time': 518, 'sell_agent': 59}
+  - entry_debug: {'checked': 4642, 'opened': 577, 'blocked_sentiment': 45, 'blocked_conf': 21, 'blocked_trend': 3958, 'blocked_latest_entry': 41}
 
 TEST tm_buy_only
-  - n_trades: 224
-  - final_equity: 64.35582675482833
-  - avg_net_return: 0.02407361181234067
-  - win_rate: 0.59375
-  - min_net: -0.30247908329780404
-  - median_net: 0.02454927453964495
-  - max_net: 0.5204917706265317
-  - exit_reasons: {'time': 224}
-  - entry_debug: {'checked': 2436, 'opened': 224, 'blocked_sentiment': 23, 'blocked_conf': 79, 'blocked_trend': 1977, 'blocked_latest_entry': 133}
+  - n_trades: 227
+  - final_equity: 90.91809980360557
+  - avg_net_return: 0.02561362926285676
+  - win_rate: 0.5903083700440529
+  - min_net: -0.28821353672592154
+  - median_net: 0.02303512876787228
+  - max_net: 0.5204917706265344
+  - exit_reasons: {'time': 227}
+  - entry_debug: {'checked': 2364, 'opened': 227, 'blocked_sentiment': 23, 'blocked_conf': 7, 'blocked_trend': 1972, 'blocked_latest_entry': 135}
 
 TEST tm_with_sell
-  - n_trades: 231
-  - final_equity: 103.06719541968468
-  - avg_net_return: 0.026130440623821975
-  - win_rate: 0.6103896103896104
-  - min_net: -0.32559674845573505
-  - median_net: 0.023035127118458343
-  - max_net: 0.5204917706265317
-  - exit_reasons: {'time': 204, 'sell_agent': 27}
-  - entry_debug: {'checked': 2411, 'opened': 231, 'blocked_sentiment': 21, 'blocked_conf': 75, 'blocked_trend': 1948, 'blocked_latest_entry': 136}
+  - n_trades: 230
+  - final_equity: 152.54497759323044
+  - avg_net_return: 0.02763769764077815
+  - win_rate: 0.6086956521739131
+  - min_net: -0.27925921762656225
+  - median_net: 0.024549460911430065
+  - max_net: 0.5204917706265344
+  - exit_reasons: {'time': 210, 'sell_agent': 19, 'segment_end': 1}
+  - entry_debug: {'checked': 2385, 'opened': 230, 'blocked_sentiment': 27, 'blocked_conf': 8, 'blocked_trend': 1997, 'blocked_latest_entry': 123}

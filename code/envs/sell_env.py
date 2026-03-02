@@ -13,7 +13,7 @@ SELL = 1
 
 @dataclass
 class SellEpisode:
-    entry_idx: int
+    entry_index: int
     entry_price: float
     t: int
     bars_held: int
@@ -28,7 +28,7 @@ class SellEnv:
       - Terminal reward is net return from entry -> exit minus transaction cost ONCE at exit
 
     Forced exit at:
-      - horizon end (entry_idx + sell_horizon),
+      - horizon end (entry_index + sell_horizon),
       - segment end,
       - end of data.
     """
@@ -83,28 +83,28 @@ class SellEnv:
         end = (seg + 1) * self.segment_len - 1
         return int(min(end, self.n - 1))
 
-    def _last_allowed(self, entry_idx: int) -> int:
+    def _last_allowed(self, entry_index: int) -> int:
         # Last bar (inclusive) where the position may still be open / exit may occur.
 
-        seg_end = self._segment_end(entry_idx)
-        return int(min(entry_idx + self.horizon, seg_end, self.n - 1))
+        seg_end = self._segment_end(entry_index)
+        return int(min(entry_index + self.horizon, seg_end, self.n - 1))
 
     # ---------------------------------------------------------------------
     # Env API
     # ---------------------------------------------------------------------
 
-    def reset(self, entry_idx: Optional[int] = None) -> np.ndarray:
-        if entry_idx is None:
-            entry_idx = int(self.rng.choice(self.entries))
+    def reset(self, entry_index: Optional[int] = None) -> np.ndarray:
+        if entry_index is None:
+            entry_index = int(self.rng.choice(self.entries))
 
-        entry_idx = int(entry_idx)
-        if entry_idx < 0 or entry_idx >= self.n:
-            raise ValueError("entry_idx out of range")
+        entry_index = int(entry_index)
+        if entry_index < 0 or entry_index >= self.n:
+            raise ValueError("entry_index out of range")
 
         self.ep = SellEpisode(
-            entry_idx=entry_idx,
-            entry_price=float(self.p[entry_idx]),
-            t=entry_idx,
+            entry_index=entry_index,
+            entry_price=float(self.p[entry_index]),
+            t=entry_index,
             bars_held=0,
         )
         return self._get_state()
@@ -115,8 +115,8 @@ class SellEnv:
 
         action = int(action)
         t = int(self.ep.t)
-        entry_idx = int(self.ep.entry_idx)
-        last_allowed = int(self._last_allowed(entry_idx))
+        entry_index = int(self.ep.entry_index)
+        last_allowed = int(self._last_allowed(entry_index))
         bars_held = int(self.ep.bars_held)
 
         can_sell = bars_held >= self.min_hold
@@ -124,7 +124,7 @@ class SellEnv:
         # Info dictionary 
         info: Dict = {
             "t": t,
-            "entry_idx": entry_idx,
+            "entry_index": entry_index,
             "bars_held": bars_held,
             "last_allowed": last_allowed,
         }
@@ -136,7 +136,7 @@ class SellEnv:
         # Forced exit at last_allowed: by definition delta = 0
         if t >= last_allowed:
             rets = self._returns_at(t)
-            info.update({"forced_exit": True, "reason": "limit", "exit_idx": int(t), **rets})
+            info.update({"forced_exit": True, "reason": "limit", "exit_index": int(t), **rets})
             info["delta_vs_hold"] = 0.0
             return self._terminal_state(), 0.0, True, info
 
@@ -145,7 +145,7 @@ class SellEnv:
             net_now = float(self._net_tm_at(t))
             delta = net_now - baseline
             rets = self._returns_at(t)
-            info.update({"forced_exit": False, "reason": "sell", "exit_idx": int(t), **rets})
+            info.update({"forced_exit": False, "reason": "sell", "exit_index": int(t), **rets})
             info["delta_vs_hold"] = float(delta)
             return self._terminal_state(), float(delta), True, info
 
@@ -168,7 +168,7 @@ class SellEnv:
         """
         assert self.ep is not None
         t = int(self.ep.t)
-        entry_idx = int(self.ep.entry_idx)
+        entry_index = int(self.ep.entry_index)
         entry_price = float(self.ep.entry_price)
 
         base = self.X[t].astype(np.float32, copy=False)
@@ -176,12 +176,12 @@ class SellEnv:
         if not self.include_pos:
             return base
 
-        last_allowed = self._last_allowed(entry_idx)
+        last_allowed = self._last_allowed(entry_index)
         price_now = float(self.p[t])
 
         unreal = safe_divide(price_now - entry_price, entry_price)
 
-        eff_h = max(1, int(last_allowed - entry_idx))
+        eff_h = max(1, int(last_allowed - entry_index))
         time_frac = float(min(1.0, self.ep.bars_held / eff_h))
         remaining = float(max(0, last_allowed - t))
         remaining_frac = float(min(1.0, remaining / eff_h))
@@ -193,11 +193,11 @@ class SellEnv:
         return np.zeros((self.state_dim,), dtype=np.float32)
     
     
-    def _returns_at(self, exit_idx: int) -> Dict[str, float]:
+    def _returns_at(self, exit_index: int) -> Dict[str, float]:
         assert self.ep is not None
         tc = float(self.tc)
         entry_price = float(self.ep.entry_price)
-        exit_price = float(self.p[exit_idx])
+        exit_price = float(self.p[exit_index])
 
         gross = safe_divide(exit_price - entry_price, entry_price)
 
@@ -214,10 +214,10 @@ class SellEnv:
             "net_return_tm": float(net_tm),
         }
 
-    def _net_tm_at(self, exit_idx: int) -> float:
+    def _net_tm_at(self, exit_index: int) -> float:
         assert self.ep is not None
         return net_return(
-            exit_price=float(self.p[exit_idx]),
+            exit_price=float(self.p[exit_index]),
             entry_price=float(self.ep.entry_price),
             tc=float(self.tc),
         )

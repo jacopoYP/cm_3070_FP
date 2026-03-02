@@ -519,8 +519,8 @@ def main() -> None:
     save_json(summary_path, summary)
 
     print("\n=== SELL UPLIFT (WITH_SELL - BUY_ONLY) ===")
-    print("TRAIN:", summary["sell_uplift"]["train"])
-    print("TEST :", summary["sell_uplift"]["test"])
+    # print("TRAIN:", summary["sell_uplift"]["train"])
+    # print("TEST :", summary["sell_uplift"]["test"])
 
     print("\nSaved artifacts:")
     for k, v in summary["artifacts"].items():

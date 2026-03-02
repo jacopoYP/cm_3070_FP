@@ -105,11 +105,11 @@ class ModelAdapter:
     def _load(self, ckpt_path: str, model_builder):
         obj = torch.load(ckpt_path, map_location=self.device)
 
-        # Case 1: full module saved
+        # Full module saved
         if callable(obj):
             return obj.to(self.device)
 
-        # Case 2: dict saved
+        # Dict saved
         if not isinstance(obj, dict):
             raise TypeError(f"Checkpoint type not supported: {type(obj)}")
 

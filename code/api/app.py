@@ -104,7 +104,7 @@ app = FastAPI(title="Financial Advisor Bot (Decision API)", version="0.1")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
-# Used to reference for example the css file
+# Used to link static files, such as the css
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 def confidence_label(conf: float) -> str:

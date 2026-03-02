@@ -19,9 +19,9 @@ if PROJECT_ROOT not in sys.path:
 from core.helper import check_dir
 from core.math_utils import clamp_prob
 
-# -----------------------------
-# IO helpers
-# -----------------------------
+# ---------------------------------------------------------------------
+# I/O helpers
+# ---------------------------------------------------------------------
 
 def load_json(path: str) -> Any:
     with open(path, "r", encoding="utf-8") as f:
@@ -42,16 +42,16 @@ def save_fig(path: str) -> None:
     plt.savefig(path, dpi=150)
     plt.close()
 
-# -----------------------------
+# ---------------------------------------------------------------------
 # Trade parsing + derived series
-# -----------------------------
+# ---------------------------------------------------------------------
 
 def trades_to_arrays(trades: List[Dict[str, Any]]) -> Dict[str, np.ndarray]:
     """
     Trades are emitted by TradeManager as dicts like:
       {
-        "entry_idx": int,
-        "exit_idx": int,
+        "entry_index": int,
+        "exit_index": int,
         "net_return": float,
         "gross_return": float,
         "hold_bars": int,
@@ -61,8 +61,8 @@ def trades_to_arrays(trades: List[Dict[str, Any]]) -> Dict[str, np.ndarray]:
     """
     if not trades:
         return {
-            "entry_idx": np.array([], dtype=int),
-            "exit_idx": np.array([], dtype=int),
+            "entry_index": np.array([], dtype=int),
+            "exit_index": np.array([], dtype=int),
             "net_return": np.array([], dtype=float),
             "gross_return": np.array([], dtype=float),
             "hold_bars": np.array([], dtype=int),
@@ -70,8 +70,8 @@ def trades_to_arrays(trades: List[Dict[str, Any]]) -> Dict[str, np.ndarray]:
             "reason": np.array([], dtype=str),
         }
 
-    entry_idx = np.array([int(t.get("entry_idx", -1)) for t in trades], dtype=int)
-    exit_idx = np.array([int(t.get("exit_idx", -1)) for t in trades], dtype=int)
+    entry_index = np.array([int(t.get("entry_index", -1)) for t in trades], dtype=int)
+    exit_index = np.array([int(t.get("exit_index", -1)) for t in trades], dtype=int)
     net_return = np.array([float(t.get("net_return", 0.0)) for t in trades], dtype=float)
     gross_return = np.array([float(t.get("gross_return", 0.0)) for t in trades], dtype=float)
     hold_bars = np.array([int(t.get("hold_bars", 0)) for t in trades], dtype=int)
@@ -84,8 +84,8 @@ def trades_to_arrays(trades: List[Dict[str, Any]]) -> Dict[str, np.ndarray]:
     reason = np.array(reasons, dtype=str)
 
     return {
-        "entry_idx": entry_idx,
-        "exit_idx": exit_idx,
+        "entry_index": entry_index,
+        "exit_index": exit_index,
         "net_return": net_return,
         "gross_return": gross_return,
         "hold_bars": hold_bars,
@@ -99,8 +99,8 @@ def equity_from_trade_net_returns(trades: List[Dict[str, Any]], start_equity: fl
     if not trades:
         return np.array([0], dtype=int), np.array([start_equity], dtype=float)
 
-    # sort by entry_idx for consistency
-    trades_sorted = sorted(trades, key=lambda x: int(x.get("entry_idx", 0)))
+    # sort by entry_index for consistency
+    trades_sorted = sorted(trades, key=lambda x: int(x.get("entry_index", 0)))
     net = np.array([float(t.get("net_return", 0.0)) for t in trades_sorted], dtype=float)
     x = np.arange(len(net) + 1, dtype=int)
 
@@ -124,15 +124,15 @@ def reason_counts(reason: np.ndarray) -> Dict[str, int]:
 
 @dataclass
 class SentimentColumns:
-    score_idx: int
-    mass_idx: int
+    score_index: int
+    mass_index: int
 
 def infer_sentiment_columns(n_features: int) -> SentimentColumns:
     # The pipeline appends sentiment_score and sentiment_mass as the last 2 features (most common).
 
     if n_features < 2:
         raise ValueError("Need at least 2 features to infer sentiment columns.")
-    return SentimentColumns(score_idx=n_features - 2, mass_idx=n_features - 1)
+    return SentimentColumns(score_index=n_features - 2, mass_index=n_features - 1)
 
 def slice_first_segment(x: np.ndarray, seg_len: int) -> np.ndarray:
     return x[: min(seg_len, len(x))]
@@ -144,7 +144,6 @@ def slice_first_segment(x: np.ndarray, seg_len: int) -> np.ndarray:
 
 def ga_best_mean_by_generation(ga_rows: List[Dict[str, Any]], pop_size: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     #The GA fitenss function logs one JSON line per evaluated individual.
-    
     if not ga_rows or pop_size <= 0:
         return np.array([], dtype=int), np.array([], dtype=float), np.array([], dtype=float)
 
@@ -262,8 +261,8 @@ def plot_sentiment_and_price(out_dir: str,
     p0 = slice_first_segment(prices, seg_len)
 
     cols = infer_sentiment_columns(X0.shape[1])
-    sent = X0[:, cols.score_idx]
-    mass = X0[:, cols.mass_idx]
+    sent = X0[:, cols.score_index]
+    mass = X0[:, cols.mass_index]
     t = np.arange(len(p0))
 
     # Price
@@ -350,8 +349,8 @@ def plot_buyhold_benchmark(out_dir: str,
             print(f"[WARN] symbol not in tickers list: {sym}")
             continue
 
-        idx = tickers.index(sym)
-        seg_start = idx * rows_per_ticker
+        index = tickers.index(sym)
+        seg_start = index * rows_per_ticker
         seg_end = seg_start + rows_per_ticker
         seg = prices[seg_start:seg_end]
 
@@ -438,7 +437,7 @@ def main() -> None:
 
     # SPY Comparison
     ap.add_argument("--config", type=str, default=None, help="config.yaml (to read tickers list for benchmark plot)")
-    ap.add_argument("--bench_symbols", type=str, default="AAPL,SPY", help="Comma-separated symbols to compare (e.g. AAPL,SPY)")
+    ap.add_argument("--bench_symbols", type=str, default="AAPL,SPY, GOOGL, META", help="Comma-separated symbols to compare (e.g. AAPL,SPY)")
     ap.add_argument("--rows_per_ticker", type=int, default=1238, help="Rows per ticker segment (must match your dataset layout)")
     ap.add_argument("--train_len", type=int, default=866)
     ap.add_argument("--val_len", type=int, default=185)

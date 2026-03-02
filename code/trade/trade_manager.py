@@ -14,8 +14,8 @@ from core.helper import net_return
 
 @dataclass
 class Trade:
-    entry_idx: int
-    exit_idx: int
+    entry_index: int
+    exit_index: int
     entry_price: float
     exit_price: float
     gross_return: float
@@ -27,7 +27,7 @@ class Trade:
 
 @dataclass
 class Position:
-    entry_idx: int
+    entry_index: int
     entry_price: float
     meta: Dict[str, Any] = field(default_factory=dict)
 
@@ -160,13 +160,13 @@ class TradeManager:
         end = (seg + 1) * self.segment_len - 1
         return int(min(end, len(self.prices) - 1))
 
-    def _last_allowed_exit(self, entry_idx: int) -> int:
+    def _last_allowed_exit(self, entry_index: int) -> int:
         """
-        EXACT SellEnv._last_allowed(entry_idx):
-        last_allowed = min(entry_idx + sell_horizon, segment_end(entry_idx), n-1)
+        EXACT SellEnv._last_allowed(entry_index):
+        last_allowed = min(entry_index + sell_horizon, segment_end(entry_index), n-1)
         """
-        seg_end = self._segment_end(entry_idx)
-        return int(min(entry_idx + int(self.trade_cfg.sell_horizon), seg_end, len(self.prices) - 1))
+        seg_end = self._segment_end(entry_index)
+        return int(min(entry_index + int(self.trade_cfg.sell_horizon), seg_end, len(self.prices) - 1))
 
     # ---------------------------------------------------------------------
     # SellAgent observation
@@ -184,17 +184,17 @@ class TradeManager:
         if expected_dim == base.shape[0]:
             return base
 
-        entry_idx = int(self._pos.entry_idx)
+        entry_index = int(self._pos.entry_index)
         entry_price = float(self._pos.entry_price)
         price_now = float(self.prices[t])
 
-        last_allowed = int(self._last_allowed_exit(entry_idx))
+        last_allowed = int(self._last_allowed_exit(entry_index))
 
-        hold = int(t - entry_idx)
+        hold = int(t - entry_index)
 
         unreal = safe_divide(price_now - entry_price, entry_price)
 
-        eff_h = max(1, int(last_allowed - entry_idx))
+        eff_h = max(1, int(last_allowed - entry_index))
         time_frac = float(min(1.0, hold / eff_h))
         remaining = float(max(0, last_allowed - t))
         remaining_frac = float(min(1.0, remaining / eff_h))
@@ -233,15 +233,15 @@ class TradeManager:
 
             # Exits (forced limit OR sell agent)
             if self._pos is not None:
-                entry_idx = int(self._pos.entry_idx)
-                hold = int(t - entry_idx)
+                entry_index = int(self._pos.entry_index)
+                hold = int(t - entry_index)
 
-                # last_allowed computed from entry_idx (entry segment), not current t
-                last_allowed = int(self._last_allowed_exit(entry_idx))
+                # last_allowed computed from entry_index (entry segment), not current t
+                last_allowed = int(self._last_allowed_exit(entry_index))
 
                 # Forced exit: matches SellEnv "if t >= last_allowed: done"
                 if t >= last_allowed:
-                    seg_end_entry = int(self._segment_end(entry_idx))
+                    seg_end_entry = int(self._segment_end(entry_index))
                     reason = "segment_end" if last_allowed == seg_end_entry else "time"
                     self._close(t, price, forced=True, meta={"reason": reason})
                 else:
@@ -355,7 +355,7 @@ class TradeManager:
         tc = float(self.reward_cfg.transaction_cost)
         self._equity *= (1.0 - tc)
 
-        self._pos = Position(entry_idx=int(t), entry_price=float(price), meta=dict(meta))
+        self._pos = Position(entry_index=int(t), entry_price=float(price), meta=dict(meta))
 
     def _close(self, t: int, price: float, forced: bool, meta: Dict[str, Any]) -> None:
         if self._pos is None:
@@ -364,7 +364,7 @@ class TradeManager:
         # Transaction cost
         tc = float(self.reward_cfg.transaction_cost)
 
-        entry_idx = int(self._pos.entry_idx)
+        entry_index = int(self._pos.entry_index)
         entry_price = float(self._pos.entry_price)
         exit_price = float(price)
 
@@ -384,13 +384,13 @@ class TradeManager:
 
         self.trades.append(
             Trade(
-                entry_idx=entry_idx,
-                exit_idx=int(t),
+                entry_index=entry_index,
+                exit_index=int(t),
                 entry_price=entry_price,
                 exit_price=exit_price,
                 gross_return=float(gross),
                 net_return=float(net_exact),
-                hold_bars=int(t - entry_idx),
+                hold_bars=int(t - entry_index),
                 forced_exit=bool(forced),
                 meta={**self._pos.meta, **dict(meta)},
             )
@@ -478,9 +478,9 @@ class TradeManager:
 
         return collected
 
-    def _net_tm_at(self, exit_idx: int, entry_price: float) -> float:
+    def _net_tm_at(self, exit_index: int, entry_price: float) -> float:
         return net_return(
-            exit_price=float(self.prices[exit_idx]),
+            exit_price=float(self.prices[exit_index]),
             entry_price=float(entry_price),
             tc=float(self.reward_cfg.transaction_cost),
         )

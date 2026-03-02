@@ -27,11 +27,11 @@ from core.metrics import summarize_trades
 from core.math_utils import EPS
 from envs.buy_env import BuyEnv
 
+# ---------------------------------------------------------------------
+# Path utilities
+# ---------------------------------------------------------------------
+
 def set_by_path(d: Dict[str, Any], path: str, value: Any) -> None:
-    """
-    Sets d["a"]["b"]["c"] = value for path "a.b.c".
-    Creates dicts if missing.
-    """
     parts = path.split(".")
     cur = d
     for k in parts[:-1]:
@@ -51,7 +51,7 @@ def get_by_path(d: Dict[str, Any], path: str, default=None):
     return cur
 
 # ---------------------------------------------------------------------
-# evaluation (Trade Manager WITH SELL)
+# Evaluation (Trade Manager WITH SELL)
 # ---------------------------------------------------------------------
 def run_tm_with_sell(cfgd: Dict[str, Any], state: np.ndarray, prices: np.ndarray, buy_agent, sell_agent, segment_len: int):
     tm = TradeManager(
@@ -108,7 +108,7 @@ def main():
     out_dir = os.path.join(args.out_root, run_id)
     check_dir(out_dir)
 
-    # ---- data
+    # Data
     features = np.load(args.features).astype(np.float32, copy=False)
     prices = np.load(args.prices).astype(np.float32, copy=False)
 
@@ -248,9 +248,9 @@ def main():
 
     best = pop.best()
 
-    # ----------------------------
+    # ---------------------------------------------------------------------
     # FINAL EVAL ON TEST (ONCE)
-    # ----------------------------
+    # ---------------------------------------------------------------------
     cfg_best = deepcopy(cfgd)
     for path, v in best.genome.as_config_overrides().items():
         set_by_path(cfg_best, path, v)
