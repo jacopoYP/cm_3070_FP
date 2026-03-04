@@ -26,7 +26,7 @@ class Decision:
     q_gap: float
     row_index: int
     raw_action: str
-    raw_action_idx: int
+    raw_action_index: int
 
 def softmax_maxprob(q: np.ndarray) -> float:
     q = np.asarray(q, dtype=np.float64)
@@ -251,11 +251,11 @@ class DecisionEngine:
         q = model.q_values(state)
         q = np.asarray(q, dtype=np.float32).reshape(-1)
 
-        raw_idx = int(np.argmax(q))
-        raw_action = action_map.get(raw_idx, "HOLD")
+        raw_index = int(np.argmax(q))
+        raw_action = action_map.get(raw_index, "HOLD")
 
         if raw_action not in valid:
-            raise RuntimeError(f"{intent.upper()} intent produced invalid raw_action={raw_action} idx={raw_idx}")
+            raise RuntimeError(f"{intent.upper()} intent produced invalid raw_action={raw_action} index={raw_index}")
 
         # Confidence + margin
         conf = softmax_maxprob(q)
@@ -273,19 +273,19 @@ class DecisionEngine:
         # Assuming we have HOLD plus one action (BUY or SELL)
         adv = None
         if q.size == 2:
-            # infer HOLD idx and ACTION idx from map
-            hold_idx = None
-            act_idx = None
-            for idx, name in action_map.items():
+            # infer HOLD index and ACTION index from map
+            hold_index = None
+            act_index = None
+            for index, name in action_map.items():
                 if name == "HOLD":
-                    hold_idx = idx
+                    hold_index = index
                 elif (intent == "buy" and name == "BUY") or (intent == "sell" and name == "SELL"):
-                    act_idx = idx
-            if hold_idx is None:
-                hold_idx = 0
-            if act_idx is None:
-                act_idx = 1
-            adv = float(q[act_idx] - q[hold_idx])
+                    act_index = index
+            if hold_index is None:
+                hold_index = 0
+            if act_index is None:
+                act_index = 1
+            adv = float(q[act_index] - q[hold_index])
 
         # The final action
         final_action = raw_action
@@ -320,7 +320,7 @@ class DecisionEngine:
             q_gap=float(margin),
             row_index=int(row_i),
             raw_action=str(raw_action),
-            raw_action_idx=int(raw_idx),
+            raw_action_index=int(raw_index),
         )
 
     # ---------------------------------------------------------------------

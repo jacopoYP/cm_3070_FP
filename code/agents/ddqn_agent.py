@@ -45,7 +45,9 @@ class DDQNAgent:
 
         self.total_steps = 0
 
-    # ---------- public API ----------
+    # ---------------------------------------------------------------------
+    # Public API
+    # ---------------------------------------------------------------------
 
     def select_action(self, state, greedy: bool = False) -> int:
         if not greedy:
